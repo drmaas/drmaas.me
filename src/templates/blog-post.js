@@ -1,7 +1,6 @@
 import * as React from "react"
 import { Link, graphql } from "gatsby"
 
-import Bio from "../components/bio"
 import Layout from "../components/layout"
 import Seo from "../components/seo"
 
@@ -10,9 +9,10 @@ const BlogPostTemplate = ({
   location,
 }) => {
   const siteTitle = site.siteMetadata?.title || `Title`
+  const author = site.siteMetadata?.author.name
 
   return (
-    <Layout location={location} title={siteTitle}>
+    <Layout location={location} title={siteTitle} author={author}>
       <article
         className="blog-post"
         itemScope
@@ -28,7 +28,7 @@ const BlogPostTemplate = ({
         />
         <hr />
         <footer>
-          <Bio />
+          <Link to="/">Back</Link>
         </footer>
       </article>
       <nav className="blog-post-nav">
@@ -81,6 +81,9 @@ export const pageQuery = graphql`
     site {
       siteMetadata {
         title
+        author {
+          name
+        }
       }
     }
     markdownRemark(id: { eq: $id }) {

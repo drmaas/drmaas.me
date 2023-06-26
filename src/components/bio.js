@@ -8,6 +8,12 @@
 import * as React from "react"
 import { useStaticQuery, graphql } from "gatsby"
 import { StaticImage } from "gatsby-plugin-image"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import {
+  faGithub,
+  faLinkedin,
+  faTwitter,
+} from "@fortawesome/free-brands-svg-icons"
 
 const Bio = () => {
   const data = useStaticQuery(graphql`
@@ -31,26 +37,57 @@ const Bio = () => {
   const social = data.site.siteMetadata?.social
 
   return (
-    <div className="bio">
-      <StaticImage
-        className="bio-avatar"
-        layout="fixed"
-        formats={["auto", "webp", "avif"]}
-        src="../images/profile-pic.jpg"
-        width={50}
-        height={50}
-        quality={95}
-        alt="Profile picture"
-      />
-      {author?.name && (
-        <p>
-          Written by <strong>{author.name}</strong> {author?.summary || null}
-          {` `}
-          <a href={`https://twitter.com/${social?.twitter || ``}`}>
-            You should follow them on Twitter
-          </a>
-        </p>
-      )}
+    <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr" }}>
+      <div className="bio">
+        <StaticImage
+          className="bio-avatar"
+          layout="fixed"
+          formats={["auto", "webp", "avif"]}
+          src="../images/profile-pic.jpg"
+          width={200}
+          height={200}
+          quality={95}
+          alt="Profile picture"
+        />
+      </div>
+      <div>
+        {author?.name && (
+          <p>
+            <div>
+              Written by <strong>{author.name}</strong>{`. `} 
+            </div>
+            <div>
+              {author.summary || null}
+            </div>
+            <div class="line-break"></div>
+            <div>
+              <a
+                href="https://github.com/drmaas"
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{ marginRight: "10px" }}
+              >
+                <FontAwesomeIcon icon={faGithub} size="2x" />
+              </a>
+              <a
+                href="https://www.linkedin.com/in/daniel-r-maas"
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{ marginRight: "10px" }}
+              >
+                <FontAwesomeIcon icon={faLinkedin} size="2x" />
+              </a>
+              <a
+                href="https://twitter.com/drmaas"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <FontAwesomeIcon icon={faTwitter} size="2x" />
+              </a>
+            </div>
+          </p>
+        )}
+      </div>
     </div>
   )
 }

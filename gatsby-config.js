@@ -9,10 +9,10 @@
  */
 module.exports = {
   siteMetadata: {
-    title: `Personal site for Dan Maas`,
+    title: `Mind of Maas`,
     author: {
       name: `Daniel Robert Maas`,
-      summary: `who writes words and thinks thoughts`,
+      summary: `He writes words and thinks thoughts.`,
     },
     description: `A blog about many things in life`,
     siteUrl: `https://drmaas.me`,
@@ -116,9 +116,9 @@ module.exports = {
         background_color: `#ffffff`,
         // This will impact how browsers show your PWA/website
         // https://css-tricks.com/meta-theme-color-and-trickery/
-        // theme_color: `#663399`,
+        theme_color: `#663399`,
         display: `minimal-ui`,
-        icon: `src/images/gatsby-icon.png`, // This path is relative to the root of the site.
+        icon: `src/images/bitmoji.jpeg`, // This path is relative to the root of the site.
       },
     },
   ],

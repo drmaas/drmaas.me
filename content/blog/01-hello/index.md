@@ -1,7 +1,7 @@
 ---
 title: Starting a blog
 date: "2023-06-25T12:16:00.123Z"
-description: "Goodbye procrastination"
+description: "Goodbye procrastination."
 ---
 
 I am going to start a blog. Finally. My biggest challenge will be coming up with content. 
