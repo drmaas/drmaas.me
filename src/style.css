@@ -329,3 +329,8 @@ a:focus {
     list-style-position: inside;
   }
 }
+
+.line-break {
+  display: block;
+  height: 1.5rem;
+}
