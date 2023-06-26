@@ -1,5 +1,7 @@
 # :snowflake: drmaas.me
 
+[![Deploy Gatsby site to Pages](https://github.com/drmaas/drmaas.me/actions/workflows/build-and-deploy.yml/badge.svg?branch=main)](https://github.com/drmaas/drmaas.me/actions/workflows/build-and-deploy.yml)
+
 I generated the template for this blog using a [gatsbyjs community-created starter](https://www.gatsbyjs.com/starters/gatsbyjs/gatsby-starter-blog/)
 
 ## :dizzy: Local Development
