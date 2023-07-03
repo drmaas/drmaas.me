@@ -6,7 +6,7 @@ I generated the template for this blog using a [gatsbyjs community-created start
 
 ## :dizzy: Local Development
 
-Run locally: `npm run develop`
+Run locally: `yarn dev`
 
 ## :rocket: Deploy
 

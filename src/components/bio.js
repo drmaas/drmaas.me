@@ -25,6 +25,8 @@ const Bio = () => {
             summary
           }
           social {
+            github
+            linkedin
             twitter
           }
         }
@@ -62,7 +64,7 @@ const Bio = () => {
             <div class="line-break"></div>
             <div>
               <a
-                href="https://github.com/drmaas"
+                href={`${social.github}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 style={{ marginRight: "10px" }}
@@ -70,7 +72,7 @@ const Bio = () => {
                 <FontAwesomeIcon icon={faGithub} size="2x" />
               </a>
               <a
-                href="https://www.linkedin.com/in/daniel-r-maas"
+                href={`${social.linkedin}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 style={{ marginRight: "10px" }}
@@ -78,7 +80,7 @@ const Bio = () => {
                 <FontAwesomeIcon icon={faLinkedin} size="2x" />
               </a>
               <a
-                href="https://twitter.com/drmaas"
+                href={`${social.twitter}`}
                 target="_blank"
                 rel="noopener noreferrer"
               >

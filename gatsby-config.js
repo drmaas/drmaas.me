@@ -17,7 +17,9 @@ module.exports = {
     description: `A blog about many things in life`,
     siteUrl: `https://drmaas.me`,
     social: {
-      twitter: `drmaas`,
+      github: `https://github.com/drmaas`,
+      linkedin: `https://www.linkedin.com/in/daniel-r-maas`,
+      twitter: `https://twitter.com/drmaas`,
     },
   },
   plugins: [
@@ -53,6 +55,7 @@ module.exports = {
             },
           },
           `gatsby-remark-prismjs`,
+          `gatsby-remark-emoji`,
         ],
       },
     },
