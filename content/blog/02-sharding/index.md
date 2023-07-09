@@ -1,5 +1,6 @@
 ---
 title: On Partition Keys
+slug: /sharding
 date: "2023-07-02T20:15:00.000Z"
 description: "Think carefully."
 ---

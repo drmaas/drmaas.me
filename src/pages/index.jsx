@@ -7,12 +7,25 @@ import Seo from "../components/seo";
 
 const BlogIndex = ({ data, location }) => {
   const siteTitle = data.site.siteMetadata?.title || `Title`
-  const posts = data.allMarkdownRemark.nodes
+  // filter for blog posts only
+  const blogPattern = /.*\/content\/blog\/.*/;
+  const posts = data.allMarkdownRemark.nodes.filter((node) => {
+    return blogPattern.test(node.fileAbsolutePath);
+  })
+
+  // filter for topics pages
+  const topicsPattern = /.*\/content\/topics\/.*/;
+  const topics = data.allMarkdownRemark.nodes.filter((node) => {
+    return topicsPattern.test(node.fileAbsolutePath);
+  }).reduce((map, node) => {
+    map[node.frontmatter.slug] = node;
+    return map;
+  }, {});
 
   if (posts.length === 0) {
     return (
       <Layout location={location} title={siteTitle}>
-        <Bio />
+        <Bio topics={topics} />
         <p>
           No blog posts found. Add markdown posts to "content/blog" (or the
           directory you specified for the "gatsby-source-filesystem" plugin in
@@ -24,7 +37,7 @@ const BlogIndex = ({ data, location }) => {
 
   return (
     <Layout location={location} title={siteTitle} author={data.site.siteMetadata?.author.name}>
-      <Bio />
+      <Bio topics={topics} />
       <ol style={{ listStyle: `none` }}>
         {posts.map(post => {
           const title = post.frontmatter.title || post.fields.slug
@@ -38,11 +51,15 @@ const BlogIndex = ({ data, location }) => {
               >
                 <header>
                   <h2>
-                    <Link to={post.fields.slug} itemProp="url">
+                    { /* custom slug defined on each blog post */ }
+                    <Link to={post.frontmatter.slug} itemProp="url">
                       <span itemProp="headline">{title}</span>
                     </Link>
                   </h2>
                   <small>{post.frontmatter.date}</small>
+                  {post.timeToRead > 1 ?
+                    <small> &#8226; {post.timeToRead} minutes</small> : <small> &#8226; {post.timeToRead} minute</small>
+                  }
                 </header>
                 <section>
                   <p
@@ -89,9 +106,12 @@ export const pageQuery = graphql`
         }
         frontmatter {
           date(formatString: "MMMM DD, YYYY")
+          slug
           title
           description
         }
+        fileAbsolutePath
+        timeToRead
       }
     }
   }
