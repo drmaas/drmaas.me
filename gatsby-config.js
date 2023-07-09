@@ -12,7 +12,7 @@ module.exports = {
     title: `Mind of Maas`,
     author: {
       name: `Daniel Robert Maas`,
-      summary: `He writes words and thinks thoughts.`,
+      summary: `I write words and think thoughts.`,
     },
     description: `A blog about many things in life`,
     siteUrl: `https://drmaas.me`,
@@ -25,43 +25,55 @@ module.exports = {
   plugins: [
     `gatsby-plugin-image`,
     {
+      // A Gatsby plugin for sourcing data into your Gatsby application from your local filesystem
       resolve: `gatsby-source-filesystem`,
       options: {
-        path: `${__dirname}/content/blog`,
+        path: `${__dirname}/content`,
         name: `blog`,
+        fastHash: true,
       },
     },
     {
+      // A Gatsby plugin for sourcing data into your Gatsby application from your local filesystem
       resolve: `gatsby-source-filesystem`,
       options: {
         name: `images`,
         path: `${__dirname}/src/images`,
+        fastHash: true,
       },
     },
     {
+      // Parses Markdown files using remark
       resolve: `gatsby-transformer-remark`,
       options: {
         plugins: [
           {
+            // Processes images in markdown so they can be used in the production build
             resolve: `gatsby-remark-images`,
             options: {
               maxWidth: 630,
             },
           },
           {
+            // Wraps iframes or objects (e.g. embedded YouTube videos) within markdown files in a responsive elastic container with a fixed aspect ratio
             resolve: `gatsby-remark-responsive-iframe`,
             options: {
               wrapperStyle: `margin-bottom: 1.0725rem`,
             },
           },
+          // Adds syntax highlighting to code blocks in markdown files using PrismJS.
           `gatsby-remark-prismjs`,
+          // Adds slack-style emoji to gatsby’s markdown 👍!
           `gatsby-remark-emoji`,
         ],
       },
     },
+    // Creates ImageSharp nodes from image types that are supported by the Sharp image processing library and provides fields in their GraphQL types for processing your images in a variety of ways including resizing, cropping, and creating responsive images
     `gatsby-transformer-sharp`,
+    // Exposes several image processing functions built on the Sharp image processing library
     `gatsby-plugin-sharp`,
     {
+      // Create an RSS feed (or multiple feeds) for your Gatsby site
       resolve: `gatsby-plugin-feed`,
       options: {
         query: `
@@ -111,6 +123,7 @@ module.exports = {
       },
     },
     {
+      // The web app manifest (part of the PWA specification) enabled by this plugin allows users to add your site to their home screen on most mobile browsers — see here
       resolve: `gatsby-plugin-manifest`,
       options: {
         name: `Personal site for Dan Maas`,
@@ -124,5 +137,7 @@ module.exports = {
         icon: `src/images/bitmoji.jpeg`, // This path is relative to the root of the site.
       },
     },
+    // Adds drop-in support for making a Gatsby site work offline and more resistant to bad network connections
+    `gatsby-plugin-offline`,
   ],
 }

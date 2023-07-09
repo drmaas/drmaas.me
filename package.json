@@ -19,6 +19,7 @@
     "gatsby-plugin-feed": "^5.11.0",
     "gatsby-plugin-image": "^3.11.0",
     "gatsby-plugin-manifest": "^5.11.0",
+    "gatsby-plugin-offline": "^6.11.0",
     "gatsby-plugin-sharp": "^5.11.0",
     "gatsby-plugin-typescript": "^5.11.0",
     "gatsby-remark-emoji": "^0.0.3",

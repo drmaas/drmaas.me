@@ -19,8 +19,12 @@ const BlogPostTemplate = ({
         itemType="http://schema.org/Article"
       >
         <header>
-          <h1 itemProp="headline">{post.frontmatter.title}</h1>
-          <p>{post.frontmatter.date}</p>
+          <Link className="header-link-home" to={post.frontmatter.slug}><h1 itemProp="headline">{post.frontmatter.title}</h1></Link>
+          <p>{post.frontmatter.date}
+          {post.timeToRead > 1 ?
+                    <span> &#8226; {post.timeToRead} minutes</span> : <span> &#8226; {post.timeToRead} minute</span>
+                  }
+          </p>
         </header>
         <section
           dangerouslySetInnerHTML={{ __html: post.html }}
@@ -43,14 +47,14 @@ const BlogPostTemplate = ({
         >
           <li>
             {previous && (
-              <Link to={previous.fields.slug} rel="prev">
+              <Link to={previous.frontmatter.slug} rel="prev">
                 ← {previous.frontmatter.title}
               </Link>
             )}
           </li>
           <li>
             {next && (
-              <Link to={next.fields.slug} rel="next">
+              <Link to={next.frontmatter.slug} rel="next">
                 {next.frontmatter.title} →
               </Link>
             )}
@@ -92,9 +96,11 @@ export const pageQuery = graphql`
       html
       frontmatter {
         title
+        slug
         date(formatString: "MMMM DD, YYYY")
         description
       }
+      timeToRead
     }
     previous: markdownRemark(id: { eq: $previousPostId }) {
       fields {
@@ -102,6 +108,7 @@ export const pageQuery = graphql`
       }
       frontmatter {
         title
+        slug
       }
     }
     next: markdownRemark(id: { eq: $nextPostId }) {
@@ -110,6 +117,7 @@ export const pageQuery = graphql`
       }
       frontmatter {
         title
+        slug
       }
     }
   }

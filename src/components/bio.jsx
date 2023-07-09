@@ -6,7 +6,7 @@
  */
 
 import * as React from "react"
-import { useStaticQuery, graphql } from "gatsby"
+import { Link, useStaticQuery, graphql } from "gatsby"
 import { StaticImage } from "gatsby-plugin-image"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import {
@@ -15,7 +15,7 @@ import {
   faTwitter,
 } from "@fortawesome/free-brands-svg-icons"
 
-const Bio = () => {
+const Bio = ({ topics }) => {
   const data = useStaticQuery(graphql`
     query BioQuery {
       site {
@@ -54,14 +54,15 @@ const Bio = () => {
       </div>
       <div>
         {author?.name && (
-          <p>
+          <div>
             <div>
               Written by <strong>{author.name}</strong>{`. `} 
-            </div>
-            <div>
               {author.summary || null}
             </div>
-            <div class="line-break"></div>
+            <div>
+              <Link className="header-link-home" to={topics['/what-im-consuming'].frontmatter.slug}>Check out what I'm Consuming</Link>
+            </div>
+            <div className="line-break"></div>
             <div>
               <a
                 href={`${social.github}`}
@@ -87,7 +88,7 @@ const Bio = () => {
                 <FontAwesomeIcon icon={faTwitter} size="2x" />
               </a>
             </div>
-          </p>
+          </div>
         )}
       </div>
     </div>

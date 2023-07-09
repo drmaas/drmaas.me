@@ -20,18 +20,20 @@ const Layout = ({ location, title, author, children }) => {
     )
   }
 
+  const footer = (
+    <div style={{ whiteSpace: "pre-wrap" }}>
+    {`
+    © ${new Date().getFullYear()} ${author}
+
+    Built with `
+    } <a href="https://www.gatsbyjs.com">Gatsby</a></div>
+  )
+
   return (
     <div className="global-wrapper" data-is-root-path={isRootPath}>
       <header className="global-header">{header}</header>
       <main>{children}</main>
-      <footer>
-        <div style={{ whiteSpace: "pre-wrap" }}>
-          {`
-          © ${new Date().getFullYear()} ${author}
-
-          Built with `
-          } <a href="https://www.gatsbyjs.com">Gatsby</a></div>
-      </footer>
+      <footer>{footer}</footer>
     </div>
   )
 }
