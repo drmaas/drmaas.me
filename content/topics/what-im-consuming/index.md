@@ -7,6 +7,9 @@ description: "A list of media that I've consumed. Podcasts, articles, videos, tw
 
 This page serves two purposes: firstly and most importantly, it helps me keep track of things I've read, listened to, or watched, that I thought were interesting and may want to explore more deeply in the future. Secondly, I get to share it with all of you. Hopefully, you find some of it interesting and even useful.
 
+## 02023-07-10
+
+I watched a little bit of [The Witcher](https://www.netflix.com/title/80189685). Not sure I'm going to continue. I am looking for some reason to care about / be interested in the main characters. On a scale of `I don't care` to `I care a lot` I'm in the middle. Meh. We shall see.
 ## 02023-07-09
 
 [Wokeism is Marxism](https://youtu.be/y6rk1mYiOAw)

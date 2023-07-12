@@ -59,10 +59,15 @@ const Bio = ({ topics }) => {
               Written by <strong>{author.name}</strong>{`. `} 
               {author.summary || null}
             </div>
+            <div className="line-break"></div>
             <div>
               <Link className="header-link-home" to={topics['/what-im-consuming'].frontmatter.slug}>Check out what I'm Consuming</Link>
             </div>
             <div className="line-break"></div>
+            <div>
+              Please read my <Link className="header-link-home" to={topics['/disclaimer'].frontmatter.slug}>Disclaimer</Link>
+            </div>          
+            <div className="line-break"></div>  
             <div>
               <a
                 href={`${social.github}`}
