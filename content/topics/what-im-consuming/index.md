@@ -7,9 +7,16 @@ description: "A list of media that I've consumed. Podcasts, articles, videos, tw
 
 This page serves two purposes: firstly and most importantly, it helps me keep track of things I've read, listened to, or watched, that I thought were interesting and may want to explore more deeply in the future. Secondly, I get to share it with all of you. Hopefully, you find some of it interesting and even useful.
 
+## 02023-07-16
+
+[The Witcher](https://www.netflix.com/title/80189685) (season 1) was strangely compelling. Because the viewer has to piece together the events that happen in different timelines (Geralt, Yen, and Ciri), it engaged my interest more than usual. The background and purpose of Geralt is also intriguing.
+
 ## 02023-07-10
 
-I watched a little bit of [The Witcher](https://www.netflix.com/title/80189685). Not sure I'm going to continue. I am looking for some reason to care about / be interested in the main characters. On a scale of `I don't care` to `I care a lot` I'm in the middle. Meh. We shall see.
+I watched a little bit of [The Witcher](https://www.netflix.com/title/80189685).
+
+Not sure I'm going to continue. I am looking for some reason to care about / be interested in the main characters. On a scale of `I don't care` to `I care a lot` I'm in the middle. Meh. We shall see.
+
 ## 02023-07-09
 
 [Wokeism is Marxism](https://youtu.be/y6rk1mYiOAw)
@@ -25,6 +32,7 @@ I like this explanation because it explains why capitalism makes people as happy
 [Render Unto the Machine](https://theconvivialsociety.substack.com/p/render-unto-the-machine)
 
 This article caused me to pause and think about the nature and purpose of `AI`. I agree with the author that rather than being a drastic break from the tech adoption trend, it's more likely a continuation that will mostly be used to automate:
+
 1. Things we don't like to do
 1. Things we think are pointless but someone else wants us to do
 1. Things that other software programs require us to do to fulfill the needs of the software
