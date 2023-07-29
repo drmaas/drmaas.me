@@ -8,7 +8,8 @@ const path = require(`path`)
 const { createFilePath } = require(`gatsby-source-filesystem`)
 
 // Define the template for blog post
-const blogPost = path.resolve(`./src/templates/blog-post.jsx`)
+const blog = path.resolve(`./src/pages/blog.jsx`)
+const other = path.resolve(`./src/pages/other.jsx`)
 
 /**
  * @type {import('gatsby').GatsbyNode['createPages']}
@@ -19,16 +20,15 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
   // Get all markdown blog posts sorted by date
   const result = await graphql(`
     {
-      allMarkdownRemark(sort: { frontmatter: { date: ASC } }, limit: 1000) {
+      allMdx(sort: { frontmatter: { date: ASC } }, limit: 1000) {
         nodes {
           id
-          fields {
-            slug
-          }
           frontmatter {
             slug
           }
-          fileAbsolutePath
+          internal {
+            contentFilePath
+          }
         }
       }
     }
@@ -42,35 +42,53 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
     return
   }
 
-  const posts = result.data.allMarkdownRemark.nodes
-
   // Create blog posts pages
   // But only if there's at least one markdown file found at "content/blog" (defined in gatsby-config.js)
   // `context` is available in the template as a prop and as a variable in GraphQL
 
   const isBlog = (post) => {
-    return post.fileAbsolutePath.indexOf('blog') > 0;
+    return post.internal.contentFilePath.indexOf('blog') > 0;
   };
 
+  const posts = result.data.allMdx.nodes.filter((node) => isBlog(node));
+
   if (posts.length > 0) {
-    posts.forEach((post, index) => {
+    posts.forEach((node, index) => {
       // only link to blog posts
-      const previousPostId = index > 0 && isBlog(post) && isBlog(posts[index - 1]) ? posts[index - 1].id : null
-      const nextPostId = index < posts.length - 1 && isBlog(post) && isBlog(posts[index + 1]) ? posts[index + 1].id : null
+      const previousPostId = index > 0 && isBlog(node) && isBlog(posts[index - 1]) ? posts[index - 1].id : null
+      const nextPostId = index < posts.length - 1 && isBlog(node) && isBlog(posts[index + 1]) ? posts[index + 1].id : null
 
       createPage({
         // custom slug defined on each blog post
-        path: post.frontmatter.slug,
-        component: blogPost,
+        path: `/blog${node.frontmatter.slug}`,
+        component: `${blog}?__contentFilePath=${node.internal.contentFilePath}`,
         context: {
-          id: post.id,
+          id: node.id,
           previousPostId,
           nextPostId,
         },
       })
     })
   }
+
+  const others = result.data.allMdx.nodes.filter((node) => !isBlog(node));
+
+  if (others.length > 0) {
+    others.forEach((node) => {
+      createPage({
+        // custom slug defined on each blog post
+        path: node.frontmatter.slug,
+        component: `${other}?__contentFilePath=${node.internal.contentFilePath}`,
+        context: {
+          id: node.id,
+        },
+      })
+    })
+  }
+
 }
+
+const readingTime = require(`reading-time`)
 
 /**
  * @type {import('gatsby').GatsbyNode['onCreateNode']}
@@ -78,13 +96,11 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
 exports.onCreateNode = ({ node, actions, getNode }) => {
   const { createNodeField } = actions
 
-  if (node.internal.type === `MarkdownRemark`) {
-    const value = createFilePath({ node, getNode })
-
+  if (node.internal.type === `Mdx`) {
     createNodeField({
-      name: `slug`,
       node,
-      value,
+      name: `timeToRead`,
+      value: readingTime(node.body)
     })
   }
 }
@@ -115,21 +131,6 @@ exports.createSchemaCustomization = ({ actions }) => {
 
     type Social {
       twitter: String
-    }
-
-    type MarkdownRemark implements Node {
-      frontmatter: Frontmatter
-      fields: Fields
-    }
-
-    type Frontmatter {
-      title: String
-      description: String
-      date: Date @dateformat
-    }
-
-    type Fields {
-      slug: String
     }
   `)
 }
