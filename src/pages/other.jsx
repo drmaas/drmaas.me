@@ -44,10 +44,8 @@ export const Head = ({ data: { mdx: post } }) => {
 export default OtherTemplate
 
 export const pageQuery = graphql`
-  query BlogPostBySlug(
-    $id: String!
-    $previousPostId: String
-    $nextPostId: String
+  query OtherPostBySlug(
+    $id: String
   ) {
     site {
       siteMetadata {
@@ -71,18 +69,6 @@ export const pageQuery = graphql`
         slug
         date(formatString: "MMMM DD, YYYY")
         description
-      }
-    }
-    previous: mdx(id: { eq: $previousPostId }) {
-      frontmatter {
-        title
-        slug
-      }
-    }
-    next: mdx(id: { eq: $nextPostId }) {
-      frontmatter {
-        title
-        slug
       }
     }
   }
