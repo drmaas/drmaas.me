@@ -50,6 +50,9 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
     return post.internal.contentFilePath.indexOf('blog') > 0;
   };
 
+
+  // blog posts
+
   const posts = result.data.allMdx.nodes.filter((node) => isBlog(node));
 
   if (posts.length > 0) {
@@ -71,6 +74,8 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
     })
   }
 
+  // other pages
+  
   const others = result.data.allMdx.nodes.filter((node) => !isBlog(node));
 
   if (others.length > 0) {
