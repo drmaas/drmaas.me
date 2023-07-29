@@ -9,14 +9,14 @@ const BlogIndex = ({ data, location }) => {
   const siteTitle = data.site.siteMetadata?.title || `Title`
   // filter for blog posts only
   const blogPattern = /.*\/content\/blog\/.*/;
-  const posts = data.allMarkdownRemark.nodes.filter((node) => {
-    return blogPattern.test(node.fileAbsolutePath);
+  const posts = data.allMdx.nodes.filter((node) => {
+    return !node.frontmatter.hidden && blogPattern.test(node.internal.contentFilePath);
   })
 
   // filter for topics pages
   const topicsPattern = /.*\/content\/topics\/.*/;
-  const topics = data.allMarkdownRemark.nodes.filter((node) => {
-    return topicsPattern.test(node.fileAbsolutePath);
+  const topics = data.allMdx.nodes.filter((node) => {
+    return !node.frontmatter.hidden && topicsPattern.test(node.internal.contentFilePath);
   }).reduce((map, node) => {
     map[node.frontmatter.slug] = node;
     return map;
@@ -40,10 +40,11 @@ const BlogIndex = ({ data, location }) => {
       <Bio topics={topics} />
       <ol style={{ listStyle: `none` }}>
         {posts.map(post => {
+
           const title = post.frontmatter.title || post.fields.slug
 
           return (
-            <li key={post.fields.slug}>
+            <li key={post.id}>
               <article
                 className="post-list-item"
                 itemScope
@@ -52,14 +53,12 @@ const BlogIndex = ({ data, location }) => {
                 <header>
                   <h2>
                     { /* custom slug defined on each blog post */ }
-                    <Link to={post.frontmatter.slug} itemProp="url">
+                    <Link key={post.id} to={`/blog${post.frontmatter.slug}`} itemProp="url">
                       <span itemProp="headline">{title}</span>
                     </Link>
                   </h2>
                   <small>{post.frontmatter.date}</small>
-                  {post.timeToRead > 1 ?
-                    <small> &#8226; {post.timeToRead} minutes</small> : <small> &#8226; {post.timeToRead} minute</small>
-                  }
+                  <small> &#8226; {post.fields.timeToRead.text} </small>
                 </header>
                 <section>
                   <p
@@ -98,11 +97,14 @@ export const pageQuery = graphql`
         }
       }
     }
-    allMarkdownRemark(sort: { frontmatter: { date: DESC } }) {
+    allMdx(sort: { frontmatter: { date: DESC } }) {
       nodes {
+        id
         excerpt
         fields {
-          slug
+          timeToRead {
+            text
+          }
         }
         frontmatter {
           date(formatString: "MMMM DD, YYYY")
@@ -110,8 +112,9 @@ export const pageQuery = graphql`
           title
           description
         }
-        fileAbsolutePath
-        timeToRead
+        internal {
+          contentFilePath
+        }
       }
     }
   }

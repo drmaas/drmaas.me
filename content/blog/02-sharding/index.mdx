@@ -3,6 +3,7 @@ title: On Partition Keys
 slug: /sharding
 date: "2023-07-02T20:15:00.000Z"
 description: "Think carefully."
+tags: ["performance"]
 ---
 
 Let's say that you want to build a new backend ([OIDC](https://openid.net/developers/how-connect-works/)) identity provider (let's call it `the system`). Good luck! Since you don't want to write the whole thing from scratch, you pick an established vendor to help manage the system state. So, when `The system` performs authorization, it integrates with this vendor app. The vendor app acts like a smart proxy that connects other identity providers to `the system`. This allows users to log in user their favorite Google, Facebook, Twitter, etc. accounts. Because the vendor app needs to know if you are logging in or registering a new account (so it can prompt to allow access, collect one-time data, etc) it records some basic identity information about the user. The vendor app uses standard OIDC API calls to verify and collect basic information. So far, so good.

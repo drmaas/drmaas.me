@@ -4,6 +4,15 @@
  * See: https://www.gatsbyjs.com/docs/reference/config-files/gatsby-config/
  */
 
+const wrapESMPlugin = name =>
+  function wrapESM(opts) {
+    return async (...args) => {
+      const mod = await import(name)
+      const plugin = mod.default(opts)
+      return plugin(...args)
+    }
+  }
+
 /**
  * @type {import('gatsby').GatsbyConfig}
  */
@@ -28,8 +37,8 @@ module.exports = {
       // A Gatsby plugin for sourcing data into your Gatsby application from your local filesystem
       resolve: `gatsby-source-filesystem`,
       options: {
-        path: `${__dirname}/content`,
         name: `blog`,
+        path: `${__dirname}/content`,
         fastHash: true,
       },
     },
@@ -43,15 +52,20 @@ module.exports = {
       },
     },
     {
-      // Parses Markdown files using remark
-      resolve: `gatsby-transformer-remark`,
+      resolve: `gatsby-plugin-mdx`,
       options: {
-        plugins: [
+        gatsbyRemarkPlugins: [
           {
-            // Processes images in markdown so they can be used in the production build
             resolve: `gatsby-remark-images`,
             options: {
-              maxWidth: 630,
+              maxWidth: 600,
+              wrapperStyle: `margin: 30px auto;`,
+            },
+          },
+          {
+            resolve: `gatsby-remark-embed-video`,
+            options: {
+              width: 800,
             },
           },
           {
@@ -90,28 +104,25 @@ module.exports = {
         `,
         feeds: [
           {
-            serialize: ({ query: { site, allMarkdownRemark } }) => {
-              return allMarkdownRemark.nodes.map(node => {
+            serialize: ({ query: { site, allMdx } }) => {
+              return allMdx.nodes.map(node => {
                 return Object.assign({}, node.frontmatter, {
                   description: node.excerpt,
                   date: node.frontmatter.date,
-                  url: site.siteMetadata.siteUrl + node.fields.slug,
-                  guid: site.siteMetadata.siteUrl + node.fields.slug,
+                  url: site.siteMetadata.siteUrl + node.frontmatter.slug,
+                  guid: site.siteMetadata.siteUrl + node.frontmatter.slug,
                   custom_elements: [{ "content:encoded": node.html }],
                 })
               })
             },
             query: `{
-              allMarkdownRemark(sort: {frontmatter: {date: DESC}}) {
+              allMdx(sort: {frontmatter: {date: DESC}}) {
                 nodes {
                   excerpt
-                  html
-                  fields {
-                    slug
-                  }
                   frontmatter {
                     title
                     date
+                    slug
                   }
                 }
               }
