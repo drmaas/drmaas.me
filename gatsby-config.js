@@ -18,12 +18,12 @@ const wrapESMPlugin = name =>
  */
 module.exports = {
   siteMetadata: {
-    title: `Mind of Maas`,
+    title: `Thoughts on Software`,
     author: {
-      name: `Daniel Robert Maas`,
-      summary: `I write words and think thoughts.`,
+      name: `Dan Maas`,
+      summary: `I write about systems.`,
     },
-    description: `A blog about many things in life`,
+    description: `A blog about stuff`,
     siteUrl: `https://drmaas.me`,
     social: {
       github: `https://github.com/drmaas`,
@@ -33,6 +33,7 @@ module.exports = {
   },
   plugins: [
     `gatsby-plugin-image`,
+    `gatsby-plugin-styled-components`,
     {
       // A Gatsby plugin for sourcing data into your Gatsby application from your local filesystem
       resolve: `gatsby-source-filesystem`,
@@ -54,7 +55,18 @@ module.exports = {
     {
       resolve: `gatsby-plugin-mdx`,
       options: {
+        extensions: [`.mdx`, `.md`],
+        commonmark: true,
+        footnotes: true,
+        pedantic: false,
+        gfm: true,
         gatsbyRemarkPlugins: [
+          {
+            resolve: `gatsby-remark-autolink-headers`,
+            options: {
+              className: `header-link-icon`
+            }
+          },
           {
             resolve: `gatsby-remark-images`,
             options: {
