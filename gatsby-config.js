@@ -18,7 +18,7 @@ const wrapESMPlugin = name =>
  */
 module.exports = {
   siteMetadata: {
-    title: `Thoughts on Software`,
+    title: `The Everyday Software Guy`,
     author: {
       name: `Dan Maas`,
       summary: `I write about systems.`,
@@ -118,13 +118,13 @@ module.exports = {
           {
             serialize: ({ query: { site, allMdx } }) => {
               return allMdx.nodes.map(node => {
-                return Object.assign({}, node.frontmatter, {
+                return { ...node.frontmatter,
                   description: node.excerpt,
                   date: node.frontmatter.date,
                   url: site.siteMetadata.siteUrl + node.frontmatter.slug,
                   guid: site.siteMetadata.siteUrl + node.frontmatter.slug,
                   custom_elements: [{ "content:encoded": node.html }],
-                })
+                }
               })
             },
             query: `{
