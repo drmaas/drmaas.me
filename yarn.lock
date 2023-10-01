@@ -1868,60 +1868,60 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@fontsource-variable/montserrat@npm:^5.0.4":
-  version: 5.0.4
-  resolution: "@fontsource-variable/montserrat@npm:5.0.4"
-  checksum: 4fccf379fee1e95a459196eee8083a180ddc6240f574870140b49bbef2cbc757f80917a1ad623e995c16de99a3bacfa3e2bf0066082424bc10267b3cea267831
+"@fontsource-variable/montserrat@npm:^5.0.9":
+  version: 5.0.9
+  resolution: "@fontsource-variable/montserrat@npm:5.0.9"
+  checksum: 4bded4bac812ba2f83259f113284093a99ff57401cbc48273ccbebdd151ebd56c7c36622fd2203a6e7f8fca9f95a3ed52571ebb48c97c86a748e70d5a54a8630
   languageName: node
   linkType: hard
 
-"@fontsource/merriweather@npm:^5.0.3":
-  version: 5.0.3
-  resolution: "@fontsource/merriweather@npm:5.0.3"
-  checksum: c4a941d5741779b3b2fee84bb37c5f4bc124361672db8ea2919ec25dcd480920555c7fdde8bc3edbafafdf774e582a8156139f4df14c907d00727cc7851c882d
+"@fontsource/merriweather@npm:^5.0.8":
+  version: 5.0.8
+  resolution: "@fontsource/merriweather@npm:5.0.8"
+  checksum: dfd735cfe5f28a8ba89dad3201ad34aee6f23683dd462c5037c02d8c3c0bd41e7a38760356936a979e4028ef0aa1cf8c4be358bd67d2aec98ee76075f6d104ff
   languageName: node
   linkType: hard
 
-"@fortawesome/fontawesome-common-types@npm:6.4.0":
-  version: 6.4.0
-  resolution: "@fortawesome/fontawesome-common-types@npm:6.4.0"
-  checksum: 10ca683a6772b1e606f9c701f34f18558b8297e3af0b70d07f78dbcdf072b5da4f5548bf50b5b1bbfa8611931d1b7fc7c3e190aae383b4dd92edab1ea29ebfd7
+"@fortawesome/fontawesome-common-types@npm:6.4.2":
+  version: 6.4.2
+  resolution: "@fortawesome/fontawesome-common-types@npm:6.4.2"
+  checksum: cc472b90a9ca57b0d3e61efe62742c2489dde09770cb7a05141022b9c07ff4e0def723861bd6988f618198c7163855330e214adcbea272ce269702cfed09505c
   languageName: node
   linkType: hard
 
-"@fortawesome/fontawesome-svg-core@npm:^6.4.0":
-  version: 6.4.0
-  resolution: "@fortawesome/fontawesome-svg-core@npm:6.4.0"
+"@fortawesome/fontawesome-svg-core@npm:^6.4.2":
+  version: 6.4.2
+  resolution: "@fortawesome/fontawesome-svg-core@npm:6.4.2"
   dependencies:
-    "@fortawesome/fontawesome-common-types": "npm:6.4.0"
-  checksum: b4c4e4c687c7837f95baaaca7775c5e3d02e48004f63e2ee2eea2f349b5316e86f3ccd1697c7be3f9cf5703ac88eda64f2ad91a5839ba400222522d369d260eb
+    "@fortawesome/fontawesome-common-types": "npm:6.4.2"
+  checksum: 3e91fc5fb34720514c80a6ba8b143d2ee24b5feef6fb4ce0d87c9883c47f1cb43dde7b4e872ee5450b82f7e4c271ae611d84a7b3c219e7f76cd57d16704bc450
   languageName: node
   linkType: hard
 
-"@fortawesome/free-brands-svg-icons@npm:^6.4.0":
-  version: 6.4.0
-  resolution: "@fortawesome/free-brands-svg-icons@npm:6.4.0"
+"@fortawesome/free-brands-svg-icons@npm:^6.4.2":
+  version: 6.4.2
+  resolution: "@fortawesome/free-brands-svg-icons@npm:6.4.2"
   dependencies:
-    "@fortawesome/fontawesome-common-types": "npm:6.4.0"
-  checksum: 431215bda99cc3d2c0fccab83e6f69870302ff739650825e61e2d1fe4814a7a7e8592fc0d5a7e1a200cec200528c2978f0e1d448167fea2774e78e7d5f0ce0f8
+    "@fortawesome/fontawesome-common-types": "npm:6.4.2"
+  checksum: e8d3e1d018b778475df078e567e89cb40dc3965b3e21f00bd711dbc51a5898379a574086fe75507cf822cf68b6934eb79c2d4a6dad196219ef899aa02d253dc8
   languageName: node
   linkType: hard
 
-"@fortawesome/free-regular-svg-icons@npm:^6.4.0":
-  version: 6.4.0
-  resolution: "@fortawesome/free-regular-svg-icons@npm:6.4.0"
+"@fortawesome/free-regular-svg-icons@npm:^6.4.2":
+  version: 6.4.2
+  resolution: "@fortawesome/free-regular-svg-icons@npm:6.4.2"
   dependencies:
-    "@fortawesome/fontawesome-common-types": "npm:6.4.0"
-  checksum: fff9989b2268d3816846a83ec2c158ca4d19993441472a368372438704247c53a673f1f5fdb9675b3861a1acd2ebb0c5fcaaa2e17e82712d69a05516dc438e48
+    "@fortawesome/fontawesome-common-types": "npm:6.4.2"
+  checksum: fc934f7cfc3110ac7003f0c4d46409dca4cd10d3d55449905d4606f2b290937285f3f5a92528b4f89975b2626b7499f458b640e197ccb0ca4cc6da9233833531
   languageName: node
   linkType: hard
 
-"@fortawesome/free-solid-svg-icons@npm:^6.4.0":
-  version: 6.4.0
-  resolution: "@fortawesome/free-solid-svg-icons@npm:6.4.0"
+"@fortawesome/free-solid-svg-icons@npm:^6.4.2":
+  version: 6.4.2
+  resolution: "@fortawesome/free-solid-svg-icons@npm:6.4.2"
   dependencies:
-    "@fortawesome/fontawesome-common-types": "npm:6.4.0"
-  checksum: abeb44d7b4833450e76d03ee45db13f4fc9a70e7616fd1a7c31a5764d042f3bc9c7e17e314253c670f050f2f12735bdd158372acf9973d6b0f260c5c049699a1
+    "@fortawesome/fontawesome-common-types": "npm:6.4.2"
+  checksum: 58593dec66255cfa8d3739f8e3e3a1821be312e2e85026b17bffd380a99ee19d7ff99fe6044c3078c7b3d1d6503ad427522b048f8be3f28067bdefafba5750e3
   languageName: node
   linkType: hard
 
@@ -1937,15 +1937,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@gatsbyjs/parcel-namer-relative-to-cwd@npm:^2.11.0":
-  version: 2.11.0
-  resolution: "@gatsbyjs/parcel-namer-relative-to-cwd@npm:2.11.0"
+"@gatsbyjs/parcel-namer-relative-to-cwd@npm:^2.12.0":
+  version: 2.12.0
+  resolution: "@gatsbyjs/parcel-namer-relative-to-cwd@npm:2.12.0"
   dependencies:
     "@babel/runtime": "npm:^7.20.13"
     "@parcel/namer-default": "npm:2.8.3"
     "@parcel/plugin": "npm:2.8.3"
-    gatsby-core-utils: "npm:^4.11.0"
-  checksum: 61e52381baf4915f27c644d32bfdd2203ac2af9581fe1429d0e957f260790eb8a14be9c5f0e0b1428d7ca6499b5b7f801a81fe19e1d87fe6450e33b262b5b452
+    gatsby-core-utils: "npm:^4.12.0"
+  checksum: 5c25183347ee96931741688286878b5e091e3943e07ecee6bd0b8bfd87f6f841f4318b98443f0785914a1ed2b6d73ef10d647b6a2ba398e618cecaa3f65200ca
   languageName: node
   linkType: hard
 
@@ -3665,16 +3665,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@typescript-eslint/eslint-plugin@npm:^5.59.8":
-  version: 5.60.1
-  resolution: "@typescript-eslint/eslint-plugin@npm:5.60.1"
+"@typescript-eslint/eslint-plugin@npm:^5.60.1":
+  version: 5.62.0
+  resolution: "@typescript-eslint/eslint-plugin@npm:5.62.0"
   dependencies:
     "@eslint-community/regexpp": "npm:^4.4.0"
-    "@typescript-eslint/scope-manager": "npm:5.60.1"
-    "@typescript-eslint/type-utils": "npm:5.60.1"
-    "@typescript-eslint/utils": "npm:5.60.1"
+    "@typescript-eslint/scope-manager": "npm:5.62.0"
+    "@typescript-eslint/type-utils": "npm:5.62.0"
+    "@typescript-eslint/utils": "npm:5.62.0"
     debug: "npm:^4.3.4"
-    grapheme-splitter: "npm:^1.0.4"
+    graphemer: "npm:^1.4.0"
     ignore: "npm:^5.2.0"
     natural-compare-lite: "npm:^1.4.0"
     semver: "npm:^7.3.7"
@@ -3685,43 +3685,43 @@ __metadata:
   peerDependenciesMeta:
     typescript:
       optional: true
-  checksum: ebac5a35043c5846a493ebd69d68eb5831c53c0dbdb1aeae121655f738536c5aed6f237ffd1e20a57f790da17495968986980440a7ed340317696667c28c2116
+  checksum: a445c171a1db6c6931726cab5f9bed36331f75d37c1138be162a1ce52af6784174f8859e277ccf5680ac7b556b0a66729aab163d38cb51dbe9e4017e678eac3a
   languageName: node
   linkType: hard
 
-"@typescript-eslint/parser@npm:^5.59.8":
-  version: 5.60.1
-  resolution: "@typescript-eslint/parser@npm:5.60.1"
+"@typescript-eslint/parser@npm:^5.60.1":
+  version: 5.62.0
+  resolution: "@typescript-eslint/parser@npm:5.62.0"
   dependencies:
-    "@typescript-eslint/scope-manager": "npm:5.60.1"
-    "@typescript-eslint/types": "npm:5.60.1"
-    "@typescript-eslint/typescript-estree": "npm:5.60.1"
+    "@typescript-eslint/scope-manager": "npm:5.62.0"
+    "@typescript-eslint/types": "npm:5.62.0"
+    "@typescript-eslint/typescript-estree": "npm:5.62.0"
     debug: "npm:^4.3.4"
   peerDependencies:
     eslint: ^6.0.0 || ^7.0.0 || ^8.0.0
   peerDependenciesMeta:
     typescript:
       optional: true
-  checksum: c38ebb903e77b5b0ab599a1a2a2ce585b35bbdf57789f60fe55d8411c295966dbd71430e2e2f699edf1d2c67f4161ef32e639e2a907fe795eba03af29bfc5248
+  checksum: b1645ddcfd851b8676f3c173fbe4cdfafb420f359071117ba9a531545da1f3f253deac72fc8630b5d65e6ff957ffad50a27cee4bcff5d0a32700eea98fbc6652
   languageName: node
   linkType: hard
 
-"@typescript-eslint/scope-manager@npm:5.60.1":
-  version: 5.60.1
-  resolution: "@typescript-eslint/scope-manager@npm:5.60.1"
+"@typescript-eslint/scope-manager@npm:5.62.0":
+  version: 5.62.0
+  resolution: "@typescript-eslint/scope-manager@npm:5.62.0"
   dependencies:
-    "@typescript-eslint/types": "npm:5.60.1"
-    "@typescript-eslint/visitor-keys": "npm:5.60.1"
-  checksum: ed7bf085bcf90cb3f3c8f864bc8e25edaca6c58d4625cf538431c6c0d10b2a7b1bc96e1d171cce6c8ef40232bc072d782051e59ed3feab791cd0b464a6e1bb55
+    "@typescript-eslint/types": "npm:5.62.0"
+    "@typescript-eslint/visitor-keys": "npm:5.62.0"
+  checksum: 007805e2d7791099216294e131a584e348cd46717ab2dd26707389ce0e04537b253b6993e3e3a241c61264d0ac19e7bb6d8643135c946898a66b2b464d0df9ba
   languageName: node
   linkType: hard
 
-"@typescript-eslint/type-utils@npm:5.60.1":
-  version: 5.60.1
-  resolution: "@typescript-eslint/type-utils@npm:5.60.1"
+"@typescript-eslint/type-utils@npm:5.62.0":
+  version: 5.62.0
+  resolution: "@typescript-eslint/type-utils@npm:5.62.0"
   dependencies:
-    "@typescript-eslint/typescript-estree": "npm:5.60.1"
-    "@typescript-eslint/utils": "npm:5.60.1"
+    "@typescript-eslint/typescript-estree": "npm:5.62.0"
+    "@typescript-eslint/utils": "npm:5.62.0"
     debug: "npm:^4.3.4"
     tsutils: "npm:^3.21.0"
   peerDependencies:
@@ -3729,23 +3729,23 @@ __metadata:
   peerDependenciesMeta:
     typescript:
       optional: true
-  checksum: a56843cade8b3e62c3999f0382d208219c08e33c29396521dad6e9d79b0385bfa6c89ace0a7534b2f128fddb205784717a385cce0822eda2b724b776bf52c13b
+  checksum: f2867a1fc28326e61530f8c3611d14a7a4dcffe1c4729382d4ff7e43b43eaeb0d87cb02d440b3d7b091e0d6e67c68f34c8bfdfd27d072b75f2398020267df58c
   languageName: node
   linkType: hard
 
-"@typescript-eslint/types@npm:5.60.1":
-  version: 5.60.1
-  resolution: "@typescript-eslint/types@npm:5.60.1"
-  checksum: c12adcc6970e012af0cdb0c0ed5c20c8d4bc5625393098c1252a23eae2d44ab818c232833c7c73e03619feabb87f4b6216d33c77a9cc6f0f29fe4b499bc1898b
+"@typescript-eslint/types@npm:5.62.0":
+  version: 5.62.0
+  resolution: "@typescript-eslint/types@npm:5.62.0"
+  checksum: d226e471f3212d996bfff9e9544df9b3dd4f9cf8024d46cc83332474a8ca0c7fa958f916e59b353bdea5c8ecf3c9a801b16eca6835d470fcb7b313c7becc1427
   languageName: node
   linkType: hard
 
-"@typescript-eslint/typescript-estree@npm:5.60.1":
-  version: 5.60.1
-  resolution: "@typescript-eslint/typescript-estree@npm:5.60.1"
+"@typescript-eslint/typescript-estree@npm:5.62.0":
+  version: 5.62.0
+  resolution: "@typescript-eslint/typescript-estree@npm:5.62.0"
   dependencies:
-    "@typescript-eslint/types": "npm:5.60.1"
-    "@typescript-eslint/visitor-keys": "npm:5.60.1"
+    "@typescript-eslint/types": "npm:5.62.0"
+    "@typescript-eslint/visitor-keys": "npm:5.62.0"
     debug: "npm:^4.3.4"
     globby: "npm:^11.1.0"
     is-glob: "npm:^4.0.3"
@@ -3754,35 +3754,35 @@ __metadata:
   peerDependenciesMeta:
     typescript:
       optional: true
-  checksum: 98e55ee81c239eb572d51ecbc4e69dd1e4c9b01102ba54f03fcfc9f56a7da5a6d5c7fd6ff10244c63dd0c6e1517089053073b39003b57d1e460328dfe38f23d9
+  checksum: db6d826fa20b3eaa1f949f12e95c1420866429fb98e46e387b207eaab847e56341763da340bffd5669db734f7de4031f67746b01c4d36efdd9ff5631f41a44eb
   languageName: node
   linkType: hard
 
-"@typescript-eslint/utils@npm:5.60.1":
-  version: 5.60.1
-  resolution: "@typescript-eslint/utils@npm:5.60.1"
+"@typescript-eslint/utils@npm:5.62.0":
+  version: 5.62.0
+  resolution: "@typescript-eslint/utils@npm:5.62.0"
   dependencies:
     "@eslint-community/eslint-utils": "npm:^4.2.0"
     "@types/json-schema": "npm:^7.0.9"
     "@types/semver": "npm:^7.3.12"
-    "@typescript-eslint/scope-manager": "npm:5.60.1"
-    "@typescript-eslint/types": "npm:5.60.1"
-    "@typescript-eslint/typescript-estree": "npm:5.60.1"
+    "@typescript-eslint/scope-manager": "npm:5.62.0"
+    "@typescript-eslint/types": "npm:5.62.0"
+    "@typescript-eslint/typescript-estree": "npm:5.62.0"
     eslint-scope: "npm:^5.1.1"
     semver: "npm:^7.3.7"
   peerDependencies:
     eslint: ^6.0.0 || ^7.0.0 || ^8.0.0
-  checksum: 432195cd589ce1729c6c817bdd2d9c7d07ba358c6ffa40121151b6294db00697b10e1d36e507b6527fb116b9f9459465408dd7dc9dc37590fb774afdb02e1b1d
+  checksum: a5ee3c1279f000da805b976689034c6bdce0302541467305b1e015ef230b44060b5dffc94436553c6e5ee053ebd778c0b7e64f2014a517dbba230c495a2b62ac
   languageName: node
   linkType: hard
 
-"@typescript-eslint/visitor-keys@npm:5.60.1":
-  version: 5.60.1
-  resolution: "@typescript-eslint/visitor-keys@npm:5.60.1"
+"@typescript-eslint/visitor-keys@npm:5.62.0":
+  version: 5.62.0
+  resolution: "@typescript-eslint/visitor-keys@npm:5.62.0"
   dependencies:
-    "@typescript-eslint/types": "npm:5.60.1"
+    "@typescript-eslint/types": "npm:5.62.0"
     eslint-visitor-keys: "npm:^3.3.0"
-  checksum: 2fda2eb2bac6541a997a77db9cbccfdb990b3abb7359cac86d7622a381fd85c8d3d0c1e049479f16dc47b1e7d0e4b65f617aa19f85757d07ec01fe70fbd11395
+  checksum: 65928322389af2c4280cd1f1bdae717f323e680343d3ccfad671e6a2a3b1e4497f03cff23ffdbf15602641b8bd6d5e2229aeb13ff8af8ac1f6e78ca9b3b41c83
   languageName: node
   linkType: hard
 
@@ -4617,17 +4617,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"babel-plugin-remove-graphql-queries@npm:^5.11.0":
-  version: 5.11.0
-  resolution: "babel-plugin-remove-graphql-queries@npm:5.11.0"
+"babel-plugin-remove-graphql-queries@npm:^5.12.0":
+  version: 5.12.0
+  resolution: "babel-plugin-remove-graphql-queries@npm:5.12.0"
   dependencies:
     "@babel/runtime": "npm:^7.20.13"
     "@babel/types": "npm:^7.20.7"
-    gatsby-core-utils: "npm:^4.11.0"
+    gatsby-core-utils: "npm:^4.12.0"
   peerDependencies:
     "@babel/core": ^7.0.0
     gatsby: ^5.0.0-next
-  checksum: 13c8e27e236aaefd8fc354feecd2e1028ae4d2eed50ee2bc38b2bacc54dcc430b29945aec7028c6b874b05eb08ed3fbfc8a04bb8718d790c755c222b5d98100e
+  checksum: 5e5766752c61a4c975e5aa5ab5f45c5c9f55c94a55a9dcd7d729e412860595f68298646a3b1427d1eb186f0fdf97eea0312b0c043b6bb22fec0bcdf0f79e7c38
   languageName: node
   linkType: hard
 
@@ -4714,9 +4714,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"babel-preset-gatsby@npm:^3.11.0":
-  version: 3.11.0
-  resolution: "babel-preset-gatsby@npm:3.11.0"
+"babel-preset-gatsby@npm:^3.12.0":
+  version: 3.12.0
+  resolution: "babel-preset-gatsby@npm:3.12.0"
   dependencies:
     "@babel/plugin-proposal-class-properties": "npm:^7.18.6"
     "@babel/plugin-proposal-nullish-coalescing-operator": "npm:^7.18.6"
@@ -4731,12 +4731,12 @@ __metadata:
     babel-plugin-dynamic-import-node: "npm:^2.3.3"
     babel-plugin-macros: "npm:^3.1.0"
     babel-plugin-transform-react-remove-prop-types: "npm:^0.4.24"
-    gatsby-core-utils: "npm:^4.11.0"
-    gatsby-legacy-polyfills: "npm:^3.11.0"
+    gatsby-core-utils: "npm:^4.12.0"
+    gatsby-legacy-polyfills: "npm:^3.12.0"
   peerDependencies:
     "@babel/core": ^7.11.6
     core-js: ^3.0.0
-  checksum: abc027dddbb0c15b2ba29f19cc9dec11707e226c384b7de84f26ee24b3472c420cf2b5500ff623ba615565c446031dd0d5b04e0dc87e0f4fbecf15dac29fb308
+  checksum: 0a7e94556c1970606591c1d04f72fa3bc48d0d8a9a2deac4fe605de8a169669b602df81f18624e5caf697b89dc03238712b7c58aa75cdcdcb9fbdc31d57ba384
   languageName: node
   linkType: hard
 
@@ -4922,7 +4922,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"browserslist@npm:^4.0.0, browserslist@npm:^4.14.5, browserslist@npm:^4.18.1, browserslist@npm:^4.21.3, browserslist@npm:^4.21.4, browserslist@npm:^4.21.5, browserslist@npm:^4.21.7, browserslist@npm:^4.6.6":
+"browserslist@npm:^4.0.0, browserslist@npm:^4.14.5, browserslist@npm:^4.18.1, browserslist@npm:^4.21.3, browserslist@npm:^4.21.4, browserslist@npm:^4.21.5, browserslist@npm:^4.6.6":
   version: 4.21.9
   resolution: "browserslist@npm:4.21.9"
   dependencies:
@@ -5573,7 +5573,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"commander@npm:^2.18.0, commander@npm:^2.20.0":
+"commander@npm:^11.0.0":
+  version: 11.0.0
+  resolution: "commander@npm:11.0.0"
+  checksum: cbdf1f81454204ef49b8ba7c1c03353fb102aa79ca6a107eff35fdfa0322c9610350510edcc098d1172f449d3a6035d108238dc5f3b846436c373740a7a3523e
+  languageName: node
+  linkType: hard
+
+"commander@npm:^2.20.0":
   version: 2.20.3
   resolution: "commander@npm:2.20.3"
   checksum: a6cb7ce73cc1db74a2da4bb6b4fc4f9a655ba35beb90f32bf5831d7d3be610dafc01dcc8a17f8204cf4e3f1f434d2115b7db56dfb0b827d42b10d1ba6ae8cbb4
@@ -5758,16 +5765,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"core-js-compat@npm:3.30.2":
-  version: 3.30.2
-  resolution: "core-js-compat@npm:3.30.2"
-  dependencies:
-    browserslist: "npm:^4.21.5"
-  checksum: e45e1415b26797d0ad9bcbede5d6a57c3604b0a560cac20e1e5a84fe8ab116bb017e99da0c2372614fee51b30880cb25d3da2a38426161b3cd069e8eab3465b7
-  languageName: node
-  linkType: hard
-
-"core-js-compat@npm:^3.30.1, core-js-compat@npm:^3.30.2":
+"core-js-compat@npm:3.31.0, core-js-compat@npm:^3.30.1, core-js-compat@npm:^3.30.2":
   version: 3.31.0
   resolution: "core-js-compat@npm:3.31.0"
   dependencies:
@@ -5790,10 +5788,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"core-js@npm:^3.30.2":
-  version: 3.31.0
-  resolution: "core-js@npm:3.31.0"
-  checksum: 8d38fb70c4dc7e2b3e43dc7e0c7e9770fb6cc5870f1aa9d69f8a7bffb27b5085d9968925dfe746e3856d3e68fa7314d789241b81094bc664b5cb69addd3f70b1
+"core-js@npm:^3.31.0":
+  version: 3.32.2
+  resolution: "core-js@npm:3.32.2"
+  checksum: ca54b12d82226b425a22f1eb24ce6f89d536234239cf9771573a6283123d05e1ab0deae819f01ef4aefda081a8af62a82b6e393e68b957260a9ab7dee6718def
   languageName: node
   linkType: hard
 
@@ -5840,14 +5838,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"create-gatsby@npm:^3.11.0":
-  version: 3.11.0
-  resolution: "create-gatsby@npm:3.11.0"
+"create-gatsby@npm:^3.12.0":
+  version: 3.12.0
+  resolution: "create-gatsby@npm:3.12.0"
   dependencies:
     "@babel/runtime": "npm:^7.20.13"
   bin:
     create-gatsby: cli.js
-  checksum: 412428fb13b973a649a7ecb58e503d7f9f7a6d5fc0d8db2dea4599d9ebaba5386e870f96c2d4caed4a4bf42f7885a79a3560345bb55080edb5a128e5c08672ba
+  checksum: 93f35fc40e7c2857cb298ef82ae338dd3a9e6e38ff436cd2ac1458ab8f57810b4ac88df67f071c4301c110f04c81e8241a5db6778f8f95169260621ae9e167a1
   languageName: node
   linkType: hard
 
@@ -6516,41 +6514,41 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "drmaas.me@workspace:."
   dependencies:
-    "@fontsource-variable/montserrat": "npm:^5.0.4"
-    "@fontsource/merriweather": "npm:^5.0.3"
-    "@fortawesome/fontawesome-svg-core": "npm:^6.4.0"
-    "@fortawesome/free-brands-svg-icons": "npm:^6.4.0"
-    "@fortawesome/free-regular-svg-icons": "npm:^6.4.0"
-    "@fortawesome/free-solid-svg-icons": "npm:^6.4.0"
+    "@fontsource-variable/montserrat": "npm:^5.0.9"
+    "@fontsource/merriweather": "npm:^5.0.8"
+    "@fortawesome/fontawesome-svg-core": "npm:^6.4.2"
+    "@fortawesome/free-brands-svg-icons": "npm:^6.4.2"
+    "@fortawesome/free-regular-svg-icons": "npm:^6.4.2"
+    "@fortawesome/free-solid-svg-icons": "npm:^6.4.2"
     "@fortawesome/react-fontawesome": "npm:^0.2.0"
     "@mdx-js/react": "npm:^2.3.0"
     babel-plugin-styled-components: "npm:^2.1.4"
-    gatsby: "npm:^5.11.0"
-    gatsby-plugin-feed: "npm:^5.11.0"
-    gatsby-plugin-image: "npm:^3.11.0"
-    gatsby-plugin-manifest: "npm:^5.11.0"
-    gatsby-plugin-mdx: "npm:^5.11.0"
-    gatsby-plugin-offline: "npm:^6.11.0"
-    gatsby-plugin-sharp: "npm:^5.11.0"
-    gatsby-plugin-styled-components: "npm:^6.11.0"
-    gatsby-plugin-typescript: "npm:^5.11.0"
-    gatsby-remark-autolink-headers: "npm:^6.11.0"
+    gatsby: "npm:^5.12.5"
+    gatsby-plugin-feed: "npm:^5.12.0"
+    gatsby-plugin-image: "npm:^3.12.0"
+    gatsby-plugin-manifest: "npm:^5.12.0"
+    gatsby-plugin-mdx: "npm:^5.12.0"
+    gatsby-plugin-offline: "npm:^6.12.0"
+    gatsby-plugin-sharp: "npm:^5.12.0"
+    gatsby-plugin-styled-components: "npm:^6.12.0"
+    gatsby-plugin-typescript: "npm:^5.12.0"
+    gatsby-remark-autolink-headers: "npm:^6.12.0"
     gatsby-remark-embed-video: "npm:^3.2.1"
     gatsby-remark-emoji: "npm:^0.0.3"
-    gatsby-remark-images: "npm:^7.11.0"
-    gatsby-remark-prismjs: "npm:^7.11.0"
-    gatsby-remark-responsive-iframe: "npm:^6.11.0"
-    gatsby-source-filesystem: "npm:^5.11.0"
-    gatsby-transformer-remark: "npm:^6.11.0"
-    gatsby-transformer-sharp: "npm:^5.11.0"
-    gh-pages: "npm:^5.0.0"
-    prettier: "npm:^2.8.8"
+    gatsby-remark-images: "npm:^7.12.0"
+    gatsby-remark-prismjs: "npm:^7.12.0"
+    gatsby-remark-responsive-iframe: "npm:^6.12.0"
+    gatsby-source-filesystem: "npm:^5.12.0"
+    gatsby-transformer-remark: "npm:^6.12.0"
+    gatsby-transformer-sharp: "npm:^5.12.0"
+    gh-pages: "npm:^6.0.0"
+    prettier: "npm:^3.0.3"
     prismjs: "npm:^1.29.0"
-    react: "npm:^18.1.0"
-    react-dom: "npm:^18.1.0"
+    react: "npm:^18.2.0"
+    react-dom: "npm:^18.2.0"
     reading-time: "npm:^1.5.0"
-    styled-components: "npm:^6.0.7"
-    typescript: "npm:^5.1.3"
+    styled-components: "npm:^6.0.8"
+    typescript: "npm:^5.2.2"
   languageName: unknown
   linkType: soft
 
@@ -6649,29 +6647,29 @@ __metadata:
   languageName: node
   linkType: hard
 
-"engine.io-client@npm:~6.4.0":
-  version: 6.4.0
-  resolution: "engine.io-client@npm:6.4.0"
+"engine.io-client@npm:~6.5.1":
+  version: 6.5.2
+  resolution: "engine.io-client@npm:6.5.2"
   dependencies:
     "@socket.io/component-emitter": "npm:~3.1.0"
     debug: "npm:~4.3.1"
-    engine.io-parser: "npm:~5.0.3"
+    engine.io-parser: "npm:~5.2.1"
     ws: "npm:~8.11.0"
     xmlhttprequest-ssl: "npm:~2.0.0"
-  checksum: 08d7861af7946e5ceb9f830447b9fc26a173f2d0ed476260c43fe5ea8fedb34ad41c27050bc07aa07d54df63ffe74d246f9b4ccd0f657baf485f5b395d9ce28c
+  checksum: 51dffa1747deaeaf6ee078b897b703547b3a9dec1d6fbc4d196f5b8b8a465225ef66c36577bf743968bbbda5721f6828102b945673ec395d5d36b09b9772ce57
   languageName: node
   linkType: hard
 
-"engine.io-parser@npm:~5.0.3":
-  version: 5.0.7
-  resolution: "engine.io-parser@npm:5.0.7"
-  checksum: eced380321fb8129b9f798a136f926c2a2224452acde097089fc91963efae25a408388f3c48a84b3bcebfe38cf08de9971162d4b53b588d1e1eb57e25d7d7ecf
+"engine.io-parser@npm:~5.2.1":
+  version: 5.2.1
+  resolution: "engine.io-parser@npm:5.2.1"
+  checksum: 6fad30a55f34950d674b907b233c7e73143d45b8e232ce73966e2d63f84ce04124024b9a9c3c5807472350882d458994eb2aa164b26ed21babc03c40e442c123
   languageName: node
   linkType: hard
 
-"engine.io@npm:~6.4.1":
-  version: 6.4.2
-  resolution: "engine.io@npm:6.4.2"
+"engine.io@npm:~6.5.0":
+  version: 6.5.2
+  resolution: "engine.io@npm:6.5.2"
   dependencies:
     "@types/cookie": "npm:^0.4.1"
     "@types/cors": "npm:^2.8.12"
@@ -6681,13 +6679,13 @@ __metadata:
     cookie: "npm:~0.4.1"
     cors: "npm:~2.8.5"
     debug: "npm:~4.3.1"
-    engine.io-parser: "npm:~5.0.3"
+    engine.io-parser: "npm:~5.2.1"
     ws: "npm:~8.11.0"
-  checksum: bc4c2df54210836ca28d74eac065839e55f7e2405a5976a80e0622028179a940a6031a02666492a7f7d960840ef051d3072b1835ca9f08bda7142d6c3e419596
+  checksum: a37a67236e2b60b8b87a9df90e8b24f1923a010f162ed7f2468be5dfa97b4c5ea7d6d6e85e9a819f29313bd9caaa5f972b99f76872912c6093052c9118a592e7
   languageName: node
   linkType: hard
 
-"enhanced-resolve@npm:^5.14.1, enhanced-resolve@npm:^5.15.0":
+"enhanced-resolve@npm:^5.15.0":
   version: 5.15.0
   resolution: "enhanced-resolve@npm:5.15.0"
   dependencies:
@@ -6727,7 +6725,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"envinfo@npm:^7.8.1":
+"envinfo@npm:^7.10.0":
   version: 7.10.0
   resolution: "envinfo@npm:7.10.0"
   bin:
@@ -7837,17 +7835,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"fs-extra@npm:^8.1.0":
-  version: 8.1.0
-  resolution: "fs-extra@npm:8.1.0"
-  dependencies:
-    graceful-fs: "npm:^4.2.0"
-    jsonfile: "npm:^4.0.0"
-    universalify: "npm:^0.1.0"
-  checksum: cfdc1f2b8d32c0f7bc2435fcc1aa3dce4ea3391329294369e3821722cd05f29c057a21970d228db4beda7274486091c4e1d6f93e8eef93a874d9116ac1763470
-  languageName: node
-  linkType: hard
-
 "fs-extra@npm:^9.0.0":
   version: 9.1.0
   resolution: "fs-extra@npm:9.1.0"
@@ -7951,9 +7938,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"gatsby-cli@npm:^5.11.0":
-  version: 5.11.0
-  resolution: "gatsby-cli@npm:5.11.0"
+"gatsby-cli@npm:^5.12.1":
+  version: 5.12.1
+  resolution: "gatsby-cli@npm:5.12.1"
   dependencies:
     "@babel/code-frame": "npm:^7.18.6"
     "@babel/core": "npm:^7.20.12"
@@ -7971,13 +7958,13 @@ __metadata:
     clipboardy: "npm:^2.3.0"
     common-tags: "npm:^1.8.2"
     convert-hrtime: "npm:^3.0.0"
-    create-gatsby: "npm:^3.11.0"
-    envinfo: "npm:^7.8.1"
+    create-gatsby: "npm:^3.12.0"
+    envinfo: "npm:^7.10.0"
     execa: "npm:^5.1.1"
     fs-exists-cached: "npm:^1.0.0"
     fs-extra: "npm:^11.1.1"
-    gatsby-core-utils: "npm:^4.11.0"
-    gatsby-telemetry: "npm:^4.11.0"
+    gatsby-core-utils: "npm:^4.12.0"
+    gatsby-telemetry: "npm:^4.12.0"
     hosted-git-info: "npm:^3.0.8"
     is-valid-path: "npm:^0.1.1"
     joi: "npm:^17.9.2"
@@ -7989,7 +7976,7 @@ __metadata:
     prompts: "npm:^2.4.2"
     redux: "npm:4.2.1"
     resolve-cwd: "npm:^3.0.0"
-    semver: "npm:^7.5.1"
+    semver: "npm:^7.5.3"
     signal-exit: "npm:^3.0.7"
     stack-trace: "npm:^0.0.10"
     strip-ansi: "npm:^6.0.1"
@@ -7998,13 +7985,13 @@ __metadata:
     yurnalist: "npm:^2.1.0"
   bin:
     gatsby: cli.js
-  checksum: 4b85e6e7c525cab4b59c278a950e862bfb4048e7b666375b7c68d9ab17ae835da90c3396a5e6bf0b10dda919372da23635f71f25cf0ba50f2f4a5bdfbb8efffd
+  checksum: 8365bbac240a27dbdddae62ed33ae87ddf1ccb36b78628a93dd00ffe493acc4f0ece2ace1c24196cfb61335d453ee66764919518e8ca92f65ae8788e166e0fa1
   languageName: node
   linkType: hard
 
-"gatsby-core-utils@npm:^4.11.0":
-  version: 4.11.0
-  resolution: "gatsby-core-utils@npm:4.11.0"
+"gatsby-core-utils@npm:^4.12.0":
+  version: 4.12.0
+  resolution: "gatsby-core-utils@npm:4.12.0"
   dependencies:
     "@babel/runtime": "npm:^7.20.13"
     ci-info: "npm:2.0.0"
@@ -8022,63 +8009,63 @@ __metadata:
     resolve-from: "npm:^5.0.0"
     tmp: "npm:^0.2.1"
     xdg-basedir: "npm:^4.0.0"
-  checksum: 0e84e1c509d2858a76f85df033695c0eda02558e42637d132110ee84f58cdee0fb1366215a3991895305cbb904f47f454f9a14a3db1228f32511572583885d77
+  checksum: 02e7c9f728d228d52f8c3bc3ec6f0300cbf6e5cbc6da8c471b37753814b9ca1c1e604aaad71563d036bdaa684d54fdcd1c221f021160ab01d0be026e9cdc310e
   languageName: node
   linkType: hard
 
-"gatsby-graphiql-explorer@npm:^3.11.0":
-  version: 3.11.0
-  resolution: "gatsby-graphiql-explorer@npm:3.11.0"
-  checksum: 086a4cb566467d4fedcf8ae6886cc49c0ec2900148c5bf7310a00625f20ffef5b9c83e6d3fb9d636a819618c44f4aaedd21a3369422fa889b6e32b37bf886e9a
+"gatsby-graphiql-explorer@npm:^3.12.1":
+  version: 3.12.1
+  resolution: "gatsby-graphiql-explorer@npm:3.12.1"
+  checksum: 3bf6e3f752784568be484f5178dca82cc5d43b1b69badfe86f3b92c5e64aa1715738b1764b60194a1bd058a4d1ad5ccaa86941ae7dccf6ab0e7c70870fdc4ea7
   languageName: node
   linkType: hard
 
-"gatsby-legacy-polyfills@npm:^3.11.0":
-  version: 3.11.0
-  resolution: "gatsby-legacy-polyfills@npm:3.11.0"
+"gatsby-legacy-polyfills@npm:^3.12.0":
+  version: 3.12.0
+  resolution: "gatsby-legacy-polyfills@npm:3.12.0"
   dependencies:
     "@babel/runtime": "npm:^7.20.13"
-    core-js-compat: "npm:3.30.2"
-  checksum: f698e18f0ba5868598c51558b9e4c5fcf5b90b869bbddff06aa9b13c8cbf47934d018dcd9640591105667c4168718e22278cf15e1650e1c1d8583b00b7c9dc1a
+    core-js-compat: "npm:3.31.0"
+  checksum: aad72d5599ee759f4f23c79d6ff39ad4a02150725fac8186eca1b1308474c889f6f1fea758afcbe8f3fa5a2f7a1f304967a008a785ccd032e37318f37e89caac
   languageName: node
   linkType: hard
 
-"gatsby-link@npm:^5.11.0":
-  version: 5.11.0
-  resolution: "gatsby-link@npm:5.11.0"
+"gatsby-link@npm:^5.12.0":
+  version: 5.12.0
+  resolution: "gatsby-link@npm:5.12.0"
   dependencies:
     "@types/reach__router": "npm:^1.3.10"
-    gatsby-page-utils: "npm:^3.11.0"
+    gatsby-page-utils: "npm:^3.12.0"
     prop-types: "npm:^15.8.1"
   peerDependencies:
     "@gatsbyjs/reach-router": ^2.0.0
     react: ^18.0.0 || ^0.0.0
     react-dom: ^18.0.0 || ^0.0.0
-  checksum: 1db6d175b90e49f83aa5641b3125c57582cb4069c3e6dd180657b9276ecb7854e4d57552ca093ccc16f650b1e814d9040c9d1b1c21763a6cdb8a7304589be9b9
+  checksum: 03306e2cd6ccb78c39d4c60cb4d4b459b05b852c5362381a0574ebb7a1e8947afba221aeeaf63ff2e42db0596649e21694b851b300d700e1afda0ead63b9b668
   languageName: node
   linkType: hard
 
-"gatsby-page-utils@npm:^3.11.0":
-  version: 3.11.0
-  resolution: "gatsby-page-utils@npm:3.11.0"
+"gatsby-page-utils@npm:^3.12.0":
+  version: 3.12.0
+  resolution: "gatsby-page-utils@npm:3.12.0"
   dependencies:
     "@babel/runtime": "npm:^7.20.13"
     bluebird: "npm:^3.7.2"
     chokidar: "npm:^3.5.3"
     fs-exists-cached: "npm:^1.0.0"
-    gatsby-core-utils: "npm:^4.11.0"
+    gatsby-core-utils: "npm:^4.12.0"
     glob: "npm:^7.2.3"
     lodash: "npm:^4.17.21"
     micromatch: "npm:^4.0.5"
-  checksum: ec9bfa77fb7460256392a51dd85c11dbe9904cee002f4682e6f183b53bde50738dc51d5670a18e5d4e87c21ceacbb8bfcd669091a98bfaf30efe04e6fe60ee6f
+  checksum: db40ef2f4bacad9aa8a577443e2a422e73e178cc789c81e6f82520e91587c6ed2e69c5fa40e1bf3e56431d058ea4a6c1b91360308f6e81a83c0716b25fc21de2
   languageName: node
   linkType: hard
 
-"gatsby-parcel-config@npm:^1.11.0":
-  version: 1.11.0
-  resolution: "gatsby-parcel-config@npm:1.11.0"
+"gatsby-parcel-config@npm:1.12.0":
+  version: 1.12.0
+  resolution: "gatsby-parcel-config@npm:1.12.0"
   dependencies:
-    "@gatsbyjs/parcel-namer-relative-to-cwd": "npm:^2.11.0"
+    "@gatsbyjs/parcel-namer-relative-to-cwd": "npm:^2.12.0"
     "@parcel/bundler-default": "npm:2.8.3"
     "@parcel/compressor-raw": "npm:2.8.3"
     "@parcel/namer-default": "npm:2.8.3"
@@ -8092,44 +8079,44 @@ __metadata:
     "@parcel/transformer-json": "npm:2.8.3"
   peerDependencies:
     "@parcel/core": ^2.0.0
-  checksum: afc2c11834459d7c538d6024aa716b221a96d1460bc1bab04cf990e80112c676e4d19f25d9658b1b43f026387e6c0e57224984f87ac204ceadc21a7cfb8eb637
+  checksum: 85e104f701fbf7bee52322c3bd1a917ca1d9a0f56d3cba93a30b35ae81555e7459152c3c7c8e63240086cd3b974038521b2bccf82729172548fc6df6aad70664
   languageName: node
   linkType: hard
 
-"gatsby-plugin-feed@npm:^5.11.0":
-  version: 5.11.0
-  resolution: "gatsby-plugin-feed@npm:5.11.0"
+"gatsby-plugin-feed@npm:^5.12.0":
+  version: 5.12.0
+  resolution: "gatsby-plugin-feed@npm:5.12.0"
   dependencies:
     "@babel/runtime": "npm:^7.20.13"
     common-tags: "npm:^1.8.2"
     fs-extra: "npm:^11.1.1"
-    gatsby-plugin-utils: "npm:^4.11.0"
+    gatsby-plugin-utils: "npm:^4.12.0"
     lodash.merge: "npm:^4.6.2"
     rss: "npm:^1.2.2"
   peerDependencies:
     gatsby: ^5.0.0-next
     react: ^18.0.0 || ^0.0.0
     react-dom: ^18.0.0 || ^0.0.0
-  checksum: 4dcee0ce98bbead8ccbea3002328f1179722d67cce27d8dedb0d3d6520708a30e96b3276e3bc41a14c3d1ad165407ea421e4b9003c7c56e95b726ca1fbf879ef
+  checksum: 24748c78126e5b53a27b668488ac8eff5205b89d0020de5ff99e61a816cb2e88d95056e918266120cbe8223365dd78a1064fce306c1bbc11655c2a32ddb8e6ff
   languageName: node
   linkType: hard
 
-"gatsby-plugin-image@npm:^3.11.0":
-  version: 3.11.0
-  resolution: "gatsby-plugin-image@npm:3.11.0"
+"gatsby-plugin-image@npm:^3.12.0":
+  version: 3.12.0
+  resolution: "gatsby-plugin-image@npm:3.12.0"
   dependencies:
     "@babel/code-frame": "npm:^7.18.6"
     "@babel/parser": "npm:^7.20.13"
     "@babel/runtime": "npm:^7.20.13"
     "@babel/traverse": "npm:^7.20.13"
     babel-jsx-utils: "npm:^1.1.0"
-    babel-plugin-remove-graphql-queries: "npm:^5.11.0"
+    babel-plugin-remove-graphql-queries: "npm:^5.12.0"
     camelcase: "npm:^6.3.0"
     chokidar: "npm:^3.5.3"
     common-tags: "npm:^1.8.2"
     fs-extra: "npm:^11.1.1"
-    gatsby-core-utils: "npm:^4.11.0"
-    gatsby-plugin-utils: "npm:^4.11.0"
+    gatsby-core-utils: "npm:^4.12.0"
+    gatsby-plugin-utils: "npm:^4.12.0"
     objectFitPolyfill: "npm:^2.3.5"
     prop-types: "npm:^15.8.1"
   peerDependencies:
@@ -8144,28 +8131,28 @@ __metadata:
       optional: true
     gatsby-source-filesystem:
       optional: true
-  checksum: 8954d7728c90ec91cf382a5f37dbfb6e666a2cdea47acd8e8955838f283db50950810742e15102a1c6066f32a5572c31a3ea8527d2cdc282c76317c245157446
+  checksum: 3b71bf1bc56f0350d0c4133f0529a3802ca44d15a75a426ae18ec83538005eeb9dfa882169da3fbdbd8acded434716365c16286aeb0744869e1e56752bd94a97
   languageName: node
   linkType: hard
 
-"gatsby-plugin-manifest@npm:^5.11.0":
-  version: 5.11.0
-  resolution: "gatsby-plugin-manifest@npm:5.11.0"
+"gatsby-plugin-manifest@npm:^5.12.0":
+  version: 5.12.0
+  resolution: "gatsby-plugin-manifest@npm:5.12.0"
   dependencies:
     "@babel/runtime": "npm:^7.20.13"
-    gatsby-core-utils: "npm:^4.11.0"
-    gatsby-plugin-utils: "npm:^4.11.0"
-    semver: "npm:^7.5.1"
+    gatsby-core-utils: "npm:^4.12.0"
+    gatsby-plugin-utils: "npm:^4.12.0"
+    semver: "npm:^7.5.3"
     sharp: "npm:^0.32.1"
   peerDependencies:
     gatsby: ^5.0.0-next
-  checksum: 2947a6857cc4bde9ab1d173f08699c5800fdb7175fabce9eaf60eb4f843fa12b2663887ab976a89fcda2eeedb0acacc7987b2c86b5079c069bbb276ae49ec01f
+  checksum: e18f748d50ea23f8edce1454e3effa87f7a8fc8cdc60b6f1f6811a79a1727ad663537973635a20b6c9fe4f3a4e623d97d747d626d4dac3937d32e06cf077fea8
   languageName: node
   linkType: hard
 
-"gatsby-plugin-mdx@npm:^5.11.0":
-  version: 5.11.0
-  resolution: "gatsby-plugin-mdx@npm:5.11.0"
+"gatsby-plugin-mdx@npm:^5.12.0":
+  version: 5.12.0
+  resolution: "gatsby-plugin-mdx@npm:5.12.0"
   dependencies:
     "@mdx-js/mdx": "npm:^2.3.0"
     acorn: "npm:^8.8.2"
@@ -8174,8 +8161,8 @@ __metadata:
     deepmerge: "npm:^4.3.1"
     estree-util-build-jsx: "npm:^2.2.2"
     fs-extra: "npm:^11.1.1"
-    gatsby-core-utils: "npm:^4.11.0"
-    gatsby-plugin-utils: "npm:^4.11.0"
+    gatsby-core-utils: "npm:^4.12.0"
+    gatsby-plugin-utils: "npm:^4.12.0"
     gray-matter: "npm:^4.0.3"
     mdast-util-mdx: "npm:^2.0.1"
     mdast-util-to-hast: "npm:^10.2.0"
@@ -8192,17 +8179,17 @@ __metadata:
     gatsby-source-filesystem: ^5.0.0-next
     react: ^18.0.0 || ^0.0.0
     react-dom: ^18.0.0 || ^0.0.0
-  checksum: 0b5e1625a638f7f5d99b8b5c57bcfc8437b6831b4eeebba108d994af833467f02806458db99375b598b1df3cb90d05b583f923f5edb5426e32b09c61a0221b0c
+  checksum: ac693a2a8faca20949006d57e043cfec6b2d128d2b8a047896d82c3bb8956428f040b8ae402dc946eeacd012d69a8d14a10fb2fedff8008e553c219def4dd2f4
   languageName: node
   linkType: hard
 
-"gatsby-plugin-offline@npm:^6.11.0":
-  version: 6.11.0
-  resolution: "gatsby-plugin-offline@npm:6.11.0"
+"gatsby-plugin-offline@npm:^6.12.0":
+  version: 6.12.0
+  resolution: "gatsby-plugin-offline@npm:6.12.0"
   dependencies:
     "@babel/runtime": "npm:^7.20.13"
     cheerio: "npm:^1.0.0-rc.10"
-    gatsby-core-utils: "npm:^4.11.0"
+    gatsby-core-utils: "npm:^4.12.0"
     glob: "npm:^7.2.3"
     idb-keyval: "npm:^3.2.0"
     lodash: "npm:^4.17.21"
@@ -8211,13 +8198,13 @@ __metadata:
     gatsby: ^5.0.0-next
     react: ^18.0.0 || ^0.0.0
     react-dom: ^18.0.0 || ^0.0.0
-  checksum: 8167be5c657bfc65d2a3a20de8c50448eedca9afdc87ba0183a0e082eb15c51a683818612b1d14f47460310a408a4441208eea6f8816565d7a7645c07698bf8b
+  checksum: c609a3f535eeb016fb0e205d5b512ef84fa65bfebb705924c83c20a30fa366d105cdb5206c1383258f264085b45fbec5c23a76b9b38d354edce3fa770651a7ca
   languageName: node
   linkType: hard
 
-"gatsby-plugin-page-creator@npm:^5.11.0":
-  version: 5.11.0
-  resolution: "gatsby-plugin-page-creator@npm:5.11.0"
+"gatsby-plugin-page-creator@npm:^5.12.0":
+  version: 5.12.0
+  resolution: "gatsby-plugin-page-creator@npm:5.12.0"
   dependencies:
     "@babel/runtime": "npm:^7.20.13"
     "@babel/traverse": "npm:^7.20.13"
@@ -8225,21 +8212,21 @@ __metadata:
     chokidar: "npm:^3.5.3"
     fs-exists-cached: "npm:^1.0.0"
     fs-extra: "npm:^11.1.1"
-    gatsby-core-utils: "npm:^4.11.0"
-    gatsby-page-utils: "npm:^3.11.0"
-    gatsby-plugin-utils: "npm:^4.11.0"
-    gatsby-telemetry: "npm:^4.11.0"
+    gatsby-core-utils: "npm:^4.12.0"
+    gatsby-page-utils: "npm:^3.12.0"
+    gatsby-plugin-utils: "npm:^4.12.0"
+    gatsby-telemetry: "npm:^4.12.0"
     globby: "npm:^11.1.0"
     lodash: "npm:^4.17.21"
   peerDependencies:
     gatsby: ^5.0.0-next
-  checksum: 0673a5bc3163fd926ea5fee00187a88f09857f0f002e117fed9fd966b780dfe63c760b2135a4d28113bdb50bca4b539174727da6d3b580807db2808c7acfe706
+  checksum: 422590ee2cbb6cce582b43577a56a4c389074ed9a2ed28c66e427d60c80881baf6fc33ba5ea50038f3733d04a6de57dbc17a04cb44601c284495c8683e7d5c69
   languageName: node
   linkType: hard
 
-"gatsby-plugin-sharp@npm:^5.11.0":
-  version: 5.11.0
-  resolution: "gatsby-plugin-sharp@npm:5.11.0"
+"gatsby-plugin-sharp@npm:^5.12.0":
+  version: 5.12.0
+  resolution: "gatsby-plugin-sharp@npm:5.12.0"
   dependencies:
     "@babel/runtime": "npm:^7.20.13"
     async: "npm:^3.2.4"
@@ -8247,21 +8234,21 @@ __metadata:
     debug: "npm:^4.3.4"
     filenamify: "npm:^4.3.0"
     fs-extra: "npm:^11.1.1"
-    gatsby-core-utils: "npm:^4.11.0"
-    gatsby-plugin-utils: "npm:^4.11.0"
+    gatsby-core-utils: "npm:^4.12.0"
+    gatsby-plugin-utils: "npm:^4.12.0"
     lodash: "npm:^4.17.21"
     probe-image-size: "npm:^7.2.3"
-    semver: "npm:^7.5.1"
+    semver: "npm:^7.5.3"
     sharp: "npm:^0.32.1"
   peerDependencies:
     gatsby: ^5.0.0-next
-  checksum: 95a5c2950777f52f8394664d8440d471ca6e81d2370f7ab3887b064b885ae70748a365337c0a28633ff74992566232798ad62014351b932eff4dbb4aceeb2939
+  checksum: 0de10488ad12d07058d73438fd2aa5df9fb082c3d6f460e3c9cfa61a2a83a6a3bc47b98ad82c6ab0310d0b92660706c791254527183c0d92f97cf61475dfd999
   languageName: node
   linkType: hard
 
-"gatsby-plugin-styled-components@npm:^6.11.0":
-  version: 6.11.0
-  resolution: "gatsby-plugin-styled-components@npm:6.11.0"
+"gatsby-plugin-styled-components@npm:^6.12.0":
+  version: 6.12.0
+  resolution: "gatsby-plugin-styled-components@npm:6.12.0"
   dependencies:
     "@babel/runtime": "npm:^7.20.13"
   peerDependencies:
@@ -8270,13 +8257,13 @@ __metadata:
     react: ^18.0.0 || ^0.0.0
     react-dom: ^18.0.0 || ^0.0.0
     styled-components: ">=2.0.0"
-  checksum: ddab3154e9255178842debe79396aa6a350b21004264f3220ff432e1856683781dc8c1bb36a57386a67125af63176898395b295c0e877709193c26150d5d86e0
+  checksum: 0d3339ef9508d06ba8e64b34250e0637d0bc49c4a810e339327c257d4bb1c44e389d86918323ca14c7a9ee9fa603154d03ae1fc69330d8a839424ef3acd870ec
   languageName: node
   linkType: hard
 
-"gatsby-plugin-typescript@npm:^5.11.0":
-  version: 5.11.0
-  resolution: "gatsby-plugin-typescript@npm:5.11.0"
+"gatsby-plugin-typescript@npm:^5.12.0":
+  version: 5.12.0
+  resolution: "gatsby-plugin-typescript@npm:5.12.0"
   dependencies:
     "@babel/core": "npm:^7.20.12"
     "@babel/plugin-proposal-nullish-coalescing-operator": "npm:^7.18.6"
@@ -8284,22 +8271,22 @@ __metadata:
     "@babel/plugin-proposal-optional-chaining": "npm:^7.20.7"
     "@babel/preset-typescript": "npm:^7.18.6"
     "@babel/runtime": "npm:^7.20.13"
-    babel-plugin-remove-graphql-queries: "npm:^5.11.0"
+    babel-plugin-remove-graphql-queries: "npm:^5.12.0"
   peerDependencies:
     gatsby: ^5.0.0-next
-  checksum: 036fcc9b982fa03c42e30eacb4dc559675f289810785331088bd0ac311894a8125333e512d5c8ed7e04dbf1cc41b4270079cb951fee9278fbff4ef0e0a24cb58
+  checksum: 221dea6e5ead6f877170adfb8e74b0978323defc2ca62ea4b5968c2097d6caf93fb8b6ed4d7593d5b62376b3b2527a0cfb5b66dd256990a0cf8b7d524f1d094a
   languageName: node
   linkType: hard
 
-"gatsby-plugin-utils@npm:^4.11.0":
-  version: 4.11.0
-  resolution: "gatsby-plugin-utils@npm:4.11.0"
+"gatsby-plugin-utils@npm:^4.12.0":
+  version: 4.12.0
+  resolution: "gatsby-plugin-utils@npm:4.12.0"
   dependencies:
     "@babel/runtime": "npm:^7.20.13"
     fastq: "npm:^1.15.0"
     fs-extra: "npm:^11.1.1"
-    gatsby-core-utils: "npm:^4.11.0"
-    gatsby-sharp: "npm:^1.11.0"
+    gatsby-core-utils: "npm:^4.12.0"
+    gatsby-sharp: "npm:^1.12.0"
     graphql-compose: "npm:^9.0.10"
     import-from: "npm:^4.0.0"
     joi: "npm:^17.9.2"
@@ -8307,13 +8294,13 @@ __metadata:
   peerDependencies:
     gatsby: ^5.0.0-next
     graphql: ^16.0.0
-  checksum: 9a94ecd8bd7f1d6c3d3d5918c9aa748d7ad80d9cc2fbc6b0edb24b666ed90a805dd4d214d06007add73be1804c75bdf49dd4ee3efed510cba8e7612b17783f5f
+  checksum: 440ec73e3848885005a5e7031f62024e78b6249207ea6cd066b2082c516a914c33478456aa427293021eb3d11bdba97ba1e546ce98abbe42ce25ee63cfbcbe00
   languageName: node
   linkType: hard
 
-"gatsby-react-router-scroll@npm:^6.11.0":
-  version: 6.11.0
-  resolution: "gatsby-react-router-scroll@npm:6.11.0"
+"gatsby-react-router-scroll@npm:^6.12.0":
+  version: 6.12.0
+  resolution: "gatsby-react-router-scroll@npm:6.12.0"
   dependencies:
     "@babel/runtime": "npm:^7.20.13"
     prop-types: "npm:^15.8.1"
@@ -8321,13 +8308,13 @@ __metadata:
     "@gatsbyjs/reach-router": ^2.0.0
     react: ^18.0.0 || ^0.0.0
     react-dom: ^18.0.0 || ^0.0.0
-  checksum: 49b727850b0fd126fbe9297cf914b2a805f752bca855da6f595379692df111d76d6b2459e458c33f33192da38b5e7bc1452227ca127c92d9f60a38a85768e9a3
+  checksum: 80278caef8fdd3d2af2eb8837f821d27f59945d618b9bbfe722da39c91f01a92bbc2634ada5f537ee9950500b698cad674623f59b847cf87578635ca4c0f05e9
   languageName: node
   linkType: hard
 
-"gatsby-remark-autolink-headers@npm:^6.11.0":
-  version: 6.11.0
-  resolution: "gatsby-remark-autolink-headers@npm:6.11.0"
+"gatsby-remark-autolink-headers@npm:^6.12.0":
+  version: 6.12.0
+  resolution: "gatsby-remark-autolink-headers@npm:6.12.0"
   dependencies:
     "@babel/runtime": "npm:^7.20.13"
     github-slugger: "npm:^1.5.0"
@@ -8338,7 +8325,7 @@ __metadata:
     gatsby: ^5.0.0-next
     react: ^18.0.0 || ^0.0.0
     react-dom: ^18.0.0 || ^0.0.0
-  checksum: c71cbf32b280b602e077e0b0670385ae8947a17855b519a0f62ef4f63719c39c3d195f414fa871d4eeede67054477fdf3644a1f4e11c7b45988e0804dee5f4db
+  checksum: dea1f6a61959ddb0e65d7979fde31f41c4effee5ba19da213c370f37aaad48ca876ce2a2401109a515290de0163b2cd35aa1bf8d799e4a34cb2d45d6cd5ee629
   languageName: node
   linkType: hard
 
@@ -8363,14 +8350,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"gatsby-remark-images@npm:^7.11.0":
-  version: 7.11.0
-  resolution: "gatsby-remark-images@npm:7.11.0"
+"gatsby-remark-images@npm:^7.12.0":
+  version: 7.12.0
+  resolution: "gatsby-remark-images@npm:7.12.0"
   dependencies:
     "@babel/runtime": "npm:^7.20.13"
     chalk: "npm:^4.1.2"
     cheerio: "npm:^1.0.0-rc.10"
-    gatsby-core-utils: "npm:^4.11.0"
+    gatsby-core-utils: "npm:^4.12.0"
     is-relative-url: "npm:^3.0.0"
     lodash: "npm:^4.17.21"
     mdast-util-definitions: "npm:^4.0.0"
@@ -8380,13 +8367,13 @@ __metadata:
   peerDependencies:
     gatsby: ^5.0.0-next
     gatsby-plugin-sharp: ^5.0.0-next
-  checksum: bb4fd5dd6e0811f0078a4c35385c1db7f0ebe81d3a62e564b8598bca7afffdd9f7b3b6d1fc2d777c06141fcd4054886a7ecc89b081dca413c7e4ef0650a06d10
+  checksum: a850d0a03b5aaf502b72e6c8a52c8bba7c67bde0e4fc6cd847e1362e57f8bf3e87cc849155744ec150a8468c35e38eaea95c9884774f6bc9768b1672499647ef
   languageName: node
   linkType: hard
 
-"gatsby-remark-prismjs@npm:^7.11.0":
-  version: 7.11.0
-  resolution: "gatsby-remark-prismjs@npm:7.11.0"
+"gatsby-remark-prismjs@npm:^7.12.0":
+  version: 7.12.0
+  resolution: "gatsby-remark-prismjs@npm:7.12.0"
   dependencies:
     "@babel/runtime": "npm:^7.20.13"
     parse-numeric-range: "npm:^1.3.0"
@@ -8394,13 +8381,13 @@ __metadata:
   peerDependencies:
     gatsby: ^5.0.0-next
     prismjs: ^1.15.0
-  checksum: 9d4bb047ffbd5e4fcc6a4021a1fee2a7138d1b1081afe79c8a4c238e53c9e5deb289bccb15455112866b7cbcce548b842b6ef8a5b3be17c494d155609b8709d3
+  checksum: 886585e7f5839a84acf1ef9c5ba4b3ffce8d392ca8d12c0011771fe37dc6373530ec2fd799474c92721e15766a9cd2ec538aca9a3cf1c154c7da2a46ed3ea15f
   languageName: node
   linkType: hard
 
-"gatsby-remark-responsive-iframe@npm:^6.11.0":
-  version: 6.11.1
-  resolution: "gatsby-remark-responsive-iframe@npm:6.11.1"
+"gatsby-remark-responsive-iframe@npm:^6.12.0":
+  version: 6.12.0
+  resolution: "gatsby-remark-responsive-iframe@npm:6.12.0"
   dependencies:
     "@babel/runtime": "npm:^7.20.13"
     cheerio: "npm:^1.0.0-rc.10"
@@ -8409,52 +8396,52 @@ __metadata:
     unist-util-visit: "npm:^2.0.3"
   peerDependencies:
     gatsby: ^5.0.0-next
-  checksum: 7a3da0fe80376273bcdb1148527971f45af7c8b20947350956607fb931deeedf1f4b9f28f2c19e267a9249b6a879745f54209b5ff8176c7100921b625ef74a6c
+  checksum: 54ebf1f9b3ce6e57736e83c96c7d34001181a0b8ed1aeb2b4614c5fef9fe7869f83d104743800e9b7b5dfde8e8ca5b739d4d918d23683a9d9755a235a9bc2792
   languageName: node
   linkType: hard
 
-"gatsby-script@npm:^2.11.0":
-  version: 2.11.0
-  resolution: "gatsby-script@npm:2.11.0"
+"gatsby-script@npm:^2.12.0":
+  version: 2.12.0
+  resolution: "gatsby-script@npm:2.12.0"
   peerDependencies:
     "@gatsbyjs/reach-router": ^2.0.0
     react: ^18.0.0 || ^0.0.0
     react-dom: ^18.0.0 || ^0.0.0
-  checksum: 647ece33039a3b1c2fc8983bb2787ea638b4faf4915c1098279055ac7896471d9ac6dbd14d583e047966e0d3b8bd98665b89c7919246ef5e67c9a0772f31c9a6
+  checksum: d532f5a55721151e8f6de0db70de1d95939c2cf57a57991f05febb332caf861b66f349bb8926acdb3522609074b7b19a8b4e93526f5ae7592762a8fe0d10a0b3
   languageName: node
   linkType: hard
 
-"gatsby-sharp@npm:^1.11.0":
-  version: 1.11.0
-  resolution: "gatsby-sharp@npm:1.11.0"
+"gatsby-sharp@npm:^1.12.0":
+  version: 1.12.0
+  resolution: "gatsby-sharp@npm:1.12.0"
   dependencies:
     sharp: "npm:^0.32.1"
-  checksum: 030a9350d0f439aa97ffad7f716bc80e399e4e6d849dd85af926174fb1655442a8a688c92ceff1757214a47baa122dd3dc804474ab4d7b617b43a9fe8c1b23ed
+  checksum: 9ef9da40675a215b3fb54aaa17391eba8232dd6ce59fac677d2796721d28aa25603e06eaec66bc53b0e217816b236686fda2af1bbda51ad60bfc03cf8453113c
   languageName: node
   linkType: hard
 
-"gatsby-source-filesystem@npm:^5.11.0":
-  version: 5.11.0
-  resolution: "gatsby-source-filesystem@npm:5.11.0"
+"gatsby-source-filesystem@npm:^5.12.0":
+  version: 5.12.0
+  resolution: "gatsby-source-filesystem@npm:5.12.0"
   dependencies:
     "@babel/runtime": "npm:^7.20.13"
     chokidar: "npm:^3.5.3"
     file-type: "npm:^16.5.4"
     fs-extra: "npm:^11.1.1"
-    gatsby-core-utils: "npm:^4.11.0"
+    gatsby-core-utils: "npm:^4.12.0"
     mime: "npm:^3.0.0"
     pretty-bytes: "npm:^5.6.0"
     valid-url: "npm:^1.0.9"
-    xstate: "npm:^4.37.2"
+    xstate: "npm:^4.38.0"
   peerDependencies:
     gatsby: ^5.0.0-next
-  checksum: cdc7d0600bebbdd70b0186b4811d806c801b1bd9ef0d7226362df0b9a76fa8a396c79c90371048ebdb90d35cfadf1bcb529bb942ecc3855740ad0175dd2a34e6
+  checksum: e64d08433b6930b3922c05cef2d850e78a073ca65479d5151e11467c3b419e149a49f6e1f677b221acc5c59d332b08fa47fc74827f946f7877184007612cee27
   languageName: node
   linkType: hard
 
-"gatsby-telemetry@npm:^4.11.0":
-  version: 4.11.0
-  resolution: "gatsby-telemetry@npm:4.11.0"
+"gatsby-telemetry@npm:^4.12.0":
+  version: 4.12.0
+  resolution: "gatsby-telemetry@npm:4.12.0"
   dependencies:
     "@babel/code-frame": "npm:^7.18.6"
     "@babel/runtime": "npm:^7.20.13"
@@ -8463,21 +8450,21 @@ __metadata:
     boxen: "npm:^5.1.2"
     configstore: "npm:^5.0.1"
     fs-extra: "npm:^11.1.1"
-    gatsby-core-utils: "npm:^4.11.0"
+    gatsby-core-utils: "npm:^4.12.0"
     git-up: "npm:^7.0.0"
     is-docker: "npm:^2.2.1"
     lodash: "npm:^4.17.21"
     node-fetch: "npm:^2.6.11"
-  checksum: 21b62925fa3361cde13e01a8336a8ba0573a5ca9e5254f58ca70468abd4b83b3da797303b60e21cc26c5ddc9ed82fde5678a6c1cd5069eb3158e6e84ace97000
+  checksum: 2cb0acfd43a089bedcaba2f7456a642c5264d30e7eb9d9c77c89181f2b820264f43b11e15cbe2f7ebf6333ddf72980050f0511770e79ddaa64e6cd28356b9045
   languageName: node
   linkType: hard
 
-"gatsby-transformer-remark@npm:^6.11.0":
-  version: 6.11.0
-  resolution: "gatsby-transformer-remark@npm:6.11.0"
+"gatsby-transformer-remark@npm:^6.12.0":
+  version: 6.12.0
+  resolution: "gatsby-transformer-remark@npm:6.12.0"
   dependencies:
     "@babel/runtime": "npm:^7.20.13"
-    gatsby-core-utils: "npm:^4.11.0"
+    gatsby-core-utils: "npm:^4.12.0"
     gray-matter: "npm:^4.0.3"
     hast-util-raw: "npm:^6.1.0"
     hast-util-to-html: "npm:^7.1.3"
@@ -8492,7 +8479,7 @@ __metadata:
     remark-retext: "npm:^4.0.0"
     remark-stringify: "npm:^9.0.1"
     retext-english: "npm:^3.0.4"
-    sanitize-html: "npm:^2.10.0"
+    sanitize-html: "npm:^2.11.0"
     underscore.string: "npm:^3.3.6"
     unified: "npm:^9.2.2"
     unist-util-remove-position: "npm:^3.0.0"
@@ -8500,44 +8487,44 @@ __metadata:
     unist-util-visit: "npm:^2.0.3"
   peerDependencies:
     gatsby: ^5.0.0-next
-  checksum: f8bcbf6c381d6a7630e5061b66c798627d91a7c370a21543268ee1019f890f5d2bf126e2e7c91b1f7a3e254f0212e87a971524ffdea3d4fd3a4111d6bcb21faa
+  checksum: 75878055f219c1d9a40a8f1bae0a3a849f0d6ef5e0881a4fa97d064cb0c44e329dc9260b23b6763271b122b7b2939995c0b6890d646cc82487d1ca4f10387aac
   languageName: node
   linkType: hard
 
-"gatsby-transformer-sharp@npm:^5.11.0":
-  version: 5.11.0
-  resolution: "gatsby-transformer-sharp@npm:5.11.0"
+"gatsby-transformer-sharp@npm:^5.12.0":
+  version: 5.12.0
+  resolution: "gatsby-transformer-sharp@npm:5.12.0"
   dependencies:
     "@babel/runtime": "npm:^7.20.13"
     bluebird: "npm:^3.7.2"
     common-tags: "npm:^1.8.2"
     fs-extra: "npm:^11.1.1"
-    gatsby-plugin-utils: "npm:^4.11.0"
+    gatsby-plugin-utils: "npm:^4.12.0"
     probe-image-size: "npm:^7.2.3"
-    semver: "npm:^7.5.1"
+    semver: "npm:^7.5.3"
     sharp: "npm:^0.32.1"
   peerDependencies:
     gatsby: ^5.0.0-next
     gatsby-plugin-sharp: ^5.0.0-next
-  checksum: 31dc5a989e2714ff873866576164eb48592bd6bb980d640a8af99478eee130d3fa7d50811bc48cdcc8ecbcbe5a39923aeea0084da39bc560c016786ecb0f3c60
+  checksum: 05e1777b19274e7fe810e074c787e8b73150105c2a75d323a5debb7ecac9c3e9dfddcd179d7ed9df0b994fb2088860fc986bd95d1fb9240f07b2e4f86f8ce8b4
   languageName: node
   linkType: hard
 
-"gatsby-worker@npm:^2.11.0":
-  version: 2.11.0
-  resolution: "gatsby-worker@npm:2.11.0"
+"gatsby-worker@npm:^2.12.0":
+  version: 2.12.0
+  resolution: "gatsby-worker@npm:2.12.0"
   dependencies:
     "@babel/core": "npm:^7.20.12"
     "@babel/runtime": "npm:^7.20.13"
     fs-extra: "npm:^11.1.1"
     signal-exit: "npm:^3.0.7"
-  checksum: 228522084ddb31ef712ad8192adc8850521a6f167f9d00c172ea7a76af88707f8432e285685a0b81a56ede091aa2a1e51e7275774f56c2e0d113312e6b0a7d2f
+  checksum: c36167d1946c57e942a836da7099bf7a41e6f822092d883569288d849ba9fc208c8bf1aae79303a8c8b872b6934d9b8bd42841d764518f52eef70a15da6d55f6
   languageName: node
   linkType: hard
 
-"gatsby@npm:^5.11.0":
-  version: 5.11.0
-  resolution: "gatsby@npm:5.11.0"
+"gatsby@npm:^5.12.5":
+  version: 5.12.5
+  resolution: "gatsby@npm:5.12.5"
   dependencies:
     "@babel/code-frame": "npm:^7.18.6"
     "@babel/core": "npm:^7.20.12"
@@ -8563,8 +8550,8 @@ __metadata:
     "@parcel/core": "npm:2.8.3"
     "@pmmmwh/react-refresh-webpack-plugin": "npm:^0.5.10"
     "@types/http-proxy": "npm:^1.17.11"
-    "@typescript-eslint/eslint-plugin": "npm:^5.59.8"
-    "@typescript-eslint/parser": "npm:^5.59.8"
+    "@typescript-eslint/eslint-plugin": "npm:^5.60.1"
+    "@typescript-eslint/parser": "npm:^5.60.1"
     "@vercel/webpack-asset-relocator-loader": "npm:^1.7.3"
     acorn-loose: "npm:^8.3.0"
     acorn-walk: "npm:^8.2.0"
@@ -8577,18 +8564,19 @@ __metadata:
     babel-plugin-add-module-exports: "npm:^1.0.4"
     babel-plugin-dynamic-import-node: "npm:^2.3.3"
     babel-plugin-lodash: "npm:^3.3.4"
-    babel-plugin-remove-graphql-queries: "npm:^5.11.0"
-    babel-preset-gatsby: "npm:^3.11.0"
+    babel-plugin-remove-graphql-queries: "npm:^5.12.0"
+    babel-preset-gatsby: "npm:^3.12.0"
     better-opn: "npm:^2.1.1"
     bluebird: "npm:^3.7.2"
-    browserslist: "npm:^4.21.7"
+    body-parser: "npm:1.20.1"
+    browserslist: "npm:^4.21.9"
     cache-manager: "npm:^2.11.1"
     chalk: "npm:^4.1.2"
     chokidar: "npm:^3.5.3"
     common-tags: "npm:^1.8.2"
     compression: "npm:^1.7.4"
     cookie: "npm:^0.5.0"
-    core-js: "npm:^3.30.2"
+    core-js: "npm:^3.31.0"
     cors: "npm:^2.8.5"
     css-loader: "npm:^5.2.7"
     css-minimizer-webpack-plugin: "npm:^2.0.0"
@@ -8599,7 +8587,7 @@ __metadata:
     detect-port: "npm:^1.5.1"
     devcert: "npm:^1.2.2"
     dotenv: "npm:^8.6.0"
-    enhanced-resolve: "npm:^5.14.1"
+    enhanced-resolve: "npm:^5.15.0"
     error-stack-parser: "npm:^2.1.4"
     eslint: "npm:^7.32.0"
     eslint-config-react-app: "npm:^6.0.0"
@@ -8619,27 +8607,27 @@ __metadata:
     find-cache-dir: "npm:^3.3.2"
     fs-exists-cached: "npm:1.0.0"
     fs-extra: "npm:^11.1.1"
-    gatsby-cli: "npm:^5.11.0"
-    gatsby-core-utils: "npm:^4.11.0"
-    gatsby-graphiql-explorer: "npm:^3.11.0"
-    gatsby-legacy-polyfills: "npm:^3.11.0"
-    gatsby-link: "npm:^5.11.0"
-    gatsby-page-utils: "npm:^3.11.0"
-    gatsby-parcel-config: "npm:^1.11.0"
-    gatsby-plugin-page-creator: "npm:^5.11.0"
-    gatsby-plugin-typescript: "npm:^5.11.0"
-    gatsby-plugin-utils: "npm:^4.11.0"
-    gatsby-react-router-scroll: "npm:^6.11.0"
-    gatsby-script: "npm:^2.11.0"
-    gatsby-sharp: "npm:^1.11.0"
-    gatsby-telemetry: "npm:^4.11.0"
-    gatsby-worker: "npm:^2.11.0"
+    gatsby-cli: "npm:^5.12.1"
+    gatsby-core-utils: "npm:^4.12.0"
+    gatsby-graphiql-explorer: "npm:^3.12.1"
+    gatsby-legacy-polyfills: "npm:^3.12.0"
+    gatsby-link: "npm:^5.12.0"
+    gatsby-page-utils: "npm:^3.12.0"
+    gatsby-parcel-config: "npm:1.12.0"
+    gatsby-plugin-page-creator: "npm:^5.12.0"
+    gatsby-plugin-typescript: "npm:^5.12.0"
+    gatsby-plugin-utils: "npm:^4.12.0"
+    gatsby-react-router-scroll: "npm:^6.12.0"
+    gatsby-script: "npm:^2.12.0"
+    gatsby-sharp: "npm:^1.12.0"
+    gatsby-telemetry: "npm:^4.12.0"
+    gatsby-worker: "npm:^2.12.0"
     glob: "npm:^7.2.3"
     globby: "npm:^11.1.0"
     got: "npm:^11.8.6"
-    graphql: "npm:^16.6.0"
+    graphql: "npm:^16.7.1"
     graphql-compose: "npm:^9.0.10"
-    graphql-http: "npm:^1.18.0"
+    graphql-http: "npm:^1.19.0"
     graphql-tag: "npm:^2.12.6"
     hasha: "npm:^5.2.2"
     invariant: "npm:^2.2.4"
@@ -8648,6 +8636,7 @@ __metadata:
     joi: "npm:^17.9.2"
     json-loader: "npm:^0.5.7"
     latest-version: "npm:^7.0.0"
+    linkfs: "npm:^2.1.0"
     lmdb: "npm:2.5.3"
     lodash: "npm:^4.17.21"
     meant: "npm:^1.0.3"
@@ -8680,12 +8669,12 @@ __metadata:
     redux: "npm:4.2.1"
     redux-thunk: "npm:^2.4.2"
     resolve-from: "npm:^5.0.0"
-    semver: "npm:^7.5.1"
+    semver: "npm:^7.5.3"
     shallow-compare: "npm:^1.2.2"
     signal-exit: "npm:^3.0.7"
     slugify: "npm:^1.6.6"
-    socket.io: "npm:4.6.1"
-    socket.io-client: "npm:4.6.1"
+    socket.io: "npm:4.7.1"
+    socket.io-client: "npm:4.7.1"
     stack-trace: "npm:^0.0.10"
     string-similarity: "npm:^1.2.2"
     strip-ansi: "npm:^6.0.1"
@@ -8697,12 +8686,12 @@ __metadata:
     type-of: "npm:^2.0.1"
     url-loader: "npm:^4.1.1"
     uuid: "npm:^8.3.2"
-    webpack: "npm:^5.85.0"
+    webpack: "npm:^5.88.1"
     webpack-dev-middleware: "npm:^4.3.0"
     webpack-merge: "npm:^5.9.0"
-    webpack-stats-plugin: "npm:^1.1.1"
+    webpack-stats-plugin: "npm:^1.1.3"
     webpack-virtual-modules: "npm:^0.5.0"
-    xstate: "npm:^4.37.2"
+    xstate: "npm:^4.38.0"
     yaml-loader: "npm:^0.8.0"
   peerDependencies:
     react: ^18.0.0 || ^0.0.0
@@ -8712,7 +8701,7 @@ __metadata:
       optional: true
   bin:
     gatsby: ./cli.js
-  checksum: afaad9d7e6bec698445e47899d262e0172c66eeceaf4c85748a8a46d13fe38e821cd10b3a6c20846a2e88b2995882d8799d626cbf1743ca9adc8f4b2a5e9bc20
+  checksum: e440fe7b08300a4c4b05644a48bd62becd4a435e3132e0f2b80b3ff5fc041f0e035bb45ba6dac07670f31119010c8b794f8fd3334537c8898e3633c0b370f8d5
   languageName: node
   linkType: hard
 
@@ -8814,21 +8803,21 @@ __metadata:
   languageName: node
   linkType: hard
 
-"gh-pages@npm:^5.0.0":
-  version: 5.0.0
-  resolution: "gh-pages@npm:5.0.0"
+"gh-pages@npm:^6.0.0":
+  version: 6.0.0
+  resolution: "gh-pages@npm:6.0.0"
   dependencies:
     async: "npm:^3.2.4"
-    commander: "npm:^2.18.0"
+    commander: "npm:^11.0.0"
     email-addresses: "npm:^5.0.0"
     filenamify: "npm:^4.3.0"
     find-cache-dir: "npm:^3.3.1"
-    fs-extra: "npm:^8.1.0"
+    fs-extra: "npm:^11.1.1"
     globby: "npm:^6.1.0"
   bin:
     gh-pages: bin/gh-pages.js
     gh-pages-clean: bin/gh-pages-clean.js
-  checksum: 9d65197074a2bfa12c025da0ddb8e3ae2aa6718b2ac85bff5462a8f791a12325d1a6d959b7d9e8213d505ab503eea1726e60ac5b08a40bf949fc7eac6fc04d64
+  checksum: 6594599c6c39b049a7eb66c554673ac681d2afc84cb2bd7838645812942108b07edebbe20af8f6f003df3423f7b00e5f11de66abed359a0b07dce6ddf5068d05
   languageName: node
   linkType: hard
 
@@ -9041,10 +9030,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"grapheme-splitter@npm:^1.0.4":
-  version: 1.0.4
-  resolution: "grapheme-splitter@npm:1.0.4"
-  checksum: c67a8e522758dd907770a78ad750e6dfdcce327b0696fdd82f4b7acb8bb22b0574c88f806afb3c6597a536fa9016e6e3486071535fd0e9226b8505c67cf2fb01
+"graphemer@npm:^1.4.0":
+  version: 1.4.0
+  resolution: "graphemer@npm:1.4.0"
+  checksum: a4ee139533e1d1683edb24eaf3e598451e7f1577da3dfc68f247f0601d5d11d264d0ccfad3de3bfcabbed891140fbae84c0403b9d68f4fcb6431c418f971434e
   languageName: node
   linkType: hard
 
@@ -9057,12 +9046,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"graphql-http@npm:^1.18.0":
-  version: 1.19.0
-  resolution: "graphql-http@npm:1.19.0"
+"graphql-http@npm:^1.19.0":
+  version: 1.22.0
+  resolution: "graphql-http@npm:1.22.0"
   peerDependencies:
     graphql: ">=0.11 <=16"
-  checksum: 9a74f572e6b8bf436517ec94394727af02c959731b740b52af98334e92cebf5f781bc85b2c87d0a4f7d5534ef07384af70b1b8e2ead1c1eb81ed3e5ce1c2406e
+  checksum: b9e2e8078fe0d0b70e84f3288df31912f8b6a568bc2ed7b5b7aa5e386b8d711403945e015d1a9c0a686be5b1a6087e92cf0aeb71a1691edc14413e39b179aa2f
   languageName: node
   linkType: hard
 
@@ -9086,10 +9075,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"graphql@npm:^16.6.0":
-  version: 16.7.1
-  resolution: "graphql@npm:16.7.1"
-  checksum: f391ef321598b62771b9a8e0c8bb7fae200648bdf1a5b1dec567a71d06a262d6da250aba814f36631fe8eae51fb24ab86dfca5acd1162527b2d9503218e7ea2d
+"graphql@npm:^16.7.1":
+  version: 16.8.1
+  resolution: "graphql@npm:16.8.1"
+  checksum: e3a95625d233c1d13c6f1df659f66955f582cb95dddb8407558090376088abcc414f39ed387a549541fca8cee681f3a5976253b6f53a5d47930dd129a5030143
   languageName: node
   linkType: hard
 
@@ -10559,6 +10548,13 @@ __metadata:
   version: 1.2.4
   resolution: "lines-and-columns@npm:1.2.4"
   checksum: c0807326f935ca3bbb725fe1a90d4a15e9b58939a2e75f5e85aa28e488620088b0f110bac2c384537e3c16cf64134afc67f39dd77f9249dcf7d056400d8c303b
+  languageName: node
+  linkType: hard
+
+"linkfs@npm:^2.1.0":
+  version: 2.1.0
+  resolution: "linkfs@npm:2.1.0"
+  checksum: 215dc6146f696e375ed31efc15f3a44ea6265ee137bb590538080633671a74574b3ff2c85e5a80544838d1da6edbd0f7a913d3ca142009d794ebe58fabf2f4c6
   languageName: node
   linkType: hard
 
@@ -13583,12 +13579,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"prettier@npm:^2.8.8":
-  version: 2.8.8
-  resolution: "prettier@npm:2.8.8"
+"prettier@npm:^3.0.3":
+  version: 3.0.3
+  resolution: "prettier@npm:3.0.3"
   bin:
-    prettier: bin-prettier.js
-  checksum: 38b0a43ea17e83f54b904f8808f7d0fd1d9705ef9627bb40017ee276cbd6f5e7d15bcf816c4467b64cfe14ef109369a981ce61fad9c6022749d041f74a672188
+    prettier: bin/prettier.cjs
+  checksum: 467e8febce083cba26791b1be3e9ecfee08593a151b7d54803d93bef87033242c3cfdf86cd7ce559b6eda2d1f8d1e54f87bf4a58f6f0258540fe4990753418fc
   languageName: node
   linkType: hard
 
@@ -13889,7 +13885,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-dom@npm:^18.1.0":
+"react-dom@npm:^18.2.0":
   version: 18.2.0
   resolution: "react-dom@npm:18.2.0"
   dependencies:
@@ -13936,7 +13932,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react@npm:^18.1.0":
+"react@npm:^18.2.0":
   version: 18.2.0
   resolution: "react@npm:18.2.0"
   dependencies:
@@ -14555,7 +14551,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"sanitize-html@npm:^2.10.0":
+"sanitize-html@npm:^2.11.0":
   version: 2.11.0
   resolution: "sanitize-html@npm:2.11.0"
   dependencies:
@@ -14664,7 +14660,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"semver@npm:^7.2.1, semver@npm:^7.3.2, semver@npm:^7.3.4, semver@npm:^7.3.5, semver@npm:^7.3.7, semver@npm:^7.5.0, semver@npm:^7.5.1":
+"semver@npm:^7.2.1, semver@npm:^7.3.2, semver@npm:^7.3.4, semver@npm:^7.3.5, semver@npm:^7.3.7, semver@npm:^7.5.0":
   version: 7.5.3
   resolution: "semver@npm:7.5.3"
   dependencies:
@@ -14672,6 +14668,17 @@ __metadata:
   bin:
     semver: bin/semver.js
   checksum: 9e949f7d5797373fcd8986b9b667cbd45afd4e95619ef82978d158a50c47579224e8f39badf03f6b9e8f4c80a1c87d6415eb1ee8b476e7bb60e6c7e8f63279be
+  languageName: node
+  linkType: hard
+
+"semver@npm:^7.5.3":
+  version: 7.5.4
+  resolution: "semver@npm:7.5.4"
+  dependencies:
+    lru-cache: "npm:^6.0.0"
+  bin:
+    semver: bin/semver.js
+  checksum: b06b6c19088f1d7c4a21858a432fc31a766d3a3dbcc6638028e2e85de79f5ec87b849b940f03487d4e366616435ba16bf769f558896addb55ba5ec388ca2ed1b
   languageName: node
   linkType: hard
 
@@ -14961,19 +14968,19 @@ __metadata:
   languageName: node
   linkType: hard
 
-"socket.io-client@npm:4.6.1":
-  version: 4.6.1
-  resolution: "socket.io-client@npm:4.6.1"
+"socket.io-client@npm:4.7.1":
+  version: 4.7.1
+  resolution: "socket.io-client@npm:4.7.1"
   dependencies:
     "@socket.io/component-emitter": "npm:~3.1.0"
     debug: "npm:~4.3.2"
-    engine.io-client: "npm:~6.4.0"
-    socket.io-parser: "npm:~4.2.1"
-  checksum: 483543d5fcc1ee50a64d9e83e7c2c1aeaab6f2cf29ddac60e6d903adff27365d9456710078399fc5e3c1d4876c14fd8048e55e678265604eff1f4d70787e8090
+    engine.io-client: "npm:~6.5.1"
+    socket.io-parser: "npm:~4.2.4"
+  checksum: 30633becb6507e18d12130a99d35c882c2cbfb2df221676051b0a1435c43b85627dbaea285388d666e63718c7ad64018579396ceb107e5ceffa15f8726af9837
   languageName: node
   linkType: hard
 
-"socket.io-parser@npm:~4.2.1":
+"socket.io-parser@npm:~4.2.4":
   version: 4.2.4
   resolution: "socket.io-parser@npm:4.2.4"
   dependencies:
@@ -14983,17 +14990,18 @@ __metadata:
   languageName: node
   linkType: hard
 
-"socket.io@npm:4.6.1":
-  version: 4.6.1
-  resolution: "socket.io@npm:4.6.1"
+"socket.io@npm:4.7.1":
+  version: 4.7.1
+  resolution: "socket.io@npm:4.7.1"
   dependencies:
     accepts: "npm:~1.3.4"
     base64id: "npm:~2.0.0"
+    cors: "npm:~2.8.5"
     debug: "npm:~4.3.2"
-    engine.io: "npm:~6.4.1"
+    engine.io: "npm:~6.5.0"
     socket.io-adapter: "npm:~2.5.2"
-    socket.io-parser: "npm:~4.2.1"
-  checksum: 71d6bb2d8364ef1b0b058fee3da1873ed7bca225fd76a13236a0cb96084d08bd9474369ad859963bfd4b80da97702eb55e46f3cf1d6b2afaf30f046eae80dd64
+    socket.io-parser: "npm:~4.2.4"
+  checksum: 452b5a0a75d584b46a4071db8beca2fa5038d571e1eaa5ae9e2095f497128d981d7378a3439818e0147f8756cc305a0e2eada71960d7ad97b72298efef23dc78
   languageName: node
   linkType: hard
 
@@ -15438,9 +15446,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"styled-components@npm:^6.0.7":
-  version: 6.0.7
-  resolution: "styled-components@npm:6.0.7"
+"styled-components@npm:^6.0.8":
+  version: 6.0.8
+  resolution: "styled-components@npm:6.0.8"
   dependencies:
     "@babel/cli": "npm:^7.21.0"
     "@babel/core": "npm:^7.21.0"
@@ -15468,7 +15476,7 @@ __metadata:
   peerDependenciesMeta:
     babel-plugin-styled-components:
       optional: true
-  checksum: 0738891dde0b68fedd0129adc1aeeeb0ee6db75204398d6f14e3aaf94ec2c88ce7ce8a9d6a55cde3aa814724a32dcbca7942cf858e6ff78892397ca40e1621c3
+  checksum: aaf843f6d3dc1a9f4ba9c0efc965585d8b7d335609931d66180d9debaebe7b9225eafd9a8a370290c1596e60e857abd4a683cdc97e5218357ed98701172bfd37
   languageName: node
   linkType: hard
 
@@ -15936,23 +15944,23 @@ __metadata:
   languageName: node
   linkType: hard
 
-"typescript@npm:^5.1.3":
-  version: 5.1.6
-  resolution: "typescript@npm:5.1.6"
+"typescript@npm:^5.2.2":
+  version: 5.2.2
+  resolution: "typescript@npm:5.2.2"
   bin:
     tsc: bin/tsc
     tsserver: bin/tsserver
-  checksum: fffaefc0d48e7f505ac42e314628b3cd41b2a69428e0ecc158db84af36a0565d4cfdd337ea8f7933cccf1556b08170e4389ee07974ff9f55f86d01342b1951ec
+  checksum: 8c5dfc6149a0d5fbad8d55fd9f5cefaf567b6dda42bce8eef7e5f27e6b11d0fc15f4aa4cad3b38394a34f3e9db8b719f5083ab114ddc649e1bc3318327ffa8ca
   languageName: node
   linkType: hard
 
-"typescript@patch:typescript@npm%3A^5.1.3#optional!builtin<compat/typescript>":
-  version: 5.1.6
-  resolution: "typescript@patch:typescript@npm%3A5.1.6#optional!builtin<compat/typescript>::version=5.1.6&hash=1f5320"
+"typescript@patch:typescript@npm%3A^5.2.2#optional!builtin<compat/typescript>":
+  version: 5.2.2
+  resolution: "typescript@patch:typescript@npm%3A5.2.2#optional!builtin<compat/typescript>::version=5.2.2&hash=1f5320"
   bin:
     tsc: bin/tsc
     tsserver: bin/tsserver
-  checksum: 3eef948e10c71b96172ebce471c031d3b7afb12a48feeacbadac1876c0b4e9b0c0fc1677bef53d41664970a174a9ee02f9d09be260281571c90e8ef4e22574cf
+  checksum: b52454ea2b8ba479dd655c4e55ae57c1cec4af21c83c3aa9ab280879a53f3ef4314587b0cfe5e6dd0a082aca4409fef70d0763e762cd0a3e8b38ef70d1dbad67
   languageName: node
   linkType: hard
 
@@ -16561,7 +16569,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"webpack-stats-plugin@npm:^1.1.1":
+"webpack-stats-plugin@npm:^1.1.3":
   version: 1.1.3
   resolution: "webpack-stats-plugin@npm:1.1.3"
   checksum: c0dbe4f6ece5cbbf15a060e20d15feb8c37f382b6683ed3bf92810a2bab5bba39fb67f30e08852b98952253b210dd3b8ac33960bb46a2cbbf06d8dc84abee075
@@ -16575,9 +16583,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"webpack@npm:^5.85.0":
-  version: 5.88.1
-  resolution: "webpack@npm:5.88.1"
+"webpack@npm:^5.88.1":
+  version: 5.88.2
+  resolution: "webpack@npm:5.88.2"
   dependencies:
     "@types/eslint-scope": "npm:^3.7.3"
     "@types/estree": "npm:^1.0.0"
@@ -16608,7 +16616,7 @@ __metadata:
       optional: true
   bin:
     webpack: bin/webpack.js
-  checksum: 0aa58c68944a45ec19eefe23bbe52a6fadcb6da6f92a8c70758125f96dcfcc946fdd1fbcc8142d8edbf30dee218c829bf0728cb063fbfad0e88542a15622ac97
+  checksum: e13d84eb63e6db06b940303f2ce6c76270684f2ebe957db4394076f0b2fa4d93c043a580da39fb10f3d9fc7962ff0eeafba6058b98be395fcce5a6a4c17b00c0
   languageName: node
   linkType: hard
 
@@ -16947,10 +16955,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"xstate@npm:^4.37.2":
-  version: 4.38.0
-  resolution: "xstate@npm:4.38.0"
-  checksum: 0d25dffcc90174254febbd6f28b5a0983830760ac718b636af634e3444294b29250dcfb77ae9b806fb5e968fc34aaba4bbc8a6f6057ad2d29064aa1dc2b4daca
+"xstate@npm:^4.38.0":
+  version: 4.38.2
+  resolution: "xstate@npm:4.38.2"
+  checksum: 2daa37cd2fb991e599fd7eb65432e4b764f2ac4587d492a03321fbeca0853ecfec17278ec26ba8cc12d1b67977fe7e2b85b8f7cfbfb07e1347faaef1ca8a1810
   languageName: node
   linkType: hard
 
