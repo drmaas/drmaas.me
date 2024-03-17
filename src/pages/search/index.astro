@@ -1,0 +1,78 @@
+---
+import BaseLayout from "@layouts/BaseLayout.astro";
+---
+
+<BaseLayout title="Search" activeLink="search">
+  <div class="flex flex-col content-between space-y-12">
+    <input
+      id="searchBox"
+      aria-label="search box"
+      autofocus
+      type="text"
+      placeholder="Type here"
+      class="input input-bordered input-info w-full max-w-lg block mx-auto"
+    />
+    <div id="results" class="flex flex-wrap flex-col justify-center gap-12">
+    </div>
+  </div>
+</BaseLayout>
+
+<script>
+  interface resultInterface {
+    title: string;
+    url: string;
+    description?: string;
+    tags: Array<string>;
+  }
+  import Fuse from "fuse.js";
+
+  async function search() {
+    const options = {
+      // isCaseSensitive: false,
+      // includeScore: false,
+      // shouldSort: true,
+      // includeMatches: false,
+      // findAllMatches: false,
+      // minMatchCharLength: 1,
+      // location: 0,
+      // threshold: 0.6,
+      // distance: 100,
+      // useExtendedSearch: false,
+      ignoreLocation: true,
+      // ignoreFieldNorm: false,
+      // fieldNormWeight: 1,
+      keys: ["title", "description"],
+    };
+    const baseSite = import.meta.env.BASE_URL;
+    const posts = await fetch(`${baseSite}search/search.json`).then((resp) =>
+      resp.json(),
+    );
+    const fuse = new Fuse(posts, options);
+    const inputBox = document.querySelector<HTMLInputElement>("#searchBox");
+    if (inputBox) {
+      inputBox.addEventListener("input", () => {
+        const pattern = inputBox.value;
+        const results: Fuse.FuseResult<resultInterface>[] =
+          fuse.search(pattern);
+        let html = "";
+        for (const result of results) {
+          html += `
+          <div class="card sm:card-side bg-base-200 max-w-[90%] w-[52rem] mx-auto scale-1 transition-[scale_250ms] focus-within:outline focus-within:outline-2 focus-within:outline-secondary">
+            <div class="card-body"> 
+              <a href="${result.item.url}" class="no-underline text-cyan-600 hover:text-black dark:hover:text-white">
+                <h2 class="card-title">${result.item.title}</h2>
+              </a>
+              <span>${result.item.date}</span>
+              <p class="line-clamp-4 md:line-clamp-3">${result.item.description}</p>
+            </div>
+          </div>
+          `;
+        }
+        document.querySelector("#results").innerHTML = html;
+      });
+    }
+  }
+  search();
+
+  document.addEventListener("astro:after-swap", search);
+</script>

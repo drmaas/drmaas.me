@@ -1,26 +1,44 @@
-# :snowflake: drmaas.me
+# Dan's Blog
 
-[![Deploy Gatsby site to Pages](https://github.com/drmaas/drmaas.me/actions/workflows/build-and-deploy.yml/badge.svg?branch=main)](https://github.com/drmaas/drmaas.me/actions/workflows/build-and-deploy.yml)
-
-I generated the template for this blog using a [gatsbyjs community-created starter](https://www.gatsbyjs.com/starters/gatsbyjs/gatsby-starter-blog/)
-
-## :dizzy: Local Development
-
-Run locally: `yarn dev`
-
-## :rocket: Deploy
-
-This project is set up with GitHub actions. Any PR merge or direct push to `main` will trigger a build and deploy to the `gh-pages` branch. This in turn publishes the site to https://drmaas.github.io/drmaas.me, which is configured to be redirected to https://drmaas.me.
-
-## :school: Learning Gatsby
-
-Eventually, it would be great to learn more about this tool.
-
-Full documentation for Gatsby lives [on the website](https://www.gatsbyjs.com/). Here are some places to start:
-
-- **For most developers, we recommend starting with our [in-depth tutorial for creating a site with Gatsby](https://www.gatsbyjs.com/docs/tutorial/getting-started/).** It starts with zero assumptions about your level of ability and walks through every step of the process.
-
-- **To dive straight into code samples, head [to our documentation](https://www.gatsbyjs.com/docs/).** In particular, check out the _Guides_, _API Reference_, and _Advanced Tutorials_ sections in the sidebar.
+My personal blog, built with Astro and Tailwind CSS. Based on <https://github.com/MoofyWoofy/Bob-blog>
 
 
+## :dizzy: Features
+
+- A full featured blog with tagging
+- Dark mode and light mode with daisyUI
+- Site configuration
+- Supports draft page
+- Pagination for blog and tags page
+- SEO friendly
+- Client-Side search
+- Floating TOC for all articles
+
+## 🧞 Commands
+
+All commands are run from the root of the project, from a terminal:
+
+| Command        | Action                                                 |
+| :------------- | :----------------------------------------------------- |
+| `yarn install` | Installs dependencies                                  |
+| `yarn dev`     | Starts local dev server at `localhost:4321`            |
+| `yarn build`   | Build your production site to `./dist/`                |
+| `yarn preview` | Preview your build locally, before deploying           |
+| `yarn lint`    | Lint the project using <https://typescript-eslint.io/> |
+
+
+## :rocket: Adding new posts
+A template to follow is in `src/pages/articles/content/template.md`
+```markdown
+---
+layout: required
+title: required
+date: required
+image?: optional
+imageDescription?: optional
+tags: required;
+description: required;
+draft?: optional;
+---
+```
 

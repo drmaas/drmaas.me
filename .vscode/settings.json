@@ -1,8 +1,5 @@
 {
-    "grammarly.selectors": [
-        {
-            "language": "mdx",
-            "scheme": "file"
-        }
-    ]
+  "cSpell.words": [
+    "frontmatter"
+  ]
 }

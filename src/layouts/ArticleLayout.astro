@@ -1,0 +1,68 @@
+---
+import { Frontmatter } from "src/misc";
+import BaseLayout from "./BaseLayout.astro";
+import TagButton from "@components/TagButton.astro";
+import TableOfContents from "../components/TableOfContents.astro";
+
+export interface Props {
+  content: Frontmatter;
+  url: string;
+  headings: string;
+}
+
+const { content, url, headings } = Astro.props as Props;
+const { title, image, imageDescription, tags, description } = content;
+const date = new Date(content.date).toDateString();
+---
+
+<BaseLayout title={title} description={description}>
+  <div
+    class="max-w-5xl md:pb-10 md:pt-16 md:px-8 mx-auto pb-8 pt-12 px-5"
+  >
+    <h1
+      class="text-3xl md:text-5xl 2xl:text-6xl mb-[0.8em] font-extrabold mx-auto w-fit"
+    >
+      {title}
+    </h1>
+    {
+      image ? (
+        <Fragment>
+          <img
+            class="w-10/12 mx-auto aspect-video"
+            src={image}
+            alt={imageDescription ?? title}
+            transition:name={image}
+          />
+        </Fragment>
+      ) : null
+    }
+
+    <div class="flex flex-wrap justify-evenly mb-9 mt-2">
+      <div>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="h-6 w-6 inline"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+          stroke-width="2"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+        </svg>
+        <span>{date}</span>
+      </div>
+      <div class="flex flex-wrap gap-2">
+        {tags && tags.length > 0 && tags.map((tag) => <TagButton tagName={tag} />)}
+      </div>
+    </div>
+  </div>
+  <div class="flex max-w-5xl mx-auto md:px-8 px-5 gap-12 items-start prose md:prose-lg 2xl:prose-xl px-4 mx-auto prose-pre:font-mono">
+    <TableOfContents headings={headings} />
+    <article class="grid justify-items-start max-w-2xl">
+      <slot />
+    </article>
+  </div>
+</BaseLayout>

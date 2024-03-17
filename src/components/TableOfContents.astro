@@ -1,0 +1,44 @@
+---
+import { build } from "astro";
+import { MarkdownHeading } from "astro/dist/@types/astro";
+import TableOfContentsHeading from "./TableOfContentsHeading.astro";
+
+// https://kld.dev/building-table-of-contents/ and https://componentland.com/component/table-of-contents-2
+
+const { headings } = Astro.props;
+
+interface TocItem extends MarkdownHeading {
+    subheadings: TocItem[];
+}
+
+const buildToc = (headings: MarkdownHeading[]) => {
+    const toc: TocItem[] = [];
+    const parentHeadings = new Map();
+    headings.forEach((h) => {
+        h.text = h.text.replace("testa11y.sectionLink", "");
+        const heading: TocItem = { ...h, subheadings: [] as TocItem[] };
+        parentHeadings.set(heading.depth, heading);
+        // Change 2 to 1 if your markdown includes your <h1>
+        if (heading.depth === 2) {
+            toc.push(heading);
+        } else {
+            parentHeadings.get(heading.depth - 1).subheadings.push(heading);
+        }
+    });
+    return toc;
+};
+
+const toc = buildToc(headings);
+---
+
+{toc.length > 0 && <nav
+    class="hidden lg:block order-2 pt-8 sticky toc top-0 rounded-md border px-6 py-6 shadow-md"
+    style="max-width:25%"
+>
+    <div class="pb-2 text-xl font-medium">Table of Contents</div>
+    <hr class="h-1" />
+    <ul class="list-none">
+        {toc.map((heading) => <TableOfContentsHeading heading={heading} />)}
+    </ul>
+</nav>
+}
