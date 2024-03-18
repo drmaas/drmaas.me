@@ -1,4 +1,5 @@
 import { MarkdownInstance } from "astro";
+import path from "path";
 
 export interface Frontmatter {
   layout: string;
@@ -9,6 +10,10 @@ export interface Frontmatter {
   tags: string[];
   description: string;
   draft?: boolean;
+}
+
+export function fileToSlug(file: string, extension: string) {
+  return path.parse(file).base.replace(`.${extension}`, "/");
 }
 
 export function sortDateDescending(arg: MarkdownInstance<Frontmatter>[]) {

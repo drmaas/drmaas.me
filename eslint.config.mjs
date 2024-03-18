@@ -17,6 +17,7 @@ export default tseslint.config(
       "**/coverage/**",
       "**/public/**",
       "src/env.d.ts",
+      ".yarn/**",
     ],
   },
   eslint.configs.recommended,

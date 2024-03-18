@@ -1,5 +1,4 @@
 ---
-layout: "@layouts/ArticleLayout.astro"
 title: My Favorite Development Tools
 date: 2023-10-01T00:00:00.000Z
 description: CLI FTW

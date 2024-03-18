@@ -11,7 +11,7 @@ export interface Props {
 }
 
 export async function getStaticPaths({ paginate }) {
-  const allPosts = await Astro.glob<Frontmatter>('../../articles/content/*.md');
+  const allPosts = await Astro.glob<Frontmatter>('../../../posts/*.md');
   const allTags = getAllUniqueTags(allPosts);
   // For every tag, return a paginate() result.
   // Make sure that you pass `{params: {tag}}` to `paginate()`
@@ -36,11 +36,12 @@ const { tag } = Astro.params;
 <BaseLayout title={`#${tag}`}>
   <h1 class="text-center text-3xl font-semibold text-secondary mb-8">
     #{tag.toString()}</h1>
-
   <div class="flex flex-wrap flex-col justify-center gap-12">
     {page.data.map((post, index) =>
-    <ArticleCard content={post} lazyLoading={index > 2} />)}
+    <ArticleCard content={post} lazyLoading={index > 2}/>)}
+  </div>
+    <div class="flex flex-wrap flex-col justify-center gap-12">
+  <Pagination page={page} dir={tag.toString()} />
   </div>
 
-  <Pagination page={page} dir={tag.toString()}/>
 </BaseLayout>

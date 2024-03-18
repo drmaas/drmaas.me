@@ -1,5 +1,4 @@
 ---
-layout: "@layouts/ArticleLayout.astro"
 title: Building Services Part 2 - Coding
 date: 2023-09-30T00:00:00.000Z
 description: You can haz code!

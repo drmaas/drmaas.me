@@ -1,5 +1,4 @@
 ---
-layout: "@layouts/ArticleLayout.astro"
 title: Performance Testing is Hard
 date: 2023-07-16T20:00:00.000Z
 description: But why?

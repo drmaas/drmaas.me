@@ -29,7 +29,7 @@ All commands are run from the root of the project, from a terminal:
 
 ## :rocket: Adding new posts
 A template to follow is in `src/pages/articles/content/template.md`
-```markdown
+```md
 ---
 layout: required
 title: required
