@@ -22,7 +22,6 @@ export default defineConfig({
     mdx(),
   ],
   site: "https://drmaas.me",
-  base: "/",
   trailingSlash: "always",
   // https://github.com/withastro/docs/blob/main/astro.config.ts
   markdown: {

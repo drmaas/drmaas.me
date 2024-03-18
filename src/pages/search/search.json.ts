@@ -1,10 +1,10 @@
 import { MarkdownInstance } from "astro";
-import { Frontmatter } from "src/misc";
+import { Frontmatter, fileToSlug } from "src/misc";
 import { parse } from "node-html-parser";
 
 export async function GET() {
   const allPosts = import.meta.glob<MarkdownInstance<Frontmatter>>(
-    "../articles/content/*.md",
+    "../../posts/*.md",
     { eager: true },
   ); // Vite
   const posts = Object.values(allPosts)
@@ -12,7 +12,7 @@ export async function GET() {
     .map((ele) => {
       return {
         title: ele.frontmatter.title,
-        url: ele.url,
+        url: `/articles/${fileToSlug(ele.file, 'md')}`,
         date: ele.frontmatter.date,
         description:
           ele.frontmatter.description ||
