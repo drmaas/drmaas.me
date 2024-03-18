@@ -1,5 +1,4 @@
 ---
-layout: "@layouts/ArticleLayout.astro"
 title: Starting a blog
 date: 2023-06-25T12:16:00.123Z
 description: Goodbye procrastination.

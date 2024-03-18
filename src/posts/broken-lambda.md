@@ -1,5 +1,4 @@
 ---
-layout: "@layouts/ArticleLayout.astro"
 title: The case of the broken lambda
 date: 2023-07-28T21:30:00.000Z
 description: API Gateway Lambda Proxy Madness.

@@ -3,9 +3,8 @@ import BaseLayout from "@layouts/BaseLayout.astro";
 import TagButton from "@components/TagButton.astro";
 import { Frontmatter, getAllUniqueTags } from "src/misc"
 
-const allPosts = await Astro.glob<Frontmatter>('../../pages/articles/content/*.md');
+const allPosts = await Astro.glob<Frontmatter>('../../posts/*.md');
 const posts = allPosts.filter((post) => post.frontmatter.draft != true);
-
 const uniqueTags = getAllUniqueTags(posts);
 ---
 

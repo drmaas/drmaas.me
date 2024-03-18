@@ -1,5 +1,4 @@
 ---
-layout: "@layouts/ArticleLayout.astro"
 title: On Partition Keys
 date: 2023-07-02T20:15:00.000Z
 description: Think carefully.

@@ -1,5 +1,4 @@
 ---
-layout: "@layouts/ArticleLayout.astro"
 title: Building Services Part 1 - Intro and Modelling
 slug: /building-services-1
 date: 2023-08-10T20:15:00.000Z
@@ -125,26 +124,3 @@ doing two things - overengineering the solution, and slowing down the delivery.
 
 In the next part, I'll be giving a brief overview of the coding implementation tasks the team will need to perform.
 
-{/* TODO 
-
-## Coding
-
-## Testing
-
-## Infrastructure
-
-## CI/CD
-
-## Runtime
-
-## Scaling
-
-## Integration
-
-## Monitoring
-
-## Chores
-
-## Resilience/High Availability
-
-## Documentation */}
