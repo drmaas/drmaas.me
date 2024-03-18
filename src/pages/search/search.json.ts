@@ -12,8 +12,8 @@ export async function GET() {
     .map((ele) => {
       return {
         title: ele.frontmatter.title,
-        url: `/articles/${fileToSlug(ele.file, 'md')}`,
-        date: ele.frontmatter.date,
+        url: `/articles/${fileToSlug(ele.file, "md")}`,
+        date: new Date(ele.frontmatter.date).toDateString(),
         description:
           ele.frontmatter.description ||
           parse(ele.compiledContent()).querySelector("p:first-of-type")
