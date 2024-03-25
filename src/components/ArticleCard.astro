@@ -1,7 +1,6 @@
 ---
 import { MarkdownInstance } from "astro";
 import { parse } from "node-html-parser";
-import readingTime from "reading-time";
 import { Frontmatter, fileToSlug } from "src/misc";
 import TagButton from "./TagButton.astro";
 import DateComponent from "./DateComponent.astro";
@@ -13,14 +12,13 @@ export interface Props {
 }
 
 const { content, lazyLoading } = Astro.props as Props;
-console.log(JSON.stringify(content));
 
 const description =
   content.frontmatter.description ||
   parse(await content.compiledContent()).querySelector("p:first-of-type")
     ?.innerText;
 
-const url = fileToSlug(content.file, "md");
+const url = `/articles/${fileToSlug(content.file, "md")}`;
 
 const date = new Date(content.frontmatter.date).toDateString();
 
