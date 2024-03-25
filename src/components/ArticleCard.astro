@@ -2,8 +2,10 @@
 import { MarkdownInstance } from "astro";
 import { parse } from "node-html-parser";
 import readingTime from "reading-time";
-import { Frontmatter } from "src/misc";
+import { Frontmatter, fileToSlug } from "src/misc";
 import TagButton from "./TagButton.astro";
+import DateComponent from "./DateComponent.astro";
+import ReadingTimeComponent from "./ReadingTimeComponent.astro";
 
 export interface Props {
   content: MarkdownInstance<Frontmatter>;
@@ -11,11 +13,14 @@ export interface Props {
 }
 
 const { content, lazyLoading } = Astro.props as Props;
+console.log(JSON.stringify(content));
 
 const description =
   content.frontmatter.description ||
   parse(await content.compiledContent()).querySelector("p:first-of-type")
     ?.innerText;
+
+const url = fileToSlug(content.file, "md");
 
 const date = new Date(content.frontmatter.date).toDateString();
 
@@ -47,7 +52,7 @@ const tags = content.frontmatter.tags;
   }
 
   <div class="card-body">
-    <a href={content.url} class="no-underline text-cyan-600 hover:text-black dark:hover:text-white">
+    <a href={url} class="no-underline text-cyan-600 hover:text-black dark:hover:text-white">
       <h2 class="card-title">{content.frontmatter.title}</h2>
     </a>
     <div class="flex gap-2 flex-wrap">
@@ -58,22 +63,9 @@ const tags = content.frontmatter.tags;
       }
     </div>
     <div class="card-actions justify-beginning items-center">
-      <span>{date}</span>
+      <DateComponent date={date} />
       <span> • </span>
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        class="h-6 w-6 stroke-warning"
-        fill="none"
-        viewBox="0 0 24 24"
-        stroke-width="2"
-      >
-        <path
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"
-        ></path>
-      </svg>
-      <span>{readingTime(content.rawContent()).text}</span>
+      <ReadingTimeComponent content={content.rawContent()} />
     </div>
     <p class="line-clamp-4 md:line-clamp-3">
       {description}

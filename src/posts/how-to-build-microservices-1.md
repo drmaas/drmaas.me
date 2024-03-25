@@ -1,6 +1,5 @@
 ---
 title: Building Services Part 1 - Intro and Modelling
-slug: /building-services-1
 date: 2023-08-10T20:15:00.000Z
 description: I thought I could just wing it?
 tags: [design, architecture, systems]

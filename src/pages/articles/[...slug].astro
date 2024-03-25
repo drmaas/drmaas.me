@@ -6,6 +6,9 @@ import TableOfContents from "../../components/TableOfContents.astro";
 
 import { Frontmatter, fileToSlug, sortDateDescending } from "../../misc";
 import path from "path";
+import readingTime from "reading-time";
+import DateComponent from "@components/DateComponent.astro";
+import ReadingTimeComponent from "@components/ReadingTimeComponent.astro";
 
 export interface Props {
   post: MarkdownInstance<Frontmatter>;
@@ -48,8 +51,12 @@ const { title, image, imageDescription, tags, description } = post.frontmatter;
 const date = new Date(post.frontmatter.date).toDateString();
 const headings = post.getHeadings();
 const { Content } = post;
-const prevUrl = prevPost.frontmatter? `/articles/${fileToSlug(prevPost.file, "md")}` : '';
-const nextUrl = nextPost.frontmatter? `/articles/${fileToSlug(nextPost.file, "md")}` : '';
+const prevUrl = prevPost.frontmatter
+  ? `/articles/${fileToSlug(prevPost.file, "md")}`
+  : "";
+const nextUrl = nextPost.frontmatter
+  ? `/articles/${fileToSlug(nextPost.file, "md")}`
+  : "";
 ---
 
 <BaseLayout title={title} description={description}>
@@ -73,29 +80,18 @@ const nextUrl = nextPost.frontmatter? `/articles/${fileToSlug(nextPost.file, "md
         ) : null
       }
 
-      <div class="flex flex-wrap justify-evenly mb-9 mt-2">
-        <div>
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            class="h-6 w-6 inline"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-            stroke-width="2"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-          </svg>
-          <span>{date}</span>
-        </div>
+      <div>
         <div class="flex flex-wrap gap-2">
           {
             tags &&
               tags.length > 0 &&
               tags.map((tag) => <TagButton tagName={tag} />)
           }
+        </div>
+        <div class="flex flex-wrap gap-2 mt-8">
+          <DateComponent date={date} />
+          <span> • </span>
+          <ReadingTimeComponent content={post.rawContent()} />
         </div>
       </div>
     </div>
@@ -110,7 +106,9 @@ const nextUrl = nextPost.frontmatter? `/articles/${fileToSlug(nextPost.file, "md
       </div>
     </div>
     <!-- https://route360.dev/en/post/astro-prevnext-posts/ -->
-    <div class="flex max-w-5xl mx-auto md:px-8 px-5 gap-12 items-start prose md:prose-lg 2xl:prose-xl px-4 mx-auto prose-pre:font-mono">
+    <div
+      class="flex max-w-5xl mx-auto md:px-8 px-5 gap-12 items-start prose md:prose-lg 2xl:prose-xl px-4 mx-auto prose-pre:font-mono"
+    >
       {
         prevPost.frontmatter && (
           <a
