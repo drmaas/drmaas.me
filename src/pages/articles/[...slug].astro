@@ -96,9 +96,9 @@ const nextUrl = nextPost.frontmatter
     <div
       class="flex max-w-7xl mx-auto md:px-8 px-5 gap-12 items-start prose md:prose-lg 2xl:prose-xl px-4 mx-auto prose-pre:font-mono"
     >
-      <TableOfContents headings={headings} />
+    {headings.length > 0 && <TableOfContents headings={headings} />}
       <div>
-        <article class="grid justify-items-start max-w-4xl">
+        <article class="grid justify-items-start max-w-5xl">
           <Content />
         </article>
       </div>

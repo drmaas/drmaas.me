@@ -29,11 +29,16 @@ Then I followed [the conversion guide](https://docs.astro.build/en/guides/migrat
 
 Once I exhausted that, I found there were many other things I needed to fix:
 
+* I wanted to have a rounded profile image with social links below it
 * I wanted to make markdown headings linkable
 * I wanted a floating table of contents on all content pages
 * I wanted content pages to be able to show estimated reading time and previous/next links
 * I wanted to change some of the layouts and colors on the site
 * I wanted to change the markdown returned by the search
+
+### Rounded Profile Image
+
+After some trial and error, I realized that tailwind classes exist to make a picture nice and rounded. I also found some SVG code that rendered nice social icons. Done!
 
 ### Markdown headings
 
