@@ -5,8 +5,6 @@ import TagButton from "../../components/TagButton.astro";
 import TableOfContents from "../../components/TableOfContents.astro";
 
 import { Frontmatter, fileToSlug, sortDateDescending } from "../../misc";
-import path from "path";
-import readingTime from "reading-time";
 import DateComponent from "@components/DateComponent.astro";
 import ReadingTimeComponent from "@components/ReadingTimeComponent.astro";
 
@@ -61,7 +59,7 @@ const nextUrl = nextPost.frontmatter
 
 <BaseLayout title={title} description={description}>
   <div class="mx-auto">
-    <div class="max-w-5xl md:pb-10 md:pt-16 md:px-8 mx-auto pb-8 pt-12 px-5">
+    <div class="max-w-7xl md:pb-10 md:pt-16 md:px-8 mx-auto pb-8 pt-12 px-5">
       <h1
         class="text-3xl md:text-5xl 2xl:text-6xl mb-[0.8em] font-extrabold mx-auto w-fit"
       >
@@ -96,18 +94,18 @@ const nextUrl = nextPost.frontmatter
       </div>
     </div>
     <div
-      class="flex max-w-5xl mx-auto md:px-8 px-5 gap-12 items-start prose md:prose-lg 2xl:prose-xl px-4 mx-auto prose-pre:font-mono"
+      class="flex max-w-7xl mx-auto md:px-8 px-5 gap-12 items-start prose md:prose-lg 2xl:prose-xl px-4 mx-auto prose-pre:font-mono"
     >
       <TableOfContents headings={headings} />
       <div>
-        <article class="grid justify-items-start max-w-2xl">
+        <article class="grid justify-items-start max-w-4xl">
           <Content />
         </article>
       </div>
     </div>
     <!-- https://route360.dev/en/post/astro-prevnext-posts/ -->
     <div
-      class="flex max-w-5xl mx-auto md:px-8 px-5 gap-12 items-start prose md:prose-lg 2xl:prose-xl px-4 mx-auto prose-pre:font-mono"
+      class="flex max-w-7xl mx-auto md:px-8 px-5 gap-12 items-start prose md:prose-lg 2xl:prose-xl px-4 mx-auto prose-pre:font-mono"
     >
       {
         prevPost.frontmatter && (

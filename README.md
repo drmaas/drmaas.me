@@ -5,8 +5,8 @@ My personal blog, built with Astro and Tailwind CSS. Based on <https://github.co
 
 ## :dizzy: Features
 
-- A full featured blog with tagging
-- Dark mode and light mode with daisyUI
+A full-featured blog with tagging
+- Dark mode and light mode with [daisyUI](https://daisyui.com/)
 - Site configuration
 - Supports draft page
 - Pagination for blog and tags page
