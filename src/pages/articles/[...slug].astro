@@ -7,6 +7,7 @@ import TableOfContents from "../../components/TableOfContents.astro";
 import { Frontmatter, fileToSlug, sortDateDescending } from "../../misc";
 import DateComponent from "@components/DateComponent.astro";
 import ReadingTimeComponent from "@components/ReadingTimeComponent.astro";
+import ArticleNav from "@components/ArticleNav.astro";
 
 export interface Props {
   post: MarkdownInstance<Frontmatter>;
@@ -46,7 +47,7 @@ export async function getStaticPaths() {
 // Get properties (frontmatter) for the previous/next posts
 const { post, prevPost, nextPost } = Astro.props as Props;
 const { title, image, imageDescription, tags, description } = post.frontmatter;
-const date = new Date(post.frontmatter.date).toDateString();
+const date = post.frontmatter.date ? new Date(post.frontmatter.date).toDateString() : undefined;
 const headings = post.getHeadings();
 const { Content } = post;
 const prevUrl = prevPost.frontmatter
@@ -87,7 +88,7 @@ const nextUrl = nextPost.frontmatter
           }
         </div>
         <div class="flex flex-wrap gap-2 mt-8">
-          <DateComponent date={date} />
+          {date && <DateComponent date={date} />}
           <span> • </span>
           <ReadingTimeComponent content={post.rawContent()} />
         </div>
@@ -103,30 +104,6 @@ const nextUrl = nextPost.frontmatter
         </article>
       </div>
     </div>
-    <!-- https://route360.dev/en/post/astro-prevnext-posts/ -->
-    <div
-      class="flex max-w-7xl mx-auto md:px-8 px-5 gap-12 items-start prose md:prose-lg 2xl:prose-xl px-4 mx-auto prose-pre:font-mono"
-    >
-      {
-        prevPost.frontmatter && (
-          <a
-            class="no-underline text-cyan-600 hover:text-black dark:hover:text-white"
-            href={prevUrl}
-          >
-            {`<< ${prevPost.frontmatter.title}`}
-          </a>
-        )
-      }
-      {
-        nextPost.frontmatter && (
-          <a
-            class="no-underline text-cyan-600 hover:text-black dark:hover:text-white"
-            href={nextUrl}
-          >
-            {`${nextPost.frontmatter.title} >>`}
-          </a>
-        )
-      }
-    </div>
+    <ArticleNav prevPost={prevPost} nextPost={nextPost} />
   </div>
 </BaseLayout>

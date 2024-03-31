@@ -1,0 +1,44 @@
+---
+import { MarkdownInstance } from 'astro/dist/@types/astro';
+import { Frontmatter, fileToSlug } from 'src/misc';
+
+export interface Props {
+  prevPost: MarkdownInstance<Frontmatter>;
+  nextPost: MarkdownInstance<Frontmatter>;
+}
+
+const { prevPost, nextPost } = Astro.props as Props;
+
+const prevUrl = prevPost.frontmatter
+  ? `/articles/${fileToSlug(prevPost.file, "md")}`
+  : "";
+const nextUrl = nextPost.frontmatter
+  ? `/articles/${fileToSlug(nextPost.file, "md")}`
+  : "";
+---
+
+<!-- https://route360.dev/en/post/astro-prevnext-posts/ -->
+<div
+class="flex max-w-7xl mx-auto md:px-8 px-5 gap-12 items-start prose md:prose-lg 2xl:prose-xl mx-auto prose-pre:font-mono"
+>
+{
+  prevPost.frontmatter && (
+    <a
+      class="no-underline text-cyan-600 hover:text-black dark:hover:text-white"
+      href={prevUrl}
+    >
+      {`<< ${prevPost.frontmatter.title}`}
+    </a>
+  )
+}
+{
+  nextPost.frontmatter && (
+    <a
+      class="no-underline text-cyan-600 hover:text-black dark:hover:text-white"
+      href={nextUrl}
+    >
+      {`${nextPost.frontmatter.title} >>`}
+    </a>
+  )
+}
+</div>

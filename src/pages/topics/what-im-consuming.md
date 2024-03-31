@@ -1,7 +1,6 @@
 ---
 layout: "@layouts/ArticleLayout.astro"
 title: What I'm Consuming
-date: 2023-07-28T21:30:00.000Z
 description: A list of media that I've consumed. Podcasts, articles, videos, tweets.
 ---
 

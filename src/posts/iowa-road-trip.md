@@ -38,7 +38,7 @@ After that, we got dinner at [Dough Company Pizza](https://doughcodsm.com/) and 
 
 We started early in the morning so that we could tour both the state capitol building and the history museum. We got to the capitol early enough to snag a visitor parking spot right by the entrance. The state capitol building was really busy - congress was in session and hundreds of lobbyists, members of various companies and organizations, and a few tourists congregated on the main floor. We wound our way to the second floor and then the third floor, where the public sits to listen to congressional debates.
 
-![State Capitol](/images-capitol-1.jpg)
+![State Capitol](/images/capitol-1.jpg)
 *State Capitol*
 
 ![Capitol Dome](/images/capitol-2.jpg)

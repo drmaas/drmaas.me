@@ -13,7 +13,7 @@ export interface Props {
 
 const { content, headings } = Astro.props as Props;
 const { title, image, imageDescription, tags, description } = content;
-const date = new Date(content.date).toDateString();
+const date = content.date ? new Date(content.date).toDateString() : undefined;
 ---
 
 <BaseLayout title={title} description={description}>
@@ -39,7 +39,7 @@ const date = new Date(content.date).toDateString();
     }
 
     <div class="flex flex-wrap justify-evenly mb-9 mt-2">
-      <DateComponent date={date}/>
+      {date &&<DateComponent date={date}/>}
       <div class="flex flex-wrap gap-2 mt-8">
         {tags && tags.length > 0 && tags.map((tag) => <TagButton tagName={tag} />)}
       </div>

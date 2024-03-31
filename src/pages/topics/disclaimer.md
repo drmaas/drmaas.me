@@ -1,7 +1,6 @@
 ---
 layout: "@layouts/ArticleLayout.astro"
 title: Disclaimer
-date: 2023-07-11T22:00:00.000Z
 description: Disclaimer
 ---
 
