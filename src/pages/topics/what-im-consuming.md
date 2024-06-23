@@ -8,6 +8,12 @@ This page serves two purposes: firstly and most importantly, it helps me keep tr
 listened to, or watched, that I thought were interesting and may want to explore more deeply in the future. 
 Secondly, I get to share it with all of you. Hopefully, you find some of it interesting and even useful.
 
+## 2024-06-22
+
+[The Bible in a Year Podcast](https://media.ascensionpress.com/category/ascension-podcasts/bibleinayear/)
+
+This is the first time I've actually read (listened to) the entire Bible. I am thinking that this is a deficit common to my generation and younger. I am not sure how we will be able to sustain a prosperous society without the wisdom of the Bible, and without knowing God. So many of our institutions, like Universities, and the principles of our democratic governments, are based on biblical principles. Without that grounding, and if "each man does what is right in his own eyes", we should expect a long and slow decay towards feudalism.
+
 ## 2024-01-28
 
 [The Creature from Jekyll Island](https://www.amazon.com/Creature-Jekyll-Island-Federal-Reserve/dp/091298645X)
