@@ -18,7 +18,6 @@ export default tseslint.config(
       "**/public/**",
       "src/env.d.ts",
       ".yarn/**",
-      "**/*.md",
     ],
   },
   eslint.configs.recommended,

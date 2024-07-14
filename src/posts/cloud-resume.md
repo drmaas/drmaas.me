@@ -82,23 +82,23 @@ I had to update permissions to allow the lambda access to the counter table. Doc
 
 To test, I first used the lambda console to validate that the function worked. Then I tested the API Gateway URL to verify the api worked end-end.
 
-```shell
-curl -XPOST https://*********.execute-api.us-west-2.amazonaws.com/Prod/increment -d '{}'
+```
+curl -XPOST https://*********.execute-api.us-west-2.amazonaws.com/Prod/increment
 ```
 
 Then I wrote a unit test with `pytest` to assert that the lambda works.
 
-Once that worked, I setup Cloudfront in front of the API Gateway. This was tricky, as I had to follow a few undocumented steps:
+Once that worked, I set up Cloudfront in front of the API Gateway. This was tricky, as I had to follow a few undocumented steps:
 * When adding a Cloudfront Origin, I had to add `/Prod` as an origin path to account for the API Gateway stage name
 * I had to update the API Gateway path to include `/api` as the root path, since I used the `/api/*` path when I added a routing behavior to Cloudfront
 
 Testing confirmed it worked:
-```shell
+```
 curl -XPOST https://d2p501d6pxawyj.cloudfront.net/api/increment
 ```
 
 Then the custom domain automatically started working:
-```shell
+```
 curl -XPOST https://resume.drmaas.me/api/increment
 ```
 

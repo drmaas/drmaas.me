@@ -15,9 +15,9 @@ const {
   description = "My blog",
   activeLink = null,
 } = Astro.props as Props;
-const { navLinks } = pageSize;
 const {
   metaData: { fullName },
+  navLinks,
 } = config;
 ---
 
@@ -83,8 +83,10 @@ const {
             navLinks.map((ele) => (
               <NavListItem
                 navLink={ele.link}
+                text={ele.text}
                 activeLink={activeLink}
                 icon={ele.icon}
+                absolute={ele.absolute}
               />
             ))
           }
