@@ -49,24 +49,29 @@ const tags = content.frontmatter.tags;
     ) : null
   }
 
-  <div class="card-body">
-    <a href={url} class="no-underline text-cyan-600 hover:text-black dark:hover:text-white">
-      <h2 class="card-title">{content.frontmatter.title}</h2>
-    </a>
-    <div class="flex gap-2 flex-wrap">
-      {
-        tags && tags.length > 0 && tags.map((ele: string) => (
-          <TagButton tagName={ele} />
-        ))
-      }
+  <div class="card-body items-center">
+    <div>
+      <a
+        href={url}
+        class="no-underline text-cyan-600 hover:text-black dark:hover:text-white"
+      >
+        <h2 class="card-title">{content.frontmatter.title}</h2>
+      </a>
+      <div class="flex gap-2 flex-wrap">
+        {
+          tags &&
+            tags.length > 0 &&
+            tags.map((ele: string) => <TagButton tagName={ele} />)
+        }
+      </div>
+      <div class="card-actions justify-beginning items-center">
+        <DateComponent date={date} />
+        <span> • </span>
+        <ReadingTimeComponent content={content.rawContent()} />
+      </div>
+      <p class="line-clamp-4 md:line-clamp-3">
+        {description}
+      </p>
     </div>
-    <div class="card-actions justify-beginning items-center">
-      <DateComponent date={date} />
-      <span> • </span>
-      <ReadingTimeComponent content={content.rawContent()} />
-    </div>
-    <p class="line-clamp-4 md:line-clamp-3">
-      {description}
-    </p>
   </div>
 </div>

@@ -1,7 +1,3 @@
-## Coding
-
-## Testing
-
 ## Infrastructure
 
 ## CI/CD
