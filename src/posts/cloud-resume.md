@@ -19,16 +19,7 @@ My work at Salesforce necessitated that I ramp up on my AWS skills. I completed 
 
 ### HTML and CSS
 
-I used [ChatGPT](https://chatgpt.com) to generate a sample resume. I then modified the content and layout to improve the look and feel. Here is my prompt:
-
-```
-Generate a resume written in html and css. 
-The resume should have a title, description, 
-a section for contact information, a section for education, 
-a section for work history, and a section for 
-other miscellaneous information. 
-It should have a table of contents on the left.
-```
+I used [ChatGPT](https://chatgpt.com) to generate a sample resume. I then modified the content and layout to improve the look and feel.
 
 Then, I went down a bit of a rabbit hole and implemented live-reload functionality for my resume. I wanted it to auto-refresh every time I edited a file. To do this I wrote a dev server that served my resume on port 8080. The dev server starts a Websocket server on port 8090. Every time it gets a request on port 8080, it appends a small javascript snippet that creates a Websocket connection to the server. When the server detects a connection, it starts watching for file changes in the `public` directory. If it sees a change, it sends a Websocket message to the client. The client reads the message and reloads the page.
 
@@ -36,19 +27,7 @@ Then, I went down a bit of a rabbit hole and implemented live-reload functionali
 
 1. I created an empty S3 bucket, and enabled it for static website publishing.
 2. I uploaded my files to the S3 bucket and tested the site.
-   1. It didn't work, because I needed to add a bucket policy allowing public access (I plan to turn this off later and only allow cloudfront).
-   ```
-    "Version": "2012-10-17",
-    "Statement": [
-        {
-            "Sid": "Public Access",
-            "Effect": "Allow",
-            "Principal": "*",
-            "Action": "s3:GetObject",
-            "Resource": "arn:aws:s3:::cloud-resume-drmaas/*"
-        }
-    ]
-   ```
+3. It didn't work, because I needed to add a bucket policy allowing public access (I later turned this off) 
    Reference: https://docs.aws.amazon.com/AmazonS3/latest/userguide/WebsiteAccessPermissionsReqd.html
 
 
@@ -69,14 +48,9 @@ I added a small script to the resume html page that displayed a visitor counter.
 
 I used `sam init` with the `hello world` template to generate a new API Gateway / Python Lambda project. Then I added a DynamoDB table to the template. Using the online docs, I wired together the Lambda with the DynamoDB table name using environment variables.
 
-I had to install `boto3` to work with the AWS API in Python, and also pytest for testing.
-```
-    sudo apt-install python3-pip
-    pip install boto3
-    pip install pytest
-```
+I had to install `boto3` to work with the AWS API in Python, and also `pytest` for testing.
 
-I created a DDB update expression to initialize a single row with `id=counter`. It updates the `count` column with an increment of 1.
+I created a DynamoDB update expression to initialize a single row with `id=counter`. It updates the `count` column with an increment of 1.
 
 I had to update permissions to allow the lambda access to the counter table. Documentation was hard to find for how to do this in SAM, but after a while I found https://repost.aws/knowledge-center/lambda-sam-template-permissions.
 
@@ -108,8 +82,7 @@ But then, the S3 origin stopped working. I am not sure what happened, so I just 
 
 ### Source Control
 
-1. https://github.com/drmaas/cloud-resume-api
-1. https://github.com/drmaas/cloud-resume-ui
+Yep, I did it.
 
 ### CI/CD (Backend)
 
