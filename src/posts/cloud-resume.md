@@ -19,9 +19,9 @@ My work at Salesforce necessitated that I ramp up on my AWS skills. I completed 
 
 ### HTML and CSS
 
-I used [ChatGPT](https://chatgpt.com) to generate a sample resume. I then modified the content and layout to improve the look and feel.
+I went online and looked at sample resumes built with HTML and CSS. I then modified the content and layout to tailor the look and feel to how I wanted it to look.
 
-Then, I went down a bit of a rabbit hole and implemented live-reload functionality for my resume. I wanted it to auto-refresh every time I edited a file. To do this I wrote a dev server that served my resume on port 8080. The dev server starts a Websocket server on port 8090. Every time it gets a request on port 8080, it appends a small javascript snippet that creates a Websocket connection to the server. When the server detects a connection, it starts watching for file changes in the `public` directory. If it sees a change, it sends a Websocket message to the client. The client reads the message and reloads the page.
+Then, I went down a bit of a rabbit hole and implemented live-reload functionality for my resume. I wanted it to auto-refresh every time I edited a file. To do this I wrote a dev server that served my resume on port 8080. The dev server starts a WebSocket server on port 8090. Every time it gets a request on port 8080, it appends a small javascript snippet that creates a WebSocket connection to the server. When the server detects a connection, it starts watching for file changes in the `public` directory. If it sees a change, it sends a WebSocket message to the client. The client reads the message and reloads the page.
 
 ### Static Website
 
