@@ -28,9 +28,9 @@ export default {
     },
   ],
   tagNames: {
-    featured: "orange",
-    first: "purple",
-    second: "cyan",
+    Featured: "orange",
+    First: "purple",
+    Second: "cyan",
   },
   tagColors: {
     orange: "#EA4E28",

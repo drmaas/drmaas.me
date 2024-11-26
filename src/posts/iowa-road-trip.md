@@ -3,7 +3,8 @@ title: Iowa Road Trip
 date: 22 March 2024
 description: A road trip through central Iowa
 tags:
-  - featured
+  - Featured
+  - Travel
 draft: false
 ---
 

@@ -5,7 +5,7 @@ description: example
 image: /images/...
 imageDescription: template text
 tags:
-  - featured
+  - Featured
 draft: true
 ---
 

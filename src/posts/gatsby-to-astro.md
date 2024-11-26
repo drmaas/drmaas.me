@@ -3,7 +3,8 @@ title: Moving from Gatsby to Astro
 date: 29 March 2024
 description: example
 tags:
-  - featured
+  - Featured
+  - Astro
 draft: false
 ---
 

@@ -3,7 +3,12 @@ title: My Cloud Resume Journey
 date: 01 July 2024
 description: An interesting full stack project
 tags:
-  - featured
+  - Featured
+  - Python
+  - JavaScript
+  - AWS
+  - Html
+  - CSS
 draft: false
 ---
 
