@@ -15,6 +15,7 @@
     "types": ["astro/client"],
     // Using aliases for paths
     "baseUrl": ".",
+    "strictNullChecks": true,
     "paths": {
       "@components/*":["src/components/*"],
       "@layouts/*":["src/layouts/*"],

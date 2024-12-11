@@ -1,8 +1,7 @@
 ---
 import BaseHead from "./BaseHead.astro";
 import NavListItem from "@components/NavListItem.astro";
-import ViewTransitions from "astro/components/ViewTransitions.astro";
-import pageSize from "src/config.js";
+import { ClientRouter } from 'astro:transitions';
 import config from "src/config.js";
 export interface Props {
   title: string;
@@ -24,7 +23,7 @@ const {
 <html lang="en">
   <head>
     <BaseHead title={title} description={description} />
-    <ViewTransitions />
+    <ClientRouter />
   </head>
 
   <body>

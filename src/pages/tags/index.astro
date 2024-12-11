@@ -2,8 +2,9 @@
 import BaseLayout from "@layouts/BaseLayout.astro";
 import TagButton from "@components/TagButton.astro";
 import { Frontmatter, getAllUniqueTags } from "src/misc"
+import { MarkdownInstance } from "astro";
 
-const allPosts = await Astro.glob<Frontmatter>('../../posts/*.md');
+const allPosts = Object.values(import.meta.glob('../../posts/*.md', { eager: true })) as MarkdownInstance<Frontmatter>[];
 const posts = allPosts.filter((post) => post.frontmatter.draft != true);
 const uniqueTags = getAllUniqueTags(posts);
 ---

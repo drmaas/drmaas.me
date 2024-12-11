@@ -16,9 +16,9 @@ export interface Props {
 }
 
 export async function getStaticPaths() {
-  const allPosts = (await Astro.glob(
-    `../../posts/*.md`,
-  )) as MarkdownInstance<Frontmatter>[];
+  const allPosts = Object.values(import.meta.glob(`../../posts/*.md`, {
+    eager: true,
+  })) as MarkdownInstance<Frontmatter>[];
   const numberOfPosts = allPosts.length; // Total of all posts
 
   return sortDateDescending(allPosts).map(
@@ -40,14 +40,16 @@ export async function getStaticPaths() {
             ? { frontmatter: "" }
             : allPosts[i - 1],
       },
-    }),
+    })
   );
 }
 
 // Get properties (frontmatter) for the previous/next posts
 const { post, prevPost, nextPost } = Astro.props as Props;
 const { title, image, imageDescription, tags, description } = post.frontmatter;
-const date = post.frontmatter.date ? new Date(post.frontmatter.date).toDateString() : undefined;
+const date = post.frontmatter.date
+  ? new Date(post.frontmatter.date).toDateString()
+  : undefined;
 const headings = post.getHeadings();
 const { Content } = post;
 const prevUrl = prevPost.frontmatter
@@ -97,7 +99,7 @@ const nextUrl = nextPost.frontmatter
     <div
       class="flex max-w-7xl mx-auto md:px-8 px-5 gap-12 items-start prose md:prose-lg 2xl:prose-xl px-4 mx-auto prose-pre:font-mono"
     >
-    {headings.length > 0 && <TableOfContents headings={headings} />}
+      {headings.length > 0 && <TableOfContents headings={headings} />}
       <div>
         <article class="grid justify-items-start max-w-5xl">
           <Content />
