@@ -28,17 +28,24 @@ All commands are run from the root of the project, from a terminal:
 
 
 ## :rocket: Adding new posts
-A template to follow is in `src/pages/articles/content/template.md`
+A template to follow is in `src/posts/template.md`
 ```md
 ---
-layout: required
-title: required
-date: required
-image?: optional
-imageDescription?: optional
-tags: required;
-description: required;
-draft?: optional;
----
+title: template
+date: 01 July 2022
+description: example
+image: /images/...
+imageDescription: template text
+tags:
+  - Featured
+draft: true
 ```
+
+## :sparkles: Analytics
+
+[PostHog](https://posthog.com/docs/libraries/astro)
+
+## :chicken: Misc
+
+<https://github.com/markdown-templates/markdown-emojis> :astonished:
 
