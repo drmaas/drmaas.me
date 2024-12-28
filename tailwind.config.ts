@@ -1,5 +1,8 @@
-/** @type {import('tailwindcss').Config} */
-module.exports = {
+import { Config } from "tailwindcss";
+import typography from "@tailwindcss/typography";
+import daisyui from "daisyui";
+
+const config: Config = {
   content: ["./src/**/*.{astro,html,js,jsx,md,svelte,ts,tsx,vue}"],
   theme: {
     extend: {
@@ -34,7 +37,7 @@ module.exports = {
       },
     },
   },
-  plugins: [require("@tailwindcss/typography"), require("daisyui")],
+  plugins: [typography, daisyui],
   // daisyUI config (optional)
   daisyui: {
     themes: ["cmyk", "night"],
@@ -42,3 +45,5 @@ module.exports = {
   },
   darkMode: ["class", '[data-theme="night"]'],
 };
+
+export default config;

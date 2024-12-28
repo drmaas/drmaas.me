@@ -11,8 +11,8 @@ export interface Props {
 }
 
 export async function getStaticPaths({ paginate }) {
-  const allPosts = Object.values(import.meta.glob('../posts/*.md', { eager: true })) as MarkdownInstance<Frontmatter>[];
-  const posts = sortDateDescending(allPosts.filter((post) => post.frontmatter.draft != true));
+  const allPosts = Object.values(import.meta.glob('../../posts/*.md', { eager: true })) as MarkdownInstance<Frontmatter>[];
+  const posts = sortDateDescending(allPosts.filter((post) => post.frontmatter.draft !== true));
   return paginate(posts, { pageSize: config.pageSize ?? 5 });
 }
 
