@@ -4,7 +4,7 @@
     "target": "ESNext",
     "module": "ESNext",
     // Enable node-style module resolution, for things like npm package imports.
-    "moduleResolution": "node",
+    "moduleResolution": "bundler",
     // es interop
     "esModuleInterop": true,
     // Enable JSON imports.
@@ -13,6 +13,7 @@
     "isolatedModules": true,
     // Add type definitions for our Astro runtime.
     "types": ["astro/client"],
+    "jsx": "react-jsx",
     // Using aliases for paths
     "baseUrl": ".",
     "strictNullChecks": true,

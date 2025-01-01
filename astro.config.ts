@@ -25,6 +25,7 @@ export default defineConfig({
   trailingSlash: "always",
   // https://github.com/withastro/docs/blob/main/astro.config.ts
   markdown: {
+    smartypants: false,
     remarkPlugins: [
       [
         remarkSmartypants,
