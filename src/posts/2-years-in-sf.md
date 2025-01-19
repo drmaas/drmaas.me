@@ -1,12 +1,12 @@
 ---
 title: Two years at Salesforce - What I've Learned
-date: 10 December 2024
+date: 17 January 2025
 description: It's not what you'd expect
 tags:
   - Featured
   - Engineering
   - Career
-draft: true
+draft: false
 ---
 
 12 insights all at once! What have I learned? What did I already know that's been reinforced?
