@@ -1,6 +1,6 @@
 ---
 title: Building Services Part 2 - Coding
-date: 2023-09-30T00:00:00.000Z
+date: 30 September 2023
 description: You can haz code!
 tags: [coding, design, systems]
 draft: false

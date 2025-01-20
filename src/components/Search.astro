@@ -68,7 +68,10 @@
             </div>
             `;
                 }
-                document.querySelector("#results").innerHTML = html;
+                const resultsElement = document.querySelector("#results");
+                if (resultsElement) {
+                    resultsElement.innerHTML = html;
+                }
             });
         }
     }

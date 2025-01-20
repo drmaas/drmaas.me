@@ -1,6 +1,6 @@
 ---
 title: Building Services Part 3 - Testing
-date: 2024-01-12T00:00:00.000Z
+date: 12 January 2024
 description: You can haz code and test it too!
 tags: [coding, design, systems, testing]
 draft: false

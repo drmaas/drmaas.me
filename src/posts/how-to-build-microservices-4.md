@@ -1,6 +1,6 @@
 ---
 title: Building Services Part 4 - Infrastructure
-date: 2024-12-10T20:00:00.000Z
+date: 12 December 2024
 description: Have your code and deploy it too!
 tags: [Featured, Engineering, Intrastucture as Code, Coding, Devops, Fullstack]
 draft: false

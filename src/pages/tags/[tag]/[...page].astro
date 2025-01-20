@@ -2,23 +2,24 @@
 import BaseLayout from "@layouts/BaseLayout.astro";
 import ArticleCard from "@components/ArticleCard.astro";
 import Pagination from "@components/Pagination.astro";
-import { Frontmatter, sortDateDescending, getAllUniqueTags } from "src/misc";
-import { MarkdownInstance, Page } from "astro";
+import { sortDateDescending, getAllUniqueTags } from "src/misc";
+import { Page } from "astro";
 import config from "src/config.js";
+import { CollectionEntry, getCollection } from "astro:content";
 
 export interface Props {
-  page: Page<MarkdownInstance<Frontmatter>>,
+  page: Page<CollectionEntry<"posts">>,
 }
 
 export async function getStaticPaths({ paginate }) {
-  const allPosts = Object.values(import.meta.glob('../../../posts/*.md', { eager: true })) as MarkdownInstance<Frontmatter>[];
+  const allPosts = await getCollection('posts');
   const allTags = getAllUniqueTags(allPosts);
   // For every tag, return a paginate() result.
   // Make sure that you pass `{params: {tag}}` to `paginate()`
   // so that Astro knows which tag grouping the result is for.
   return allTags.flatMap((tag) => {
     const filteredPosts = sortDateDescending(allPosts.filter((post) => {
-      return post.frontmatter.tags.find(ele => ele === tag) && post.frontmatter.draft != true
+      return post.data.tags.find(ele => ele === tag) && post.data.draft != true
     }));
 
     return paginate(filteredPosts, {

@@ -2,6 +2,8 @@
 layout: "@layouts/ArticleLayout.astro"
 title: What I'm Consuming
 description: A list of media that I've consumed. Podcasts, articles, videos, tweets.
+tags: []
+draft: false
 ---
 
 This page serves two purposes: firstly and most importantly, it helps me keep track of things I've read, 

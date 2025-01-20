@@ -1,6 +1,6 @@
 ---
 title: Building Services Part 1 - Intro and Modelling
-date: 2023-08-10T20:15:00.000Z
+date: 10 August 2023
 description: I thought I could just wing it?
 tags: [design, architecture, systems]
 draft: false

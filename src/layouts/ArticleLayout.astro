@@ -1,13 +1,12 @@
 ---
-import { Frontmatter } from "src/misc";
 import BaseLayout from "./BaseLayout.astro";
 import TagButton from "@components/TagButton.astro";
 import TableOfContents from "../components/TableOfContents.astro";
 import DateComponent from "@components/DateComponent.astro";
+import { InferEntrySchema } from "astro:content";
 
 export interface Props {
-  content: Frontmatter;
-  url: string;
+  content: InferEntrySchema<"posts">;
   headings: string;
 }
 

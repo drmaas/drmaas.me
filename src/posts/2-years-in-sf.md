@@ -9,7 +9,9 @@ tags:
 draft: false
 ---
 
-12 insights all at once! What have I learned? What did I already know that's been reinforced?
+## 12 insights all at once! 
+
+What have I learned? What did I already know that's been reinforced?
 
 * Become a business expert, while keeping your coding skills sharp.
 * Continuously improve your ability to effectively communicate you ideas.

@@ -3,7 +3,7 @@ import BaseHead from "./BaseHead.astro";
 import NavListItem from "@components/NavListItem.astro";
 import { ClientRouter } from "astro:transitions";
 import config from "src/config.js";
-import PostHog from "../components/posthog.astro"
+import PostHog from "../components/posthog.astro";
 export interface Props {
   title: string;
   description?: string;
@@ -84,10 +84,10 @@ const {
             navLinks.map((ele) => (
               <NavListItem
                 navLink={ele.link}
-                text={ele.text}
-                activeLink={activeLink}
+                text={ele.text ?? ""}
+                activeLink={activeLink ?? ""}
                 icon={ele.icon}
-                absolute={ele.absolute}
+                absolute={ele.absolute ?? false}
               />
             ))
           }
@@ -128,7 +128,7 @@ const {
       </nav>
     </header>
 
-    <main id="main" class="container mx-auto">
+    <main id="main">
       <slot />
     </main>
 
@@ -146,16 +146,17 @@ const {
 
     <footer class="border-t px-4 py-6 mt-6">
       <p class="text-center text-sm">
-      <span>
-        &copy; {new Date().getFullYear()}&nbsp;{fullName}
-      </span>
-      <span> • </span>
-      <span>
-        <a
-        class="text-cyan-600 hover:text-black dark:hover:text-white"
-        href="/topics/disclaimer/">Disclaimer</a>
-      </span>
-    </p>
+        <span>
+          &copy; {new Date().getFullYear()}&nbsp;{fullName}
+        </span>
+        <span> • </span>
+        <span>
+          <a
+            class="text-cyan-600 hover:text-black dark:hover:text-white"
+            href="/topics/disclaimer/">Disclaimer</a
+          >
+        </span>
+      </p>
       <p class="text-center text-xs">
         Built with <a
           class="text-cyan-600 hover:text-black dark:hover:text-white"
@@ -279,74 +280,87 @@ const {
       const navToggleInput =
         document.querySelector<HTMLInputElement>("#nav-toggle input");
 
-      navToggle.addEventListener("change", () => {
-        if (nav.getAttribute("data-visible") === "false") {
-          nav.setAttribute("data-visible", "true");
-          nav.setAttribute("aria-expanded", "true");
-        } else if (nav.getAttribute("data-visible") === "true") {
-          nav.setAttribute("data-visible", "false");
-          nav.setAttribute("aria-expanded", "false");
-        }
-      });
+      if (navToggle && nav) {
+        navToggle.addEventListener("change", () => {
+          if (nav.getAttribute("data-visible") === "false") {
+            nav.setAttribute("data-visible", "true");
+            nav.setAttribute("aria-expanded", "true");
+          } else if (nav.getAttribute("data-visible") === "true") {
+            nav.setAttribute("data-visible", "false");
+            nav.setAttribute("aria-expanded", "false");
+          }
+        });
+      }
 
-      document.querySelector("main").addEventListener("click", () => {
-        if (nav.getAttribute("data-visible") === "true") {
-          nav.setAttribute("data-visible", "false");
-          nav.setAttribute("aria-expanded", "false");
-          navToggleInput.checked = !navToggleInput.checked;
-        }
-      });
+      const main = document.querySelector("main");
+      if (main && nav && navToggleInput) {
+        main.addEventListener("click", () => {
+          if (nav.getAttribute("data-visible") === "true") {
+            nav.setAttribute("data-visible", "false");
+            nav.setAttribute("aria-expanded", "false");
+            navToggleInput.checked = !navToggleInput.checked;
+          }
+        });
+      }
 
       // Scroll To Top button - control
       const scrollButton = document.querySelector<SVGElement>("#scrollButton");
-      scrollButton.addEventListener("click", () => {
-        window.scroll({
-          top: 0,
-          left: 0,
-          behavior: "smooth",
+      if (scrollButton) {
+        scrollButton.addEventListener("click", () => {
+          window.scroll({
+            top: 0,
+            left: 0,
+            behavior: "smooth",
+          });
         });
-      });
-      window.addEventListener("scroll", () => {
-        if (document.documentElement.scrollTop > window.innerHeight / 4) {
-          scrollButton.style.display = "block";
-        } else {
-          scrollButton.style.display = "none";
-        }
-      });
+        window.addEventListener("scroll", () => {
+          if (document.documentElement.scrollTop > window.innerHeight / 4) {
+            scrollButton.style.display = "block";
+          } else {
+            scrollButton.style.display = "none";
+          }
+        });
+      }
 
       // Theme stuff
       function setTheme() {
-        const theme =
-          localStorage["theme"] ||
-          document.querySelector("html").getAttribute("data-theme");
-        document.querySelector("html").setAttribute("data-theme", theme);
+        const html = document.querySelector("html");
+        const theme = localStorage["theme"] || (html ? html.getAttribute("data-theme") : "default");
+        if (html) {
+          html.setAttribute("data-theme", theme);
+        }
 
+        const themeSettingInputElement =
+          document.querySelector<HTMLInputElement>("#themeSetting > input");
         if (theme === "cmyk") {
-          document.querySelector<HTMLInputElement>(
-            "#themeSetting > input",
-          ).checked = true;
+          if (themeSettingInputElement) {
+            themeSettingInputElement.checked = true;
+          }
         } else {
-          document.querySelector<HTMLInputElement>(
-            "#themeSetting > input",
-          ).checked = false;
+          if (themeSettingInputElement) {
+            themeSettingInputElement.checked = false;
+          }
         }
       }
 
       function clickTheme() {
-        document
-          .querySelector("#themeSetting")
-          .addEventListener("click", () => {
+        const themeSettingElement = document.querySelector("#themeSetting");
+        if (themeSettingElement) {
+          themeSettingElement.addEventListener("click", () => {
             const themeSettingInputElement =
               document.querySelector<HTMLInputElement>("#themeSetting > input");
-            themeSettingInputElement.checked =
-              !themeSettingInputElement.checked;
-            if (themeSettingInputElement.checked) {
+            if (themeSettingInputElement) {
+              themeSettingInputElement.checked =
+                !themeSettingInputElement.checked;
+            }
+            if (themeSettingInputElement && themeSettingInputElement.checked) {
               localStorage["theme"] = "cmyk";
             } else {
               localStorage["theme"] = "night";
             }
             setTheme();
           });
+        }
       }
 
       clickTheme();

@@ -1,6 +1,6 @@
 ---
 title: Starting a blog
-date: 2023-06-25T12:16:00.123Z
+date: 25 June 2023
 description: Goodbye procrastination.
 tags: [General, Featured]
 draft: false

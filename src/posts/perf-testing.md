@@ -1,6 +1,6 @@
 ---
 title: Performance Testing is Hard
-date: 2023-07-16T20:00:00.000Z
+date: 16 July 2023
 description: But why?
 tags: [performance]
 draft: false

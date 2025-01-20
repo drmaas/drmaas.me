@@ -1,10 +1,10 @@
 ---
-import { MarkdownInstance, Page } from "astro";
-import { Frontmatter } from "src/misc";
+import { Page } from "astro";
+import { CollectionEntry } from "astro:content";
 
 export interface Props {
-  page: Page<MarkdownInstance<Frontmatter>>,
-  dir: string
+  page: Page<CollectionEntry<"posts">>;
+  dir: string;
 }
 
 const { page, dir } = Astro.props as Props;

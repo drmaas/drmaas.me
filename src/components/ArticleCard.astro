@@ -1,28 +1,29 @@
 ---
-import { MarkdownInstance } from "astro";
 import { parse } from "node-html-parser";
-import { Frontmatter, fileToSlug } from "src/misc";
+import { fileToSlug } from "src/misc";
 import TagButton from "./TagButton.astro";
 import DateComponent from "./DateComponent.astro";
 import ReadingTimeComponent from "./ReadingTimeComponent.astro";
+import { CollectionEntry } from "astro:content";
 
 export interface Props {
-  content: MarkdownInstance<Frontmatter>;
+  content: CollectionEntry<"posts">;
   lazyLoading?: boolean;
 }
 
 const { content, lazyLoading } = Astro.props as Props;
 
+const rendered = content.rendered?.html ?? "";
+
 const description =
-  content.frontmatter.description ||
-  parse(await content.compiledContent()).querySelector("p:first-of-type")
-    ?.innerText;
+  content.data.description ||
+  parse(rendered).querySelector("p:first-of-type")?.innerText;
 
-const url = `/articles/${fileToSlug(content.file, "md")}`;
+const url = `/articles/${fileToSlug(content.filePath ?? "", "md")}`;
 
-const date = new Date(content.frontmatter.date).toDateString();
+const date = new Date(content.data.date).toDateString();
 
-const tags = content.frontmatter.tags;
+const tags = content.data.tags;
 ---
 
 <div
@@ -30,7 +31,7 @@ const tags = content.frontmatter.tags;
   focus-within:outline focus-within:outline-2 focus-within:outline-secondary"
 >
   {
-    content.frontmatter.image ? (
+    content.data.image ? (
       <Fragment>
         <figure class="pt-4 sm:pt-0 rounded">
           <img
@@ -38,11 +39,11 @@ const tags = content.frontmatter.tags;
             height="200"
             loading={lazyLoading ? "lazy" : "eager"}
             class="m-2 max-w-[300px] max-h-[200px] aspect-video"
-            src={content.frontmatter.image}
+            src={content.data.image}
             alt={
-              content.frontmatter.imageDescription ?? content.frontmatter.title
+              content.data.imageDescription ?? content.data.title
             }
-            transition:name={content.frontmatter.image}
+            transition:name={content.data.image}
           />
         </figure>
       </Fragment>
@@ -55,7 +56,7 @@ const tags = content.frontmatter.tags;
         href={url}
         class="no-underline text-cyan-600 hover:text-black dark:hover:text-white"
       >
-        <h2 class="card-title">{content.frontmatter.title}</h2>
+        <h2 class="card-title">{content.data.title}</h2>
       </a>
       <div class="flex gap-2 flex-wrap">
         {
@@ -67,7 +68,7 @@ const tags = content.frontmatter.tags;
       <div class="card-actions justify-beginning items-center">
         <DateComponent date={date} />
         <span> • </span>
-        <ReadingTimeComponent content={content.rawContent()} />
+        <ReadingTimeComponent content={rendered} />
       </div>
       <p class="line-clamp-4 md:line-clamp-3">
         {description}

@@ -1,31 +1,29 @@
 ---
-import { MarkdownInstance } from "astro";
+import { CollectionEntry, getCollection, render } from "astro:content";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import TagButton from "../../components/TagButton.astro";
 import TableOfContents from "../../components/TableOfContents.astro";
 
-import { Frontmatter, fileToSlug, sortDateDescending } from "../../misc";
+import { fileToSlug, sortDateDescending } from "../../misc";
 import DateComponent from "@components/DateComponent.astro";
 import ReadingTimeComponent from "@components/ReadingTimeComponent.astro";
 import ArticleNav from "@components/ArticleNav.astro";
 
 export interface Props {
-  post: MarkdownInstance<Frontmatter>;
-  prevPost: MarkdownInstance<Frontmatter>;
-  nextPost: MarkdownInstance<Frontmatter>;
+  post: CollectionEntry<'posts'>;
+  prevPost: CollectionEntry<'posts'>;
+  nextPost: CollectionEntry<'posts'>;
 }
 
 export async function getStaticPaths() {
-  const allPosts = Object.values(import.meta.glob(`../../posts/*.md`, {
-    eager: true,
-  })) as MarkdownInstance<Frontmatter>[];
+  const allPosts = await getCollection('posts');
   const numberOfPosts = allPosts.length; // Total of all posts
 
   return sortDateDescending(allPosts).map(
-    (post: MarkdownInstance<Frontmatter>, i: number) => ({
+    (post: CollectionEntry<'posts'>, i: number) => ({
       // Map() all posts after sorting
       params: {
-        slug: fileToSlug(post.file, "md"),
+        slug: fileToSlug(post.filePath ?? "", "md"),
       },
       props: {
         post,
@@ -46,25 +44,25 @@ export async function getStaticPaths() {
 
 // Get properties (frontmatter) for the previous/next posts
 const { post, prevPost, nextPost } = Astro.props as Props;
-const { title, image, imageDescription, tags, description } = post.frontmatter;
-const date = post.frontmatter.date
-  ? new Date(post.frontmatter.date).toDateString()
+const { Content, headings } = await render(post);
+const rendered = post.rendered?.html ?? "";
+const { title, image, imageDescription, tags, description } = post.data;
+const date = post.data.date
+  ? new Date(post.data.date).toDateString()
   : undefined;
-const headings = post.getHeadings();
-const { Content } = post;
-const prevUrl = prevPost.frontmatter
-  ? `/articles/${fileToSlug(prevPost.file, "md")}`
+const prevUrl = prevPost.data
+  ? `/articles/${fileToSlug(prevPost.filePath ?? "", "md")}`
   : "";
-const nextUrl = nextPost.frontmatter
-  ? `/articles/${fileToSlug(nextPost.file, "md")}`
+const nextUrl = nextPost.data
+  ? `/articles/${fileToSlug(nextPost.filePath ?? "", "md")}`
   : "";
 ---
 
 <BaseLayout title={title} description={description}>
-  <div class="mx-auto">
-    <div class="max-w-7xl md:pb-10 md:pt-16 md:px-8 mx-auto pb-8 pt-12 px-5">
+  <div>
+    <div class="container max-w-7xl md:pb-10 md:pt-16 mx-auto pb-8 pt-12">
       <h1
-        class="text-3xl md:text-5xl 2xl:text-6xl mb-[0.8em] font-extrabold mx-auto w-fit"
+        class="text-3xl md:text-5xl 2xl:text-6xl mb-[0.8em] font-extrabold mx-auto"
       >
         {title}
       </h1>
@@ -92,12 +90,12 @@ const nextUrl = nextPost.frontmatter
         <div class="flex flex-wrap gap-2 mt-8">
           {date && <DateComponent date={date} />}
           <span> • </span>
-          <ReadingTimeComponent content={post.rawContent()} />
+          <ReadingTimeComponent content={rendered} />
         </div>
       </div>
     </div>
     <div
-      class="flex max-w-7xl mx-auto gap-12 items-start prose md:prose-lg prose-pre:font-mono"
+      class="container flex max-w-7xl mx-auto gap-8 items-start prose md:prose-lg prose-pre:font-mono"
     >
       {headings.length > 0 && <TableOfContents headings={headings} />}
       <div>

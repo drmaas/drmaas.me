@@ -1,9 +1,8 @@
 ---
 layout: "@layouts/ArticleLayout.astro"
 title: Links
-date: 2024-06-22T00:00:00.000Z
 description: Links to things to remember
-tags: [coding, development, tools]
+tags: []
 draft: false
 ---
 

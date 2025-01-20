@@ -11,7 +11,11 @@ tags:
 draft: false
 ---
 
+## Overview
+
 I was recently playing around with an app I was building at work to teach myself how to use LangChain. This app, a Dev Portal, allows users to upload and view OpenAPI and GraphQL specs. It *also* has a chat feature built in where a user can ask questions about the APIs stored in the app.
+
+## Data Flow
 
 The chat feature was using a general RAG approach to querying internal data. The general flows is:
 
@@ -22,6 +26,8 @@ The chat feature was using a general RAG approach to querying internal data. The
 * pass the results to a prompt that answers the user's question and returns the results in markdown
 
 This did not work well! The LLM can't answer questions about a 1000-line api spec if it only has 5 100 character fragments. I needed a way to return better results.
+
+## Improvement
 
 Here's what I came up with:
 

@@ -1,6 +1,6 @@
 ---
 title: On Partition Keys
-date: 2023-07-02T20:15:00.000Z
+date: 2 July 2023
 description: Think carefully.
 tags: [performance]
 draft: false

@@ -1,6 +1,6 @@
 ---
 title: My Favorite Development Tools
-date: 2023-10-01T00:00:00.000Z
+date: 10 October 2023
 description: CLI FTW
 tags: [coding, local, development, tools]
 draft: false

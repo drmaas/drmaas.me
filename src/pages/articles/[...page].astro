@@ -2,17 +2,20 @@
 import BaseLayout from "@layouts/BaseLayout.astro";
 import ArticleCard from "@components/ArticleCard.astro";
 import Pagination from "@components/Pagination.astro";
-import { Frontmatter, sortDateDescending } from "../../misc";
-import { MarkdownInstance, Page } from "astro";
+import { sortDateDescending } from "../../misc";
+import { Page } from "astro";
 import config from "src/config";
+import { CollectionEntry, getCollection } from "astro:content";
 
 export interface Props {
-  page: Page<MarkdownInstance<Frontmatter>>,
+  page: Page<CollectionEntry<"posts">>;
 }
 
 export async function getStaticPaths({ paginate }) {
-  const allPosts = Object.values(import.meta.glob('../../posts/*.md', { eager: true })) as MarkdownInstance<Frontmatter>[];
-  const posts = sortDateDescending(allPosts.filter((post) => post.frontmatter.draft !== true));
+  const allPosts = await getCollection("posts");
+  const posts = sortDateDescending(
+    allPosts.filter((post) => post.data.draft !== true)
+  );
   return paginate(posts, { pageSize: config.pageSize ?? 5 });
 }
 
@@ -20,15 +23,18 @@ const { page } = Astro.props as Props;
 ---
 
 <BaseLayout title="Articles" activeLink="articles">
-  {page.currentPage == 1 ? <h1
-    class="text-center text-3xl font-semibold bg-clip-text mb-8">
-    Articles</h1> : null}
+  {
+    page.currentPage == 1 ? (
+      <h1 class="text-center text-3xl font-semibold bg-clip-text mb-8">
+        Articles
+      </h1>
+    ) : null
+  }
 
   <div class="flex flex-wrap flex-col justify-center gap-12">
-    {page.data.map(post =>
-    <ArticleCard content={post} />)}
+    {page.data.map((post) => <ArticleCard content={post} />)}
   </div>
-    <div class="flex flex-wrap flex-col justify-center gap-12">
-  <Pagination page={page} dir={"articles"} />
+  <div class="flex flex-wrap flex-col justify-center gap-12">
+    <Pagination page={page} dir={"articles"} />
   </div>
 </BaseLayout>

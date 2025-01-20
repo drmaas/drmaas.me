@@ -1,33 +1,18 @@
-import { MarkdownInstance } from "astro";
+import { CollectionEntry } from "astro:content";
 import path from "path";
-
-export interface Frontmatter {
-  layout: string;
-  title: string;
-  date: string;
-  image?: string;
-  imageDescription?: string;
-  tags: string[];
-  description: string;
-  draft?: boolean;
-}
 
 export function fileToSlug(file: string, extension: string) {
   return path.parse(file).base.replace(`.${extension}`, "/");
 }
 
-export function sortDateDescending(arg: MarkdownInstance<Frontmatter>[]) {
+export function sortDateDescending(arg: CollectionEntry<"posts">[]) {
   return arg.sort(
-    (a, b) =>
-      new Date(b.frontmatter.date).getTime() -
-      new Date(a.frontmatter.date).getTime(),
+    (a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime(),
   );
 }
 
-export function getAllUniqueTags(arg: MarkdownInstance<Frontmatter>[]) {
-  return Array.from(
-    new Set(arg.map((e) => e.frontmatter.tags).flat()).values(),
-  );
+export function getAllUniqueTags(arg: CollectionEntry<"posts">[]) {
+  return Array.from(new Set(arg.map((e) => e.data.tags ?? []).flat()).values());
 }
 
 export function capitalizeString(arg: string) {

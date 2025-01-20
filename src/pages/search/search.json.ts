@@ -1,24 +1,21 @@
-import { MarkdownInstance } from "astro";
-import { Frontmatter, fileToSlug } from "src/misc";
+import { fileToSlug } from "src/misc";
 import { parse } from "node-html-parser";
+import { getCollection } from "astro:content";
 
 export async function GET() {
-  const allPosts = import.meta.glob<MarkdownInstance<Frontmatter>>(
-    "../../posts/*.md",
-    { eager: true },
-  ); // Vite
+  const allPosts = await getCollection("posts");
   const posts = Object.values(allPosts)
-    .filter((ele) => ele.frontmatter.draft != true)
+    .filter((ele) => ele.data.draft != true)
     .map((ele) => {
+      const rendered = ele.rendered?.html ?? "";
       return {
-        title: ele.frontmatter.title,
-        url: `/articles/${fileToSlug(ele.file, "md")}`,
-        date: new Date(ele.frontmatter.date).toDateString(),
+        title: ele.data.title,
+        url: `/articles/${fileToSlug(ele.filePath ?? "", "md")}`,
+        date: new Date(ele.data.date).toDateString(),
         description:
-          ele.frontmatter.description ||
-          parse(ele.compiledContent()).querySelector("p:first-of-type")
-            ?.innerText,
-        tags: ele.frontmatter.tags,
+          ele.data.description ||
+          parse(rendered).querySelector("p:first-of-type")?.innerText,
+        tags: ele.data.tags,
       };
     });
   return new Response(JSON.stringify(posts));

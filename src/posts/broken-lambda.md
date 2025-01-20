@@ -1,6 +1,6 @@
 ---
 title: The case of the broken lambda
-date: 2023-07-28T21:30:00.000Z
+date: 28 July 2023
 description: API Gateway Lambda Proxy Madness.
 tags: [debugging]
 draft: false

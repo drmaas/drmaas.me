@@ -1,14 +1,14 @@
 ---
 import ArticleCard from "@components/ArticleCard.astro";
 import BaseLayout from "@layouts/BaseLayout.astro";
-import { MarkdownInstance } from "astro";
+import { getCollection } from "astro:content";
 import config from "src/config";
-import { Frontmatter, sortDateDescending, capitalizeString } from "src/misc";
+import { sortDateDescending, capitalizeString } from "src/misc";
 
-const allPosts = Object.values(import.meta.glob('../posts/*.md', { eager: true })) as MarkdownInstance<Frontmatter>[];
-const posts = sortDateDescending(allPosts.filter((post) => post.frontmatter.draft != true && post.frontmatter.tags.includes('Featured'))).slice(0, 3);
+const allPosts = await getCollection('posts');
+
+const posts = sortDateDescending(allPosts.filter((post) => post.data.draft != true && post.data.tags.includes('Featured'))).slice(0, 3);
 const { metaData: { authorName }, social } = config;
-const baseSite = import.meta.env.BASE_URL
 ---
 
 <BaseLayout title="Home" activeLink="home">
