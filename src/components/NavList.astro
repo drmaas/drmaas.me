@@ -1,0 +1,155 @@
+---
+import config from "src/config";
+import NavListItem from "./NavListItem.astro";
+import ThemeIcon from "./ThemeIcon.astro";
+
+export interface Props {
+  activeLink: string;
+}
+
+const { activeLink } = Astro.props as Props;
+const {
+  metaData: { fullName },
+  navLinks,
+} = config;
+---
+
+<label
+  aria-label="Hamburger Menu"
+  id="nav-toggle"
+  class="btn btn-circle swap swap-rotate fixed z-[999] top-4 right-4 hidden"
+  aria-controls="primary-nav"
+  aria-expanded="false"
+>
+  <input type="checkbox" />
+  <!-- hamburger icon -->
+  <svg
+    class="swap-off fill-current"
+    xmlns="http://www.w3.org/2000/svg"
+    width="32"
+    height="32"
+    viewBox="0 0 512 512"
+  >
+    <path
+      d="M64,384H448V341.33H64Zm0-106.67H448V234.67H64ZM64,128v42.67H448V128Z"
+    ></path>
+  </svg>
+  <!-- close icon -->
+  <svg
+    class="swap-on fill-current"
+    xmlns="http://www.w3.org/2000/svg"
+    width="32"
+    height="32"
+    viewBox="0 0 512 512"
+  >
+    <polygon
+      points="400 145.49 366.51 112 256 222.51 145.49 112 112 145.49 222.51 256 112 366.51 145.49 400 256 289.49 366.51 400 400 366.51 289.49 256 400 145.49"
+    ></polygon>
+  </svg>
+</label>
+
+<nav class="mr-6">
+  <ul
+    id="primary-nav"
+    class="flex grow gap-8 items-center justify-center z-[100]"
+    data-visible="false"
+  >
+    {
+      navLinks.map((ele) => (
+        <NavListItem
+          navLink={ele.link}
+          text={ele.text ?? ""}
+          activeLink={activeLink ?? ""}
+          icon={ele.icon}
+          absolute={ele.absolute ?? false}
+          tip={ele.tip}
+        />
+      ))
+    }
+    <ThemeIcon />
+  </ul>
+</nav>
+
+<style>
+  /* Mobile Navigation */
+  @media (max-width: 640px) {
+    ul#primary-nav {
+      position: fixed;
+      inset: 0 0 0 30%;
+      flex-direction: column;
+      padding: min(30vh, 10rem) 2em;
+      transform: translateX(100%);
+      transition: transform 500ms ease-in-out;
+      background: hsl(var(--hamburger-bg) / 0.5);
+      backdrop-filter: blur(2rem);
+    }
+
+    ul#primary-nav[data-visible="true"] {
+      transform: translateX(0);
+    }
+
+    label#nav-toggle {
+      display: grid;
+    }
+  }
+
+  /* Logo & Theme SVG color */
+  header path {
+    fill: hsl(var(--fill-color));
+  }
+  header polygon {
+    fill: hsl(var(--er));
+  }
+
+  /* Logo Animation */
+  header > div > svg > path {
+    stroke-dasharray: var(--svg-totalLength);
+    stroke-dashoffset: var(--svg-totalLength);
+    animation: logoAnimation 5s forwards ease-in-out;
+    paint-order: stroke;
+  }
+
+  @keyframes logoAnimation {
+    from {
+      fill: hsl(var(--fill-color) / 0.1);
+      stroke: hsl(var(--stroke-color));
+    }
+
+    to {
+      stroke-dashoffset: 0;
+      fill: hsl(var(--fill-color));
+      stroke: hsl(var(--stroke-color) / 0);
+    }
+  }
+</style>
+
+<script>
+  // Navigation / Hamburger menu - control
+  const nav = document.querySelector<HTMLUListElement>("#primary-nav");
+  const navToggle = document.querySelector<HTMLLabelElement>("#nav-toggle");
+  const navToggleInput =
+    document.querySelector<HTMLInputElement>("#nav-toggle input");
+
+  if (navToggle && nav) {
+    navToggle.addEventListener("change", () => {
+      if (nav.getAttribute("data-visible") === "false") {
+        nav.setAttribute("data-visible", "true");
+        nav.setAttribute("aria-expanded", "true");
+      } else if (nav.getAttribute("data-visible") === "true") {
+        nav.setAttribute("data-visible", "false");
+        nav.setAttribute("aria-expanded", "false");
+      }
+    });
+  }
+
+  const main = document.querySelector("main");
+  if (main && nav && navToggleInput) {
+    main.addEventListener("click", () => {
+      if (nav.getAttribute("data-visible") === "true") {
+        nav.setAttribute("data-visible", "false");
+        nav.setAttribute("aria-expanded", "false");
+        navToggleInput.checked = !navToggleInput.checked;
+      }
+    });
+  }
+</script>
