@@ -11,7 +11,7 @@ const { page, dir } = Astro.props as Props;
 const baseSite = import.meta.env.BASE_URL;
 ---
 
-<div class="btn-group justify-center mt-12 mx-auto">
+<div class="btn-group justify-center mt-12">
   {page.currentPage !== 1 && page.currentPage !== 2?
   <>
     <a href={`${baseSite}${dir}/`} class="btn">1</a>

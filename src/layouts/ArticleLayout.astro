@@ -44,10 +44,10 @@ const date = content.date ? new Date(content.date).toDateString() : undefined;
       </div>
     </div>
   </div>
-  <div class="flex max-w-7xl mx-auto md:px-8 px-5 gap-12 items-start prose md:prose-lg 2xl:prose-xl px-4 mx-auto prose-pre:font-mono">
+  <div class="flex max-w-7xl mx-auto md:px-8 px-5 gap-12 items-start">
     {headings.length > 0 && <TableOfContents headings={headings} />}
-    <div class="w-3/4">
-      <article class="grid justify-items-start max-w-5xl">
+    <div class="flex-1 min-w-0">
+      <article class="prose md:prose-lg 2xl:prose-xl max-w-none prose-pre:overflow-x-auto prose-pre:whitespace-pre-wrap prose-code:break-words">
         <slot />
       </article>
       <a href="/articles/" class="no-underline text-cyan-600 hover:text-black dark:hover:text-white">

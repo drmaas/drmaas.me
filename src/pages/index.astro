@@ -14,11 +14,9 @@ const { metaData: { authorName }, social } = config;
 <BaseLayout title="Home" activeLink="home">
 
 	<section class="flex flex-col sm:flex-row justify-center max-w-[90%] w-[52rem] mx-auto gap-12 mb-24">
-		<img class="w-64 h-64 object-cover object-left rounded-full" src={"/images/profile.jpg"} alt="avatar"
-			class="rounded-md h-fit self-center justify-self-center scale-125">
-		<div class="flex flex-col flex-wrap flex-grow">
-			<h1
-				class="mx-auto text-center mb-8 text-4xl font-semibold w-fit">
+		<img class="w-64 h-64 object-cover object-left rounded-full self-center" src={"/images/profile.jpg"} alt="avatar">
+		<div class="flex flex-col flex-grow">
+			<h1 class="text-center mb-8 text-4xl font-semibold">
 				Hi there, I'm <span class="font-bold">{authorName}.</span></h1>
 			<p class="text-center">
 				<span>I write about software and life. I hope you find my posts relevant.</span>
@@ -29,10 +27,10 @@ const { metaData: { authorName }, social } = config;
 				  </span>
 
 				</p>
-			<div class="flex flex-wrap justify-center gap-5 mt-4">
-				{social.map(ele => <a class="w-8 h-8 flex scale-1 hover:scale-125 transition-[scale] justify-center" href={ele.link}
+			<div class="flex justify-center gap-5 mt-4">
+				{social.map(ele => <a class="w-8 h-8 flex scale-1 hover:scale-125 transition-transform justify-center" href={ele.link}
 					target="_blank" rel="noreferrer noopener">
-					<span class="sr-only">{`Link to my ${ele.sr?? capitalizeString(ele.link.replace(/.+\/\/|www.|\..+/g, ''))} account`}</span>
+					<span class="sr-only">{`Link to my ${capitalizeString(ele.link.replace(/.+\/\/|www.|\..+/g, ''))} account`}</span>
 					<Fragment set:html={ele.svg} />
 				</a> )}
 			</div>
@@ -40,17 +38,16 @@ const { metaData: { authorName }, social } = config;
 	</section>
 		
 	<section>
-		<h2
-			class="mx-auto text-center mb-8 text-4xl font-semibold w-fit">
+		<h2 class="text-center mb-8 text-4xl font-semibold">
 			Featured Articles
 		</h2>
 
-		<div class="flex flex-wrap flex-col justify-center gap-12">
+		<div class="flex flex-col justify-center gap-12">
 			{posts.map(post =>
 			<ArticleCard content={post} />)}
 
 			<a href="/articles/" class="no-underline text-cyan-600 hover:text-black dark:hover:text-white">
-				<span class="flex flex-wrap flex-col justify-center gap-12 card-title">View All Articles</span>
+				<span class="text-center card-title">View All Articles</span>
 			</a>
 		</div>
 

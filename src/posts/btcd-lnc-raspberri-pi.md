@@ -1,6 +1,16 @@
-# Running BTC and Lightning
+---
+title: Running BTC and Lightning on Raspberri PI
+date: June 2025
+description: Yes, this was a fun project
+tags: [Featured, Bitcoin, Lightning, Raspberri Pi]
+draft: false
+---
 
-## Raspberry Pi Setup (optional)
+This article documents the process of setting up a Bitcoin node and Lightning Network daemon on a Raspberry Pi from scratch. It covers the complete installation and configuration of btcd (a Bitcoin implementation in Go) and LND (Lightning Network Daemon), including system service setup and basic wallet operations.
+
+If I were to start this project over today, I would strongly recommend using established solutions like [RaspiBlitz](https://docs.raspiblitz.org/) or [RaspiBolt](https://raspibolt.org/) to significantly speed up setup time and quickly add additional tools like BTCPayServer. These platforms provide automated scripts and comprehensive guides that handle much of the manual configuration described below, while also offering additional features and better security practices out of the box.
+
+## Raspberri Pi Setup
 
 1. Download imager from <https://www.raspberrypi.com/software/>
 1. Run the imager per <https://www.raspberrypi.com/documentation/computers/getting-started.html#raspberry-pi-imager> to install the OS on your device (microSD is preferred)
@@ -26,14 +36,14 @@
 
 1. Download latest from https://github.com/btcsuite/btcd/releases
 
-```
+```sh
 tar xvzf *.tar.gz`
 sudo cp btcd /usr/local/bin/
 ```
 
 2. Create ~/.btcd/btcd.conf
 
-```
+```sh
 rpcuser=bitcoin
 rpcpass=bitcoin
 txindex=1
@@ -42,7 +52,7 @@ debuglevel=info
 
 3. Create system service - /etc/systemd/system/btcd.service
 
-```
+```sh
 [Unit]
 Description=Bitcoin Go daemon
 After=network.target
@@ -62,19 +72,19 @@ WantedBy=multi-user.target
 
 4. Start service
 
-```
+```sh
 sudo systemctl start btcd
 ```
 
 5. View logs
 
-```
+```sh
 journalctl -u btcd.service -f
 ```
 
 6. Stop service
 
-```
+```sh
 sudo systemctl stop btcd.service
 ```
 
@@ -82,38 +92,38 @@ sudo systemctl stop btcd.service
 
 1. Download latest from https://github.com/lightningnetwork/lnd/releases
 
-```
+```sh
 tar xvzf *.tar.gz
 sudo cp lnd lncli /usr/local/bin/
 ```
 
 2. Start LND
 
-```
+```sh
 lnd --bitcoin.active --bitcoin.mainnet
 ```
 
 3. Setup wallet. Remember the password.
 
-```
+```sh
 lncli create
 ```
 
 4. Stop LND
 
-```
+```sh
 lncli stop
 ```
 
 5. Create password file
 
-```
+```sh
 echo my-password > ~/password.txt
 ```
 
 6. Create ~/.lnd/lnd.conf
 
-```
+```sh
 bitcoin.active=true
 bitcoin.mainnet=true
 
@@ -130,11 +140,11 @@ debuglevel=info
 
 # Contains password to unlock wallet
 wallet-unlock-password-file=/home/user/password.txt
+```
 
 7. Create lnd system service file - /etc/systemd/system/lnd.service
 
 ```
-
 [Unit]
 Description=Lightning Network Daemon
 
@@ -196,16 +206,13 @@ MemoryDenyWriteExecute=true
 
 [Install]
 WantedBy=multi-user.target
-
 ```
 
 9. Start LND
 
-```
-
+```sh
 sudo systemctl start lnd
 journalctl -u lnd.service -f
-
 ```
 
 10. Wait for btcd to catch up to the latest transactions
@@ -216,11 +223,15 @@ journalctl -u lnd.service -f
 
 13. Open an outbound channel (kraken example)
 
+```sh
+lncli openchannel \
+  --node_key 02f1a8c87607f415c8f22c00593002775941dea48869ce23096af27b0cfdcc0b69 \
+  --connect 52.13.118.208:9735 \
+  --local_amt 100000 \
+  --sat_per_vbyte 1 \
+  --min_confs 3
 ```
 
-lncli openchannel --node_key 02f1a8c87607f415c8f22c00593002775941dea48869ce23096af27b0cfdcc0b69 --connect 52.13.118.208:9735 --local_amt 100000 --sat_per_vbyte 1 --min_confs 3
-
-```
-
-NOTE: more secure way to store password: https://docs.lightning.engineering/lightning-network-tools/lnd/wallet#more-secure-example-with-password-manager-and-using-a-named-pipe
+NOTE: more secure way to store password: 
+<https://docs.lightning.engineering/lightning-network-tools/lnd/wallet#more-secure-example-with-password-manager-and-using-a-named-pipe>
 ```
