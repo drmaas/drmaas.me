@@ -38,11 +38,6 @@ const config: Config = {
     },
   },
   plugins: [typography, daisyui],
-  // daisyUI config (optional)
-  daisyui: {
-    themes: ["cmyk", "night"],
-    darkTheme: "night",
-  },
   darkMode: ["class", '[data-theme="night"]'],
 };
 

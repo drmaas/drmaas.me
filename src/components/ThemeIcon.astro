@@ -1,9 +1,10 @@
 <!-- Theme, Light/Dark mode -->
-<li>
+<li
+  class="after:block after:mx-auto after:h-[0.15em] after:bottom-0 after:w-0 after:bg-green-700 dark:after:bg-amber-400 after:transition-[all_ease_in_out_300ms] after:mt-1 hover:after:w-full"
+>
   <label
     id="themeSetting"
-    class="swap swap-rotate"
-    transition:persist
+    class="swap swap-rotate w-6 h-6"
     title="Toggle Theme"
   >
     <!-- this hidden checkbox controls the state -->
@@ -54,8 +55,10 @@
   function setTheme() {
     const html = document.querySelector("html");
     const theme =
-      localStorage["theme"] ||
-      (html ? html.getAttribute("data-theme") : "default");
+      localStorage.getItem("theme") ||
+      (html ? html.getAttribute("data-theme") : null) ||
+      "cmyk";
+
     if (html) {
       html.setAttribute("data-theme", theme);
     }
@@ -63,39 +66,43 @@
     const themeSettingInputElement = document.querySelector<HTMLInputElement>(
       "#themeSetting > input"
     );
-    if (theme === "cmyk") {
-      if (themeSettingInputElement) {
-        themeSettingInputElement.checked = true;
-      }
-    } else {
-      if (themeSettingInputElement) {
-        themeSettingInputElement.checked = false;
-      }
+    if (themeSettingInputElement) {
+      themeSettingInputElement.checked = theme === "cmyk";
     }
   }
 
-  function clickTheme() {
+  function initThemeToggle() {
     const themeSettingElement = document.querySelector("#themeSetting");
     if (themeSettingElement) {
       themeSettingElement.addEventListener("click", () => {
         const themeSettingInputElement =
           document.querySelector<HTMLInputElement>("#themeSetting > input");
+
         if (themeSettingInputElement) {
+          // Toggle the checkbox state
           themeSettingInputElement.checked = !themeSettingInputElement.checked;
+
+          // Set theme based on checkbox state
+          const newTheme = themeSettingInputElement.checked ? "cmyk" : "night";
+          localStorage.setItem("theme", newTheme);
+
+          // Apply theme immediately
+          const html = document.querySelector("html");
+          if (html) {
+            html.setAttribute("data-theme", newTheme);
+          }
         }
-        if (themeSettingInputElement && themeSettingInputElement.checked) {
-          localStorage["theme"] = "cmyk";
-        } else {
-          localStorage["theme"] = "night";
-        }
-        setTheme();
       });
     }
   }
 
-  clickTheme();
+  // Initialize on page load
   setTheme();
+  initThemeToggle();
 
-  document.addEventListener("astro:after-swap", setTheme);
-  document.addEventListener("astro:after-swap", clickTheme);
+  // Re-initialize after Astro page transitions
+  document.addEventListener("astro:after-swap", () => {
+    setTheme();
+    initThemeToggle();
+  });
 </script>

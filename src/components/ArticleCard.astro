@@ -27,7 +27,7 @@ const tags = content.data.tags;
 ---
 
 <div
-  class="card sm:card-side bg-base-200 max-w-[90%] w-[60rem] mx-auto transition-transform focus-within:outline focus-within:outline-2 focus-within:outline-secondary"
+  class="card sm:card-side bg-gray-200 dark:bg-black max-w-[90%] w-240 mx-auto transition-transform focus-within:outline focus-within:outline-2 focus-within:outline-secondary"
 >
   {
     content.data.image ? (
@@ -39,9 +39,7 @@ const tags = content.data.tags;
             loading={lazyLoading ? "lazy" : "eager"}
             class="m-2 max-w-[300px] max-h-[200px] aspect-video"
             src={content.data.image}
-            alt={
-              content.data.imageDescription ?? content.data.title
-            }
+            alt={content.data.imageDescription ?? content.data.title}
             transition:name={content.data.image}
           />
         </figure>
@@ -49,29 +47,27 @@ const tags = content.data.tags;
     ) : null
   }
 
-  <div class="card-body">
-    <div>
-      <a
-        href={url}
-        class="no-underline text-cyan-600 hover:text-black dark:hover:text-white"
-      >
-        <h2 class="card-title">{content.data.title}</h2>
-      </a>
-      <div class="flex gap-2 flex-wrap">
-        {
-          tags &&
-            tags.length > 0 &&
-            tags.map((ele: string) => <TagButton tagName={ele} />)
-        }
-      </div>
-      <div class="card-actions items-center">
-        <DateComponent date={date} />
-        <span> • </span>
-        <ReadingTimeComponent content={rendered} />
-      </div>
-      <p class="line-clamp-4 md:line-clamp-3">
-        {description}
-      </p>
+  <div class="card-body max-w-md mx-auto">
+    <a
+      href={url}
+      class="no-underline text-cyan-600 hover:text-black dark:hover:text-white"
+    >
+      <h2 class="card-title">{content.data.title}</h2>
+    </a>
+    <div class="flex gap-2 flex-wrap">
+      {
+        tags &&
+          tags.length > 0 &&
+          tags.map((ele: string) => <TagButton tagName={ele} />)
+      }
     </div>
+    <div class="card-actions items-center">
+      <DateComponent date={date} />
+      <span> • </span>
+      <ReadingTimeComponent content={rendered} />
+    </div>
+    <p class="line-clamp-4 md:line-clamp-3">
+      {description}
+    </p>
   </div>
 </div>

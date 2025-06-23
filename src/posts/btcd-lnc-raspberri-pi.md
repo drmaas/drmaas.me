@@ -234,4 +234,4 @@ lncli openchannel \
 
 NOTE: more secure way to store password: 
 <https://docs.lightning.engineering/lightning-network-tools/lnd/wallet#more-secure-example-with-password-manager-and-using-a-named-pipe>
-```
+

@@ -1,4 +1,5 @@
 ---
+import "../styles/global.css";
 import BaseHead from "./BaseHead.astro";
 import { ClientRouter } from "astro:transitions";
 import config from "src/config.js";
@@ -21,17 +22,17 @@ const {
 } = config;
 ---
 
-<html lang="en">
+<html lang="en" class="bg-base-100">
   <head>
     <PostHog />
     <BaseHead title={title} description={description} />
     <ClientRouter />
   </head>
 
-  <body>
+  <body class="bg-base-100 text-base-content min-h-screen">
     <a
       href="#main"
-      class="absolute bg-info text-info-content px-6 py-2 rounded-br-md translate-x-[-100%] focus-within:translate-x-0 transition-all"
+      class="absolute bg-info text-info-content px-6 py-2 rounded-br-md -translate-x-full focus-within:translate-x-0 transition-all"
       >Skip Navigation</a
     >
     <header class="container mx-auto flex items-center justify-between mb-16">

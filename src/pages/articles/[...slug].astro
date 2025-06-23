@@ -95,11 +95,11 @@ const nextUrl = nextPost.data
       </div>
     </div>
     <div
-      class="container flex max-w-7xl mx-auto gap-8 items-start prose md:prose-lg prose-pre:font-mono"
+      class="container flex max-w-7xl mx-auto gap-8 items-start mb-16"
     >
       {headings.length > 0 && <TableOfContents headings={headings} />}
-      <div>
-        <article class="grid justify-items-start max-w-5xl">
+      <div class="flex-1">
+        <article class="prose md:prose-lg lg:prose-xl prose-slate dark:prose-invert max-w-none prose-headings:scroll-mt-20 prose-pre:font-mono">
           <Content />
         </article>
       </div>
