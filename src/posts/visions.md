@@ -9,7 +9,7 @@ tags:
 draft: false
 ---
 
-I am a spiritual man. I'm also strivint to improve my Christian faith, though this does not come easily to me. But, in my view, the only things worth doing are difficult. Following is a sort of vision I had while laying in bed, fully awake. It was not a dream.
+I'm striving to improve my Christian faith, though this does not come easily to me. But, in my view, the only things worth doing are difficult. Following is a sort of vision I had while laying in bed, fully awake. It was not a dream.
 
 It's 6 a.m. Laying in bed, brain void of thoughts. Suddenly, I am standing in front of an old church. It's stones are crumbling. I touch the wall, and the stone begins to repair itself. From floor to roof, the wall becomes a single rock, sealed by a shiny glaze.
 
