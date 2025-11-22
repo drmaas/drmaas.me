@@ -2,16 +2,18 @@
 
 ---
 
-<div class="flex flex-col content-between space-y-12">
-    <input
-        id="search"
-        aria-label="search box"
-        autofocus
-        type="text"
-        placeholder="Type here"
-        class="input input-bordered input-info w-full max-w-lg block mx-auto"
-    />
-    <div id="results" class="flex flex-wrap flex-col justify-center gap-12">
+<div class="container mx-auto px-4 py-8 max-w-4xl">
+    <div class="flex flex-col space-y-8">
+        <input
+            id="search"
+            aria-label="search box"
+            autofocus
+            type="text"
+            placeholder="Search articles..."
+            class="input input-bordered input-info w-full max-w-lg mx-auto"
+        />
+        <div id="results" class="flex flex-col gap-6 w-full">
+        </div>
     </div>
 </div>
 
@@ -57,12 +59,12 @@
                 let html = "";
                 for (const result of results) {
                     html += `
-            <div class="card sm:card-side bg-base-200 max-w-[90%] w-208 mx-auto scale-1 transition-[scale_250ms] focus-within:outline focus-within:outline-2 focus-within:outline-secondary">
+            <div class="card bg-base-200 w-full shadow-lg hover:shadow-xl transition-shadow duration-200 focus-within:outline focus-within:outline-2 focus-within:outline-secondary">
               <div class="card-body"> 
                 <a href="${result.item.url}" class="no-underline text-cyan-600 hover:text-black dark:hover:text-white">
                   <h2 class="card-title">${result.item.title}</h2>
                 </a>
-                <span>${result.item.date}</span>
+                <span class="text-sm opacity-70">${result.item.date}</span>
                 <p class="line-clamp-4 md:line-clamp-3">${result.item.description}</p>
               </div>
             </div>
