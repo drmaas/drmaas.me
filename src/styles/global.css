@@ -1,6 +1,6 @@
 @import "tailwindcss";
 @plugin "daisyui" {
-    themes: cymk --default, night --prefersdark;
+    themes: winter --default, night --prefersdark;
 }
 @plugin "@tailwindcss/typography";
 

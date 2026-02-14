@@ -27,7 +27,7 @@ const tags = content.data.tags;
 ---
 
 <div
-  class="card sm:card-side bg-gray-200 dark:bg-black max-w-[90%] w-240 mx-auto transition-transform focus-within:outline focus-within:outline-2 focus-within:outline-secondary"
+  class="card sm:card-side bg-base-100 shadow-xl hover:shadow-2xl transition-all duration-300 max-w-[90%] w-240 mx-auto border border-base-300 hover:border-primary/30 focus-within:outline focus-within:outline-2 focus-within:outline-primary"
 >
   {
     content.data.image ? (
@@ -50,9 +50,9 @@ const tags = content.data.tags;
   <div class="card-body max-w-md mx-auto">
     <a
       href={url}
-      class="no-underline text-cyan-600 hover:text-black dark:hover:text-white"
+      class="no-underline text-primary hover:text-primary-focus transition-colors duration-200"
     >
-      <h2 class="card-title">{content.data.title}</h2>
+      <h2 class="card-title text-2xl">{content.data.title}</h2>
     </a>
     <div class="flex gap-2 flex-wrap">
       {
