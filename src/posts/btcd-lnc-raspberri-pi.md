@@ -1,14 +1,26 @@
 ---
-title: Running BTC and Lightning on Raspberri PI
+title: Running Bitcoin and Lightning Network on a Raspberry Pi
 date: June 2025
-description: Yes, this was a fun project
-tags: [Featured, Bitcoin, Lightning, Raspberri Pi]
+description: A hands-on exploration of distributed financial infrastructure
+tags: [Featured, Bitcoin, Lightning, Raspberry Pi]
 draft: false
 ---
 
-This article documents the process of setting up a Bitcoin node and Lightning Network daemon on a Raspberry Pi from scratch. It covers the complete installation and configuration of btcd (a Bitcoin implementation in Go) and LND (Lightning Network Daemon), including system service setup and basic wallet operations.
+## Introduction
 
-If I were to start this project over today, I would strongly recommend using established solutions like [RaspiBlitz](https://docs.raspiblitz.org/) or [RaspiBolt](https://raspibolt.org/) to significantly speed up setup time and quickly add additional tools like BTCPayServer. These platforms provide automated scripts and comprehensive guides that handle much of the manual configuration described below, while also offering additional features and better security practices out of the box.
+This article documents the complete process of building your own Bitcoin and Lightning Network node on a Raspberry Pi. Accomplishing this requires patience, attention to detail, and comfort with Linux system administration. For those willing to invest the effort, the reward is operational understanding of critical financial infrastructure components.
+
+Running your own node provides several valuable benefits:
+- **Financial sovereignty**: Verify blockchain transactions yourself rather than trusting third parties
+- **Network participation**: Contribute to Bitcoin and Lightning Network decentralization
+- **Technical education**: Deeply understand how Bitcoin and Lightning actually work
+- **Payment infrastructure**: Operate a personal Lightning node for making and receiving payments
+
+### A Note on Existing Solutions
+
+If you're starting this project today, I'd strongly recommend leveraging battle-tested platforms like [RaspiBlitz](https://docs.raspiblitz.org/) or [RaspiBolt](https://raspibolt.org/) for significantly faster setup and better security practices. These solutions automate much of the manual configuration described below while adding tools like BTCPayServer and incorporating community best practices developed through collective experience.
+
+That said, understanding the manual setup process provides invaluable insight into how these components actually work together. This guide documents that path.
 
 ## Raspberri Pi Setup
 

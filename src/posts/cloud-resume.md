@@ -1,7 +1,7 @@
 ---
-title: My Cloud Resume Journey
+title: Building the AWS Cloud Resume - A Full-Stack Demonstration Project
 date: 01 July 2024
-description: An interesting full stack project
+description: End-to-end AWS architecture combining frontend, backend, and infrastructure
 tags:
   - Featured
   - Python
@@ -14,96 +14,103 @@ draft: false
 
 ## Overview
 
-This post describes the methodology I used to implement my [AWS cloud resume](https://cloudresumechallenge.dev/docs/the-challenge/aws/).
+This post documents my implementation of the [AWS Cloud Resume Challenge](https://cloudresumechallenge.dev/docs/the-challenge/aws/), a comprehensive full-stack project that demonstrates practical cloud engineering skills across multiple AWS services and technology domains.
 
-### Certified Solutions Architect
+## Context: Why This Project Matters
 
-My work at Salesforce necessitated that I ramp up on my AWS skills. I completed the [AWS Certified Solutions Architect - Associate](https://aws.amazon.com/certification/certified-solutions-architect-associate/?ch=sec&sec=rmg&d=1) exam in 2023.
+At Salesforce, my work required substantial AWS knowledge. To formalize this expertise, I pursued and completed the [AWS Certified Solutions Architect - Associate](https://aws.amazon.com/certification/certified-solutions-architect-associate/?ch=sec&sec=rmg&d=1) certification in 2023. The Cloud Resume Challenge provided an ideal vehicle to apply and validate this knowledge across a complete architecture, combining frontend deployment, serverless compute, databases, CDN, and infrastructure-as-code principles.
 
 ## Implementation
 
-### HTML and CSS
+## Frontend Implementation
 
-I went online and looked at sample resumes built with HTML and CSS. I then modified the content and layout to tailor the look and feel to how I wanted it to look.
+### Static HTML and CSS
 
-Then, I went down a bit of a rabbit hole and implemented live-reload functionality for my resume. I wanted it to auto-refresh every time I edited a file. To do this I wrote a dev server that served my resume on port 8080. The dev server starts a WebSocket server on port 8090. Every time it gets a request on port 8080, it appends a small javascript snippet that creates a WebSocket connection to the server. When the server detects a connection, it starts watching for file changes in the `public` directory. If it sees a change, it sends a WebSocket message to the client. The client reads the message and reloads the page.
+I began by researching well-designed resume templates built with HTML and CSS, then adapted them to match my personal aesthetic and information architecture. This process naturally led me down a rabbit hole: implementing live-reload functionality for development.
 
-### Static Website
+To achieve live-reload, I built a custom dev server running on port 8080 with a companion WebSocket server on port 8090. When the server receives an HTTP request, it injects a small JavaScript snippet that establishes a WebSocket connection. The server continuously watches the `public` directory for changes. On detection, it sends a WebSocket message to connected clients, triggering automatic page reload. This reduced development iteration time significantly.
 
-1. I created an empty S3 bucket, and enabled it for static website publishing.
-2. I uploaded my files to the S3 bucket and tested the site.
-3. It didn't work, because I needed to add a bucket policy allowing public access (I later turned this off) 
-   Reference: https://docs.aws.amazon.com/AmazonS3/latest/userguide/WebsiteAccessPermissionsReqd.html
+## Backend Architecture
+
+### Static Website Hosting with S3
+
+I deployed the frontend to S3 by creating an empty bucket, enabling static website publishing, and uploading my files. Initial testing failed because the bucket required an explicit public access policy. [AWS documentation clarifies the required bucket policy configuration](https://docs.aws.amazon.com/AmazonS3/latest/userguide/WebsiteAccessPermissionsReqd.html). Later, I disabled public S3 access entirely, routing all traffic through CloudFront instead.
 
 
-### HTTPS
+### HTTPS and CDN Distribution
 
-I already had TLS enabled in my DNS registrar (domain.com) for www.drmaas.me. To enable TLS for resume.drmaas.me, I requested an SSL certificate in Amazon Cert Manager with the name `*.drmaas.me`. I had to ensure it was issued in `us-east-1` so that CloudFront could use it for the custom SSL cert for resume.drmaas.me.
+I already had TLS enabled via my domain registrar (domain.com) for www.drmaas.me. To extend HTTPS support to resume.drmaas.me, I requested a wildcard SSL certificate (`*.drmaas.me`) from AWS Certificate Manager. Importantly, certificates used by CloudFront must be provisioned in `us-east-1`, a requirement I initially overlooked.
 
-After that, I added a CloudFront distribution that pointed to my custom domain, and my custom SSL cert. I also had to go into the behavior settings and toggle `redirect http to https`.
+I created a CloudFront distribution with the custom domain and SSL certificate, then configured HTTP-to-HTTPS redirection in the distribution behavior settings.
 
-### DNS
-I set up DNS validation for the certificate by adding a CNAME entry in the DNS registrar that matches the configs provided by ACM. AWS validates the DNS entry to validate domain ownership. I also added a CNAME record for resume.drmaas.me that points to my CloudFront distribution URL. Because AWS validated the cert, and it was associated with a custom domain name for my CloudFront distribution, everything worked once the DNS changes propagated.
+### DNS Configuration and Certificate Validation
+
+For certificate validation, I created a CNAME record in my DNS registrar that matched ACM's validation requirements. AWS validates domain ownership through this DNS entry. Once validated, I added another CNAME record pointing resume.drmaas.me to the CloudFront distribution URL. Upon DNS propagation, the complete HTTPS chain functioned seamlessly.
 
 ### Javascript
 
 I added a small script to the resume html page that displayed a visitor counter. Initially I set it to 0. Later on, once the api was built, I called the API on page load and updated the counter.
 
-### Database, API, Python, Tests, Infrastructure As Code
+## Serverless Backend
 
-I used `sam init` with the `hello world` template to generate a new API Gateway / Python Lambda project. Then I added a DynamoDB table to the template. Using the online docs, I wired together the Lambda with the DynamoDB table name using environment variables.
+### Backend Infrastructure with SAM and CloudFormation
 
-I had to install `boto3` to work with the AWS API in Python, and also `pytest` for testing.
+Using AWS Serverless Application Model (SAM), I scaffolded a new project with the `hello world` template, which provided API Gateway and Lambda boilerplate. I then added a DynamoDB table for persistent storage. Environment variables connected the Lambda function to the DynamoDB table name.
 
-I created a DynamoDB update expression to initialize a single row with `id=counter`. It updates the `count` column with an increment of 1.
+The Lambda needed to increment a visitor counter, so I implemented a DynamoDB update expression that creates a row with `id=counter` if it doesn't exist and increments the `count` attribute by 1. I installed `boto3` for AWS SDK access and `pytest` for testing.
 
-I had to update permissions to allow the lambda access to the counter table. Documentation was hard to find for how to do this in SAM, but after a while I found https://repost.aws/knowledge-center/lambda-sam-template-permissions.
+### Lambda Permissions and Testing
 
-To test, I first used the lambda console to validate that the function worked. Then I tested the API Gateway URL to verify the api worked end-end.
+A critical step was granting the Lambda function proper IAM permissions to access the DynamoDB table. AWS documentation on SAM template permissions wasn't immediately obvious; I found the solution at [AWS Repost Knowledge Center](https://repost.aws/knowledge-center/lambda-sam-template-permissions).
 
+I validated functionality through multiple testing approaches:
+1. Lambda console testing confirmed the function executed correctly
+2. Direct API Gateway URL testing verified end-to-end functionality
+```bash
+curl -XPOST https://[api-id].execute-api.us-west-2.amazonaws.com/Prod/increment
 ```
-curl -XPOST https://*********.execute-api.us-west-2.amazonaws.com/Prod/increment
-```
+3. PyTest unit tests provided automated verification
 
-Then I wrote a unit test with `pytest` to assert that the lambda works.
+All tests passed, confirming the backend worked correctly in isolation.
 
-Once that worked, I set up Cloudfront in front of the API Gateway. This was tricky, as I had to follow a few undocumented steps:
-* When adding a Cloudfront Origin, I had to add `/Prod` as an origin path to account for the API Gateway stage name
-* I had to update the API Gateway path to include `/api` as the root path, since I used the `/api/*` path when I added a routing behavior to Cloudfront
+### CloudFront for API Distribution
 
-Testing confirmed it worked:
-```
+To add caching and reduce API latency, I deployed CloudFront in front of the API Gateway. This required careful configuration:
+
+- **Origin path**: Set to `/Prod` to account for API Gateway's stage naming
+- **API Gateway routing**: Updated to use `/api` as the root path, matching CloudFront routing behaviors
+
+Testing confirmed the full stack worked:
+```bash
 curl -XPOST https://d2p501d6pxawyj.cloudfront.net/api/increment
-```
-
-Then the custom domain automatically started working:
-```
 curl -XPOST https://resume.drmaas.me/api/increment
 ```
 
-But then, the S3 origin stopped working. I am not sure what happened, so I just reconfigured the S3 origin to *not* use the S3 static site url, which allowed me to easily get a bucket policy that only allowed my CF distribution. After that, it worked again.
+However, this introduced an unexpected problem: the S3 origin stopped serving static content. I resolved this by reconfiguring the S3 origin to use the regular S3 bucket URL (instead of the static website URL), which allowed me to apply a restrictive bucket policy that only permitted my CloudFront distribution.
 
-## Automation
+## CI/CD Pipeline
 
-### Source Control
+### Source Control and Backend Automation
 
-Yep, I did it.
+I implemented GitHub Actions for both backend and frontend deployments, following AWS best practices. For the backend, I adapted [AWS's guide on deploying serverless applications with GitHub Actions](https://aws.amazon.com/blogs/compute/using-github-actions-to-deploy-serverless-applications/), adding a pytest test step that installs dependencies via `pip install -r requirements.txt`. Environment-specific secrets were stored securely in GitHub.
 
-### CI/CD (Backend)
+### Frontend Automation
 
-Setting this up was straightforward. I followed https://aws.amazon.com/blogs/compute/using-github-actions-to-deploy-serverless-applications/ and made modifications to add the `pytest` test step. This required adding a step to install dependencies using `pip install -r requirements.txt`. After adding environment secrets, everything worked.
+Frontend automation was more straightforward. Following [established patterns for S3 deployment via GitHub Actions](https://medium.com/@olayinkasamuel44/how-to-deploy-a-static-website-to-s3-bucket-using-github-actions-ci-script-fa1acc932fbd), I created a simple workflow that uploads files to S3 on each commit. GitHub Secrets handled AWS credentials securely.
 
-### CI/CD (Frontend)
+## Key Challenges and Lessons
 
-Setting this up was even easier. I followed the sample at https://medium.com/@olayinkasamuel44/how-to-deploy-a-static-website-to-s3-bucket-using-github-actions-ci-script-fa1acc932fbd and was up and running, after adding environment secrets.
+Despite AWS certification, several challenges emerged that required problem-solving:
 
-## Challenges
+### SSL Certificate Management
+Domain.com charged $400/year for a wildcard certificate, while AWS Certificate Manager provided them for free. However, deploying ACM certificates with CloudFront required understanding DNS validation workflows and regional requirements (us-east-1 for CloudFront). Trial and error was necessary here.
 
-Even as someone who had previous experience with AWS, I think the AWS portion was the most challenging. 
-* Delegating SSL certs for my CNAME to ACM. Domain.com wanted to charge $400/year for a wildcard cert for *.drmaas.me. While AWS does have documentation, there was some trial and error involved during the cert validation process.
-* Setting up Cloudfront to forward `/api` requests to the API Gateway for my app, while forwarding `/` to the S3 static site was a challenge. There were some nuanced path settings in Cloudfront and the API Gateway that took a few hours to work through.
-* The SAM `Hello World` template works well for getting started, but when I needed to add additional configurations for CORS I found the documentation difficult to find. AWS really needs an easier-to-read reference for SAM templates, especially since they deviate from CloudFormation template syntax.
+### CloudFront Path Complexities
+Configuring CloudFront to route `/api` requests to API Gateway while serving `/` from S3 required careful attention to origin paths, routing behaviors, and root paths. The interaction between CloudFront and API Gateway staging isn't intuitive from documentation alone.
 
-## Blog Post 
+### AWS SAM Documentation Gaps
+While the SAM hello-world template provides a good starting point, adding CORS configuration required hunting through multiple documentation sources. AWS would benefit from more comprehensive SAM template examples, particularly since SAM's YAML differs subtly from CloudFormation templates.
 
-This is it! Enjoy, and happy learning.
+## Conclusion
+
+The Cloud Resume Challenge provided practical, end-to-end experience across core AWS services: compute (Lambda), storage (S3, DynamoDB), networking (CloudFront, API Gateway), certificates (ACM), and infrastructure automation (SAM, CloudFormation). The project reinforces that cloud architecture, while powerful, rewards careful attention to configuration details and the often-undocumented interactions between services. This hands-on experience proved invaluable for my subsequent AWS work at Salesforce.

@@ -1,73 +1,65 @@
 ---
-title: Moving from Gatsby to Astro
+title: Migrating from Gatsby to Astro - Choosing Simplicity Over Abstraction
 date: 29 March 2024
-description: example
+description: Why I opted for a more transparent, less magical framework
 tags:
   - Featured
   - Astro
 draft: false
 ---
 
-## Background
+## The Problem with Gatsby
 
-I was not very satisfied with my [Gatsby](https://www.gatsbyjs.com/) site. I didn't understand a lot of the magic that was happening to render my markdown files as static HTML. I didn't know a lot about react, and it seemed like there was a lot of Gatsy-specific wiring and plumbing to understand. I wanted something simpler.
+I increasingly felt misaligned with my Gatsby implementation. The framework embodied too much abstraction and automation, making it difficult to understand what was actually happening under the hood. As someone who values understanding systems thoroughly, Gatsby's "magic" was more frustrating than helpful.
+
+I lacked sufficient React knowledge to work comfortably within Gatsby's architecture, and the framework-specific conventions and plugin ecosystem created steep learning curves. Worst of all, I couldn't confidently maintain the site after stepping away from it. I needed a framework that prioritized clarity over convention.
 
 ## Why Astro
 
-I liked [Astro](https://astro.build/) because it was conceptually simpler. It focused on doing less out of the box while retaining the same amount of power to render markdown-based blog sites. I really wanted a framework that made it easy to:
-  
-* Write markdown annotated by frontmatter. Almost all static site generation frameworks have this
-* Write custom components in regular HTML, JavaScript, and CSS. Astro makes this dead simple by using a jsx-like syntax. It also creates structure by making it easy to group the html, javascript and CSS needed to render a page, without magic getting in the way.
-* Bring in other frameworks. Astro allowed me to easily use any other framework I wanted, like React, Vue, or Svelte.
-* Make it easier to manage styles. Astro has a nice integration with [Tailwindcss](https://tailwindcss.com/) and made it easy to leverage [daisyUI](https://daisyui.com/) for nice componentry. I need this because I am not a CSS expert, and I don't usually have good design sense.
-Avoid GraphQL by default. I did not like relying on GraphQL to provide the data needed to hydrate my pages. It felt like overkill and was overly complex.
+[Astro](https://astro.build/) appealed to me for its philosophy: do less out of the box while retaining complete power for building markdown-based sites. It emphasizes clarity over hidden complexity. Here's what drew me in:
 
-## The Process
+### Core Strengths
 
-First, I found a template I liked and created a site from it. I used <https://github.com/MoofyWoofy/Bob-blog>. It had night mode, client-side content search, and global nav already set up.
+* **Markdown-first architecture**: All static site generators handle frontmatter-annotated markdown, but Astro makes this a first-class concern
+* **Regular component syntax**: Components use JSX-like syntax with HTML, JavaScript, and CSS co-located without framework magic obscuring how they work
+* **Framework agnostic**: I can bring in React, Vue, Svelte, or any other framework when beneficial—not because the framework requires it
+* **Clean styling story**: Native Tailwind CSS integration with DaisyUI components, providing design system support without sacrificing control
+* **GraphQL-optional**: Unlike Gatsby's GraphQL-centric data model, Astro lets me load data however makes sense for my use case
 
-Then I followed [the conversion guide](https://docs.astro.build/en/guides/migrate-to-astro/from-gatsby/) to start porting over resources. This made it easy to get basic things set up correctly, like static pages, images, favicon, and GitHub pages deployments.
+## The Migration Process
 
-Once I exhausted that, I found there were many other things I needed to fix:
+### Starting with a Template
 
-* I wanted to have a rounded profile image with social links below it
-* I wanted to make markdown headings linkable
-* I wanted a floating table of contents on all content pages
-* I wanted content pages to be able to show estimated reading time and previous/next links
-* I wanted to change some of the layouts and colors on the site
-* I wanted to change the markdown returned by the search
+I [located a well-designed starting template](https://github.com/MoofyWoofy/Bob-blog) already featuring night mode, client-side search, and navigation—eliminating redundant work. I then used [Astro's official Gatsby migration guide](https://docs.astro.build/en/guides/migrate-to-astro/from-gatsby/) to systematically port core resources: static pages, images, favicon, and deployment configuration.
 
-### Rounded Profile Image
+### Iterative Feature Implementation
 
-After some trial and error, I realized that tailwind classes exist to make a picture nice and rounded. I also found some SVG code that rendered nice social icons. Done!
+With the migration guide exhausted, I methodically added features that enhance the site:
 
-### Markdown headings
+#### Visual Enhancements
+**Rounded Profile Image**: Tailwind CSS classes handle image rounding elegantly. I paired these with SVG social media icons for a polished appearance.
 
-This involved adding the rehypeAutolinkHeadings plugin, and searching around to make the headings render like I wanted them to. See [astro.config.mjs](/astro.config.mjs) for details and links to source sites I found helpful.
+**Markdown Link Anchors**: Integrating the rehypeAutolinkHeadings plugin required research into rendering preferences, but [the plugin documentation](https://github.com/rehypejs/rehype-autolink-headings) clarifies configuration options well.
 
-### Floating Table of Contents
+#### Navigation and UX
+**Floating Table of Contents**: This ambitious feature provides visual hierarchy while enabling infinite scrolling. The implementation required coordinate calculations and DOM manipulation. See [TableOfContents.astro](/src/components/TableOfContents.astro) for the full solution.
 
-For some reason, I love this concept. Being able to infinitely scroll on a page while not losing track of the hierarchy on a page appeals to me greatly. This involves quite a bit of hacking. See [TableOfContents.astro](/src/components/TableOfContents.astro) for details and links to sites I found helpful.
+**Reading Time and Article Navigation**: Display reading time estimates and previous/next article links on each post. This required a significant architectural shift: moving from Astro's default markdown layouts to custom dynamic routing.
 
-### Allowing Articles Posts to Show Reading Time
+With Astro's [dynamic routing](https://docs.astro.build/en/guides/routing/#rest-parameters), I created slug-based pages that access the entire rendered markdown content. This enables reading time calculation while providing article navigation context. The component-based reading time calculator extracts and measures content efficiently.
 
-This one small ask turned into a big redesign. By default, the blog used [Astro markdown layouts](https://docs.astro.build/en/basics/layouts/#markdownmdx-layouts). This worked well but made it impossible to access the raw content of the rendered page. I wanted that to calculate reading time. I also wanted to add navigation at the bottom of each post to the previous and next post.
+#### Styling and Search
+**Visual Customization**: I iteratively applied Tailwind CSS classes until achieving the desired appearance. While my CSS expertise remains limited, Tailwind's utility-first approach made experimentation productive.
 
-To accomplish this, I used Astro's built-in [dynamic routing](https://docs.astro.build/en/guides/routing/#rest-parameters) to generate a slug page for each post, that contained references to the entire rendered markdown plus links to the previous and next post. See [[...slug].astro](/src/pages/articles/[...slug].astro) for the full layout.
+**Client-Side Search**: Because search executes client-side while most content is server-rendered, I embedded markdown as JavaScript on search pages. The search JSON endpoint returns properly formatted data for client consumption.
 
-For reading time, I built a reusable component that rendered a book icon and reading time from the raw page content.
+## Lessons from the Migration
 
-### Changing Layouts and Colors
+Migrating from Gatsby to Astro taught me several valuable lessons:
 
-Honestly, I just hacked away at tailwind styles until things looked ok. I didn't come away with a full understanding of the right styles to use, and how to best apply them. I just made it look ok. You can judge the results for yourself!
+1. **Transparency trumps convention**: Understanding exactly how your framework generates and serves content is worth more than saved configuration.
+2. **Gradual enhancement works**: Building the site incrementally—completing one feature before moving to the next—prevented overwhelming complexity.
+3. **Leverage community knowledge**: Standing on the shoulders of other builders through well-documented examples and open-source templates accelerates progress substantially.
+4. **Constraints enable creativity**: Astro's minimal "magic" forced me to understand the underlying patterns, making me a better frontend engineer.
 
-### Changing the Search Results
-
-I mostly copied content from the [article list](/src/pages/articles/[...page].astro). The main difference was that because the search is performed on the client, while the rest of the site is generated statically on the server,
-I had to [insert the markdown](/src/pages/search/index.astro) as part of a javascript function that ran on the client. The results are very similar to the article list format. I also needed to adjust the Astro search [endpoint](https://docs.astro.build/en/guides/endpoints/)
-to have the search request return the right data attributes.
-
-## Wrapping it Up
-
-That's a very brief overview of my process. I spent more hours on this than I'd like to admit; it was anything but easy, and I spent a lot of time learning about the fundamentals of Astro. I also spent a lot of time stitching together existing
-examples of how to wire data together, rather than reinventing it all on my own. I feel like I was successful in that regard - there are many smart and experienced front-end professionals out that inspired and guided my efforts. I made my best effort to cite the pages that helped me.
+The migration consumed more time than anticipated, but I emerged with a site I truly understand and confidently maintain. For anyone who values clarity and has experience with web fundamentals, [Astro](https://astro.build/) deserves serious consideration.

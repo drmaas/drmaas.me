@@ -6,23 +6,50 @@ tags: [debugging]
 draft: false
 ---
 
-My team recently deployed a set of lambdas into production using AWS. The topology of our app stack goes like this:
+---
+title: The Case of the Broken Lambda - A Deep Dive into API Gateway Integration Failures
+date: 28 July 2023
+description: Debugging the subtle contract between API Gateway and Lambda Proxy Integrations
+tags: [debugging]
+draft: false
+---
 
-> DNS -> Akamai -> API Gatway -> Lambda
+## The Setup
 
-Everything went smoothly and perfectly :boom: But seriously, it was mostly ok. After reviewing production traffic for a few days, I found that a small percentage, maybe 5%, of traffic to one important endpoint was returning 502 errors to Akamai. Correlated to the API gateway via request ID, these were also returning 502 from the API gateway.
+Our team recently deployed a set of Lambdas into production using AWS. The infrastructure topology looked clean and well-designed:
 
-Error code 502 is odd. Typically we just return 500 if something blows up unexpectedly. So I looked up what it meant in [the Amazon docs](https://docs.aws.amazon.com/apigateway/latest/developerguide/set-up-lambda-proxy-integrations.html#api-gateway-simple-proxy-for-lambda-output-format). Hm. Malformated lambda response. Checking the lambda logs, I did not see any 5xx errors for this endpoint. Furthermore, all lambda responses contained the requisite parameters: `body`, `headers`, and `statusCode`.
+> DNS → Akamai → API Gateway → Lambda
 
-To make it even more confusing, the error only happened when we passed in the `Referer` http header. This header controlled the setting of CORS headers. Aha! I thought. CORS problems. So we removed the CORS headers. Turns out that was a bad idea, as they were needed! So we had to keep CORS headers. 
+Initial rollout appeared successful, but after monitoring production traffic for several days, I discovered an unsettling pattern: approximately 5% of requests to a critical endpoint were returning 502 errors to Akamai, with the same 502s appearing in API Gateway logs correlated by request ID.
 
-Next, I [turned on full input/output logging in the api gateway](https://docs.aws.amazon.com/apigateway/latest/developerguide/view-cloudwatch-log-events-in-cloudwatch-console.html). I was hoping this would reveal the secrets I needed to solve the issue. Nope, just logs showing a perfectly nice-seeming lambda response causing an API gateway error. I took some screenshots of some logs to review later.
+## Why 502 is Puzzling
 
-I should mention at this point that the endpoint acted as a proxy to another api. All request headers were passed to the upstream API, and all response headers were sent back in the lambda response. So, something maybe related to headers was causing the lambda response to break the API gateway integration. I tried removing headers from the lambda response and everything started magically working.
+HTTP 502 "Bad Gateway" typically indicates that a gateway received an invalid response from an upstream server. This seemed odd in our context—Lambda timeouts or unhandled exceptions usually produce 500 "Internal Server Error" responses, not 502s. I consulted AWS documentation and learned that [Lambda Proxy Integration returns 502 when it receives a malformed response](https://docs.aws.amazon.com/apigateway/latest/developerguide/set-up-lambda-proxy-integrations.html#api-gateway-simple-proxy-for-lambda-output-format).
 
-After engaging AWS support and providing the screenshots, it turned out that a header value returned as a list, like `"x-my-header": ["wow"]`, instead of a string, will cause this error. We wanted to continue to proxy the other API headers, so we simply updated the offending cookie value to be a string. Problem solved!
+Inspecting Lambda CloudWatch logs told a strange story: no 5xx errors were occurring at the Lambda level. Every response appeared to contain the required parameters for Proxy Integration: `statusCode`, `headers`, and `body`. The Lambda responses looked perfectly valid.
 
-I ran this scenario by a friend on another team after this happened. No joking, he said `Yeah`, the `API` gateway integration` breaks all the time.` What!? If [curl](https://curl.se/docs/manpage.html) can figure out how to convert a list header value to a string, shouldn't the API gateway try to do that? Or at least make a log that says, 
-> by the way, this header value seems off. Is this what you meant to do? I fixed it for you, but you should probably change it.
+## The Misleading Clue
 
-I can only hope. This event reminded me of the hidden costs associated with using off-the-shelf software, whether commercial or open source. Life is great when it functions as advertised, but you're in for a world of pain once you go off the rails even slightly. The subject of the tradeoffs associated with build vs buy interests me, and I may write about it more at some time. I have also seen it go the other way, where writing a lot of code from scratch caused an entirely different set of avoidable problems.
+The errors only manifested when the `Referer` HTTP header was present in the request. This header controlled CORS header generation in our Lambda, giving me a false sense of certainty. I assumed this was a CORS configuration issue and removed the CORS headers from responses. The errors vanished—but I'd introduced a new problem: legitimate cross-origin requests now failed because CORS headers were missing. I had to restore them. 
+
+## Following the Logs
+
+I [enabled comprehensive input/output logging in API Gateway](https://docs.aws.amazon.com/apigateway/latest/developerguide/view-cloudwatch-log-events-in-cloudwatch-console.html), hoping full request-response visibility would reveal the pattern. The logs showed precisely what shouldn't be happening: a perfectly formed Lambda response triggering an API Gateway error. I captured screenshots of several logs for later analysis.
+
+Then I recalled an important architectural detail: our Lambda acted as a proxy to an upstream API service, forwarding all request headers and returning all response headers from the upstream service. This meant the HTTP header values themselves were the likely culprit. ## The Root Cause
+
+When I started removing headers from the Lambda response, the errors disappeared. This narrowed the problem significantly. After working with AWS support and providing CloudWatch log screenshots, they identified the culprit: the upstream API was returning a header value as an array (e.g., `"x-my-header": ["wow"]`) instead of a properly formatted string. API Gateway's Lambda Proxy Integration couldn't serialize this array-formatted header value, resulting in the 502 error.
+
+The fix was straightforward: convert the offending header value from array format to a string before returning it in the Lambda response. We normalized this upstream API response and the errors resolved completely.
+
+## The Bigger Picture
+
+After the incident resolved, I mentioned this scenario to a colleague working on another team. His immediate, unsurprised response was revealing: "Yeah, the API Gateway integration breaks all the time."
+
+This unexpected fragility in AWS's API Gateway raises a fundamental question: if the [curl](https://curl.se/docs/manpage.html) command-line tool can intelligently handle and convert list-formatted header values to strings, why can't API Gateway's Lambda Proxy Integration? At minimum, API Gateway should emit a diagnostic log message like:
+
+> "This header value appears to be malformed. We attempted to convert it to a string, but you should review your Lambda response format for correctness."
+
+This experience reinforced an important lesson about the hidden costs of commercial and open-source software. When systems function as documented, they provide tremendous value and accelerate development. But the moment you deviate from the happy path—even slightly—you enter a debugging nightmare. These edge cases, combined with insufficient error messages and undocumented behavior, represent the true cost of dependency management.
+
+The build-versus-buy trade-off is perpetually relevant. I've seen this scenario play out in both directions: excessive custom code creates one set of maintainability problems, while opaque vendor solutions create entirely different ones. The ideal lies somewhere in the middle, disciplined choices informed by realistic assessment of capability and risk.

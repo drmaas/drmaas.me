@@ -1,7 +1,7 @@
 ---
-import { CollectionEntry, getCollection, render } from "astro:content";
+import type { CollectionEntry } from "astro:content";
+import { getCollection, render } from "astro:content";
 import BaseLayout from "../../layouts/BaseLayout.astro";
-import TagButton from "../../components/TagButton.astro";
 import TableOfContents from "../../components/TableOfContents.astro";
 
 import { fileToSlug, sortDateDescending } from "../../misc";
@@ -46,7 +46,7 @@ export async function getStaticPaths() {
 const { post, prevPost, nextPost } = Astro.props as Props;
 const { Content, headings } = await render(post);
 const rendered = post.rendered?.html ?? "";
-const { title, image, imageDescription, tags, description } = post.data;
+const { title, image, imageDescription, description } = post.data;
 const date = post.data.date
   ? new Date(post.data.date).toDateString()
   : undefined;
@@ -80,13 +80,6 @@ const nextUrl = nextPost.data
       }
 
       <div>
-        <div class="flex flex-wrap gap-2">
-          {
-            tags &&
-              tags.length > 0 &&
-              tags.map((tag) => <TagButton tagName={tag} />)
-          }
-        </div>
         <div class="flex flex-wrap gap-2 mt-8">
           {date && <DateComponent date={date} />}
           <span> • </span>

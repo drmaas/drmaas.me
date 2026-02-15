@@ -1,65 +1,96 @@
 ---
-title: Performance Testing is Hard
+title: Performance Testing is Hard - But Worth It
 date: 16 July 2023
-description: But why?
+description: Why comprehensive load testing demands discipline and careful analysis
 tags: [performance]
 draft: false
 ---
 
-At first glance, performance testing seems like it should be pretty easy. All you have to do is simulate lots of users doing lots of things all at the same time. Then, measure how well the system is responding. This could include saturation (CPU, memory, disk usage), errors (the output error rate is less than X), requests (the throughput of requests to the system exceeds X), or latency (the system responds in less than X for 95% of all requests). If you think this way, like I did, you would be in for a rough time!
+## Why Performance Testing Appears Simple But Doesn't Scale
 
-## Why it's hard
+At first glance, performance testing seems straightforward: simulate concurrent users, measure how well the system responds. Success metrics are clear: keep CPU/memory/disk saturation below thresholds, maintain error rates below target percentages, achieve throughput above minimum, ensure latency stays within SLAs for 95% of requests.
 
-Performance testing is hard because you're trying to wrangle a system whose parameters are exploding with combinatorial complexity. And, you face constraints. Let's say you're building a shopping cart and ordering API. Your system consists of the following layers:
+This mental model fails catastrophically because performance testing battles **combinatorial complexity** while operating under **hard constraints**.
 
-* CDN (Akamai)
-* Runtime platform (nomad)
-  * load balancer (haproxy)
-  * Operating system (alpine linux)
-  * Sidecars (metrics and logging)
-  * Autoscaling policy
-  * Canary
-  * CPU allocation per pod
-  * Memory allocation per pod
-  * Disk allocation per pod
-* IAAS (Inra as a service - terraform)
-* Application
-  * framework (nodejs)
-  * Your Business Logic
-  * Dependencies like database (cassandra), topic (kafka), cache (redis)
-  * Apis your application calls
-* Network Egress (squid proxy)
+## The Complexity Explosion
 
-That's a lot to worry about! In other words, high cognitive load. But that's just your application. The performance test app itself is another application with multiple parts:
+Consider a moderately complex shopping and ordering API. Your system spans multiple abstraction layers:
 
-* Load generator (maybe K6)
-* Log analyzer (maybe Spunk dashboads)
-* Metrics analyzer (maybe Grafana dashboards)
-* Reports (usually manually stiched together from the above dashboards)
+**Network and CDN**: Akamai or similar
+**Orchestration Platform**: Nomad managing containers
+- Load balancer (HAProxy)
+- Operating system (Alpine Linux)  
+- Sidecars for metrics and logging
+- Autoscaling policies
+- Canary deployment configuration
+- CPU, memory, and disk allocation per pod
 
-Once all that's built, you can run load tests. But then, your system falls over and does not achieve the scale that you want. What to do?
+**Infrastructure as Code**: Terraform provisioning
+**Application Layer**:
+- Runtime (Node.js)
+- Your business logic
+- Dependencies: Cassandra (database), Kafka (messaging), Redis (cache)
+- External API calls
 
-## Where to start
+**Network Egress**: Proxy layers (Squid)
 
-Start by building the application. Don't wait until it's done before building perf test app - it will take longer than you think. Then build the perf test app:
+That's your production system—just the application layer. Now consider the performance test harness itself:
 
-1. Build the load generator.
-1. Run the load generator to make sure it works.
-1. Compare it against manual tests of the application to make sure the perf test results match the manual testing results.
-1. Build the dashboards
+**Load Generator**: Maybe K6 for generating traffic
+**Log Analysis**: Splunk dashboards parsing output
+**Metrics Analysis**: Grafana dashboards visualizing system behavior
+**Reporting**: Usually manually stitched from dashboard outputs
 
-Now you can run tests. 99% of the time, you won't get the results you want. So how do you know what to change?
+This isn't complexity you can reason through in your head. The cognitive load alone is substantial before you even start analysis.
 
-## Data is your friend
+## Where to Begin
 
-Remember those dashboards you built? They will be your best friends. If you can capture metrics about each level of your app stack, you should be able to pinpoint the exact point at which your application begins to tip over. Here are some example scenarios:
+Rather than attempting comprehensive analysis upfront, adopt an iterative approach:
 
-* Your app has high latency. Since you're smart and you measure response times at the CDN, platform, app, and dependency level, you see that the CDN is adding 500ms of latency to each request. This seems high. Upon review, it is misconfigured and does not honor keep-alive headers. Action: Enable keep-alive and re-run your tests.
-* Your load test will not generate the traffic you are telling it to generate. You observe that after you get to 50 RPS, your app error rate spikes to 75%. Oops. Because you measure errors at all layers, you see that your Cassandra cluster is throwing exceptions at that same threshold. Action: You look at your cluster, and it turns out the disk is full, and each node only gets 1 CPU. Increase disk, CPU, and number of nodes, and re-run your tests.
-* Your load test is measuring high error rates. When you test manually, you cannot reproduce the errors. Because you measure the response of dependent APIs, you see that one of them is throwing 500 error response codes. Action: engage your partner team to provide deeper insights into why their API is tipping over.
-* Your app (which you wrote with extra care and attention to detail) is slowing down at high loads. CPU usage is low. But what about memory usage? It's on the high side, but nothing crazy. Action: So, you decide to instrument your app with a flame graph, hoping to know which lines of code your application is spending most of its precious time and resources. You re-run your tests and find that using recursive functions inside of a for loop leads to exponential decay of performance.
-* Your load test will not generate the traffic you are telling it to generate. Your app is barely seeing any traffic. Oops! Your load test isn't doing what you thought it would. You miscalculated how many requests per second it would generate - you are sending your intended number as requests perf minute! Action: fix your perf test.
+### Phase 1: Build the Minimal Test Harness
+1. Create the load generator
+2. Run it to verify it actually works
+3. Compare results against manual application testing to ensure the perf test mimics reality
+4. Build observability dashboards
+5. Run actual load tests
 
-## Conclusions
+**Reality check**: 99% of the time, you won't achieve desired performance metrics. Accept this.
 
-This is but a surface level scratch of the deep fathoms of your production system. There are probably thousands of other knobs to turn, depending on your exact app stack. I hope that the complexity illustrated herein inspires you to invest in the proper tooling, talent, and time needed to build a robust performance-testing app that gives you a stress-free (mostly) production rollout.
+## Data Transforms Analysis Into Insight
+
+Your dashboards are your debugging toolkit. Capture metrics at every layer:
+
+### Example Scenarios and Investigative Approaches
+
+**Scenario**: High latency throughout the system
+- **Root cause discovery**: Check latency at CDN, platform, application, and dependency levels
+- **Example finding**: CDN is adding 500ms per request despite misconfiguration
+- **Example finding**: Investigation reveals keep-alive headers aren't honored
+- **Action**: Enable keep-alive, rerun tests
+
+**Scenario**: Load generator can't reach target throughput; errors spike at 50 RPS
+- **Root cause discovery**: Check error rates at all layers
+- **Example finding**: Cassandra cluster throws exceptions at 50 RPS threshold
+- **Example finding**: Disk is full; each node has only 1 CPU
+- **Action**: Increase disk, CPU, node count; rerun tests
+
+**Scenario**: High error rates during manual testing don't occur in load tests
+- **Root cause discovery**: Monitor dependent APIs' behavior  
+- **Example finding**: An upstream API throws 500 errors at certain load levels
+- **Action**: Engage partner team for deeper investigation and fixes
+
+**Scenario**: Application slows dramatically under load despite low CPU usage
+- **Investigation**: Check memory usage; if high, use flame graphs to identify hot code paths
+- **Example finding**: Recursive functions inside loops cause exponential performance degradation
+- **Action**: Refactor, rerun tests
+
+**Scenario**: Load generator claims 10RPS but application barely sees traffic
+- **Root cause discovery**: Verify actual load generation
+- **Example finding**: Configuration error—targeting requests-per-minute instead of requests-per-second
+- **Action**: Fix configuration math, rerun tests
+
+## Conclusion
+
+Performance testing exposes the true complexity of modern distributed systems. The multitude of interacting components, configuration parameters, and emergent behaviors can't be understood through intuition alone—systematic measurement, careful analysis, and iterative refinement are the only path to confident performance predictions.
+
+Invest in the tooling, talent, and time needed to build robust performance testing infrastructure. Your production deployment reliability depends on it.

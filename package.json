@@ -5,12 +5,13 @@
   "type": "module",
   "scripts": {
     "clean": "rimraf dist",
+    "typecheck": "tsc --noEmit",
     "dev": "astro dev",
     "start": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "lint": "yarn run eslint .",
-    "lint:fix": "yarn run eslint --fix .",
+    "lint": "eslint .",
+    "lint:fix": "eslint --fix .",
     "prepare": "husky",
     "test": "vitest"
   },
@@ -21,12 +22,13 @@
     "@commitlint/config-conventional": "^20.4.1",
     "@shikijs/transformers": "^3.22.0",
     "@tailwindcss/typography": "^0.5.19",
+    "@types/node": "^25.2.3",
     "@typescript-eslint/eslint-plugin": "^8.55.0",
     "@typescript-eslint/parser": "^8.55.0",
     "astro": "^5.17.2",
     "autoprefixer": "^10.4.24",
     "daisyui": "^5.5.18",
-    "eslint": "^9.39.2",
+    "eslint": "^10.0.0",
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-import": "^2.32.0",
     "eslint-plugin-markdown": "^5.1.0",
@@ -48,7 +50,7 @@
   },
   "lint-staged": {
     "src/**/*.{cjs,mjs,js,ts,tsx}": [
-      "yarn lint"
+      "pnpm lint"
     ]
   },
   "dependencies": {
@@ -64,5 +66,10 @@
     "rehype-slug": "^6.0.0",
     "remark-smartypants": "^3.0.2"
   },
-  "packageManager": "yarn@4.9.2"
+  "pnpm": {
+    "overrides": {
+      "vite": "^7.3.1"
+    }
+  },
+  "packageManager": "pnpm@10.0.0"
 }

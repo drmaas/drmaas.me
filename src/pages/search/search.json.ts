@@ -15,7 +15,6 @@ export async function GET() {
         description:
           ele.data.description ||
           parse(rendered).querySelector("p:first-of-type")?.innerText,
-        tags: ele.data.tags,
       };
     });
   return new Response(JSON.stringify(posts));

@@ -1,10 +1,9 @@
 ---
 import { parse } from "node-html-parser";
 import { fileToSlug } from "src/misc";
-import TagButton from "./TagButton.astro";
 import DateComponent from "./DateComponent.astro";
 import ReadingTimeComponent from "./ReadingTimeComponent.astro";
-import { CollectionEntry } from "astro:content";
+import type { CollectionEntry } from "astro:content";
 
 export interface Props {
   content: CollectionEntry<"posts">;
@@ -22,51 +21,40 @@ const description =
 const url = `/articles/${fileToSlug(content.filePath ?? "", "md")}`;
 
 const date = new Date(content.data.date).toDateString();
-
-const tags = content.data.tags;
 ---
 
 <div
-  class="card sm:card-side bg-base-100 shadow-xl hover:shadow-2xl transition-all duration-300 max-w-[90%] w-240 mx-auto border border-base-300 hover:border-primary/30 focus-within:outline focus-within:outline-2 focus-within:outline-primary"
+  class="card sm:card-side bg-base-100 shadow-lg hover:shadow-2xl transition-all duration-300 w-full border border-base-300/50 hover:border-primary/50 overflow-hidden"
 >
   {
     content.data.image ? (
-      <Fragment>
-        <figure class="pt-4 sm:pt-0 rounded">
-          <img
-            width="300"
-            height="200"
-            loading={lazyLoading ? "lazy" : "eager"}
-            class="m-2 max-w-[300px] max-h-[200px] aspect-video"
-            src={content.data.image}
-            alt={content.data.imageDescription ?? content.data.title}
-            transition:name={content.data.image}
-          />
-        </figure>
-      </Fragment>
+      <figure class="sm:w-80 sm:flex-shrink-0">
+        <img
+          width="300"
+          height="200"
+          loading={lazyLoading ? "lazy" : "eager"}
+          class="w-full h-full object-cover aspect-video sm:aspect-auto"
+          src={content.data.image}
+          alt={content.data.imageDescription ?? content.data.title}
+          transition:name={content.data.image}
+        />
+      </figure>
     ) : null
   }
 
-  <div class="card-body max-w-md mx-auto">
+  <div class="card-body">
     <a
       href={url}
       class="no-underline text-primary hover:text-primary-focus transition-colors duration-200"
     >
-      <h2 class="card-title text-2xl">{content.data.title}</h2>
+      <h2 class="card-title text-2xl mb-2">{content.data.title}</h2>
     </a>
-    <div class="flex gap-2 flex-wrap">
-      {
-        tags &&
-          tags.length > 0 &&
-          tags.map((ele: string) => <TagButton tagName={ele} />)
-      }
-    </div>
-    <div class="card-actions items-center">
+    <div class="flex items-center gap-3 text-sm opacity-70 mb-3">
       <DateComponent date={date} />
-      <span> • </span>
+      <span class="text-base-300">•</span>
       <ReadingTimeComponent content={rendered} />
     </div>
-    <p class="line-clamp-4 md:line-clamp-3">
+    <p class="line-clamp-3 text-base">
       {description}
     </p>
   </div>

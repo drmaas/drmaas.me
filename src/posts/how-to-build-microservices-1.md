@@ -1,125 +1,88 @@
 ---
-title: Building Services Part 1 - Intro and Modelling
+title: Building Services Part 1 - Introduction to Domain Modeling
 date: 10 August 2023
-description: I thought I could just wing it?
+description: Laying the foundation for effective service architecture
 tags: [design, architecture, systems]
 draft: false
 ---
 
-I like to think about design (micro)services from a planning perspective. 
-If you start with the result (a successful service running in production that everyone
-knows and loves) and reverse the project timeline back to the beginning, what 
-questions were answered along the way? What were the decisions taken? What were the steps 
-taken that contributed to the successful rollout? 
+## The Reverse Engineering Approach
 
+When designing microservices, I find it useful to start from the end state and work backward. Imagine a service successfully running in production—something the entire team understands, maintains with confidence, and that users love. Now reverse the project timeline. What questions were answered along the way? What architectural decisions were made? What concrete steps contributed to this successful rollout?
 
-## Part 0: Asking the Right Questions
+This inversion reveals the true complexity of service design. It's not about picking frameworks or deployment platforms—those are implementation details. The real work happens in planning what the service does, how it communicates, what it depends on, and how it scales.
 
-The formulation of a solution starts not with answers, but with questions. Keep a [beginner's mindset](https://en.wikipedia.org/wiki/Shoshin), and remember
-that there aren't any stupid questions. In no particular order, these are some of the questions that need to be answered, explicitly or implicitly:
+## Part 0: The Foundation Questions
 
-* System/Domain Modeling    
-    * What does the service do?
-    * What are its responsibilities?
-    * Who does the service talk to?
-    * How does it talk to those services?
-* Coding
-    * How is the service written? What language is used? What libraries are used?
-    * How are the project directories laid out?
-    * What tools are used to build the code?
-* Testing
-    * Do you have tests?
-    * Really, do you have tests? What kind of tests?
-    * How is the code tested?
-    * How is code coverage calculated?
-    * How is the code formatted and linted?
-    * How is the code scanned for security vulnerabilities?
-* Infrastructure
-    * How is infrastructure defined?
-* CI/CD
-    * How is the service built when features are committed? What is the build toolchain?
-    * How is the service deployed?
-* Runtime
-    * Where does the application run? 
-    * How is the application run?
-    * Where are application configurations and secrets stored? How are they loaded into the application?
-    * How are the infrastructure dependencies managed? 
-* Scaling
-    * Is your service going to be under a high load? If so:
-    * How do you plan to scale your service to handle the anticipated load?
-    * Have you written and executed performance tests?
-    * Do you have ways to identify performance bottlenecks?
-* Integration
-    * Do you have the right number of pre-production environments defined? Does each have a purpose?
-    * Does your service work with other services in each environment?
-    * How do you know if something is broken in one of your environments? 
-    * Do you run automated regression testing? If so, how?
-* Monitoring
-    * How is the service observed? How can engineers search logs and view metrics?
-    * How are alerts triggered? What are the thresholds?
-* Chores
-    * How do you keep dependencies up to date?
-* Resilience/High Availability
-    * How are failures from dependent services handled? Are there retries, circuit breakers, fallbacks defined?
-    * How are unknown application errors handled? How are known errors handled?   
-    * What do you do if the server or network running your services goes down? Do you run replicas? 
-* Documentation
-    * How is your API defined? Does it have an API schema? A README? CLI help messages? A Wiki?
+Solution design begins with questions, not answers. Maintain a [beginner's mindset](https://en.wikipedia.org/wiki/Shoshin) and recognize that thoroughness beats speed at this stage. Here are the critical areas requiring explicit answers:
 
-Ok, that's a lot to think about. And it doesn't even cover the people aspect of how this thing was delivered - 
-the project team structure, meetings, ownership models, agile ceremonies, troubleshooting and triaging, etc. I have thoughts on that as well, 
-but will leave that to a separate post!
+### Strategic Questions
+* **System/Domain Modeling**: What precisely does this service do? What are its clear responsibilities? Who does it communicate with? How?
 
-You may have noticed that the order in which I posed these questions also tends to be the order in 
-which they are tackled. If I had my way, certain things might be shifted around under special circumstances, for example,
-scaling might be tackled up-front if you know your service is going to get rekt. But, in my view, this ordering tends to work
-pretty well, as it provides a logical sequence of steps to follow, each building on one or more previous steps.
+### Operational Questions
+* **Coding practices**: Which language? What libraries? How is code organized into directories and modules? What build tools power the process?
+* **Testing strategy**: What types of tests? How is coverage calculated? How is code formatted and linted? How are security vulnerabilities detected?
+* **Infrastructure definition**: Is it code? Scripts? Manually configured? What's the source of truth?
+* **CI/CD pipeline**: How is code built when features are committed? How does it deploy?
+* **Runtime environment**: Where does it run? How? Where are configuration and secrets stored? How do dependencies get managed?
 
-You may have also noticed that writing the application code is a small part of the overall effort to run a service. 
-This is often true! Often, test code (unit, integration, performance, regression, smoke, etc).
-Let's dive into each of the topics.
+### Scaling Considerations
+* **Load capacity**: Will this service support high traffic? If yes:
+  * How specifically will it scale?
+  * Have performance tests been written and validated?
+  * Can you identify performance bottlenecks algorithmically?
 
-## Part 1: Domain Modeling
+### Integration and Reliability
+* **Pre-production environments**: How many exist? What's each one's purpose? Do all services interact correctly across them?
+* **Health visibility**: How do engineers know when something is broken? Can they search logs and view metrics?
+* **Failure handling**: Are there retry mechanisms? Circuit breakers? Fallbacks? How are known and unknown errors handled?
+* **High availability**: What happens when servers or networks fail? Are replicas deployed?
 
-What the service does and what are its responsibilities are foundational questions. This is probably done by a Product Owner 
-in conjunction with Architects or Principal/Staff Engineers. The responsibilities of each service need to be defined, 
-and boundaries need to be drawn to make behaviors and capabilities explicit. 
+### Observability and Maintenance
+* **Monitoring architecture**: How is the service observed? What metrics matter? What thresholds trigger alerts?
+* **Dependency management**: How are dependencies kept up-to-date?
+* **Documentation**: Is there an API schema? CLI help? A README? Developer wiki?
 
-### Whiteboarding
+### The Human Element
+Beyond technical architecture, service delivery involves people: team structure, meeting cadence, ownership models, agile ceremonies, incident response. I'll address these separately, but they're equally critical.
 
-For large applications that consist of many services and user interaction patterns, it may be necessary to do some whiteboarding exercises.
-If the system is smaller in scope, you can likely skip to the engineering docs.
-Whiteboarding can be on real whiteboards with sticky notes, or if working with Hybrid teams, a tool like
-[concept board](https://conceptboard.com/) helps all stakeholders visualize the application.
-It helps define not only system-wide capabilities but also helps define user personas. User personas are then tied to specific
-tasks to accomplish. These tasks map back to system capabilities. In my experience, this exercise helps to concretize components
-that didn't need to be defined and also helps to get rid of unneeded or irrelevant components.
+## The Sequencing Principle
 
-### Architecture
+The order in which I've posed these questions tends to reflect the order in which they're best tackled. Special circumstances might shuffle priorities—if you know a service will face massive load, tackle scaling upfront. Generally, though, this sequence provides a logical progression where each phase builds on the foundation of the previous.
 
-Once a board exists (or if it wasn't deemed necessary), the technical teams can start to model *how* to bring the application vision to life. 
-The outputs of this phase are architectural diagrams, user interaction diagrams, sequence diagrams, 
-and data flow diagrams. On the other hand, if the application started as a side project or it's a small venture, engineers 
-may decide to just start building. Usually, everything will be built together as a monolith, with the intent to refactor 
-into separate services later on as needed. Arguably, this is much easier than taking the time to plan out service 
-definition boundaries. The trade-off is speed now vs tackling tech debt and complexity later on.
+Notice also what's missing: the actual application code is a relatively small portion of total effort. Much of the work involves test code (unit, integration, performance, regression, smoke tests), infrastructure definition, monitoring, and deployment automation.
 
-### Integrations
+## Part 1: Domain Modeling - Establishing Clear Boundaries
 
-Regardless of how much whiteboarding and design you choose to do, you are going to have to define 
-the external dependencies your services need to talk to perform their job(s). 
-And you are going to make choices about the protocol over which communication happens. Http, GRPC, WebSockets, AMQP,
-etc. are all valid choices in general, but pick the simplest possible protocol that fits your needs.
+Defining what a service does and establishing its responsibilities form the foundation of all subsequent work. This phase typically involves Product Owners, Architects, and Principal/Staff Engineers collaborating to draw service boundaries that make behaviors explicit and capabilities clear.
 
-### Summary
+### The Whiteboarding Exercise
 
-Overall, my recommendation is to spend just enough time modeling to achieve the known objectives at the start of the project.
-Models can always be adjusted as more information becomes apparent during development. Too little modeling can result in 
-the team building the wrong product, or one that doesn't fit the functional requirements. It also risks creating 
-a giant ball of mud that needs to be rewritten before it's launched. Too much modeling can risk
-doing two things - overengineering the solution, and slowing down the delivery.
+For complex applications with many services and diverse user interaction patterns, whiteboarding is invaluable. This can happen on physical whiteboards with sticky notes, or on digital tools like [ConceptBoard](https://conceptboard.com/) for distributed teams.
 
-### Next Up
+Good whiteboarding sessions accomplish two things:
+1. **Define system capabilities**: What can the entire application do?
+2. **Define user personas and tasks**: Who uses the system, and what do they need to accomplish? How do those tasks map to the capabilities you've identified?
 
-In the next part, I'll be giving a brief overview of the coding implementation tasks the team will need to perform.
+This exercise often reveals components that needn't exist and identifies missing pieces. It grounds abstract architectural thinking in concrete user needs.
+
+### Architectural Artifacts
+
+Once a conceptual model exists (or is deemed unnecessary for smaller projects), technical teams create architectural documentation:
+* **Architectural diagrams**: System components and their relationships
+* **User interaction diagrams**: How users flow through the system
+* **Sequence diagrams**: How services coordinate for specific scenarios
+* **Data flow diagrams**: How information moves through the system
+
+For smaller ventures or side projects, teams often build monoliths first, refactoring into services later as complexity demands. This trades upfront architectural clarity for development speed—a reasonable trade when requirements are unclear.
+
+### Defining External Dependencies
+
+Regardless of modeling depth, you must explicitly define external services and dependencies your service needs. Choose communication protocols deliberately: HTTP, gRPC, WebSockets, AMQP—each has tradeoffs. Pick the simplest protocol matching your needs.
+
+### The Balance Point
+
+The ideal approach invests just enough time modeling to understand known objectives at project start. Models can evolve as development reveals new information. Too little modeling leads to building the wrong product or creating unmaintainable systems. Too much modeling risks overengineering and delayed delivery.
+
+The art lies in calibrating effort appropriately.
 

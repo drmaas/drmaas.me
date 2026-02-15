@@ -1,8 +1,7 @@
 ---
 layout: "@layouts/ArticleLayout.astro"
-title: What I'm Consuming
-description: A list of media that I've consumed. Podcasts, articles, videos, tweets.
-tags: []
+title: Media & Resources
+description: A curated collection of books, podcasts, articles, videos, and resources that have shaped my thinking.
 draft: false
 ---
 
@@ -102,10 +101,11 @@ This article caused me to pause and think about the nature and purpose of `AI`. 
 1. Things we don't like to do
 1. Things we think are pointless but someone else wants us to do
 1. Things that other software programs require us to do to fulfill the needs of the software
+
 Thus, it is reasonable (we also have an obligation) to render unto AI what is AI's, and render unto God what is God's, as we always have.
 
 ## 2023-07-08
 
 [What is Money Episode 333](https://whatismoneypodcast.com/episodes/serendipity-wokeism-and-bitcoin-with-robert-breedlove-wim333)
-There are certain `moments` and `experiences` in life that set us on the path to our destiny.
 
+There are certain `moments` and `experiences` in life that set us on the path to our destiny.

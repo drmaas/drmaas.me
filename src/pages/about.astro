@@ -1,0 +1,42 @@
+---
+import BaseLayout from "@layouts/BaseLayout.astro";
+import config from "src/config";
+import { capitalizeString } from "src/misc";
+
+const { social } = config;
+const { fullName } = config.metaData;
+---
+
+<BaseLayout title="About Me" activeLink="about">
+  <div class="max-w-2xl mx-auto px-4 mb-32 mt-8">
+    <h1 class="text-center mb-8 text-4xl font-bold">
+      About Me
+    </h1>
+
+    <div class="prose prose-invert max-w-none mb-12">
+      <p class="text-lg text-base-content/80">
+        Hi, I'm {fullName}. I write about software engineering, architecture, and life. 
+        I hope you find my posts relevant and useful.
+      </p>
+
+      <p class="text-lg text-base-content/80">
+        You can find me on various platforms:
+      </p>
+    </div>
+
+    <div class="flex justify-center gap-8 mt-8">
+      {social.map((ele) => (
+        <a
+          class="w-12 h-12 flex items-center justify-center hover:scale-125 transition-transform duration-200 hover:opacity-80"
+          href={ele.link}
+          target="_blank"
+          rel="noreferrer noopener"
+          title={`Visit my ${capitalizeString(ele.link.replace(/.+\/\/|www.|\..+/g, ''))} account`}
+        >
+          <span class="sr-only">{`Link to my ${capitalizeString(ele.link.replace(/.+\/\/|www.|\..+/g, ''))} account`}</span>
+          <span class="w-full h-full [&>svg]:w-full [&>svg]:h-full" set:html={ele.svg} />
+        </a>
+      ))}
+    </div>
+  </div>
+</BaseLayout>

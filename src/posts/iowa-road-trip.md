@@ -1,16 +1,18 @@
 ---
-title: Iowa Road Trip
+title: Iowa Road Trip - Discovering Deeper History Beyond the Cornfields
 date: 22 March 2024
-description: A road trip through central Iowa
+description: Exploring central Iowa's surprisingly rich cultural and natural heritage
 tags:
   - Featured
   - Travel
 draft: false
 ---
 
-## Iowa Road Trip
+## A Journey Beyond First Impressions
 
-Recently, my daughters and I took a road trip to Iowa. Why Iowa? We live relatively close (4 hours to Saint Paul MN), and the trip fit within our budget to drive there. We had only been there once before, to Indian Mounds National Monument, and wanted to explore some other areas. I found the history of the area to be much deeper than I realized. I think I assumed that Iowa was just corn and didn't have much there. I was certainly wrong!
+Recently, my daughters and I took a road trip through central Iowa. The choice was practical: we live just four hours north in Saint Paul, Minnesota, making it an accessible weekend adventure. We'd previously visited Indian Mounds National Monument, but wanted to explore more comprehensively.
+
+I approached Iowa with certain assumptions—mostly farmland, flat landscape, limited attractions beyond agriculture. I was thoroughly wrong. The region reveals a surprisingly rich tapestry of natural features, cultural heritage, and thoughtfully preserved history. What unfolds over the following days shattered my preconceptions entirely.
 
 ### Day 1
 

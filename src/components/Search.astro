@@ -3,7 +3,7 @@
 ---
 
 <div class="container mx-auto px-4 py-8 max-w-4xl">
-    <div class="flex flex-col space-y-8">
+    <div class="flex flex-col space-y-6">
         <input
             id="search"
             aria-label="search box"
@@ -23,7 +23,6 @@
         url: string;
         date: string;
         description?: string;
-        tags: Array<string>;
     }
     import Fuse, { FuseResult } from "fuse.js";
 
@@ -32,52 +31,56 @@
         resp.json(),
     );
 
-    async function search() {
+    let fuse: Fuse<ResultInterface>;
+
+    async function initSearch() {
         const options = {
-            // isCaseSensitive: false,
-            // includeScore: false,
-            // shouldSort: true,
-            // includeMatches: false,
-            // findAllMatches: false,
-            // minMatchCharLength: 1,
-            // location: 0,
-            // threshold: 0.6,
-            // distance: 100,
-            // useExtendedSearch: false,
             ignoreLocation: true,
-            // ignoreFieldNorm: false,
-            // fieldNormWeight: 1,
             keys: ["title", "description"],
         };
-        const fuse = new Fuse(posts, options);
-        const input = document.querySelector<HTMLInputElement>("#search");
-        if (input) {
-            input.addEventListener("input", () => {
-                const pattern = input.value;
-                const results: FuseResult<ResultInterface>[] =
-                    fuse.search(pattern);
-                let html = "";
-                for (const result of results) {
-                    html += `
+        fuse = new Fuse(posts, options);
+    }
+
+    function renderResults(results: ResultInterface[]) {
+        let html = "";
+        for (const result of results) {
+            html += `
             <div class="card bg-base-200 w-full shadow-lg hover:shadow-xl transition-shadow duration-200 focus-within:outline focus-within:outline-2 focus-within:outline-secondary">
               <div class="card-body"> 
-                <a href="${result.item.url}" class="no-underline text-cyan-600 hover:text-black dark:hover:text-white">
-                  <h2 class="card-title">${result.item.title}</h2>
+                <a href="${result.url}" class="no-underline text-cyan-600 hover:text-black dark:hover:text-white">
+                  <h2 class="card-title">${result.title}</h2>
                 </a>
-                <span class="text-sm opacity-70">${result.item.date}</span>
-                <p class="line-clamp-4 md:line-clamp-3">${result.item.description}</p>
+                <span class="text-sm opacity-70">${result.date}</span>
+                <p class="line-clamp-4 md:line-clamp-3">${result.description}</p>
               </div>
             </div>
             `;
-                }
-                const resultsElement = document.querySelector("#results");
-                if (resultsElement) {
-                    resultsElement.innerHTML = html;
-                }
-            });
+        }
+        const resultsElement = document.querySelector("#results");
+        if (resultsElement) {
+            resultsElement.innerHTML = html;
         }
     }
-    search();
 
-    document.addEventListener("input", search);
+    function performSearch() {
+        const input = document.querySelector<HTMLInputElement>("#search");
+        if (!input) return;
+
+        const pattern = input.value;
+        const results: FuseResult<ResultInterface>[] = fuse.search(pattern);
+        const resultItems = results.map((r) => r.item);
+        renderResults(resultItems);
+    }
+
+    async function setup() {
+        await initSearch();
+        performSearch();
+
+        const input = document.querySelector<HTMLInputElement>("#search");
+        if (input) {
+            input.addEventListener("input", performSearch);
+        }
+    }
+
+    setup();
 </script>
