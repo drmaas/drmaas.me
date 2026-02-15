@@ -1,29 +1,53 @@
 ---
-title: On Partition Keys
+title: On Partition Keys - Why Randomization Matters in Distributed Systems
 date: 2 July 2023
-description: Think carefully.
+description: A cautionary tale about hidden assumptions in data distribution
 tags: [performance]
 draft: false
 ---
 
-Let's say that you want to build a new backend ([OIDC](https://openid.net/developers/how-connect-works/)) identity provider (let's call it `the system`). Good luck! Since you don't want to write the whole thing from scratch, you pick an established vendor to help manage the system state. So, when `The system` performs authorization, it integrates with this vendor app. The vendor app acts like a smart proxy that connects other identity providers to `the system`. This allows users to log in user their favorite Google, Facebook, Twitter, etc. accounts. Because the vendor app needs to know if you are logging in or registering a new account (so it can prompt to allow access, collect one-time data, etc) it records some basic identity information about the user. The vendor app uses standard OIDC API calls to verify and collect basic information. So far, so good.
+## The Scenario: A Real-World Partition Key Disaster
 
-The vendor needs a database to store this information. Because everyone is building to the OIDC spec, they decide to use the `sub` attribute as the primary key for the user information. Because this attribute is unique across IDPs (identity providers) and users, it will work well.
+Let me walk you through a genuine crisis that teaches a critical lesson about distributed system design.
 
-You realize that your system could eventually scale to hundreds of millions of users. So, you ask the vendor for assurance that they can handle that. The answer is obviously *yes*. You assume that they can handle that, and don't give it too much thought.
+We were building an identity provider ([OIDC](https://openid.net/developers/how-connect-works/)) for a large organization. To avoid reinventing standard functionality, we selected an established vendor platform that acts as a proxy connecting various external identity providers (Google, Facebook, Twitter, etc.) to our system. Users can seamlessly authenticate using their existing accounts.
 
-Eventually, the time comes to load-test this system. You test against a homegrown test IDP that returns dummy data, and the results are amazing. You can handle 25 thousand logins/minute. You then test against another third-party IDP, and the results are terrible. You can only handle 700 logins/minute. This doesn't make sense, because you know this IDP is used worldwide by millions of people, and you know it can handle the volume.
+The vendor platform maintains user identity metadata using standard OIDC attributes. They chose the `sub` (subject) attribute as the primary key—a sensible choice since `sub` is globally unique across identity providers and users by OIDC specification.
 
-A few days pass, and the vendor comes back with an interesting finding. After reaching 700 logins/minute, their system comes to a halt, every time, but only with this IDP. Furthermore, they report that their query to check if a user exists is degrading exponentially. This doesn't sound scalable at all. After your confusion subsides, you might ask them why their queries are so slow. They are breaching their SLA. With modern databases like Cassandra, DynamoDB, PostgreSQL, and more, they should be able to scale to hundreds of thousands of queries *per second*.
+We asked the vendor for scaling assurances to handle eventual scale (hundreds of millions of users). The answer was confidently affirmative. We accepted that and moved forward.
 
-It turns out they are using a relational-ish database (you don't work there, so you don't know for sure). That's perfectly great. It also turns out that to scale it horizontally, they shard it by the primary key of the user. This gives them the ability to handle the higher volume, add nodes to their cluster as needed, and give them some fault tolerance via read replicas.
+## Load Testing: The Breakdown
 
-But they didn't just use the `sub` as its primary key. Remember that the database needs to first route each query to the node that has its data. Usually, this is done with hashing. You could design it so that an infinite number of `sub` attributes map to `N` hash keys, where `N` is the number of nodes in the cluster. But, this is not what was done. `sub` values could be quite long, maybe 64 characters.
+When load testing time arrived, results astonished us. Testing against our homegrown test identity provider yielded excellent performance: 25,000 logins per minute. Testing against a real third-party provider produced catastrophic results: only 700 logins per minute.
 
-> Theory 1: In order to speed up the hashing mechanism (and maybe to save disk space?), and reasoning that all characters in the string are random, they picked the first 16 characters to hash on. Hm.
+This contradiction made no sense. The third-party IDP we tested against serves millions of users worldwide; it clearly can handle volume. Why the massive failure?
 
-> Theory 2: The vendor found that it's faster to partition on the first 16 characeters, while using the rest of the characters as a sorting or clustering key.
+## The Root Cause: A Dangerous Optimization
 
-Whatever the source of the issue, it turns out that your slow IDP has a long hard-coded prefix for all `sub` values. The vendor did not expect this. After all, someone else controls the values, and it's easy to assume that they also made good design decisions. As a result, all users are stored on the same physical node. At low volumes, nobody knows or cares that this is happening. But during load tests, the system tips over, while the 1 node serving 100% of the users starts on :fire:.
+After investigation, the vendor revealed a startling pattern: after the system reached 700 logins/minute, the entire system halted *exclusively with this specific IDP*. Additionally, their user-existence query was degrading exponentially. With modern databases (Cassandra, DynamoDB, PostgreSQL), they should easily handle hundreds of thousands of queries per second.
 
-I guess the moral of the story is to think hard about how you are partitioning your data, and how you plan to randomize the partition mapping to avoid hotspots. It turns out that splitting the string and assuming the partition key will always be random, especially when someone else controls the value, is something to avoid.
+The vendor used a horizontally-sharded relational database. While sharding enables scaling and provides fault tolerance via replicas, it requires careful partition key design. Most databases route queries to the appropriate node through hashing: ideally, infinite values of `sub` map uniformly to N hash buckets, where N is cluster node count.
+
+But the vendor made a dangerous optimization. Rather than hashing the full `sub` value (which could be ~64 characters), they hashed only the **first 16 characters**. Their reasoning: assuming all characters were random, the first 16 should provide sufficient distribution while reducing hashing computation and potentially saving disk space.
+
+## The Hidden Assumption
+
+This optimization's fatal flaw: **third-party identity providers don't guarantee random `sub` values**.
+
+The specific third-party IDP we tested used a long, hard-coded prefix for all `sub` values. When users authenticate, every single user receives a `sub` starting with identical characters. These identical prefixes produce identical hash values, routing all users to a **single physical node** in the cluster.
+
+At low volumes, this hidden hotspot wasn't apparent. Under load test traffic, the single node handling 100% of user traffic became a bottleneck, collapsing under the load. Meanwhile, other cluster nodes remained idle.
+
+## Lessons for Distributed Systems
+
+This incident crystallizes critical principles:
+
+1. **Never assume what you don't control**: External data sources (third-party ID providers, partner APIs) don't guarantee properties you'd expect. Defensive design is essential.
+
+2. **Partition key selection requires discipline**: Choose partition keys that distribute uniformly **for all realistic data distributions**, not just theoretical ones. Test against realistic data that external parties might provide.
+
+3. **Verify distribution assumptions**: If you optimize around an assumption (like "characters are random"), measure and validate that assumption against all data sources you'll encounter.
+
+4. **Measure and monitor**: Had they monitored node-level metrics during load tests, they'd have immediately spotted one node saturating while others stayed quiet—a clear hotspot indicator.
+
+The moral isn't "never optimize"—it's "never optimize around fragile assumptions about data you don't control." Partition keys determine how data distributes across your cluster. Get this wrong, and all the scalability theory in the world won't save you from single-node collapse.

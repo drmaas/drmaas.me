@@ -1,75 +1,52 @@
 ---
-title: Building Services Part 2 - Coding
+title: Building Services Part 2 - Coding Practices and Project Structure
 date: 30 September 2023
-description: You can haz code!
+description: Establishing patterns that scale across teams
 tags: [coding, design, systems]
 draft: false
 ---
 
-Ok, you have a model and architectural diagrams showing what your application needs to do. Now you need to build it!
-Here, I will focus on the structure of the code itself, and the tooling needed to enable rapid development. I won't touch
-on things like containers vs binaries vs lambdas and other runtime concerns - I will talk about those later. 
+## Part 2: Coding - From Architecture to Implementation
 
-## Part 2: Coding
+You've completed your domain modeling and have architectural diagrams. Now comes the disciplined work of translating that vision into code. This section focuses on code structure and development tooling—the runtime environment concerns come later.
 
-Recall some of the fundamental questions that you need to answer (you can make up others as well):
+### Choosing the Right Language
 
-* How is the service written? What language is used? What libraries are used?
-* How are the project directories laid out?
-* What tools are used to build the code?
+**Selection criteria matter more than personal preference.** Pick a language after considering:
+* **Team expertise**: Your team will be vastly more productive with languages they already know. Use side projects to explore new languages, not production services.
+* **Problem fit**: Is this high-traffic? Use a compiled language with efficient resource utilization. Low traffic? A dynamic language accelerates initial delivery. Need fine-grained memory control? Pick accordingly.
+* **Organizational consistency**: Align your choice with your team and broader organization. Being a team player—using common tools—matters more than chasing shiny objects. I've learned from experience that chasing novel languages usually leads to painful refactors.
 
-### Language
+### The Dependencies Question
 
-Pick a language. If you want to learn something new, choose one that you don't already know and
-learn on the go. However, I usually recommend against that. You will be far more effective using something
-you already know, and that your team is already comfortable with. Learn new languages in side projects or POCs.
+A common tension exists between **reinvention** and **leverage**. Engineers who distrust dependencies will rewrite functionality, claiming control and understanding. This stance occasionally merits consideration if available libraries are poorly tested or unmaintained. 
 
-Pick the right language for the problem you're solving. For example, if it won't get much traffic, you wil be fine using
-any dynamic language. If performance (throughput or latency) is the top concern, pick something that will scale and efficiently
-uses CPU. If memory and footprint is a concern, pick something that allows fine-grained control of memory.
+Generally, though, **leverage battle-tested code**. Is a defect more likely in code you write from scratch, or in battle-tested libraries used by hundreds of teams in production? The math is clear.
 
-The point is to use the right tool for the job, and to do it in collaboration with your team and broader organization. You want to
-be viewed as a team player, not the type of engineer that goes after shiny objects and pulls others along for the ride. I've chased my share
-of shiny objects, and it usually ended up in major refactors or rewrites.
+### Project Structure
 
-### Dependencies
+**Use a proven template.** There's little value in constantly rearranging source code, tests, and build scripts between projects. Templates encode organizational knowledge and best practices.
 
-I generally think it's a good thing to leverage code that others have written, tested, and put through the fire already. It makes your job
-easier. I know engineers who loath dependencies, and will reinvent as much code as they can, si that it can be known, understood, and version controlled by their team.
-There are probably situations where this is useful, for example, available dependent libraries are poorly tested, or haven't been updated recently. Usually, however,
-it's safer to leverage reusable components. Is it more likely that a defect is introduced in code that you write, or in battle-tested code
-that is used by hundreds or thousands of other teams in production?
+**Design for multi-module scalability**. Even if you'll deploy a single module initially, structure the codebase to accommodate N modules. Modules should depend on each other without circular dependencies. This prepares you for service splits as requirements evolve.
 
-### Project Setup
+### Tooling: The Force Multiplier
 
-1. Use a template, and create your project based on the template. There are few reasons to constantly shift the
-layer of source code, tests, and scripts from project to project.
-1. Your project should be multi-module. That means it should be capable of building N modules as part of the same build. 
-The modules can depend on each other (but not in a circular manner). Even if you only have one module,
-it's nice to know that you could add more later on, or split you one module up as use cases change.
+**Build tool**: Choose something well-documented and widely supported by your organization. Don't spend more than 5% of your time writing build code. Invest in tools that abstract away complexity.
 
-### Tooling
+**Formatting and Linting**: Enforce consistent style automatically.
+* JavaScript/TypeScript: [Prettier](https://prettier.io/) for formatting, [ESLint](https://eslint.org/) for analysis
+* JVM languages: [Spotless](https://github.com/diffplug/spotless) for formatting (supports [Google Java Style Guide](https://google.github.io/styleguide/javaguide.html)), [SpotBugs](https://spotbugs.github.io/) for analysis
+* Kotlin: [Detekt](https://detekt.dev/) for static analysis
 
-1. Pick a build tool. I won't go into the specifics on which language offers which tool, but it should be something well documented
-and well supported by your team and organization. You don't want to spend more than 5% (arguable even less) of your time writing build code.
-1. Use linters and formatters. Leverage existing tools to detect ant-patterns and formatting issues. This will keep the code style constistent
-and readable for all team members. Nothing speaks of laziness more than code that isn't formatted properly!
-1. Write unit tests, and measure their coverage. This should be a no-brainer, but knowing that your code works as expected, and that
-the most important scenarios have been covered, will bring peace of mind. I know it takes more time to deliver, but this is something you simply
-can't compromise on. Let's say you are spinning up a quick app to trial to users, and you are considering dropping the tests. If some
-defect is introduced, you won't know if the product was reviewed poorly because of defects, or because it was a lousy product. Users won't care either
-way - they expect things to JustWork.
-1. Use code analysis tools. These can be tools that check for cyclomatic complexity, check for programming patterns than are known to cause bugs, or that
-measure the performance profile of the application. Make sure it's automated. With more data points, you have more information about
-how you can improve.
+Consistent, readable code isn't negotiable. Lazily-formatted code signals disrespect toward colleagues.
 
-### Closing Thoughts
+**Unit tests and coverage**: This isn't optional. Tests provide confidence that your code behaves as intended under both normal and edge cases. The investment in testing time pays enormous dividends when you eventually deploy. Yes, you could skip tests to move faster initially. But if bugs slip through, you won't know if users rejected the feature due to defects or because it's genuinely a weak product idea. Users won't distinguish—they'll expect things to JustWork.
 
-I know that these are very high level notions. I know that each of these topics
-can probably encompass it's own chapter in a book, or even it's own book. The point here
-is to spend at least a little time being intentional about the work you are setting out to do.
-A little bit of planning can go a long ways towards scaling your teams time and energy, and also your
-application.
+**Code analysis**: Leverage automated tools to detect cyclomatic complexity, identify bug-prone patterns, and measure performance characteristics. Automated insights compound over time, revealing opportunities for improvement that manual review would miss.
+
+## Closing Principle
+
+These insights are high-level; each merits its own detailed exploration. The key is **intentionality**. Invest thoughtfully upfront. A little planning on code structure, tooling, and practice dramatically multiplies your team's effectiveness as the codebase grows.
 
 
 

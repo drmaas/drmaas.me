@@ -1,9 +1,8 @@
 ---
 import BaseLayout from "./BaseLayout.astro";
-import TagButton from "@components/TagButton.astro";
 import TableOfContents from "../components/TableOfContents.astro";
 import DateComponent from "@components/DateComponent.astro";
-import { InferEntrySchema } from "astro:content";
+import type { InferEntrySchema } from "astro:content";
 
 export interface Props {
   content: InferEntrySchema<"posts">;
@@ -11,7 +10,7 @@ export interface Props {
 }
 
 const { content, headings } = Astro.props as Props;
-const { title, image, imageDescription, tags, description } = content;
+const { title, image, imageDescription, description } = content;
 const date = content.date ? new Date(content.date).toDateString() : undefined;
 ---
 
@@ -39,9 +38,6 @@ const date = content.date ? new Date(content.date).toDateString() : undefined;
 
     <div class="flex flex-wrap justify-evenly mb-9 mt-2">
       {date &&<DateComponent date={date}/>}
-      <div class="flex flex-wrap gap-2 mt-8">
-        {tags && tags.length > 0 && tags.map((tag) => <TagButton tagName={tag} />)}
-      </div>
     </div>
   </div>
   <div class="flex max-w-7xl mx-auto md:px-8 px-5 gap-12 items-start">

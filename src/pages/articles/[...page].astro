@@ -3,9 +3,10 @@ import BaseLayout from "@layouts/BaseLayout.astro";
 import ArticleCard from "@components/ArticleCard.astro";
 import Pagination from "@components/Pagination.astro";
 import { sortDateDescending } from "../../misc";
-import { Page } from "astro";
+import type { Page } from "astro";
 import config from "src/config";
-import { CollectionEntry, getCollection } from "astro:content";
+import type { CollectionEntry } from "astro:content";
+import { getCollection } from "astro:content";
 
 export interface Props {
   page: Page<CollectionEntry<"posts">>;

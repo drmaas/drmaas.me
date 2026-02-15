@@ -35,10 +35,10 @@ const {
       class="absolute bg-info text-info-content px-6 py-2 rounded-br-md -translate-x-full focus-within:translate-x-0 transition-all"
       >Skip Navigation</a
     >
-    <header class="container mx-auto flex items-center justify-between mb-16">
+    <header class="container mx-auto flex items-center justify-between mb-8 mt-4">
       <div class="p-4">
         <!-- Logo -->
-        <span class="text-4xl"><a href="/">The Everyday Software Guy</a></span>
+        <span class="text-4xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent"><a href="/">The Everyday Software Guy</a></span>
       </div>
       <NavList activeLink={activeLink} />
     </header>
@@ -51,7 +51,7 @@ const {
       xmlns="http://www.w3.org/2000/svg"
       id="scrollButton"
       viewBox="0 0 512 512"
-      class="w-10 h-10 fill-primary fixed bottom-5 right-5 animate-[jump_1500ms_infinite] cursor-pointer bg-base-100 rounded-full"
+      class="w-12 h-12 fill-primary fixed bottom-8 right-8 animate-[jump_1500ms_infinite] cursor-pointer bg-base-100 rounded-full shadow-xl hover:shadow-2xl transition-shadow duration-200 p-2 border-2 border-primary/20"
       style="display: none"
     >
       <path
@@ -59,15 +59,15 @@ const {
       ></path>
     </svg>
 
-    <footer class="border-t px-4 py-6 mt-6">
-      <p class="text-center text-sm">
+    <footer class="border-t border-base-300 px-4 py-8 mt-12 bg-base-200">
+      <p class="text-center text-sm text-base-content/70">
         <span>
           &copy; {new Date().getFullYear()}&nbsp;{fullName}
         </span>
         <span> • </span>
         <span>
           <a
-            class="text-cyan-600 hover:text-black dark:hover:text-white"
+            class="link link-primary"
             href="/topics/disclaimer/">Disclaimer</a
           >
         </span>

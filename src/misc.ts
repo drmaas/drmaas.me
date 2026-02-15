@@ -1,4 +1,4 @@
-import { CollectionEntry } from "astro:content";
+import type { CollectionEntry } from "astro:content";
 import path from "path";
 
 export function fileToSlug(file: string, extension: string) {
@@ -9,10 +9,6 @@ export function sortDateDescending(arg: CollectionEntry<"posts">[]) {
   return arg.sort(
     (a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime(),
   );
-}
-
-export function getAllUniqueTags(arg: CollectionEntry<"posts">[]) {
-  return Array.from(new Set(arg.map((e) => e.data.tags ?? []).flat()).values());
 }
 
 export function capitalizeString(arg: string) {
