@@ -1,0 +1,17 @@
+diff --git a/dist/core/config/validate.js b/dist/core/config/validate.js
+index 69f322e2cf259439e8bda187f8f442cec6bade6d..e551bec26d89692cb023c07d115378fb6332dd51 100644
+--- a/dist/core/config/validate.js
++++ b/dist/core/config/validate.js
+@@ -61,12 +61,6 @@ async function coerceLegacyMarkdownPlugins(config) {
+       remark: remarkPlugins.length,
+       rehype: rehypePlugins.length
+     });
+-    if (!didWarnAboutLegacyMarkdownPlugins) {
+-      didWarnAboutLegacyMarkdownPlugins = true;
+-      console.warn(
+-        "[astro] `markdown.remarkPlugins`, `markdown.rehypePlugins`, and `markdown.remarkRehype` are deprecated. Pass them to `unified({...})` from `@astrojs/markdown-remark` directly instead."
+-      );
+-    }
+   } else if (!didWarnAboutProcessorMismatch) {
+     didWarnAboutProcessorMismatch = true;
+     console.warn(

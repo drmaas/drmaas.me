@@ -1,4 +1,5 @@
 import { defineConfig } from "astro/config";
+import { unified } from "@astrojs/markdown-remark";
 import mdx from "@astrojs/mdx";
 import sitemap from "@astrojs/sitemap";
 import rehypeSlug from "rehype-slug";
@@ -26,18 +27,19 @@ export default defineConfig({
 
   // https://github.com/withastro/docs/blob/main/astro.config.ts
   markdown: {
-    smartypants: true,
-    rehypePlugins: [
-      rehypeSlug,
-      // This adds links to headings
-      ...rehypeAutolink(),
-    ],
+    processor: unified({
+      smartypants: true,
+      rehypePlugins: [
+        rehypeSlug,
+        ...rehypeAutolink(),
+      ],
+    }),
     shikiConfig: {
       theme: "one-dark-pro",
       // Enable word wrap to prevent horizontal scrolling
       wrap: true,
     },
-    syntaxHighlight: "shiki", // Use Shiki for markdown, ExpressiveCode for code blocks
+    syntaxHighlight: "shiki",
   },
 
   scopedStyleStrategy: "where",

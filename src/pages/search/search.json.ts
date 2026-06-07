@@ -5,7 +5,7 @@ import { getCollection } from "astro:content";
 export async function GET() {
   const allPosts = await getCollection("posts");
   const posts = Object.values(allPosts)
-    .filter((ele) => ele.data.draft != true)
+    .filter((ele) => ele.data.draft !== true)
     .map((ele) => {
       const rendered = ele.rendered?.html ?? "";
       return {

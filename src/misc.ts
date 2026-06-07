@@ -1,5 +1,5 @@
 import type { CollectionEntry } from "astro:content";
-import path from "path";
+import path from "node:path";
 
 export function fileToSlug(file: string, extension: string) {
   return path.parse(file).base.replace(`.${extension}`, "/");

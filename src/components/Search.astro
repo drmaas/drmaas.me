@@ -24,7 +24,7 @@
         date: string;
         description?: string;
     }
-    import Fuse, { FuseResult } from "fuse.js";
+    import Fuse from "fuse.js";
 
     const baseSite = import.meta.env.BASE_URL;
     const posts = await fetch(`${baseSite}search/search.json`).then((resp) =>
@@ -67,7 +67,7 @@
         if (!input) return;
 
         const pattern = input.value;
-        const results: FuseResult<ResultInterface>[] = fuse.search(pattern);
+        const results = fuse.search(pattern);
         const resultItems = results.map((r) => r.item);
         renderResults(resultItems);
     }
