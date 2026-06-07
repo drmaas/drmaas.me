@@ -10,14 +10,16 @@
     "start": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "lint": "eslint .",
-    "lint:fix": "eslint --fix .",
+    "check": "astro check && pnpm run lint",
+    "lint": "biome lint ./src",
+    "format": "biome format --write ./src",
     "prepare": "husky",
     "test": "vitest"
   },
   "devDependencies": {
     "@astrojs/sitemap": "^3.7.0",
     "@astrojs/ts-plugin": "^1.10.6",
+    "@biomejs/biome": "^2.4.16",
     "@commitlint/cli": "^20.4.1",
     "@commitlint/config-conventional": "^20.4.1",
     "@shikijs/transformers": "^3.22.0",
@@ -28,24 +30,15 @@
     "astro": "^5.17.2",
     "autoprefixer": "^10.4.24",
     "daisyui": "^5.5.18",
-    "eslint": "^10.0.0",
-    "eslint-config-prettier": "^10.1.8",
-    "eslint-plugin-import": "^2.32.0",
-    "eslint-plugin-markdown": "^5.1.0",
-    "eslint-plugin-n": "^17.23.2",
-    "eslint-plugin-prettier": "^5.5.5",
-    "eslint-plugin-promise": "^7.2.1",
     "husky": "^9.1.7",
     "lint-staged": "^16.2.7",
     "node-html-parser": "^7.0.2",
     "postcss": "^8.5.6",
-    "prettier": "^3.8.1",
     "reading-time": "^1.5.0",
     "rimraf": "^6.1.2",
     "shiki": "^3.22.0",
     "tailwindcss": "^4.1.18",
     "typescript": "^5.9.3",
-    "typescript-eslint": "^8.55.0",
     "vitest": "^4.0.18"
   },
   "lint-staged": {
@@ -66,10 +59,10 @@
     "rehype-slug": "^6.0.0",
     "remark-smartypants": "^3.0.2"
   },
+  "packageManager": "pnpm@10.0.0",
   "pnpm": {
     "overrides": {
       "vite": "^7.3.1"
     }
-  },
-  "packageManager": "pnpm@10.0.0"
+  }
 }

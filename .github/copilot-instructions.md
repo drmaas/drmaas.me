@@ -35,7 +35,8 @@ This is an Astro-based personal blog with TypeScript, Tailwind CSS, and DaisyUI.
 ```bash
 pnpm dev          # Development server (localhost:4321)
 pnpm build        # Production build to ./dist/
-pnpm lint         # ESLint with TypeScript, Prettier, and Markdown support
+pnpm lint         # Biome linter for TypeScript/JavaScript
+pnpm format       # Biome formatter
 pnpm test         # Vitest for testing
 ```
 
@@ -76,4 +77,4 @@ pnpm test         # Vitest for testing
 - `astro.config.ts`: Core Astro setup with integrations and markdown processing
 - `src/config.ts`: Site navigation, metadata
 - `tailwind.config.ts`: Theme extensions, font families, DaisyUI integration
-- `eslint.config.mjs`: Flat config with TypeScript, Prettier, and Markdown linting
+- `biome.json`: Biome configuration for linting and formatting
