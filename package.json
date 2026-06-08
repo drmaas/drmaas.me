@@ -57,10 +57,5 @@
     "rehype-slug": "^6.0.0",
     "remark-smartypants": "^3.0.2"
   },
-  "packageManager": "pnpm@10.0.0",
-  "pnpm": {
-    "patchedDependencies": {
-      "astro@6.4.4": "patches/astro@6.4.4.patch"
-    }
-  }
+  "packageManager": "pnpm@10.0.0"
 }

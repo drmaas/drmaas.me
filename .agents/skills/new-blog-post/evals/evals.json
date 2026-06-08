@@ -1,0 +1,26 @@
+{
+  "skill_name": "new-blog-post",
+  "evals": [
+    {
+      "id": 1,
+      "name": "tech-article-published",
+      "prompt": "I want to write a new blog post about how I set up a CI/CD pipeline with GitHub Actions for a Python project. The post is called 'Automating Python Deployments with GitHub Actions' and the idea is to show the full workflow from commit to production. It's ready to publish, not a draft.",
+      "expected_output": "A published post markdown file in src/posts/ with frontmatter containing title, date, description, tags (including Python, CI/CD, DevOps), and draft: false. Body is empty.",
+      "files": []
+    },
+    {
+      "id": 2,
+      "name": "personal-draft",
+      "prompt": "I have an idea for a draft about why I think Rust is overhyped for web development. Title is 'Rust for the Web - Overkill or Overrated?'. It's just a draft for now, I want to work on it later.",
+      "expected_output": "A draft file in drafts/rust-for-the-web-overkill-or-overrated/index.md with slug field, ISO date, description, no draft field, no tags.",
+      "files": []
+    },
+    {
+      "id": 3,
+      "name": "with-image",
+      "prompt": "Write a new published post called 'My Trip to Japan' about traveling through Tokyo and Kyoto. The description is about the tech scene and temples. I have an image at /images/japan-trip.jpg and the alt text is 'Tokyo skyline at twilight'.",
+      "expected_output": "A published post in src/posts/ with image and imageDescription fields. Tags should include travel or similar deduced topics. draft: false.",
+      "files": []
+    }
+  ]
+}
