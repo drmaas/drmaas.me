@@ -1,0 +1,62 @@
+{
+  "skill_name": "blog-post-review",
+  "evals": [
+    {
+      "id": 1,
+      "name": "technical-post-grammar-and-facts",
+      "prompt": "review this post: evals/files/s3-bucket-policies.md",
+      "expected_output": "The post is reviewed with categorized suggestions covering grammar errors (suprisingly, Theres, tense issues), a factual issue flagged (AccessDeniedException), structural feedback, and tone-preserving edits.",
+      "files": ["evals/files/s3-bucket-policies.md"],
+      "assertions": [
+        {"text": "review.md exists in outputs"},
+        {"text": "edited_post.md exists in outputs"},
+        {"text": "Review has Grammar & Mechanics section"},
+        {"text": "Review has Factual Accuracy section"},
+        {"text": "Review has Structure & Flow section"},
+        {"text": "Review has Tone & Personality section"},
+        {"text": "Review uses [grammar] [factual] [structure] [tone] labels"},
+        {"text": "Review quotes original text"},
+        {"text": "Review catches 'suprisingly' typo"},
+        {"text": "Review catches 'Theres' grammar error"},
+        {"text": "Review flags AccessDeniedException as incorrect"},
+        {"text": "Edited post fixes 'suprisingly' to 'surprisingly'"}
+      ]
+    },
+    {
+      "id": 2,
+      "name": "corporate-babble-tone-rescue",
+      "prompt": "review this post: evals/files/corporate-babble.md",
+      "expected_output": "The post is reviewed with heavy tone/personality feedback, replacing corporate cliches (leveraging, synergistic, digital transformation) with the author's direct conversational voice. Structure and grammar suggestions also provided.",
+      "files": ["evals/files/corporate-babble.md"],
+      "assertions": [
+        {"text": "review.md exists in outputs"},
+        {"text": "edited_post.md exists in outputs"},
+        {"text": "Review has Tone & Personality section"},
+        {"text": "Review identifies 'leveraging' as jargon"},
+        {"text": "Review identifies 'synergistic' as jargon"},
+        {"text": "Review identifies 'digital transformation' as jargon"},
+        {"text": "Review uses [grammar] [factual] [structure] [tone] labels"},
+        {"text": "Review quotes original text"},
+        {"text": "Review mentions reading author's other posts for voice calibration"}
+      ]
+    },
+    {
+      "id": 3,
+      "name": "structural-flow-issues",
+      "prompt": "review this post: evals/files/docker-not-answer.md",
+      "expected_output": "The post is reviewed with structural feedback on sentence fragments, pacing, and the abrupt ending. Grammar corrections and tone-preserving edits also provided.",
+      "files": ["evals/files/docker-not-answer.md"],
+      "assertions": [
+        {"text": "review.md exists in outputs"},
+        {"text": "edited_post.md exists in outputs"},
+        {"text": "Review has Structure & Flow section"},
+        {"text": "Review identifies sentence fragments in opening"},
+        {"text": "Review flags 'shared network volume' as incorrect"},
+        {"text": "Review provides structural feedback on transitions"},
+        {"text": "Review uses [grammar] [factual] [structure] [tone] labels"},
+        {"text": "Review quotes original text"},
+        {"text": "Review calibrates tone against author's other posts"}
+      ]
+    }
+  ]
+}
