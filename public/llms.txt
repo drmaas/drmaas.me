@@ -1,0 +1,36 @@
+# drmaas.me
+
+> Dan Maas's personal blog about software engineering, architecture, distributed systems, and career insights. Built with Astro, Tailwind CSS, and daisyUI.
+
+The site covers topics including microservices architecture, performance testing, search systems (hybrid RAG), cloud infrastructure (AWS), Bitcoin/Lightning Network, development tooling, and career reflections. All articles reflect hands-on engineering experience.
+
+## About
+
+- [About Me](https://drmaas.me/about/): Background and social links for Dan Maas
+- [Explore](https://drmaas.me/explore/): Client-side search across all articles
+
+## Articles
+
+- [Starting a Blog](https://drmaas.me/articles/hello/): Goodbye procrastination.
+- [Two Years at Salesforce — Core Insights from Enterprise Software Engineering](https://drmaas.me/articles/2-years-in-sf/): Lessons from scaling engineering impact in a large organization.
+- [Running Bitcoin and Lightning Network on a Raspberry Pi](https://drmaas.me/articles/btcd-lnc-raspberri-pi/): A hands-on exploration of distributed financial infrastructure.
+- [The Case of the Broken Lambda](https://drmaas.me/articles/broken-lambda/): API Gateway Lambda Proxy debugging.
+- [Building the AWS Cloud Resume](https://drmaas.me/articles/cloud-resume/): End-to-end AWS architecture combining frontend, backend, and infrastructure.
+- [Code Freeze 2025](https://drmaas.me/articles/codefreeze-2025/): Thawing my knowledge of software architecture.
+- [My Favorite Development Tools](https://drmaas.me/articles/dev-tooling-1/): CLI FTW.
+- [From GitHub Copilot to OpenCode + OpenRouter](https://drmaas.me/articles/from-github-copilot-to-opencode-plus-openrouter/): How switching saved time and money after Copilot's credit-based billing changes.
+- [Migrating from Gatsby to Astro](https://drmaas.me/articles/gatsby-to-astro/): Choosing simplicity over abstraction in a static site framework.
+- [Building Services Part 1 — Introduction to Domain Modeling](https://drmaas.me/articles/how-to-build-microservices-1/): Laying the foundation for effective service architecture.
+- [Building Services Part 2 — Coding Practices and Project Structure](https://drmaas.me/articles/how-to-build-microservices-2/): Establishing patterns that scale across teams.
+- [Building Services Part 3 — Comprehensive Testing Strategy](https://drmaas.me/articles/how-to-build-microservices-3/): Building confidence through systematic verification.
+- [Building Services Part 4 — Infrastructure](https://drmaas.me/articles/how-to-build-microservices-4/): Have your code and deploy it too!
+- [Hybrid RAG Search in LangChain Using Postgres and TypeScript](https://drmaas.me/articles/hybrid-search/): Combining vector and keyword search for robust information retrieval.
+- [Iowa Road Trip](https://drmaas.me/articles/iowa-road-trip/): Discovering deeper history beyond the cornfields.
+- [Performance Testing is Hard — But Worth It](https://drmaas.me/articles/perf-testing/): Why comprehensive load testing demands discipline and careful analysis.
+- [On Partition Keys — Why Randomization Matters in Distributed Systems](https://drmaas.me/articles/sharding/): A cautionary tale about hidden assumptions in data distribution.
+
+## Optional
+
+- [Media & Resources](https://drmaas.me/topics/media/): Curated media recommendations.
+- [Links](https://drmaas.me/topics/links/): Useful links.
+- [Disclaimer](https://drmaas.me/topics/disclaimer/): Site disclaimer.
