@@ -23,6 +23,7 @@ Astro v6 · Tailwind v4 · daisyUI 5 · TypeScript · pnpm
 - **Content**: MDX in `src/posts/`, content collections via `src/content.config.ts`
 - **Markdown**: rehype-slug, rehype-autolink-headings, remark-smartypants, expressive-code (one-dark-pro theme, line numbers)
 - **Search**: fuse.js (client-side)
+- **CMS**: [Sveltia CMS](https://github.com/sveltia/sveltia-cms) at `/admin` for content authoring. Config in `public/admin/config.yml`. Auth via GitHub OAuth through a Cloudflare Worker at `sveltia-cms-auth.drmaas.workers.dev` ([Sveltia CMS Auth](https://github.com/sveltia/sveltia-cms-auth)).
 - **Linting**: Biome (no ESLint), commitlint with conventional commits, husky + lint-staged
 - **Styling**: scopedStyleStrategy `"where"` in astro config
 - **Site URL**: `https://drmaas.me`, trailing slash always
