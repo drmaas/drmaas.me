@@ -1,0 +1,98 @@
+# yaml-language-server: $schema=https://unpkg.com/@sveltia/cms/schema/sveltia-cms.json
+
+backend:
+  name: github
+  repo: drmaas/drmaas.me
+  base_url: https://sveltia-cms-auth.drmaas.workers.dev
+  branch: main
+
+media_folder: /public/media
+public_folder: /media
+
+collections:
+  - name: posts
+    label: Posts
+    label_singular: Post
+    folder: src/posts
+    create: true
+    delete: true
+    path: "{{slug}}"
+    preview_path: /articles/{{slug}}
+    fields:
+      - { name: title, label: Title, widget: string, required: true }
+      - { name: description, label: Description, widget: text }
+      - { name: date, label: Date, widget: datetime, format: "DD MMMM YYYY", required: true }
+      - name: tags
+        label: Tags
+        widget: select
+        multiple: true
+        required: true
+        options:
+          - AI
+          - Architecture
+          - Astro
+          - AWS
+          - Bitcoin
+          - Career
+          - coding
+          - CSS
+          - debugging
+          - design
+          - development
+          - "development tools"
+          - Devops
+          - Engineering
+          - Featured
+          - Fullstack
+          - General
+          - Html
+          - "Infrastructure as Code"
+          - JavaScript
+          - LangChain
+          - Lightning
+          - LLM
+          - local
+          - performance
+          - Postgres
+          - Python
+          - "Raspberry Pi"
+          - systems
+          - testing
+          - tools
+          - Travel
+      - { name: image, label: Image, widget: image, required: false }
+      - { name: imageDescription, label: Image Description, widget: string, required: false }
+      - { name: draft, label: Draft, widget: boolean, default: false, required: false }
+      - { name: body, label: Body, widget: markdown }
+
+  - name: pages
+    label: Pages
+    files:
+      - label: Media & Resources
+        name: media
+        file: src/pages/topics/media.md
+        fields:
+          - { name: layout, label: Layout, widget: hidden, default: "@layouts/ArticleLayout.astro" }
+          - { name: title, label: Title, widget: string, required: true }
+          - { name: description, label: Description, widget: text }
+          - { name: draft, label: Draft, widget: boolean, default: false, required: false }
+          - { name: body, label: Body, widget: markdown }
+      - label: Links
+        name: links
+        file: src/pages/topics/links.md
+        fields:
+          - { name: layout, label: Layout, widget: hidden, default: "@layouts/ArticleLayout.astro" }
+          - { name: title, label: Title, widget: string, required: true }
+          - { name: description, label: Description, widget: text }
+          - { name: draft, label: Draft, widget: boolean, default: false, required: false }
+          - { name: body, label: Body, widget: markdown }
+      - label: Disclaimer
+        name: disclaimer
+        file: src/pages/topics/disclaimer.md
+        fields:
+          - { name: layout, label: Layout, widget: hidden, default: "@layouts/ArticleLayout.astro" }
+          - { name: title, label: Title, widget: string, required: true }
+          - { name: description, label: Description, widget: text }
+          - { name: draft, label: Draft, widget: boolean, default: false, required: false }
+          - { name: body, label: Body, widget: markdown }
+

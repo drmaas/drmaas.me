@@ -24,18 +24,20 @@ const { page } = Astro.props as Props;
 ---
 
 <BaseLayout title="Articles" activeLink="articles">
-  {
-    page.currentPage == 1 ? (
-      <h1 class="text-center text-3xl font-semibold bg-clip-text mb-8">
-        Articles
-      </h1>
-    ) : null
-  }
+  <section class="max-w-6xl mx-auto mb-32 mt-4 px-4">
+    {
+      page.currentPage == 1 ? (
+        <h1 class="text-center mb-8 text-4xl font-bold">
+All Articles
+        </h1>
+      ) : null
+    }
 
-  <div class="flex flex-col justify-center gap-12">
-    {page.data.map((post) => <ArticleCard content={post} />)}
-  </div>
-  <div class="flex justify-center">
-    <Pagination page={page} dir={"articles"} />
-  </div>
+    <div class="flex flex-col justify-center gap-8">
+      {page.data.map((post) => <ArticleCard content={post} />)}
+    </div>
+    <div class="flex justify-center mt-8">
+      <Pagination page={page} dir={"articles"} />
+    </div>
+  </section>
 </BaseLayout>
