@@ -14,6 +14,16 @@ Astro v6 · Tailwind v4 · daisyUI 5 · TypeScript · pnpm
 | `pnpm format` | Biome format `./src` |
 | `pnpm typecheck` | `tsc --noEmit` |
 | `pnpm test` | Vitest |
+| `pnpm deploy` | Deploy API worker + main site to Cloudflare |
+| `pnpm deploy:api` | Deploy only the API worker |
+| `pnpm deploy:site` | Build + deploy only the main site |
+
+## Architecture
+
+Two Cloudflare Workers in a single repo:
+
+- **Main site** (`drmaas.me`): Astro static site deployed via Workers Static Assets. `wrangler.jsonc` at root configures `assets.directory: "./dist"`. No adapter — pure SSG output served by Cloudflare Workers.
+- **Resume API** (`api.drmaas.me`): Counter service using a Durable Object for strongly-consistent visitor counting. Lives under `api/` with its own `wrangler.jsonc` and `package.json`.
 
 ## Conventions
 
@@ -27,3 +37,7 @@ Astro v6 · Tailwind v4 · daisyUI 5 · TypeScript · pnpm
 - **Linting**: Biome (no ESLint), commitlint with conventional commits, husky + lint-staged
 - **Styling**: scopedStyleStrategy `"where"` in astro config
 - **Site URL**: `https://drmaas.me`, trailing slash always
+- **Resume page**: `/resume/` — ported from `cloud-resume-ui`, now an Astro page in `src/pages/resume/index.astro`
+- **Visitor counter**: `api/src/counter.do.ts` — Durable Object with atomic counter. Deployed as separate Worker at `api.drmaas.me`
+- **Deployment**: GitHub Actions (`.github/workflows/deploy.yml`) — builds Astro site, then deploys API worker and main site with wrangler
+- **CI secrets**: `CLOUDFLARE_API_TOKEN`, `CLOUDFLARE_ACCOUNT_ID`
