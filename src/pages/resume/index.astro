@@ -330,16 +330,7 @@ const hobbies = "Reading, Coding, Hiking, Biking, Swimming, Yoga";
 ---
 
 <BaseLayout title="Resume — Dan Maas" description="Dan Maas — Software Shepherd · Agentic AI · AWS · Cloudflare. Resume and professional experience." activeLink="">
-  <!--
-    The outer wrapper provides the full-viewport background in the browser but
-    is intentionally OUTSIDE #resume-capture so the PDF only captures actual
-    content height. With `min-h-screen` previously on #resume-capture, every
-    PDF page ended with a tall blank area at the bottom (the wrapper forcing a
-    viewport-tall canvas while the real content was much shorter).
-  -->
   <div class="min-h-screen bg-base-200">
-    <!-- PDF capture area: everything inside here is rendered to the PDF -->
-    <div id="resume-capture" class="bg-base-200">
     <!-- Header banner -->
     <div class="bg-base-300 border-b border-base-content/10">
       <div class="px-6 py-8 md:px-12">
@@ -347,7 +338,7 @@ const hobbies = "Reading, Coding, Hiking, Biking, Swimming, Yoga";
           <div class="min-w-0">
             <h1 class="text-4xl md:text-5xl font-bold tracking-tight">Dan Maas</h1>
             <p class="text-base md:text-lg text-base-content/70 mt-1.5">Software Shepherd · Agentic AI · AWS · Cloudflare</p>
-            <div class="mt-4 flex flex-wrap gap-x-4 gap-y-1 md:hidden text-sm text-base-content/70 pdf-exclude">
+            <div class="mt-4 flex flex-wrap gap-x-4 gap-y-1 md:hidden text-sm text-base-content/70">
               {contact.map((c) => (
                 c.href ? (
                   <a href={c.href} target={c.href.startsWith("http") ? "_blank" : undefined} rel={c.href.startsWith("http") ? "noopener noreferrer" : undefined} class="link link-hover link-primary">
@@ -360,16 +351,15 @@ const hobbies = "Reading, Coding, Hiking, Biking, Swimming, Yoga";
             </div>
           </div>
           <div class="flex flex-col items-start md:items-end gap-4 shrink-0">
-            <button
-              id="download-pdf-btn"
-              type="button"
-              class="btn btn-primary btn-sm gap-2 shadow-sm pdf-exclude"
+            <a
+              href="/docs/Daniel_Maas_Resume.pdf"
+              download="Dan-Maas-Resume.pdf"
+              class="btn btn-primary btn-sm gap-2 shadow-sm"
               aria-label="Download resume as PDF"
             >
-              <svg class="w-4 h-4 pdf-icon" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3" /></svg>
-              <span class="loading loading-spinner loading-xs pdf-spinner" style="display:none" aria-hidden="true"></span>
-              <span class="btn-label">Download PDF</span>
-            </button>
+              <svg class="w-4 h-4" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3" /></svg>
+              Download PDF
+            </a>
             <ul class="text-sm space-y-1.5 text-left md:text-right">
               {contact.map((c) => (
                 <li class="flex items-baseline gap-3 md:justify-end">
@@ -520,7 +510,7 @@ const hobbies = "Reading, Coding, Hiking, Biking, Swimming, Yoga";
             <p class="text-base-content/80">{hobbies}</p>
           </section>
 
-          <footer class="text-center py-8 pdf-exclude">
+          <footer class="text-center py-8">
             <div class="inline-flex items-center gap-2 bg-base-300/50 border border-base-content/10 rounded-full px-5 py-2.5">
               <svg class="w-5 h-5 text-base-content/40 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" /></svg>
               <span class="text-sm text-base-content/60">Visitor # <span id="visitor-counter" class="font-mono font-bold tabular-nums text-base-content">—</span></span>
@@ -529,18 +519,8 @@ const hobbies = "Reading, Coding, Hiking, Biking, Swimming, Yoga";
         </div>
       </div>
     </div>
-    </div>
   </div>
 
-  <style is:global>
-    /* PDF rendering context (offscreen wrapper has data-pdf-render="true"):
-       switch skill/language pills from subtle outline (web-friendly) to
-       solid filled chip for better print presence. */
-    [data-pdf-render] .resume-pill {
-      background-color: var(--color-base-300);
-      border-color: var(--color-base-300);
-    }
-  </style>
 </BaseLayout>
 
 <script>
@@ -582,158 +562,4 @@ const hobbies = "Reading, Coding, Hiking, Biking, Swimming, Yoga";
   // astro:page-load fires after every navigation (including the first page load)
   // when ClientRouter is active — this is the correct hook to use.
   document.addEventListener("astro:page-load", fetchCounter);
-</script>
-
-<script>
-  // Client-side PDF export. Renders #resume-capture to a canvas via html2canvas-pro
-  // (the "pro" fork handles Tailwind v4's oklch() colors, which the original
-  // html2canvas throws on), then slices the image across US-Letter pages in jsPDF.
-  // Libraries are dynamically imported so they aren't bundled into the initial load.
-  let pdfBusy = false;
-
-  async function downloadResumePdf() {
-    if (pdfBusy) return;
-    const btn = document.getElementById("download-pdf-btn");
-    const label = btn?.querySelector(".btn-label");
-    if (!btn) return;
-
-    pdfBusy = true;
-    btn.disabled = true;
-    const icon = btn.querySelector<SVGSVGElement>(".pdf-icon");
-    const spinner = btn.querySelector<HTMLElement>(".pdf-spinner");
-    if (icon) icon.style.display = "none";
-    if (spinner) spinner.style.display = "inline-flex";
-    const originalText = label?.textContent ?? "Download PDF";
-    if (label) label.textContent = "Generating…";
-
-    const target = document.getElementById("resume-capture");
-    let wrapper: HTMLDivElement | null = null;
-
-    try {
-      if (!target) throw new Error("Resume capture element not found");
-      // Bail out silently if layout hasn't happened yet (e.g. button clicked
-      // during initial paint). An empty canvas would otherwise produce a blank PDF.
-      if (!target.offsetWidth) return;
-
-      const [{ jsPDF }, html2canvasMod] = await Promise.all([
-        import("jspdf"),
-        import("html2canvas-pro"),
-      ]);
-      const html2canvas = html2canvasMod.default;
-
-      // Force the light theme for capture by cloning into an off-screen wrapper
-      // with data-theme="cmyk". daisyUI scopes theme CSS variables to
-      // [data-theme], so every bg-base-*/text-base-content class inside resolves
-      // to the light palette — the PDF is always print-friendly even when the
-      // visitor is in dark ("night") mode.
-      wrapper = document.createElement("div");
-      wrapper.setAttribute("data-theme", "cmyk");
-      wrapper.setAttribute("data-pdf-render", "true");
-      wrapper.style.position = "fixed";
-      wrapper.style.left = "-99999px";
-      wrapper.style.top = "0";
-      wrapper.style.width = `${target.offsetWidth}px`;
-      wrapper.style.pointerEvents = "none";
-      wrapper.appendChild(target.cloneNode(true));
-      document.body.appendChild(wrapper);
-      // Paint the wrapper itself with the current bg-base-200 so the canvas
-      // has an opaque bg matching the resume — no pure-white gaps in the PDF.
-      // Used both as the wrapper fill and as the per-slice pre-fill color
-      // further below.
-      const pdfBgColor =
-        getComputedStyle(wrapper).getPropertyValue("--color-base-200").trim() || "#eaeaeb";
-      wrapper.style.background = pdfBgColor;
-
-      // Cap the render scale so tall resumes don't blow past browser canvas
-      // dimension/area limits (~32kpx). 2x is plenty for crisp text.
-      const scale = Math.min(2, 4000 / target.offsetHeight);
-
-      const canvas = await html2canvas(wrapper, {
-        scale,
-        useCORS: true,
-        logging: false,
-        // No backgroundColor override — the wrapper's bg (set above) covers
-        // the canvas; per-slice bg pre-fills prevent transparent source
-        // regions from rendering as PDF white.
-        ignoreElements: (el) => Boolean(el.classList?.contains("pdf-exclude")),
-      });
-
-      const pdf = new jsPDF({ orientation: "portrait", unit: "pt", format: "letter" });
-      const pageWidth = pdf.internal.pageSize.getWidth();
-      const pageHeight = pdf.internal.pageSize.getHeight();
-      const imgWidth = pageWidth;
-      // Full-bleed page slicing (no margins): every PDF page is filled edge
-      // to edge by the resume. pageHeightCanvas is one page's worth of
-      // source-canvas pixels at full letter height; addImage is positioned
-      // at (0,0) so content starts at the top of the paper.
-      const pageHeightCanvas = Math.floor((pageHeight * canvas.width) / pageWidth);
-
-      // Fixed-height slicing: the two-column layout has independent left and
-      // right column heights, so content-aware grouping causes large white
-      // gaps when one column ends before the other. Slicing at fixed page
-      // heights guarantees each page is filled edge-to-edge with continuous
-      // content and the resume background color.
-      const pageGroups: { startY: number; endY: number }[] = [];
-      let y = 0;
-      while (y < canvas.height) {
-        const sliceHeight = Math.min(pageHeightCanvas, canvas.height - y);
-        pageGroups.push({ startY: y, endY: y + sliceHeight });
-        y += sliceHeight;
-      }
-
-      // Render each page group as a slice. Pre-fill the slice canvas with
-      // the resume bg color BEFORE drawing the source so any transparent
-      // region (column gap, padding, area outside cloned tree) renders as
-      // bg-base-200 instead of pure PDF white.
-      for (let pageNum = 0; pageNum < pageGroups.length; pageNum++) {
-        if (pageNum > 0) pdf.addPage();
-        const { startY, endY } = pageGroups[pageNum];
-        const sliceHeight = endY - startY;
-        const sliceCanvas = document.createElement("canvas");
-        sliceCanvas.width = canvas.width;
-        sliceCanvas.height = sliceHeight;
-        const ctx = sliceCanvas.getContext("2d");
-        if (ctx) {
-          ctx.fillStyle = pdfBgColor;
-          ctx.fillRect(0, 0, canvas.width, sliceHeight);
-          ctx.drawImage(
-            canvas,
-            0,
-            startY,
-            canvas.width,
-            sliceHeight,
-            0,
-            0,
-            canvas.width,
-            sliceHeight,
-          );
-        }
-        const sliceData = sliceCanvas.toDataURL("image/png");
-        const sliceImgHeight = (sliceHeight * imgWidth) / canvas.width;
-        pdf.addImage(sliceData, "PNG", 0, 0, imgWidth, sliceImgHeight);
-      }
-
-      pdf.save("Dan-Maas-Resume.pdf");
-    } catch (err) {
-      console.error("Failed to generate resume PDF:", err);
-      window.alert("Sorry, something went wrong generating the PDF. Please try again.");
-    } finally {
-      pdfBusy = false;
-      btn.disabled = false;
-      if (icon) icon.style.display = "";
-      if (spinner) spinner.style.display = "none";
-      if (label) label.textContent = originalText;
-      if (wrapper?.parentNode) wrapper.parentNode.removeChild(wrapper);
-    }
-  }
-
-  function wirePdfButton() {
-    const btn = document.getElementById("download-pdf-btn");
-    if (btn && !btn.dataset.wired) {
-      btn.addEventListener("click", downloadResumePdf);
-      btn.dataset.wired = "true";
-    }
-  }
-
-  document.addEventListener("astro:page-load", wirePdfButton);
 </script>
