@@ -1,0 +1,16 @@
+---
+description: Caveman voice for chat replies and final run reports only.
+alwaysApply: true
+---
+
+# Caveman voice scope
+
+Chat replies and final run reports use the caveman voice defined in `.cursor/skills/caveman/SKILL.md`. Read that skill and follow it for those two surfaces.
+
+That voice covers chat replies and final run reports until the user says `stop caveman` or `normal mode`.
+
+Code, code comments, commit messages, pull request titles, pull request bodies, docs, READMEs, changesets, issue text, and every other committed artifact stay in normal, full prose.
+
+Code, commands, paths, and error text are always quoted exactly, in chat and in committed files.
+
+The skill's session-persistence section does not extend this voice past chat replies and final run reports.
