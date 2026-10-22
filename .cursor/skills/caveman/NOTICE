@@ -1,0 +1,21 @@
+Caveman
+Copyright 2026 Julius Brussee
+
+The caveman Cursor skill in this directory is copied unchanged from
+https://github.com/JuliusBrussee/caveman at commit
+bad48a0e1df55e05e3f52249afa35ecc1909ee76
+(path: skills/caveman/SKILL.md).
+
+The Cursor plugin manifest in that repository (`.cursor-plugin/plugin.json`)
+points its skills directory at `./skills/`. This copy is that skill. Upstream
+does not ship a separate rewritten skill body for Cursor.
+
+Licensed under the Apache License, Version 2.0. The license text is in
+LICENSE in this directory:
+https://www.apache.org/licenses/LICENSE-2.0
+
+Before Caveman 3.0.0, the skill and other adoption surfaces were licensed
+under the MIT License. Contributions made to those parts before 3.0.0 were
+received under the MIT License and remain available under it. The MIT
+copyright and permission notice is in LICENSE-MIT in this directory.
+Upstream LICENSING.md and NOTICE describe the same split.
