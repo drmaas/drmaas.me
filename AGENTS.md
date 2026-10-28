@@ -39,5 +39,7 @@ Two Cloudflare Workers in a single repo:
 - **Site URL**: `https://drmaas.me`, trailing slash always
 - **Resume page**: `/resume/` — ported from `cloud-resume-ui`, now an Astro page in `src/pages/resume/index.astro`
 - **Visitor counter**: `api/src/counter.do.ts` — Durable Object with atomic counter. Deployed as separate Worker at `api.drmaas.me`
+- **Resume API CORS**: `api/src/cors.ts` — only `https://drmaas.me` and `http://localhost` / `http://127.0.0.1` (any port) for local dev; disallowed browser origins get no CORS headers (403 on preflight)
+- **Resume API rate limit**: `api/src/rateLimiter.do.ts` — per `CF-Connecting-IP`, 10 `POST /resume/increment` requests per 60s window; returns **429** with `Retry-After` when exceeded
 - **Deployment**: GitHub Actions (`.github/workflows/deploy.yml`) — builds Astro site, then deploys API worker and main site with wrangler
 - **CI secrets**: `CLOUDFLARE_API_TOKEN`, `CLOUDFLARE_ACCOUNT_ID`
