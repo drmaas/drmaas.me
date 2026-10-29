@@ -47,17 +47,23 @@ const {
       <slot />
     </main>
 
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
+    <button
+      type="button"
       id="scrollButton"
-      viewBox="0 0 512 512"
-      class="w-12 h-12 fill-primary fixed bottom-8 right-8 animate-[jump_1500ms_infinite] cursor-pointer bg-base-100 rounded-full shadow-xl hover:shadow-2xl transition-shadow duration-200 p-2 border-2 border-primary/20"
-      style="display: none"
+      aria-label="Scroll to top"
+      class="fixed bottom-8 right-8 hidden w-12 h-12 cursor-pointer rounded-full border-2 border-primary/20 bg-base-100 p-2 shadow-xl transition-shadow duration-200 hover:shadow-2xl animate-[jump_1500ms_infinite] motion-reduce:animate-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-base-100"
     >
-      <path
-        d="M256 0C114.6 0 0 114.6 0 256c0 141.4 114.6 256 256 256s256-114.6 256-256C512 114.6 397.4 0 256 0zM382.6 254.6c-12.5 12.5-32.75 12.5-45.25 0L288 205.3V384c0 17.69-14.33 32-32 32s-32-14.31-32-32V205.3L174.6 254.6c-12.5 12.5-32.75 12.5-45.25 0s-12.5-32.75 0-45.25l103.1-103.1C241.3 97.4 251.1 96 256 96c4.881 0 14.65 1.391 22.65 9.398l103.1 103.1C395.1 221.9 395.1 242.1 382.6 254.6z"
-      ></path>
-    </svg>
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 512 512"
+        aria-hidden="true"
+        class="h-full w-full fill-primary"
+      >
+        <path
+          d="M256 0C114.6 0 0 114.6 0 256c0 141.4 114.6 256 256 256s256-114.6 256-256C512 114.6 397.4 0 256 0zM382.6 254.6c-12.5 12.5-32.75 12.5-45.25 0L288 205.3V384c0 17.69-14.33 32-32 32s-32-14.31-32-32V205.3L174.6 254.6c-12.5 12.5-32.75 12.5-45.25 0s-12.5-32.75 0-45.25l103.1-103.1C241.3 97.4 251.1 96 256 96c4.881 0 14.65 1.391 22.65 9.398l103.1 103.1C395.1 221.9 395.1 242.1 382.6 254.6z"
+        ></path>
+      </svg>
+    </button>
 
     <footer class="border-t border-base-300 px-4 py-8 mt-12 bg-base-200">
       <p class="text-center text-sm text-base-content/70">
@@ -117,7 +123,8 @@ const {
 
     <script>
       // Scroll To Top button - control
-      const scrollButton = document.querySelector<SVGElement>("#scrollButton");
+      const scrollButton =
+        document.querySelector<HTMLButtonElement>("#scrollButton");
       if (scrollButton) {
         scrollButton.addEventListener("click", () => {
           window.scroll({
@@ -128,9 +135,9 @@ const {
         });
         window.addEventListener("scroll", () => {
           if (document.documentElement.scrollTop > window.innerHeight / 4) {
-            scrollButton.style.display = "block";
+            scrollButton.classList.remove("hidden");
           } else {
-            scrollButton.style.display = "none";
+            scrollButton.classList.add("hidden");
           }
         });
       }
