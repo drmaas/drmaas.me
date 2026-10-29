@@ -540,8 +540,15 @@ const hobbies = "Reading, Coding, Hiking, Biking, Swimming, Yoga";
         body: JSON.stringify({}),
       });
 
+      if (!response.ok) {
+        throw new Error(`counter request failed: ${response.status}`);
+      }
+
       const data = await response.json();
       const target = data.counter;
+      if (typeof target !== "number" || !Number.isFinite(target)) {
+        throw new Error("counter response missing numeric counter");
+      }
 
       let current = 0;
       const step = Math.max(1, Math.floor(target / 25));

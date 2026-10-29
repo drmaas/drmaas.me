@@ -22,7 +22,7 @@ Astro v6 · Tailwind v4 · daisyUI 5 · TypeScript · pnpm
 
 Two Cloudflare Workers in a single repo:
 
-- **Main site** (`drmaas.me`): Astro static site deployed via Workers Static Assets. `wrangler.jsonc` at root configures `assets.directory: "./dist"`. No adapter — pure SSG output served by Cloudflare Workers.
+- **Main site** (`drmaas.me`): Astro static site deployed via Workers Static Assets. `wrangler.jsonc` at root builds `./dist` into the `ASSETS` binding; `worker/site.ts` 301-redirects `www.drmaas.me` and HTTP to `https://drmaas.me` and sets HSTS on apex/www responses. No adapter — pure SSG output served by Cloudflare Workers.
 - **Resume API** (`api.drmaas.me`): Counter service using a Durable Object for strongly-consistent visitor counting. Lives under `api/` with its own `wrangler.jsonc` and `package.json`.
 
 ## Conventions
