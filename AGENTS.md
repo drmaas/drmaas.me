@@ -22,7 +22,7 @@ Astro v6 · Tailwind v4 · daisyUI 5 · TypeScript · pnpm
 
 Two Cloudflare Workers in a single repo:
 
-- **Main site** (`drmaas.me`): Astro static site deployed via Workers Static Assets. `wrangler.jsonc` at root configures `assets.directory: "./dist"`. No adapter — pure SSG output served by Cloudflare Workers.
+- **Main site** (`drmaas.me`): Astro static site deployed via Workers Static Assets. `wrangler.jsonc` at root builds `./dist` into the `ASSETS` binding with `run_worker_first: true` so `worker/site.ts` runs before static files; it 301-redirects `www.drmaas.me` and HTTP to `https://drmaas.me` and sets HSTS on apex/www responses. No adapter — pure SSG output served by Cloudflare Workers.
 - **Resume API** (`api.drmaas.me`): Counter service using a Durable Object for strongly-consistent visitor counting. Lives under `api/` with its own `wrangler.jsonc` and `package.json`.
 
 ## Conventions
@@ -39,5 +39,7 @@ Two Cloudflare Workers in a single repo:
 - **Site URL**: `https://drmaas.me`, trailing slash always
 - **Resume page**: `/resume/` — ported from `cloud-resume-ui`, now an Astro page in `src/pages/resume/index.astro`
 - **Visitor counter**: `api/src/counter.do.ts` — Durable Object with atomic counter. Deployed as separate Worker at `api.drmaas.me`
+- **Resume API CORS**: `api/src/cors.ts` — only `https://drmaas.me` and `http://localhost` / `http://127.0.0.1` (any port) for local dev; disallowed browser origins get no CORS headers (403 on preflight)
+- **Resume API rate limit**: `api/src/rateLimiter.do.ts` — per `CF-Connecting-IP`, 10 `POST /resume/increment` requests per 60s window; returns **429** with `Retry-After` when exceeded
 - **Deployment**: GitHub Actions (`.github/workflows/deploy.yml`) — builds Astro site, then deploys API worker and main site with wrangler
 - **CI secrets**: `CLOUDFLARE_API_TOKEN`, `CLOUDFLARE_ACCOUNT_ID`

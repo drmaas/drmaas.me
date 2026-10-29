@@ -13,5 +13,6 @@
         "name": "@astrojs/ts-plugin"
       }
     ]
-  }
+  },
+  "exclude": ["api", "worker"]
 }
