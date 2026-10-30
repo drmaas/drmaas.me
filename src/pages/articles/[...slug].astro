@@ -1,10 +1,11 @@
 ---
 import type { CollectionEntry } from "astro:content";
-import { getCollection, render } from "astro:content";
+import { render } from "astro:content";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import TableOfContents from "../../components/TableOfContents.astro";
 
 import { fileToSlug, sortDateDescending } from "../../misc";
+import { getPostsForStaticPaths } from "../../lib/published-posts";
 import DateComponent from "@components/DateComponent.astro";
 import ReadingTimeComponent from "@components/ReadingTimeComponent.astro";
 import ArticleNav from "@components/ArticleNav.astro";
@@ -16,30 +17,20 @@ export interface Props {
 }
 
 export async function getStaticPaths() {
-  const allPosts = await getCollection('posts');
-  const numberOfPosts = allPosts.length; // Total of all posts
+  const posts = sortDateDescending(await getPostsForStaticPaths());
+  const numberOfPosts = posts.length;
 
-  return sortDateDescending(allPosts).map(
-    (post: CollectionEntry<'posts'>, i: number) => ({
-      // Map() all posts after sorting
-      params: {
-        slug: fileToSlug(post.filePath ?? "", "md"),
-      },
-      props: {
-        post,
-        // Previous post
-        prevPost:
-          i + 1 === numberOfPosts // If the current post is the oldest
-            ? { frontmatter: "" }
-            : allPosts[i + 1],
-        // Next post
-        nextPost:
-          i === 0 // If the current post is the newest
-            ? { frontmatter: "" }
-            : allPosts[i - 1],
-      },
-    })
-  );
+  return posts.map((post: CollectionEntry<'posts'>, i: number) => ({
+    params: {
+      slug: fileToSlug(post.filePath ?? "", "md"),
+    },
+    props: {
+      post,
+      prevPost:
+        i + 1 === numberOfPosts ? { frontmatter: "" } : posts[i + 1],
+      nextPost: i === 0 ? { frontmatter: "" } : posts[i - 1],
+    },
+  }));
 }
 
 // Get properties (frontmatter) for the previous/next posts

@@ -1,12 +1,10 @@
 ---
 import ArticleCard from "@components/ArticleCard.astro";
 import BaseLayout from "@layouts/BaseLayout.astro";
-import { getCollection } from "astro:content";
 import { sortDateDescending } from "src/misc";
+import { getPublishedPosts } from "src/lib/published-posts";
 
-const allPosts = await getCollection('posts');
-
-const posts = sortDateDescending(allPosts.filter((post) => post.data.draft != true)).slice(0, 3);
+const posts = sortDateDescending(await getPublishedPosts()).slice(0, 3);
 ---
 
 <BaseLayout title="Home" activeLink="home">

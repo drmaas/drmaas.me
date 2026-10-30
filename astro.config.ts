@@ -8,6 +8,7 @@ import { rehypeAutolink } from "./plugins/rehype-autolink";
 import { pluginLineNumbers } from "@expressive-code/plugin-line-numbers";
 import expressiveCode from "astro-expressive-code";
 import tailwindcss from "@tailwindcss/vite";
+import { KNOWN_DRAFT_SLUG } from "./src/lib/published-posts.constants";
 
 // https://astro.build/config
 export default defineConfig({
@@ -26,7 +27,10 @@ export default defineConfig({
       },
     },
     mdx(),
-    sitemap(),
+    sitemap({
+      filter: (page) =>
+        !page.includes(`/articles/${KNOWN_DRAFT_SLUG}/`),
+    }),
   ],
 
   site: "https://drmaas.me",
