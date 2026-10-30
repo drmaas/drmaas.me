@@ -3,20 +3,17 @@ import BaseLayout from "@layouts/BaseLayout.astro";
 import ArticleCard from "@components/ArticleCard.astro";
 import Pagination from "@components/Pagination.astro";
 import { sortDateDescending } from "../../misc";
+import { getPublishedPosts } from "../../lib/published-posts";
 import type { Page } from "astro";
 import config from "src/config";
 import type { CollectionEntry } from "astro:content";
-import { getCollection } from "astro:content";
 
 export interface Props {
   page: Page<CollectionEntry<"posts">>;
 }
 
 export async function getStaticPaths({ paginate }) {
-  const allPosts = await getCollection("posts");
-  const posts = sortDateDescending(
-    allPosts.filter((post) => post.data.draft !== true)
-  );
+  const posts = sortDateDescending(await getPublishedPosts());
   return paginate(posts, { pageSize: config.pageSize ?? 5 });
 }
 
