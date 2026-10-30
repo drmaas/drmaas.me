@@ -33,6 +33,15 @@
 
     let fuse: Fuse<ResultInterface>;
 
+    function escapeHtml(value: string): string {
+        return value
+            .replaceAll("&", "&amp;")
+            .replaceAll("<", "&lt;")
+            .replaceAll(">", "&gt;")
+            .replaceAll('"', "&quot;")
+            .replaceAll("'", "&#39;");
+    }
+
     async function initSearch() {
         const options = {
             ignoreLocation: true,
@@ -44,14 +53,18 @@
     function renderResults(results: ResultInterface[]) {
         let html = "";
         for (const result of results) {
+            const safeUrl = escapeHtml(result.url);
+            const safeTitle = escapeHtml(result.title);
+            const safeDate = escapeHtml(result.date);
+            const safeDescription = escapeHtml(result.description ?? "");
             html += `
             <div class="card bg-base-200 w-full shadow-lg hover:shadow-xl transition-shadow duration-200 focus-within:outline focus-within:outline-2 focus-within:outline-secondary">
               <div class="card-body"> 
-                <a href="${result.url}" class="no-underline text-cyan-600 hover:text-black dark:hover:text-white">
-                  <h2 class="card-title">${result.title}</h2>
+                <a href="${safeUrl}" class="no-underline text-cyan-600 hover:text-black dark:hover:text-white">
+                  <h2 class="card-title">${safeTitle}</h2>
                 </a>
-                <span class="text-sm opacity-70">${result.date}</span>
-                <p class="line-clamp-4 md:line-clamp-3">${result.description}</p>
+                <span class="text-sm opacity-70">${safeDate}</span>
+                <p class="line-clamp-4 md:line-clamp-3">${safeDescription}</p>
               </div>
             </div>
             `;
