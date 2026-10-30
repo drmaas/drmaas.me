@@ -21,6 +21,12 @@ jobs:
       - name: Install root dependencies
         run: pnpm install --frozen-lockfile
 
+      - name: Check (Astro + lint)
+        run: pnpm check
+
+      - name: Typecheck
+        run: pnpm typecheck
+
       - name: Build site
         run: pnpm build
 

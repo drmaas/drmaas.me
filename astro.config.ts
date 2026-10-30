@@ -22,8 +22,9 @@ export default defineConfig({
     {
       name: "clear-legacy-markdown-config",
       hooks: {
-        "astro:config:setup": ({ updateConfig }) =>
-          updateConfig({ markdown: { rehypePlugins: void 0, remarkRehype: void 0 } }),
+        "astro:config:setup": ({ updateConfig }) => {
+          updateConfig({ markdown: { rehypePlugins: void 0, remarkRehype: void 0 } });
+        },
       },
     },
     mdx(),
