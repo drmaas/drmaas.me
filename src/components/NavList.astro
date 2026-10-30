@@ -88,6 +88,12 @@ const {
       transform: translateX(0);
     }
 
+    @media (prefers-reduced-motion: reduce) {
+      ul#primary-nav {
+        transition: none;
+      }
+    }
+
     label#nav-toggle {
       display: grid;
     }

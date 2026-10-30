@@ -7,3 +7,15 @@
 /* https://daisyui.com/docs/themes/?lang=en#how-to-apply-tailwinds-dark-selector-for-specific-themes */
 @custom-variant dark (&:where([data-theme=night], [data-theme=night] *));
 
+/* Home light mode: app sets data-theme=cmyk (daisyUI winter tokens on :root); darker primary for AA. */
+html:not([data-theme="night"])
+  section[aria-labelledby="home-hero-heading"]
+  .btn.btn-primary:not(.btn-outline),
+html:not([data-theme="night"])
+  section[aria-labelledby="home-hero-heading"]
+  ~ section
+  .btn.btn-primary:not(.btn-outline) {
+  --btn-color: oklch(45% 0.255 257.57);
+  --btn-fg: oklch(98% 0 0);
+}
+
