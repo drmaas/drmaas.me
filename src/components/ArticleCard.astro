@@ -8,9 +8,13 @@ import type { CollectionEntry } from "astro:content";
 export interface Props {
   content: CollectionEntry<"posts">;
   lazyLoading?: boolean;
+  /** Card title heading level (articles index uses 2; home featured uses 3). */
+  headingLevel?: 2 | 3;
 }
 
-const { content, lazyLoading } = Astro.props as Props;
+const { content, lazyLoading, headingLevel = 2 } = Astro.props as Props;
+
+const TitleTag = headingLevel === 3 ? "h3" : "h2";
 
 const rendered = content.rendered?.html ?? "";
 
@@ -47,7 +51,7 @@ const date = new Date(content.data.date).toDateString();
       href={url}
       class="no-underline text-primary hover:text-primary-focus transition-colors duration-200"
     >
-      <h2 class="card-title text-2xl mb-2">{content.data.title}</h2>
+      <TitleTag class="card-title text-2xl mb-2">{content.data.title}</TitleTag>
     </a>
     <div class="flex items-center gap-3 text-sm opacity-70 mb-3">
       <DateComponent date={date} />

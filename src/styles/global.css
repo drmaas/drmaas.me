@@ -7,3 +7,10 @@
 /* https://daisyui.com/docs/themes/?lang=en#how-to-apply-tailwinds-dark-selector-for-specific-themes */
 @custom-variant dark (&:where([data-theme=night], [data-theme=night] *));
 
+/* Home hero: winter theme AA contrast (tagline uses /80 in markup; primary CTA needs darker fill). */
+[data-theme="winter"] section[aria-labelledby="home-hero-heading"]
+  .btn.btn-primary:not(.btn-outline) {
+  --btn-color: oklch(45% 0.255 257.57);
+  --btn-fg: oklch(98% 0 0);
+}
+
