@@ -85,6 +85,12 @@ const {
         --svg-totalLength: 844;
         scroll-behavior: smooth;
       }
+
+      @media (prefers-reduced-motion: reduce) {
+        html {
+          scroll-behavior: auto;
+        }
+      }
     </style>
 
     <style is:global>
@@ -127,10 +133,13 @@ const {
         document.querySelector<HTMLButtonElement>("#scrollButton");
       if (scrollButton) {
         scrollButton.addEventListener("click", () => {
+          const reduceMotion = window.matchMedia(
+            "(prefers-reduced-motion: reduce)",
+          ).matches;
           window.scroll({
             top: 0,
             left: 0,
-            behavior: "smooth",
+            behavior: reduceMotion ? "auto" : "smooth",
           });
         });
         window.addEventListener("scroll", () => {
