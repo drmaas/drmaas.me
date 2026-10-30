@@ -1,5 +1,4 @@
 ---
-import { ClientRouter } from "astro:transitions";
 import config from "src/config";
 export interface Props {
   title: string,
@@ -13,7 +12,6 @@ const baseSite = import.meta.env.BASE_URL
 ---
 
 <title>{title}</title>
-<ClientRouter />
 <meta charset="UTF-8">
 
 <meta name="author" content={authorName} />
