@@ -18,69 +18,47 @@
 </div>
 
 <script>
-    interface ResultInterface {
-        title: string;
-        url: string;
-        date: string;
-        description?: string;
-    }
     import Fuse from "fuse.js";
+    import {
+        renderSearchResults,
+        type SearchResult,
+    } from "../lib/search-results";
 
     const baseSite = import.meta.env.BASE_URL;
-    const posts = await fetch(`${baseSite}search/search.json`).then((resp) =>
-        resp.json(),
-    );
-
-    let fuse: Fuse<ResultInterface>;
+    let fuse: Fuse<SearchResult> | undefined;
 
     async function initSearch() {
-        const options = {
+        const posts: SearchResult[] = await fetch(
+            `${baseSite}search/search.json`,
+        ).then((resp) => resp.json());
+
+        fuse = new Fuse(posts, {
             ignoreLocation: true,
             keys: ["title", "description"],
-        };
-        fuse = new Fuse(posts, options);
-    }
-
-    function renderResults(results: ResultInterface[]) {
-        let html = "";
-        for (const result of results) {
-            html += `
-            <div class="card bg-base-200 w-full shadow-lg hover:shadow-xl transition-shadow duration-200 focus-within:outline focus-within:outline-2 focus-within:outline-secondary">
-              <div class="card-body"> 
-                <a href="${result.url}" class="no-underline text-cyan-600 hover:text-black dark:hover:text-white">
-                  <h2 class="card-title">${result.title}</h2>
-                </a>
-                <span class="text-sm opacity-70">${result.date}</span>
-                <p class="line-clamp-4 md:line-clamp-3">${result.description}</p>
-              </div>
-            </div>
-            `;
-        }
-        const resultsElement = document.querySelector("#results");
-        if (resultsElement) {
-            resultsElement.innerHTML = html;
-        }
+        });
     }
 
     function performSearch() {
         const input = document.querySelector<HTMLInputElement>("#search");
-        if (!input) return;
+        const resultsElement = document.querySelector("#results");
+        if (!input || !resultsElement || !fuse) return;
 
-        const pattern = input.value;
-        const results = fuse.search(pattern);
-        const resultItems = results.map((r) => r.item);
-        renderResults(resultItems);
+        const resultItems = fuse.search(input.value).map((r) => r.item);
+        renderSearchResults(resultsElement as HTMLElement, resultItems);
     }
 
-    async function setup() {
+    async function setupSearch() {
+        if (!document.querySelector("#search")) return;
+
         await initSearch();
         performSearch();
 
         const input = document.querySelector<HTMLInputElement>("#search");
-        if (input) {
+        if (input && !input.dataset.searchBound) {
+            input.dataset.searchBound = "true";
             input.addEventListener("input", performSearch);
         }
     }
 
-    setup();
+    document.addEventListener("astro:page-load", setupSearch);
 </script>
