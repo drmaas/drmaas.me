@@ -35,10 +35,14 @@ const {
       class="absolute bg-info text-info-content px-6 py-2 rounded-br-md -translate-x-full focus-within:translate-x-0 transition-all"
       >Skip Navigation</a
     >
-    <header class="container mx-auto flex items-center justify-between mb-8 mt-4">
-      <div class="p-4">
-        <!-- Logo -->
-        <span class="text-4xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent"><a href="/">The Everyday Software Guy</a></span>
+    <header class="container mx-auto flex items-center justify-between gap-2 mb-8 mt-4 px-2 sm:px-4">
+      <div class="min-w-0 py-2 pl-2 pr-14 sm:p-4 sm:pr-4">
+        <a
+          href="/"
+          class="block text-2xl font-bold leading-tight tracking-tight bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent sm:text-3xl md:text-4xl"
+        >
+          {fullName}
+        </a>
       </div>
       <NavList activeLink={activeLink} />
     </header>
