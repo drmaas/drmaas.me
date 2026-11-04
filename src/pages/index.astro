@@ -3,24 +3,15 @@ import ArticleCard from "@components/ArticleCard.astro";
 import BaseLayout from "@layouts/BaseLayout.astro";
 import config from "src/config";
 import { sortDateDescending } from "src/misc";
+import {
+  profileHeroSkills,
+  profileIntro,
+  profileTagline,
+} from "src/lib/profile";
 import { getPublishedPosts } from "src/lib/published-posts";
 
 const posts = sortDateDescending(await getPublishedPosts()).slice(0, 3);
 const { fullName } = config.metaData;
-
-const heroIntro =
-  "I've been deep in the agentic AI space — building and orchestrating coding agents (Claude Code, Cursor, Codex) and authoring the primitives that power them: MCP servers, plugins, skills, hooks, and subagents.";
-
-const heroTagline = "Software Shepherd · Agentic AI · AWS · Cloudflare";
-
-const heroSkills = [
-  "Agentic AI",
-  "Application Architecture",
-  "Cloudflare",
-  "MCP Servers",
-  "System Design",
-  "TypeScript",
-];
 ---
 
 <BaseLayout title="Home" activeLink="home">
@@ -55,17 +46,17 @@ const heroSkills = [
 					{fullName}
 				</h1>
 				<p class="mt-2 text-sm text-base-content/80 sm:text-base">
-					{heroTagline}
+					{profileTagline}
 				</p>
 				<p class="mt-4 text-base leading-relaxed text-base-content/80">
-					{heroIntro}
+					{profileIntro}
 				</p>
 				<ul
 					class="mt-5 flex flex-wrap justify-center gap-2 md:justify-start"
 					aria-label="Highlighted skills"
 				>
 					{
-						heroSkills.map((skill) => (
+						profileHeroSkills.map((skill) => (
 							<li>
 								<span class="inline-flex items-center rounded-full border-[1.5px] border-base-content/40 px-3 py-1 text-sm font-medium text-base-content">
 									{skill}
