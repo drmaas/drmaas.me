@@ -14,6 +14,14 @@ const {
 } = config;
 ---
 
+<div
+  id="nav-backdrop"
+  class="nav-backdrop"
+  hidden
+  aria-hidden="true"
+  tabindex="-1"
+></div>
+
 <label
   aria-label="Hamburger Menu"
   id="nav-toggle"
@@ -48,7 +56,7 @@ const {
   </svg>
 </label>
 
-<nav class="mr-6">
+<nav class="mr-6" aria-label="Primary navigation">
   <ul
     id="primary-nav"
     class="flex gap-8 items-center justify-center z-100"
@@ -73,6 +81,17 @@ const {
 <style>
   /* Mobile Navigation */
   @media (max-width: 640px) {
+    .nav-backdrop {
+      position: fixed;
+      inset: 0;
+      z-index: 99;
+      border: none;
+      padding: 0;
+      margin: 0;
+      background: hsl(var(--bc) / 0.15);
+      cursor: pointer;
+    }
+
     ul#primary-nav {
       position: fixed;
       inset: 0 0 0 30%;
@@ -130,32 +149,153 @@ const {
 </style>
 
 <script>
-  // Navigation / Hamburger menu - control
-  const nav = document.querySelector<HTMLUListElement>("#primary-nav");
-  const navToggle = document.querySelector<HTMLLabelElement>("#nav-toggle");
-  const navToggleInput =
-    document.querySelector<HTMLInputElement>("#nav-toggle input");
+  const MOBILE_NAV_QUERY = "(max-width: 640px)";
+  const FOCUSABLE_SELECTOR =
+    'a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])';
 
-  if (navToggle && nav) {
-    navToggle.addEventListener("change", () => {
-      if (nav.getAttribute("data-visible") === "false") {
-        nav.setAttribute("data-visible", "true");
-        nav.setAttribute("aria-expanded", "true");
-      } else if (nav.getAttribute("data-visible") === "true") {
-        nav.setAttribute("data-visible", "false");
-        nav.setAttribute("aria-expanded", "false");
+  function setupMobileNav() {
+    const nav = document.querySelector<HTMLUListElement>("#primary-nav");
+    const navToggle = document.querySelector<HTMLLabelElement>("#nav-toggle");
+    const navToggleInput =
+      document.querySelector<HTMLInputElement>("#nav-toggle input");
+    const backdrop = document.querySelector<HTMLDivElement>("#nav-backdrop");
+    const main = document.querySelector<HTMLElement>("main");
+    const footer = document.querySelector<HTMLElement>("footer");
+    const scrollButton =
+      document.querySelector<HTMLElement>("#scrollButton");
+    const skipLink = document.querySelector<HTMLElement>('a[href="#main"]');
+    const siteBrand = document.querySelector<HTMLElement>("header > div.min-w-0");
+
+    if (!nav || !navToggle || !navToggleInput || !backdrop) {
+      return;
+    }
+
+    const inertTargets = [main, footer, scrollButton, skipLink, siteBrand].filter(
+      (el): el is HTMLElement => el instanceof HTMLElement,
+    );
+
+    if (navToggleInput.dataset.navBound === "true") {
+      return;
+    }
+    navToggleInput.dataset.navBound = "true";
+
+    let trapKeydown: ((event: KeyboardEvent) => void) | null = null;
+
+    const isMobileNav = () =>
+      window.matchMedia(MOBILE_NAV_QUERY).matches;
+
+    const getDrawerFocusables = (): HTMLElement[] =>
+      Array.from(nav.querySelectorAll<HTMLElement>(FOCUSABLE_SELECTOR)).filter(
+        (el) => !el.closest("[hidden]"),
+      );
+
+    const getTrapFocusables = (): HTMLElement[] => {
+      const drawer = getDrawerFocusables();
+      return drawer.length > 0 ? [...drawer, navToggle] : [navToggle];
+    };
+
+    const setInertBackground = (inert: boolean) => {
+      for (const el of inertTargets) {
+        if (inert) {
+          el.setAttribute("inert", "");
+          el.setAttribute("aria-hidden", "true");
+        } else {
+          el.removeAttribute("inert");
+          el.removeAttribute("aria-hidden");
+        }
+      }
+    };
+
+    const removeTrap = () => {
+      if (trapKeydown) {
+        document.removeEventListener("keydown", trapKeydown);
+        trapKeydown = null;
+      }
+    };
+
+    const closeMenu = (returnFocus = true) => {
+      nav.setAttribute("data-visible", "false");
+      navToggle.setAttribute("aria-expanded", "false");
+      navToggleInput.checked = false;
+      backdrop.hidden = true;
+      backdrop.setAttribute("aria-hidden", "true");
+      setInertBackground(false);
+      removeTrap();
+      if (returnFocus) {
+        navToggle.focus();
+      }
+    };
+
+    const openMenu = () => {
+      nav.setAttribute("data-visible", "true");
+      navToggle.setAttribute("aria-expanded", "true");
+      backdrop.hidden = false;
+      backdrop.setAttribute("aria-hidden", "false");
+      setInertBackground(true);
+
+      const firstLink = nav.querySelector<HTMLElement>("a[href]");
+      (firstLink ?? getDrawerFocusables()[0])?.focus();
+
+      trapKeydown = (event: KeyboardEvent) => {
+        if (event.key === "Escape") {
+          event.preventDefault();
+          closeMenu(true);
+          return;
+        }
+
+        if (event.key !== "Tab") {
+          return;
+        }
+
+        const focusables = getTrapFocusables();
+        if (focusables.length === 0) {
+          return;
+        }
+
+        const first = focusables[0];
+        const last = focusables.at(-1);
+        if (!first || !last) {
+          return;
+        }
+
+        if (event.shiftKey && document.activeElement === first) {
+          event.preventDefault();
+          last.focus();
+        } else if (!event.shiftKey && document.activeElement === last) {
+          event.preventDefault();
+          first.focus();
+        }
+      };
+
+      document.addEventListener("keydown", trapKeydown);
+    };
+
+    const syncFromCheckbox = () => {
+      if (!isMobileNav()) {
+        closeMenu(false);
+        return;
+      }
+
+      if (navToggleInput.checked) {
+        openMenu();
+      } else {
+        closeMenu(true);
+      }
+    };
+
+    navToggleInput.addEventListener("change", syncFromCheckbox);
+
+    backdrop.addEventListener("click", () => {
+      closeMenu(true);
+    });
+
+    window.matchMedia(MOBILE_NAV_QUERY).addEventListener("change", (event) => {
+      if (!event.matches && nav.getAttribute("data-visible") === "true") {
+        closeMenu(false);
       }
     });
   }
 
-  const main = document.querySelector("main");
-  if (main && nav && navToggleInput) {
-    main.addEventListener("click", () => {
-      if (nav.getAttribute("data-visible") === "true") {
-        nav.setAttribute("data-visible", "false");
-        nav.setAttribute("aria-expanded", "false");
-        navToggleInput.checked = !navToggleInput.checked;
-      }
-    });
-  }
+  setupMobileNav();
+  document.addEventListener("astro:page-load", setupMobileNav);
 </script>
