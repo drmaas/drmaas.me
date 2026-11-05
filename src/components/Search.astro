@@ -7,7 +7,6 @@
         <input
             id="search"
             aria-label="search box"
-            autofocus
             type="text"
             placeholder="Search articles..."
             class="input input-bordered input-info w-full max-w-lg mx-auto"
@@ -47,16 +46,27 @@
         renderSearchResults(resultsElement as HTMLElement, resultItems);
     }
 
+    function maybeFocusSearch(input: HTMLInputElement) {
+        const finePointer = window.matchMedia("(pointer: fine)").matches;
+        const reducedMotion = window.matchMedia(
+            "(prefers-reduced-motion: reduce)",
+        ).matches;
+        if (finePointer && !reducedMotion) {
+            input.focus({ preventScroll: true });
+        }
+    }
+
     async function setupSearch() {
-        if (!document.querySelector("#search")) return;
+        const input = document.querySelector<HTMLInputElement>("#search");
+        if (!input) return;
 
         await initSearch();
         performSearch();
 
-        const input = document.querySelector<HTMLInputElement>("#search");
-        if (input && !input.dataset.searchBound) {
+        if (!input.dataset.searchBound) {
             input.dataset.searchBound = "true";
             input.addEventListener("input", performSearch);
+            maybeFocusSearch(input);
         }
     }
 
