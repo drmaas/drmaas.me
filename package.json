@@ -20,6 +20,7 @@
     "deploy": "pnpm run deploy:api && pnpm run deploy:site"
   },
   "devDependencies": {
+    "@astrojs/check": "^0.9.12",
     "@astrojs/sitemap": "^3.7.3",
     "@astrojs/ts-plugin": "^1.10.9",
     "@biomejs/biome": "^2.5.1",
