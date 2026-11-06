@@ -14,5 +14,5 @@
       }
     ]
   },
-  "exclude": ["api", "worker"]
+  "exclude": ["api", "worker", "dist"]
 }

@@ -1,3 +1,4 @@
+import { cacheControlForAssetsResponse } from "./cache-control";
 import {
   canonicalRedirectUrl,
   HSTS_VALUE,
@@ -21,11 +22,23 @@ export default {
     const response = await env.ASSETS.fetch(request);
     const url = new URL(request.url);
 
-    if (!isProductionSiteHost(url.hostname)) {
-      return response;
+    const headers = new Headers(response.headers);
+    const cacheControl = cacheControlForAssetsResponse(
+      url.pathname,
+      response.status,
+    );
+    if (cacheControl !== null) {
+      headers.set("Cache-Control", cacheControl);
     }
 
-    const headers = new Headers(response.headers);
+    if (!isProductionSiteHost(url.hostname)) {
+      return new Response(response.body, {
+        status: response.status,
+        statusText: response.statusText,
+        headers,
+      });
+    }
+
     headers.set("Strict-Transport-Security", HSTS_VALUE);
 
     return new Response(response.body, {
