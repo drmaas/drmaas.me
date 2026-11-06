@@ -41,5 +41,6 @@ Two Cloudflare Workers in a single repo:
 - **Visitor counter**: `api/src/counter.do.ts` — Durable Object with atomic counter. Deployed as separate Worker at `api.drmaas.me`
 - **Resume API CORS**: `api/src/cors.ts` — only `https://drmaas.me` and `http://localhost` / `http://127.0.0.1` (any port) for local dev; disallowed browser origins get no CORS headers (403 on preflight)
 - **Resume API rate limit**: `api/src/rateLimiter.do.ts` — per `CF-Connecting-IP`, 10 `POST /resume/increment` requests per 60s window; returns **429** with `Retry-After` when exceeded
-- **Deployment**: GitHub Actions (`.github/workflows/deploy.yml`) — builds Astro site, then deploys API worker and main site with wrangler
+- **CI**: `.github/workflows/ci.yml` on pull requests — `pnpm install`, `pnpm check`, `pnpm typecheck`, `pnpm test run`, `pnpm build` (no deploy). Root `pnpm test run` runs Vitest once, including `api/src/cors.test.ts` and other suites under the repo Vitest config.
+- **Deployment**: GitHub Actions (`.github/workflows/deploy.yml`) on `main` — same verify steps plus deploy of API worker and main site with wrangler
 - **CI secrets**: `CLOUDFLARE_API_TOKEN`, `CLOUDFLARE_ACCOUNT_ID`
