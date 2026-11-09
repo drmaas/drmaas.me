@@ -1,12 +1,17 @@
 ---
 import config from "src/config";
+import { resolveOgImageUrl } from "src/lib/og-image";
+
 export interface Props {
-  title: string,
-  description: string,
+  title: string;
+  description: string;
+  image?: string;
 }
-const { title, description } = Astro.props as Props;
+const { title, description, image } = Astro.props as Props;
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 const url = canonicalURL.href;
+const siteOrigin = Astro.site?.href ?? "https://drmaas.me";
+const ogImageUrl = resolveOgImageUrl(siteOrigin, image);
 const { metaData: { authorName, category, summary, keywords, icon } } = config;
 const baseSite = import.meta.env.BASE_URL
 ---
@@ -33,9 +38,11 @@ const baseSite = import.meta.env.BASE_URL
 <meta property="og:description" content={description} />
 <meta property="og:type" content="website" />
 <meta property="og:url" content={url} />
+<meta property="og:image" content={ogImageUrl} />
 
 <!-- Twitter Meta data -->
-<meta name="twitter:card" content={summary} />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:image" content={ogImageUrl} />
 <meta name="twitter:url" content={url} />
 <meta name="twitter:title" content={title} />
 <meta name="twitter:site" content={url} />

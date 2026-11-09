@@ -10,12 +10,14 @@ export interface Props {
   title: string;
   description?: string;
   activeLink?: string;
+  image?: string;
 }
 
 const {
   title,
   description = "My blog",
   activeLink = "",
+  image,
 } = Astro.props as Props;
 const {
   metaData: { fullName },
@@ -25,7 +27,7 @@ const {
 <html lang="en" class="bg-base-100" data-theme="cmyk">
   <head>
     <PostHog />
-    <BaseHead title={title} description={description} />
+    <BaseHead title={title} description={description} image={image} />
     <ClientRouter />
   </head>
 

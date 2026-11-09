@@ -12,9 +12,10 @@ export interface Props {
 const { content, headings } = Astro.props as Props;
 const { title, image, imageDescription, description } = content;
 const date = content.date ? new Date(content.date).toDateString() : undefined;
+const shareImage = image?.trim() ? image : undefined;
 ---
 
-<BaseLayout title={title} description={description}>
+<BaseLayout title={title} description={description} image={shareImage}>
   <div
     class="max-w-7xl md:pb-10 md:pt-16 md:px-8 mx-auto pb-8 pt-12 px-5"
   >
