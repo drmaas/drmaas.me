@@ -3,6 +3,7 @@ import BaseLayout from "./BaseLayout.astro";
 import TableOfContents from "../components/TableOfContents.astro";
 import DateComponent from "@components/DateComponent.astro";
 import type { InferEntrySchema } from "astro:content";
+import { postShareImage } from "src/lib/og-image";
 
 export interface Props {
   content: InferEntrySchema<"posts">;
@@ -12,7 +13,7 @@ export interface Props {
 const { content, headings } = Astro.props as Props;
 const { title, image, imageDescription, description } = content;
 const date = content.date ? new Date(content.date).toDateString() : undefined;
-const shareImage = image?.trim() ? image : undefined;
+const shareImage = postShareImage(image);
 ---
 
 <BaseLayout title={title} description={description} image={shareImage}>

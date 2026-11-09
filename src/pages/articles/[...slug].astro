@@ -9,6 +9,7 @@ import { getPostsForStaticPaths } from "../../lib/published-posts";
 import DateComponent from "@components/DateComponent.astro";
 import ReadingTimeComponent from "@components/ReadingTimeComponent.astro";
 import ArticleNav from "@components/ArticleNav.astro";
+import { postShareImage } from "src/lib/og-image";
 
 export interface Props {
   post: CollectionEntry<'posts'>;
@@ -47,9 +48,10 @@ const prevUrl = prevPost.data
 const nextUrl = nextPost.data
   ? `/articles/${fileToSlug(nextPost.filePath ?? "", "md")}`
   : "";
+const shareImage = postShareImage(image);
 ---
 
-<BaseLayout title={title} description={description}>
+<BaseLayout title={title} description={description} image={shareImage}>
   <div>
     <div class="container max-w-7xl md:pb-10 md:pt-16 mx-auto pb-8 pt-12">
       <h1
