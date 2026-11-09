@@ -5,6 +5,8 @@ import config from "src/config";
 import { sortDateDescending } from "src/misc";
 import {
   profileHeroSkills,
+  profileHomeDocumentTitle,
+  profileHomeMetaDescription,
   profileIntro,
   profileTagline,
 } from "src/lib/profile";
@@ -12,9 +14,11 @@ import { getPublishedPosts } from "src/lib/published-posts";
 
 const posts = sortDateDescending(await getPublishedPosts()).slice(0, 3);
 const { fullName } = config.metaData;
+const homeTitle = profileHomeDocumentTitle(fullName);
+const homeDescription = profileHomeMetaDescription();
 ---
 
-<BaseLayout title="Home" activeLink="home">
+<BaseLayout title={homeTitle} description={homeDescription} activeLink="home">
 	<section
 		class="max-w-6xl mx-auto mb-16 mt-4 px-4"
 		aria-labelledby="home-hero-heading"

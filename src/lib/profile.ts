@@ -8,6 +8,34 @@ export const profileTagline =
 export const profileIntro =
   "I've been deep in the agentic AI space — building and orchestrating coding agents (Claude Code, Cursor, Codex) and authoring the primitives that power them: MCP servers, plugins, skills, hooks, and subagents.";
 
+/** Target length for HTML meta descriptions (search snippets). */
+export const metaDescriptionMaxLength = 160;
+
+/** Trim copy to a word boundary for `meta name="description"`. */
+export function trimToMetaDescription(
+  text: string,
+  maxLength: number = metaDescriptionMaxLength,
+): string {
+  const normalized = text.trim().replace(/\s+/g, " ");
+  if (normalized.length <= maxLength) {
+    return normalized;
+  }
+  const slice = normalized.slice(0, maxLength);
+  const lastSpace = slice.lastIndexOf(" ");
+  if (lastSpace <= 0) {
+    return slice;
+  }
+  return slice.slice(0, lastSpace);
+}
+
+export function profileHomeDocumentTitle(fullName: string): string {
+  return `${fullName} — ${profileTagline}`;
+}
+
+export function profileHomeMetaDescription(): string {
+  return trimToMetaDescription(profileIntro);
+}
+
 const profileAboutSuffix =
   " I'm particularly interested in composable agent architectures and how agentic tooling changes the way developers ship software.";
 
