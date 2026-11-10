@@ -9,13 +9,9 @@ export function postShareImage(image?: string): string | undefined {
   return image?.trim() ? image : undefined;
 }
 
-export function resolveOgImageUrl(
-  siteOrigin: string,
-  image?: string,
-): string {
+export function resolveOgImageUrl(siteOrigin: string, image?: string): string {
   const trimmed = image?.trim();
-  const path =
-    trimmed && trimmed.length > 0 ? trimmed : DEFAULT_OG_IMAGE_PATH;
+  const path = trimmed && trimmed.length > 0 ? trimmed : DEFAULT_OG_IMAGE_PATH;
 
   if (path.startsWith("http://") || path.startsWith("https://")) {
     return path;
