@@ -21,9 +21,7 @@ describe("renderSearchResults", () => {
     const title = container.querySelector("h2");
     const paragraph = container.querySelector("p");
 
-    expect(title?.textContent).toBe(
-      '<img src=x onerror="alert(1)"> & "quotes"',
-    );
+    expect(title?.textContent).toBe('<img src=x onerror="alert(1)"> & "quotes"');
     expect(paragraph?.textContent).toBe("<script>bad()</script>");
     expect(container.querySelector("img")).toBeNull();
     expect(container.querySelector("script")).toBeNull();
