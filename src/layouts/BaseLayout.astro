@@ -134,6 +134,12 @@ const {
     </style>
 
     <script>
+      import { registerViewTransitionFocus } from "../lib/view-transition-focus";
+
+      registerViewTransitionFocus();
+    </script>
+
+    <script>
       // Scroll To Top button - control
       const scrollButton =
         document.querySelector<HTMLButtonElement>("#scrollButton");
