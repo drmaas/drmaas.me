@@ -46,9 +46,38 @@ export function shouldRestoreFocus(
   return true;
 }
 
-export function resolveFocusTarget(main: HTMLElement): HTMLElement {
+function findFragmentTarget(hash: string): HTMLElement | null {
+  if (!hash.startsWith("#") || hash.length < 2) {
+    return null;
+  }
+
+  let id: string;
+  try {
+    id = decodeURIComponent(hash.slice(1));
+  } catch {
+    return null;
+  }
+
+  const element = document.getElementById(id);
+  return element instanceof HTMLElement ? element : null;
+}
+
+export function resolveFocusTarget(main: HTMLElement, hash = ""): HTMLElement {
+  const fragment = findFragmentTarget(hash);
+  if (fragment) {
+    // Natively focusable controls stay in tab order. Everything else needs
+    // tabindex="-1" or focus() is a no-op in real browsers.
+    if (!fragment.hasAttribute("tabindex") && fragment.tabIndex < 0) {
+      fragment.setAttribute("tabindex", "-1");
+    }
+    return fragment;
+  }
+
   const heading = main.querySelector("h1");
   if (heading instanceof HTMLElement) {
+    if (!heading.hasAttribute("tabindex")) {
+      heading.setAttribute("tabindex", "-1");
+    }
     return heading;
   }
   if (!main.hasAttribute("tabindex")) {
@@ -60,12 +89,12 @@ export function resolveFocusTarget(main: HTMLElement): HTMLElement {
 export function restoreFocusAfterViewTransition(
   main: HTMLElement | null,
   activeElement: Element | null,
-  options: { hashOnlyNavigation: boolean },
+  options: { hashOnlyNavigation: boolean; hash?: string },
 ): HTMLElement | null {
   if (!shouldRestoreFocus(main, activeElement, options)) {
     return null;
   }
-  const target = resolveFocusTarget(main as HTMLElement);
+  const target = resolveFocusTarget(main as HTMLElement, options.hash ?? "");
   target.focus({ preventScroll: false });
   return target;
 }
@@ -109,6 +138,7 @@ export function registerViewTransitionFocus(): void {
     const main = document.getElementById(MAIN_ELEMENT_ID);
     restoreFocusAfterViewTransition(main, document.activeElement, {
       hashOnlyNavigation,
+      hash: currentUrl.hash,
     });
   };
 
