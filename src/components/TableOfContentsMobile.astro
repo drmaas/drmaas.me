@@ -1,0 +1,68 @@
+---
+import { buildToc } from "../lib/build-toc";
+import TableOfContentsHeading from "./TableOfContentsHeading.astro";
+
+const { headings } = Astro.props;
+
+const toc = buildToc(headings);
+const tocId = "article-toc-mobile";
+---
+
+{
+	toc.length > 0 && (
+		<details
+			id={tocId}
+			class="toc-mobile group mb-6 w-full max-w-full rounded-md border border-base-300 bg-base-100 shadow-md lg:hidden motion-reduce:scroll-auto"
+		>
+			<summary class="flex cursor-pointer list-none items-center justify-between gap-2 px-4 py-3 text-base font-medium marker:content-none [&::-webkit-details-marker]:hidden focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-base-100">
+				<span>On this page</span>
+				<svg
+					xmlns="http://www.w3.org/2000/svg"
+					viewBox="0 0 20 20"
+					fill="currentColor"
+					aria-hidden="true"
+					class="h-5 w-5 shrink-0 text-base-content/70 transition-transform duration-200 motion-reduce:transition-none group-open:rotate-180"
+				>
+					<path
+						fill-rule="evenodd"
+						d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.94a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"
+						clip-rule="evenodd"
+					/>
+				</svg>
+			</summary>
+			<nav aria-label="On this page" class="border-t border-base-300 px-4 pb-4 pt-2">
+				<ul class="list-none overflow-hidden">
+					{toc.map((heading) => (
+						<TableOfContentsHeading heading={heading} />
+					))}
+				</ul>
+			</nav>
+		</details>
+	)
+}
+
+<script>
+	const MOBILE_TOC_MQ = "(max-width: 1023px)";
+
+	function bindMobileTocClose() {
+		const root = document.getElementById("article-toc-mobile");
+		if (!root) return;
+
+		const mq = window.matchMedia(MOBILE_TOC_MQ);
+		root.querySelectorAll('a[href^="#"]').forEach((link) => {
+			if (link instanceof HTMLAnchorElement && link.dataset.bound === "true") {
+				return;
+			}
+			if (link instanceof HTMLAnchorElement) {
+				link.dataset.bound = "true";
+			}
+			link.addEventListener("click", () => {
+				if (mq.matches) {
+					root.removeAttribute("open");
+				}
+			});
+		});
+	}
+
+	document.addEventListener("astro:page-load", bindMobileTocClose);
+</script>
