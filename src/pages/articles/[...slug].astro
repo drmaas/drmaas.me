@@ -10,6 +10,7 @@ import { getPostsForStaticPaths } from "../../lib/published-posts";
 import DateComponent from "@components/DateComponent.astro";
 import ReadingTimeComponent from "@components/ReadingTimeComponent.astro";
 import ArticleNav from "@components/ArticleNav.astro";
+import ArticleHeroImage from "@components/ArticleHeroImage.astro";
 import { postShareImage } from "src/lib/og-image";
 
 export interface Props {
@@ -39,7 +40,14 @@ export async function getStaticPaths() {
 const { post, prevPost, nextPost } = Astro.props as Props;
 const { Content, headings } = await render(post);
 const rendered = post.rendered?.html ?? "";
-const { title, image, imageDescription, description } = post.data;
+const {
+  title,
+  image,
+  imageDescription,
+  imageWidth,
+  imageHeight,
+  description,
+} = post.data;
 const date = post.data.date
   ? new Date(post.data.date).toDateString()
   : undefined;
@@ -62,14 +70,13 @@ const shareImage = postShareImage(image);
       </h1>
       {
         image ? (
-          <Fragment>
-            <img
-              class="w-10/12 mx-auto aspect-video"
-              src={image}
-              alt={imageDescription ?? title}
-              transition:name={image}
-            />
-          </Fragment>
+          <ArticleHeroImage
+            src={image}
+            alt={imageDescription ?? title}
+            transitionName={image}
+            width={imageWidth}
+            height={imageHeight}
+          />
         ) : null
       }
 
