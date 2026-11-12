@@ -3,6 +3,8 @@ export interface SearchResult {
   url: string;
   date: string;
   description?: string;
+  /** Plain-text excerpt for Fuse matching only; not rendered in result cards. */
+  body?: string;
 }
 
 function createResultCard(result: SearchResult): HTMLElement {

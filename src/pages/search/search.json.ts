@@ -1,5 +1,6 @@
 import { fileToSlug } from "src/misc";
 import { getPublishedPosts } from "src/lib/published-posts";
+import { htmlToSearchBodyText } from "src/lib/search-body-text";
 import { parse } from "node-html-parser";
 
 export async function GET() {
@@ -13,6 +14,7 @@ export async function GET() {
       description:
         ele.data.description ||
         parse(rendered).querySelector("p:first-of-type")?.innerText,
+      body: htmlToSearchBodyText(rendered),
     };
   });
   return new Response(JSON.stringify(posts));
