@@ -1,0 +1,33 @@
+---
+import {
+  ARTICLE_HERO_SIZES,
+  articleHeroDimensions,
+} from "src/lib/article-hero-image";
+
+export interface Props {
+  src: string;
+  alt: string;
+  transitionName?: string;
+  width?: number;
+  height?: number;
+}
+
+const { src, alt, transitionName, width, height } = Astro.props as Props;
+const { width: imgWidth, height: imgHeight } = articleHeroDimensions(
+  width,
+  height,
+);
+---
+
+<img
+  src={src}
+  alt={alt}
+  width={imgWidth}
+  height={imgHeight}
+  sizes={ARTICLE_HERO_SIZES}
+  class="w-full md:w-10/12 mx-auto aspect-video object-cover rounded-box"
+  loading="eager"
+  decoding="async"
+  fetchpriority="high"
+  transition:name={transitionName}
+/>
