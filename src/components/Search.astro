@@ -17,24 +17,21 @@
 </div>
 
 <script>
-    import Fuse from "fuse.js";
+    import { createSearchFuse } from "../lib/search-fuse";
     import {
         renderSearchResults,
         type SearchResult,
     } from "../lib/search-results";
 
     const baseSite = import.meta.env.BASE_URL;
-    let fuse: Fuse<SearchResult> | undefined;
+    let fuse: ReturnType<typeof createSearchFuse> | undefined;
 
     async function initSearch() {
         const posts: SearchResult[] = await fetch(
             `${baseSite}search/search.json`,
         ).then((resp) => resp.json());
 
-        fuse = new Fuse(posts, {
-            ignoreLocation: true,
-            keys: ["title", "description"],
-        });
+        fuse = createSearchFuse(posts);
     }
 
     function performSearch() {

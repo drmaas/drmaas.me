@@ -41,4 +41,30 @@ describe("production build output", () => {
       expect(xml).not.toContain(KNOWN_DRAFT_SLUG);
     },
   );
+
+  it.skipIf(!fs.existsSync(distRoot))(
+    "omits known draft slug from search index",
+    () => {
+      const searchPath = path.join(distRoot, "search", "search.json");
+      expect(fs.existsSync(searchPath)).toBe(true);
+      const json = fs.readFileSync(searchPath, "utf8");
+      expect(json).not.toContain(KNOWN_DRAFT_SLUG);
+    },
+  );
+
+  it.skipIf(!fs.existsSync(distRoot))(
+    "search index bodies contain no HTML tag fragments",
+    () => {
+      const searchPath = path.join(distRoot, "search", "search.json");
+      const posts = JSON.parse(
+        fs.readFileSync(searchPath, "utf8"),
+      ) as { body?: string }[];
+      for (const post of posts) {
+        const body = post.body ?? "";
+        expect(body).not.toContain("ec-line");
+        expect(body).not.toMatch(/<div\b/i);
+        expect(body).not.toMatch(/<code\b/i);
+      }
+    },
+  );
 });
