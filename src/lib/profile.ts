@@ -169,11 +169,8 @@ export const resumeExperience: ExperienceEntry[] = [
     location: "Minnesota, United States",
     dates: "Jan 2023 – Present",
     bullets: [
-      "Designing and deploying agentic coding workflows using Claude Code, Cursor, and Codex — including MCP server authoring, plugin/skill/hook composition, and subagent orchestration",
-      "Building multi-agent automation pipelines with Mastra.ai, LangChain/LangGraph, and AWS Bedrock AgentCore; integrating Slack Bolt bots with the OpenAI SDK for workflow automation",
-      "Designed website telemetry platform for salesforce.com scaling to 10K RPS",
-      "Designed authentication and authorization servers using OpenID Connect (OIDC)",
-      "Designed lead generation apps to capture marketing signals across Salesforce sites",
+      "Building platform services spanning website telemetry, lead processing, identity, profile settings, and content modeling",
+      "Developing internal agentic systems for automated website monitoring and Slack-based software factories using AWS Bedrock",
     ],
   },
   {
