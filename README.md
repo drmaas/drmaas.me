@@ -38,6 +38,16 @@ Two Cloudflare Workers in a single repo:
 
 The admin panel is at `https://drmaas.me/admin`. Sveltia CMS authenticates via GitHub OAuth through a Cloudflare Worker at `sveltia-cms-auth.drmaas.workers.dev`. Content collections and widget config are defined in `public/admin/config.yml`.
 
+`public/admin/index.html` loads Sveltia from unpkg with a pinned version and Subresource Integrity (`integrity` + `crossorigin`). The version is tracked as a devDependency (`@sveltia/cms`) for Dependabot.
+
+When upgrading Sveltia, bump the devDependency, update the script URL in `public/admin/index.html`, and regenerate the hash:
+
+```sh
+VERSION=0.265.1
+curl -fsSL "https://unpkg.com/@sveltia/cms@${VERSION}/dist/sveltia-cms.js" -o /tmp/sveltia-cms.js
+printf 'sha384-%s\n' "$(openssl dgst -sha384 -binary /tmp/sveltia-cms.js | openssl base64 -A)"
+```
+
 ## Analytics
 
 [PostHog](https://posthog.com/docs/libraries/astro)
