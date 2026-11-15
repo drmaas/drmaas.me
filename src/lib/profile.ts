@@ -3,7 +3,7 @@
 // Update resume-only blocks when the LinkedIn profile changes.
 
 export const profileTagline =
-  "Software Shepherd · Agentic AI · AWS · Cloudflare";
+  "Software Shepherd · Agent Engineering · AWS · Cloudflare";
 
 export const profileIntro =
   "I've been deep in the agentic AI space — building and orchestrating coding agents (Claude Code, Cursor, Codex) and authoring the primitives that power them: MCP servers, plugins, skills, hooks, and subagents.";
@@ -42,12 +42,13 @@ const profileAboutSuffix =
 export const profileAbout = profileIntro + profileAboutSuffix;
 
 export const profileHeroSkills = [
-  "Agentic AI",
+  "Agent Engineering",
   "Application Architecture",
   "Cloudflare",
   "MCP Servers",
   "System Design",
   "TypeScript",
+  "JVM",
 ] as const;
 
 export interface SubRole {
@@ -178,9 +179,9 @@ export const resumeExperience: ExperienceEntry[] = [
     title: "Founder and CEO, Maas Technologies LLC",
     company: "Self-Employed",
     location: "North America",
-    dates: "Jan 2015 – Present",
+    dates: "Jan 2025 – Present",
     description:
-      "I help growing companies build backend systems that scale — without the fires. As an independent consultant at maas.build, I focus on system architecture and application design: the decisions that determine whether your product handles 10x growth or falls apart under it. I find the bottlenecks, fix the foundations, and make sure your engineering keeps pace with your ambitions.",
+      "I help growing companies build backend systems that scale.",
   },
   {
     title: "Principal Software Engineer — Financial Retail Systems",
@@ -207,7 +208,7 @@ export const resumeExperience: ExperienceEntry[] = [
       "Designed platform and guest-facing omnichannel shopping cart/payment APIs",
       "Scaled shopping cart APIs to 20K RPS",
       "Built devops pipelines using Nomad and Terraform",
-      "Grew the team from 3 to more than 10 engineers",
+      "Grew the team from 3 to more than 15 engineers",
     ],
   },
   {
@@ -368,3 +369,55 @@ export const resumeLanguages = [
 ];
 
 export const resumeHobbies = "Reading, Coding, Hiking, Biking, Swimming, Yoga";
+
+// --- Resume PDF (public/docs/Daniel_Maas_Resume.pdf) ---
+// Experience, education, certs, and contact come from the exports above.
+// Highlights, summary, and competency groups are PDF-only polish.
+// Regenerate: `pnpm resume:pdf` (see .agents/skills/regenerate-resume-pdf).
+
+export const resumePdfTagline =
+  "Principal Software Architect · Agentic AI Systems · Cloud-Scale Platforms";
+
+export interface ResumePdfHighlight {
+  value: string;
+  label: string;
+}
+
+export const resumePdfHighlights: ResumePdfHighlight[] = [
+  { value: "20+ yrs", label: "Architecting Systems at Scale" },
+  { value: "20K RPS", label: "Peak Platform Throughput Shipped" },
+  { value: "Full Stack", label: "End-to-End Product Delivery" },
+  { value: "Agentic Eng.", label: "Product-Focused Agent Systems" },
+];
+
+export const resumePdfSummary =
+  "Principal-level software architect with 20+ years designing and scaling systems for organizations including Salesforce and Target, now at the leading edge of agentic engineering — authoring MCP servers, plugins, hooks, and multi-agent orchestration frameworks that change how engineering teams ship software. Track record architecting full-stack platforms that scale to 10,000–20,000+ requests per second, with a strong product focus directing technical strategy across product teams. Deep range across distributed systems, cloud infrastructure, and emerging LLM-based agent design, paired with a builder's instinct for finding the bottleneck and fixing the foundation.";
+
+export const resumePdfCompetencies: { label: string; items: string }[] = [
+  {
+    label: "Agentic AI & LLM Tooling",
+    items:
+      "Claude Code, Cursor AI, Codex, MCP Servers, Mastra.ai, LangChain/LangGraph, AWS Bedrock AgentCore, RAG",
+  },
+  {
+    label: "Cloud & Platform Engineering",
+    items: "AWS, Cloudflare, Terraform, Nomad, Next.js, Docker-based CI/CD",
+  },
+  {
+    label: "Architecture & Data",
+    items:
+      "Domain-Driven Design, System Design, GraphQL, gRPC, Kafka, PostgreSQL, MongoDB, Cassandra, Elasticsearch",
+  },
+  {
+    label: "Languages",
+    items: "Python, TypeScript/JavaScript, Java, Kotlin, Go, Groovy, SQL, C",
+  },
+  {
+    label: "Frameworks & Practices",
+    items:
+      "Spring Boot, Micronaut, Ratpack, Node.js, Agile Development, CI/CD, Performance Testing",
+  },
+];
+
+/** Roles shown in full on the PDF; later entries are condensed under Earlier Career. */
+export const resumePdfDetailedCompanyCount = 5;
