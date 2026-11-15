@@ -17,6 +17,7 @@ Astro v6 · Tailwind v4 · daisyUI 5 · TypeScript · pnpm
 | `pnpm deploy` | Deploy API worker + main site to Cloudflare |
 | `pnpm deploy:api` | Deploy only the API worker |
 | `pnpm deploy:site` | Build + deploy only the main site |
+| `pnpm resume:pdf` | Regenerate `public/docs/Daniel_Maas_Resume.pdf` from `src/lib/profile.ts` |
 
 ## Architecture
 
@@ -38,6 +39,7 @@ Two Cloudflare Workers in a single repo:
 - **Styling**: scopedStyleStrategy `"where"` in astro config
 - **Site URL**: `https://drmaas.me`, trailing slash always
 - **Resume page**: `/resume/` — ported from `cloud-resume-ui`, now an Astro page in `src/pages/resume/index.astro`
+- **Resume PDF**: static file at `public/docs/Daniel_Maas_Resume.pdf`, linked from the resume page. Content comes from `src/lib/profile.ts` (`resume*` + `resumePdf*`). Regenerate with `pnpm resume:pdf` (Chromium required; fallback: `node --experimental-strip-types ./scripts/generate-resume-pdf.ts`). Agent workflow: `.agents/skills/regenerate-resume-pdf/SKILL.md`
 - **Visitor counter**: `api/src/counter.do.ts` — Durable Object with atomic counter. Deployed as separate Worker at `api.drmaas.me`
 - **Resume API CORS**: `api/src/cors.ts` — only `https://drmaas.me` and `http://localhost` / `http://127.0.0.1` (any port) for local dev; disallowed browser origins get no CORS headers (403 on preflight)
 - **Resume API rate limit**: `api/src/rateLimiter.do.ts` — per `CF-Connecting-IP`, 10 `POST /resume/increment` requests per 60s window; returns **429** with `Retry-After` when exceeded

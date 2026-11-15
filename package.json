@@ -17,7 +17,8 @@
     "test": "vitest",
     "deploy:api": "pnpm install --prefix api && pnpx --prefix api wrangler deploy",
     "deploy:site": "pnpm build && npx wrangler deploy",
-    "deploy": "pnpm run deploy:api && pnpm run deploy:site"
+    "deploy": "pnpm run deploy:api && pnpm run deploy:site",
+    "resume:pdf": "node --experimental-strip-types ./scripts/generate-resume-pdf.ts"
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.12",
