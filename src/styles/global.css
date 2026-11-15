@@ -34,3 +34,13 @@ html:not([data-theme="night"])
   }
 }
 
+/* DaisyUI button/link outlines sit outside @layer and beat components; one ring only. */
+@layer utilities {
+  .btn:focus-visible,
+  .btn:has(:focus-visible),
+  .link:focus-visible {
+    outline: none;
+    outline-offset: 0;
+  }
+}
+
