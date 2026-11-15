@@ -19,3 +19,18 @@ html:not([data-theme="night"])
   --btn-fg: oklch(98% 0 0);
 }
 
+@layer components {
+  a:focus-visible,
+  button:focus-visible,
+  input:focus-visible,
+  select:focus-visible,
+  textarea:focus-visible,
+  summary:focus-visible {
+    @apply outline-none ring-2 ring-primary ring-offset-2 ring-offset-base-100;
+  }
+
+  .link-focus {
+    @apply no-underline text-cyan-600 hover:text-black dark:hover:text-white;
+  }
+}
+

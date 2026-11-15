@@ -4,7 +4,7 @@ const { heading } = Astro.props;
 
 <li>
     <div class="mb-3">
-        <a class="mb-1 no-underline text-cyan-600 hover:text-black dark:hover:text-white" href={"#" + heading.slug}>
+        <a class="mb-1 link-focus" href={"#" + heading.slug}>
             {heading.text}
         </a>
         {
