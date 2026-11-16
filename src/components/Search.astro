@@ -41,7 +41,7 @@
         fuse = createSearchFuse(posts);
     }
 
-    function performSearch() {
+    function performSearch(options?: { announce?: boolean }) {
         const input = document.querySelector<HTMLInputElement>("#search");
         const resultsElement = document.querySelector("#results");
         if (!input || !resultsElement || !fuse) return;
@@ -49,9 +49,11 @@
         const query = input.value;
         const resultItems = fuse.search(query).map((r) => r.item);
         const statusElement = document.querySelector<HTMLElement>("#search-status");
+        const announce = options?.announce ?? true;
         renderSearchResults(resultsElement as HTMLElement, resultItems, {
             query,
             statusElement,
+            announce,
         });
     }
 
@@ -70,11 +72,11 @@
         if (!input) return;
 
         await initSearch();
-        performSearch();
+        performSearch({ announce: false });
 
         if (!input.dataset.searchBound) {
             input.dataset.searchBound = "true";
-            input.addEventListener("input", performSearch);
+            input.addEventListener("input", () => performSearch());
             maybeFocusSearch(input);
         }
     }

@@ -49,7 +49,9 @@ describe("renderSearchResults", () => {
     const title = container.querySelector("h2");
     const paragraph = container.querySelector("p");
 
-    expect(title?.textContent).toBe('<img src=x onerror="alert(1)"> & "quotes"');
+    expect(title?.textContent).toBe(
+      '<img src=x onerror="alert(1)"> & "quotes"',
+    );
     expect(paragraph?.textContent).toBe("<script>bad()</script>");
     expect(container.querySelector("img")).toBeNull();
     expect(container.querySelector("script")).toBeNull();
@@ -97,6 +99,30 @@ describe("renderSearchResults", () => {
     });
     expect(status.textContent).toBe("");
     vi.advanceTimersByTime(150);
+    expect(status.textContent).toBe("1 result");
+  });
+
+  it("leaves status empty on initial render when announce is false, then updates on user query", () => {
+    vi.useFakeTimers();
+    const status = document.createElement("p");
+    const sample: SearchResult = {
+      title: "Hello",
+      url: "/articles/hello/",
+      date: "Mon Jan 01 2024",
+    };
+    mountResults([sample, sample], {
+      query: "",
+      statusElement: status,
+      statusDebounceMs: 0,
+      announce: false,
+    });
+    expect(status.textContent).toBe("");
+
+    mountResults([sample], {
+      query: "hello",
+      statusElement: status,
+      statusDebounceMs: 0,
+    });
     expect(status.textContent).toBe("1 result");
   });
 });

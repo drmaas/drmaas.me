@@ -12,6 +12,8 @@ export interface RenderSearchResultsOptions {
   statusElement?: HTMLElement | null;
   /** Debounce screen-reader status updates (ms). Use 0 in tests. */
   statusDebounceMs?: number;
+  /** When false, render cards only; do not update the aria-live status region. */
+  announce?: boolean;
 }
 
 /** Status text for the Explore search aria-live region. */
@@ -35,21 +37,32 @@ export function formatSearchStatus(count: number, query: string): string {
   return `${count} results`;
 }
 
-let statusDebounceTimer: ReturnType<typeof setTimeout> | undefined;
+const statusDebounceTimers = new WeakMap<
+  HTMLElement,
+  ReturnType<typeof setTimeout>
+>();
 
 function scheduleSearchStatusUpdate(
   statusElement: HTMLElement,
   text: string,
   debounceMs: number,
 ): void {
-  clearTimeout(statusDebounceTimer);
+  const existing = statusDebounceTimers.get(statusElement);
+  if (existing !== undefined) {
+    clearTimeout(existing);
+    statusDebounceTimers.delete(statusElement);
+  }
   if (debounceMs <= 0) {
     statusElement.textContent = text;
     return;
   }
-  statusDebounceTimer = setTimeout(() => {
-    statusElement.textContent = text;
-  }, debounceMs);
+  statusDebounceTimers.set(
+    statusElement,
+    setTimeout(() => {
+      statusDebounceTimers.delete(statusElement);
+      statusElement.textContent = text;
+    }, debounceMs),
+  );
 }
 
 function createResultCard(result: SearchResult): HTMLElement {
@@ -94,11 +107,9 @@ export function renderSearchResults(
   );
 
   const statusElement = options?.statusElement;
-  if (statusElement) {
-    const statusText = formatSearchStatus(
-      results.length,
-      options.query ?? "",
-    );
+  const announce = options?.announce ?? true;
+  if (statusElement && announce) {
+    const statusText = formatSearchStatus(results.length, options.query ?? "");
     scheduleSearchStatusUpdate(
       statusElement,
       statusText,
