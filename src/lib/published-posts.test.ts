@@ -19,6 +19,22 @@ describe("isPublishedPost", () => {
     expect(isPublishedPost(mockPost(false))).toBe(true);
     expect(isPublishedPost(mockPost(undefined))).toBe(true);
   });
+
+  it("excludes posts dated after now", () => {
+    const now = new Date("2025-06-01");
+    expect(
+      isPublishedPost(
+        {
+          ...mockPost(false),
+          data: {
+            ...mockPost(false).data,
+            date: new Date("2025-07-01"),
+          },
+        } as CollectionEntry<"posts">,
+        now,
+      ),
+    ).toBe(false);
+  });
 });
 
 describe("production build output", () => {
@@ -49,6 +65,17 @@ describe("production build output", () => {
       expect(fs.existsSync(searchPath)).toBe(true);
       const json = fs.readFileSync(searchPath, "utf8");
       expect(json).not.toContain(KNOWN_DRAFT_SLUG);
+    },
+  );
+
+  it.skipIf(!fs.existsSync(distRoot))(
+    "omits known draft slug from RSS feed",
+    () => {
+      const rssPath = path.join(distRoot, "rss.xml");
+      expect(fs.existsSync(rssPath)).toBe(true);
+      const xml = fs.readFileSync(rssPath, "utf8");
+      expect(xml).toContain("<rss");
+      expect(xml).not.toContain(KNOWN_DRAFT_SLUG);
     },
   );
 

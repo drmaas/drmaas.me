@@ -3,13 +3,21 @@ import { KNOWN_DRAFT_SLUG } from "./published-posts.constants";
 
 export { KNOWN_DRAFT_SLUG };
 
-export function isPublishedPost(post: CollectionEntry<"posts">): boolean {
-  return post.data.draft !== true;
+export function isPublishedPost(
+  post: CollectionEntry<"posts">,
+  now: Date = new Date(),
+): boolean {
+  if (post.data.draft === true) {
+    return false;
+  }
+  return new Date(post.data.date).getTime() <= now.getTime();
 }
 
-export async function getPublishedPosts(): Promise<CollectionEntry<"posts">[]> {
+export async function getPublishedPosts(
+  now: Date = new Date(),
+): Promise<CollectionEntry<"posts">[]> {
   const allPosts = await getCollection("posts");
-  return allPosts.filter(isPublishedPost);
+  return allPosts.filter((post) => isPublishedPost(post, now));
 }
 
 /**
@@ -22,5 +30,5 @@ export async function getPostsForStaticPaths(): Promise<
   if (import.meta.env.DEV) {
     return allPosts;
   }
-  return allPosts.filter(isPublishedPost);
+  return allPosts.filter((post) => isPublishedPost(post));
 }
