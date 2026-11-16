@@ -11,6 +11,13 @@
             placeholder="Search articles..."
             class="input input-bordered input-info w-full max-w-lg mx-auto"
         />
+        <p
+            id="search-status"
+            class="sr-only"
+            role="status"
+            aria-live="polite"
+            aria-atomic="true"
+        ></p>
         <div id="results" class="flex flex-col gap-6 w-full">
         </div>
     </div>
@@ -39,8 +46,13 @@
         const resultsElement = document.querySelector("#results");
         if (!input || !resultsElement || !fuse) return;
 
-        const resultItems = fuse.search(input.value).map((r) => r.item);
-        renderSearchResults(resultsElement as HTMLElement, resultItems);
+        const query = input.value;
+        const resultItems = fuse.search(query).map((r) => r.item);
+        const statusElement = document.querySelector<HTMLElement>("#search-status");
+        renderSearchResults(resultsElement as HTMLElement, resultItems, {
+            query,
+            statusElement,
+        });
     }
 
     function maybeFocusSearch(input: HTMLInputElement) {
