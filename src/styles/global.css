@@ -19,3 +19,36 @@ html:not([data-theme="night"])
   --btn-fg: oklch(98% 0 0);
 }
 
+@layer components {
+  .link-focus {
+    @apply no-underline text-cyan-600 hover:text-black dark:hover:text-white;
+  }
+}
+
+/*
+ * DaisyUI ships inside @layer utilities under nested @layer daisyui.*.
+ * .btn:focus-visible uses daisy outline (not the site ring). Other controls
+ * get ring utilities below; this file is imported after the plugin so equal-
+ * specificity focus rules here win over daisy link outlines and shadow-*.
+ */
+@layer utilities {
+  a:focus-visible:not(.btn),
+  button:focus-visible:not(.btn),
+  input:focus-visible,
+  select:focus-visible,
+  textarea:focus-visible,
+  summary:focus-visible {
+    @apply outline-none ring-2 ring-primary ring-offset-2 ring-offset-base-100;
+  }
+
+  .link:focus-visible {
+    outline: none;
+    outline-offset: 0;
+  }
+
+  /* Hamburger label.btn: daisy :has(:focus-visible) outline only; no inner ring. */
+  .btn :is(input, select, textarea, button):focus-visible {
+    --tw-ring-shadow: 0 0 #0000;
+    @apply ring-0 ring-offset-0 outline-none;
+  }
+}

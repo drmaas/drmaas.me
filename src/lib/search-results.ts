@@ -10,15 +10,14 @@ export interface SearchResult {
 function createResultCard(result: SearchResult): HTMLElement {
   const card = document.createElement("div");
   card.className =
-    "card bg-base-200 w-full shadow-lg hover:shadow-xl transition-shadow duration-200 focus-within:outline focus-within:outline-2 focus-within:outline-secondary";
+    "card bg-base-200 w-full shadow-lg hover:shadow-xl transition-shadow duration-200";
 
   const body = document.createElement("div");
   body.className = "card-body";
 
   const link = document.createElement("a");
   link.href = result.url;
-  link.className =
-    "no-underline text-cyan-600 hover:text-black dark:hover:text-white";
+  link.className = "link-focus";
 
   const title = document.createElement("h2");
   title.className = "card-title";

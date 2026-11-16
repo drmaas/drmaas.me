@@ -24,7 +24,7 @@ class="flex max-w-7xl mx-auto md:px-8 px-5 gap-12 items-start prose md:prose-lg 
 {
   prevPost.data && (
     <a
-      class="no-underline text-cyan-600 hover:text-black dark:hover:text-white"
+      class="link-focus"
       href={prevUrl}
     >
       {`<< ${prevPost.data.title}`}
@@ -34,7 +34,7 @@ class="flex max-w-7xl mx-auto md:px-8 px-5 gap-12 items-start prose md:prose-lg 
 {
   nextPost.data && (
     <a
-      class="no-underline text-cyan-600 hover:text-black dark:hover:text-white"
+      class="link-focus"
       href={nextUrl}
     >
       {`${nextPost.data.title} >>`}
