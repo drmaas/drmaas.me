@@ -7,6 +7,64 @@ export interface SearchResult {
   body?: string;
 }
 
+export interface RenderSearchResultsOptions {
+  query?: string;
+  statusElement?: HTMLElement | null;
+  /** Debounce screen-reader status updates (ms). Use 0 in tests. */
+  statusDebounceMs?: number;
+  /** When false, render cards only; do not update the aria-live status region. */
+  announce?: boolean;
+}
+
+/** Status text for the Explore search aria-live region. */
+export function formatSearchStatus(count: number, query: string): string {
+  const trimmed = query.trim();
+  if (trimmed.length === 0) {
+    if (count === 0) {
+      return "No articles";
+    }
+    if (count === 1) {
+      return "Showing 1 article";
+    }
+    return `Showing all ${count} articles`;
+  }
+  if (count === 0) {
+    return "No articles match your search";
+  }
+  if (count === 1) {
+    return "1 result";
+  }
+  return `${count} results`;
+}
+
+const statusDebounceTimers = new WeakMap<
+  HTMLElement,
+  ReturnType<typeof setTimeout>
+>();
+
+function scheduleSearchStatusUpdate(
+  statusElement: HTMLElement,
+  text: string,
+  debounceMs: number,
+): void {
+  const existing = statusDebounceTimers.get(statusElement);
+  if (existing !== undefined) {
+    clearTimeout(existing);
+    statusDebounceTimers.delete(statusElement);
+  }
+  if (debounceMs <= 0) {
+    statusElement.textContent = text;
+    return;
+  }
+  statusDebounceTimers.set(
+    statusElement,
+    setTimeout(() => {
+      statusDebounceTimers.delete(statusElement);
+      statusElement.textContent = text;
+    }, debounceMs),
+  );
+}
+
 function createResultCard(result: SearchResult): HTMLElement {
   const card = document.createElement("div");
   card.className =
@@ -17,7 +75,8 @@ function createResultCard(result: SearchResult): HTMLElement {
 
   const link = document.createElement("a");
   link.href = result.url;
-  link.className = "link-focus";
+  link.className =
+    "no-underline text-primary hover:text-primary-focus transition-colors duration-200";
 
   const title = document.createElement("h2");
   title.className = "card-title";
@@ -41,8 +100,20 @@ function createResultCard(result: SearchResult): HTMLElement {
 export function renderSearchResults(
   container: HTMLElement,
   results: SearchResult[],
+  options?: RenderSearchResultsOptions,
 ): void {
   container.replaceChildren(
     ...results.map((result) => createResultCard(result)),
   );
+
+  const statusElement = options?.statusElement;
+  const announce = options?.announce ?? true;
+  if (statusElement && announce) {
+    const statusText = formatSearchStatus(results.length, options.query ?? "");
+    scheduleSearchStatusUpdate(
+      statusElement,
+      statusText,
+      options.statusDebounceMs ?? 150,
+    );
+  }
 }

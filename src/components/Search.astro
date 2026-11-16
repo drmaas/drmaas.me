@@ -11,6 +11,13 @@
             placeholder="Search articles..."
             class="input input-bordered input-info w-full max-w-lg mx-auto"
         />
+        <p
+            id="search-status"
+            class="sr-only"
+            role="status"
+            aria-live="polite"
+            aria-atomic="true"
+        ></p>
         <div id="results" class="flex flex-col gap-6 w-full">
         </div>
     </div>
@@ -34,13 +41,20 @@
         fuse = createSearchFuse(posts);
     }
 
-    function performSearch() {
+    function performSearch(options?: { announce?: boolean }) {
         const input = document.querySelector<HTMLInputElement>("#search");
         const resultsElement = document.querySelector("#results");
         if (!input || !resultsElement || !fuse) return;
 
-        const resultItems = fuse.search(input.value).map((r) => r.item);
-        renderSearchResults(resultsElement as HTMLElement, resultItems);
+        const query = input.value;
+        const resultItems = fuse.search(query).map((r) => r.item);
+        const statusElement = document.querySelector<HTMLElement>("#search-status");
+        const announce = options?.announce ?? true;
+        renderSearchResults(resultsElement as HTMLElement, resultItems, {
+            query,
+            statusElement,
+            announce,
+        });
     }
 
     function maybeFocusSearch(input: HTMLInputElement) {
@@ -58,11 +72,11 @@
         if (!input) return;
 
         await initSearch();
-        performSearch();
+        performSearch({ announce: false });
 
         if (!input.dataset.searchBound) {
             input.dataset.searchBound = "true";
-            input.addEventListener("input", performSearch);
+            input.addEventListener("input", () => performSearch());
             maybeFocusSearch(input);
         }
     }
