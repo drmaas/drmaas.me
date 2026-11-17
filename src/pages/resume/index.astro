@@ -223,6 +223,8 @@ const resumeDescription = `Dan Maas — ${profileTagline}. Resume and profession
 </BaseLayout>
 
 <script>
+  import { resumeApiUrl } from "src/lib/resume-api";
+
   let isProcessing = false;
 
   async function fetchCounter() {
@@ -233,7 +235,7 @@ const resumeDescription = `Dan Maas — ${profileTagline}. Resume and profession
     counterEl.className = "font-mono font-bold tabular-nums transition-all duration-500 text-base-content";
 
     try {
-      const response = await fetch("https://api.drmaas.me/resume/increment", {
+      const response = await fetch(resumeApiUrl("/resume/increment"), {
         method: "POST",
         headers: { Accept: "application/json", "Content-Type": "application/json" },
         body: JSON.stringify({}),
