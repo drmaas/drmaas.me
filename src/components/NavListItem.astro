@@ -14,20 +14,22 @@ const baseSite = import.meta.env.BASE_URL;
 const url = absolute
   ? navLink
   : baseSite + (navLink === "home" ? "" : `${navLink}/`);
+const isCurrentPage = navLink === activeLink;
 ---
 
 <li
   class:list={[
-    { "current-page": navLink === activeLink },
+    { "current-page": isCurrentPage },
     "after:block after:mx-auto after:h-[0.15em] after:bottom-0 after:w-0 after:bg-green-700 dark:after:bg-amber-400 after:transition-[all_ease_in_out_300ms] after:mt-1 hover:after:w-full",
   ]}
 >
   <a
     href={url}
     target={absolute ? "_blank" : ""}
-    tabindex={navLink === activeLink ? -1 : null}
+    tabindex={isCurrentPage ? -1 : null}
+    aria-current={isCurrentPage ? "page" : undefined}
     class:list={[
-      { "current-page": navLink === activeLink },
+      { "current-page": isCurrentPage },
       "flex items-center justify-center max-md:min-h-11 max-md:min-w-11 hover:text-black dark:hover:text-white p-2",
     ]}
     title={tip}
