@@ -6,6 +6,7 @@ import type { MarkdownHeading } from "astro";
 import DateComponent from "@components/DateComponent.astro";
 import type { InferEntrySchema } from "astro:content";
 import ArticleHeroImage from "@components/ArticleHeroImage.astro";
+import { activeLinkForTopicPathname } from "src/lib/active-link";
 import { postShareImage } from "src/lib/og-image";
 
 export interface Props {
@@ -25,9 +26,15 @@ const {
 } = content;
 const date = content.date ? new Date(content.date).toDateString() : undefined;
 const shareImage = postShareImage(image);
+const activeLink = activeLinkForTopicPathname(Astro.url.pathname);
 ---
 
-<BaseLayout title={title} description={description} image={shareImage}>
+<BaseLayout
+  title={title}
+  description={description}
+  image={shareImage}
+  activeLink={activeLink}
+>
   <div
     class="max-w-7xl md:pb-10 md:pt-16 md:px-8 mx-auto pb-8 pt-12 px-5"
   >
