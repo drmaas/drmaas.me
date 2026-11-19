@@ -225,10 +225,14 @@ const resumeDescription = `Dan Maas — ${profileTagline}. Resume and profession
 
 <script>
   import { resumeApiUrl } from "src/lib/resume-api";
+  import { shouldIncrementResumeCounter } from "src/lib/resume-visitor-counter";
 
   let isProcessing = false;
 
   async function fetchCounter() {
+    // ClientRouter: this listener stays on document after leaving /resume/; gate on pathname.
+    if (!shouldIncrementResumeCounter(window.location.pathname)) return;
+
     const counterEl = document.getElementById("visitor-counter");
     if (!counterEl || isProcessing) return;
 
@@ -268,7 +272,7 @@ const resumeDescription = `Dan Maas — ${profileTagline}. Resume and profession
     }
   }
 
-  // astro:page-load fires after every navigation (including the first page load)
-  // when ClientRouter is active — this is the correct hook to use.
+  // astro:page-load fires after every ClientRouter navigation (including first load).
+  // Pair with shouldIncrementResumeCounter — the listener is not removed on route change.
   document.addEventListener("astro:page-load", fetchCounter);
 </script>
