@@ -31,6 +31,17 @@ jobs:
       - name: Build site
         run: pnpm build
 
+      - name: Cache Playwright browsers
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/ms-playwright
+          key: playwright-chromium-${{ runner.os }}-${{ hashFiles('pnpm-lock.yaml') }}
+
+      - name: Install Playwright system dependencies
+        run: pnpm exec playwright install-deps chromium
+        env:
+          DEBIAN_FRONTEND: noninteractive
+
       - name: Install Playwright Chromium
         run: pnpm exec playwright install chromium
 
