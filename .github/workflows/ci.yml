@@ -30,3 +30,11 @@ jobs:
 
       - name: Build site
         run: pnpm build
+
+      - name: Install Playwright Chromium
+        run: pnpm exec playwright install --with-deps chromium
+
+      - name: E2E (focus-visible)
+        run: pnpm test:e2e
+        env:
+          CI: true
