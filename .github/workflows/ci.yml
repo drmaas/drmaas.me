@@ -11,6 +11,8 @@ jobs:
   verify:
     runs-on: ubuntu-24.04
     timeout-minutes: 30
+    container:
+      image: mcr.microsoft.com/playwright:v1.56.1-noble
     steps:
       - uses: actions/checkout@v4
 
@@ -35,15 +37,6 @@ jobs:
 
       - name: Build site
         run: pnpm build
-
-      - name: Cache Playwright browsers
-        uses: actions/cache@v4
-        with:
-          path: ~/.cache/ms-playwright
-          key: playwright-chromium-${{ runner.os }}-${{ hashFiles('pnpm-lock.yaml') }}
-
-      - name: Install Playwright Chromium
-        run: node ./node_modules/@playwright/test/cli.js install chromium
 
       - name: E2E (focus-visible)
         run: pnpm test:e2e
