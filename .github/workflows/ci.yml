@@ -10,6 +10,7 @@ concurrency:
 jobs:
   verify:
     runs-on: ubuntu-24.04
+    timeout-minutes: 30
     steps:
       - uses: actions/checkout@v4
 
@@ -42,11 +43,7 @@ jobs:
           key: playwright-chromium-${{ runner.os }}-${{ hashFiles('pnpm-lock.yaml') }}
 
       - name: Install Playwright Chromium
-        run: |
-          ./node_modules/.bin/playwright install-deps chromium
-          ./node_modules/.bin/playwright install chromium
-        env:
-          DEBIAN_FRONTEND: noninteractive
+        run: node ./node_modules/@playwright/test/cli.js install chromium
 
       - name: E2E (focus-visible)
         run: pnpm test:e2e
