@@ -3,6 +3,10 @@ name: CI
 on:
   pull_request:
 
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
 jobs:
   verify:
     runs-on: ubuntu-24.04
@@ -37,13 +41,12 @@ jobs:
           path: ~/.cache/ms-playwright
           key: playwright-chromium-${{ runner.os }}-${{ hashFiles('pnpm-lock.yaml') }}
 
-      - name: Install Playwright system dependencies
-        run: pnpm exec playwright install-deps chromium
+      - name: Install Playwright Chromium
+        run: |
+          ./node_modules/.bin/playwright install-deps chromium
+          ./node_modules/.bin/playwright install chromium
         env:
           DEBIAN_FRONTEND: noninteractive
-
-      - name: Install Playwright Chromium
-        run: pnpm exec playwright install chromium
 
       - name: E2E (focus-visible)
         run: pnpm test:e2e
