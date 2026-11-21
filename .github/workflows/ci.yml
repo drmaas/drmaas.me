@@ -32,11 +32,8 @@ jobs:
       - name: Typecheck
         run: pnpm typecheck
 
-      - name: Test
-        run: pnpm test run
-
-      - name: Build site
-        run: pnpm build
+      - name: Build site and test
+        run: pnpm test:ci
 
       - name: E2E (focus-visible)
         run: pnpm test:e2e

@@ -15,6 +15,7 @@
     "format": "biome format --write ./src",
     "prepare": "husky",
     "test": "vitest",
+    "test:ci": "pnpm build && vitest run",
     "test:e2e": "playwright test",
     "deploy:api": "pnpm install --prefix api && pnpx --prefix api wrangler deploy",
     "deploy:site": "pnpm build && npx wrangler deploy",
