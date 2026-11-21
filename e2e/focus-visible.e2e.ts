@@ -85,7 +85,21 @@ test.describe("keyboard focus indicators", () => {
 
   test("pagination, resume PDF, scroll, footer link", async ({ page }) => {
     await page.goto("/articles/2/");
-    const pageBtn = page.locator(".btn-group a.btn").first();
+    const pagination = page.locator(".btn-group");
+    const currentPage = pagination.locator('[aria-current="page"]');
+    await expect(currentPage).toContainText("2");
+    await expect(currentPage.locator(".sr-only")).toHaveText("(current page)");
+
+    const pageLinks = pagination.locator("a.btn");
+    await expect(pageLinks).not.toHaveCount(0);
+    for (const link of await pageLinks.all()) {
+      await link.focus();
+      expect(await currentPage.evaluate((node) => node === document.activeElement)).toBe(
+        false,
+      );
+    }
+
+    const pageBtn = pageLinks.first();
     await expectSingleFocusChange(pageBtn, "pagination btn");
 
     await page.goto("/resume/");
