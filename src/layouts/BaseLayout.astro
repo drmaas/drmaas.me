@@ -41,7 +41,7 @@ const {
       <div class="min-w-0 py-2 pl-2 pr-14 sm:p-4 sm:pr-4">
         <a
           href="/"
-          class="block text-2xl font-bold leading-tight tracking-tight bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent sm:text-3xl md:text-4xl"
+          class="site-title block text-2xl font-bold leading-tight tracking-tight text-base-content sm:text-3xl md:text-4xl"
         >
           {fullName}
         </a>
@@ -101,6 +101,37 @@ const {
       @media (prefers-reduced-motion: reduce) {
         html {
           scroll-behavior: auto;
+        }
+      }
+
+      .site-title {
+        text-decoration: none;
+      }
+
+      @media (prefers-contrast: no-preference) {
+        @supports (background-clip: text) or (-webkit-background-clip: text) {
+          .site-title {
+            background-image: linear-gradient(
+              to right,
+              var(--color-primary),
+              var(--color-secondary)
+            );
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            -webkit-text-fill-color: transparent;
+          }
+        }
+      }
+
+      @media (forced-colors: active) {
+        .site-title {
+          background: none;
+          background-image: none;
+          -webkit-background-clip: unset;
+          background-clip: unset;
+          color: LinkText;
+          -webkit-text-fill-color: LinkText;
         }
       }
     </style>
