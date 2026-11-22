@@ -206,6 +206,22 @@ const {
       }
     };
 
+    const syncDrawerAccessibility = () => {
+      if (!isMobileNav()) {
+        nav.removeAttribute("inert");
+        nav.removeAttribute("aria-hidden");
+        return;
+      }
+
+      if (nav.getAttribute("data-visible") === "true") {
+        nav.removeAttribute("inert");
+        nav.removeAttribute("aria-hidden");
+      } else {
+        nav.setAttribute("inert", "");
+        nav.setAttribute("aria-hidden", "true");
+      }
+    };
+
     const removeTrap = () => {
       if (trapKeydown) {
         document.removeEventListener("keydown", trapKeydown);
@@ -220,6 +236,7 @@ const {
       backdrop.hidden = true;
       backdrop.setAttribute("aria-hidden", "true");
       setInertBackground(false);
+      syncDrawerAccessibility();
       removeTrap();
       if (returnFocus) {
         navToggle.focus();
@@ -232,6 +249,7 @@ const {
       backdrop.hidden = false;
       backdrop.setAttribute("aria-hidden", "false");
       setInertBackground(true);
+      syncDrawerAccessibility();
 
       const firstLink = nav.querySelector<HTMLElement>("a[href]");
       (firstLink ?? getDrawerFocusables()[0])?.focus();
@@ -293,7 +311,10 @@ const {
       if (!event.matches && nav.getAttribute("data-visible") === "true") {
         closeMenu(false);
       }
+      syncDrawerAccessibility();
     });
+
+    syncDrawerAccessibility();
   }
 
   setupMobileNav();

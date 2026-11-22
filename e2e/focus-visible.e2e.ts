@@ -147,4 +147,33 @@ test.describe("keyboard focus indicators", () => {
       (hasVisibleOutline(inputFocused) ? 1 : 0);
     expect(combined).toBe(1);
   });
+
+  test("closed mobile drawer is out of tab order", async ({ page }) => {
+    await page.setViewportSize({ width: 390, height: 844 });
+    await page.goto("/");
+
+    const navToggle = page.locator("#nav-toggle");
+    const primaryNav = page.locator("#primary-nav");
+
+    await expect(primaryNav).toHaveAttribute("inert");
+    await expect(primaryNav).toHaveAttribute("aria-hidden", "true");
+
+    await focusKeyboardVisible(navToggle.locator("input"));
+
+    await page.keyboard.press("Tab");
+    const activeAfterTab = await page.evaluate(() => {
+      const active = document.activeElement;
+      return active instanceof HTMLElement
+        ? !!active.closest("#primary-nav")
+        : false;
+    });
+    expect(activeAfterTab).toBe(false);
+
+    await navToggle.click();
+    await expect(primaryNav).toHaveAttribute("data-visible", "true");
+    await expect(primaryNav).not.toHaveAttribute("inert");
+
+    const firstNavLink = primaryNav.locator("a[href]").first();
+    await expect(firstNavLink).toBeFocused();
+  });
 });
