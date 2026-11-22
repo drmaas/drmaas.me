@@ -27,11 +27,8 @@ jobs:
       - name: Typecheck
         run: pnpm typecheck
 
-      - name: Test
-        run: pnpm test run
-
-      - name: Build site
-        run: pnpm build
+      - name: Build site and test
+        run: pnpm test:ci
 
       - name: Install API worker dependencies
         run: pnpm install --frozen-lockfile
