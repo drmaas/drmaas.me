@@ -62,7 +62,7 @@ const resumeDescription = `Dan Maas — ${profileTagline}. Resume and profession
             <ul class="text-sm space-y-1.5 text-left md:text-right">
               {contact.map((c) => (
                 <li class="flex items-baseline gap-3 md:justify-end">
-                  <span class="text-[10px] uppercase tracking-widest text-base-content/40 font-semibold shrink-0 md:w-20 md:text-right">{c.label}</span>
+                  <span class="resume-contact-label">{c.label}</span>
                   {c.href ? (
                     <a
                       href={c.href}
@@ -90,12 +90,12 @@ const resumeDescription = `Dan Maas — ${profileTagline}. Resume and profession
         <aside class="lg:w-80 shrink-0">
           <div class="space-y-6">
             <section class="bg-base-100 rounded-box p-6 shadow-sm">
-              <h2 class="text-lg font-bold uppercase tracking-wider text-base-content/60 mb-4">About</h2>
+              <h2 class="resume-section-heading mb-4">About</h2>
               <p class="text-sm text-base-content/80 leading-relaxed">{about}</p>
             </section>
 
             <section class="bg-base-100 rounded-box p-6 shadow-sm">
-              <h2 class="text-lg font-bold uppercase tracking-wider text-base-content/60 mb-4">Strengths</h2>
+              <h2 class="resume-section-heading mb-4">Strengths</h2>
               <ul class="space-y-1.5 text-sm text-base-content/80">
                 {strengths.map((s) => (
                   <li class="flex items-start gap-2">
@@ -107,7 +107,7 @@ const resumeDescription = `Dan Maas — ${profileTagline}. Resume and profession
             </section>
 
             <section class="bg-base-100 rounded-box p-6 shadow-sm">
-              <h2 class="text-lg font-bold uppercase tracking-wider text-base-content/60 mb-4">Skills</h2>
+              <h2 class="resume-section-heading mb-4">Skills</h2>
               <div class="flex flex-wrap gap-2">
                 {skills.map((s) => (
                   <span class="resume-pill inline-flex items-center px-3 py-1 text-sm font-medium text-base-content rounded-full border-[1.5px] border-base-content/40">{s}</span>
@@ -116,7 +116,7 @@ const resumeDescription = `Dan Maas — ${profileTagline}. Resume and profession
             </section>
 
             <section class="bg-base-100 rounded-box p-6 shadow-sm">
-              <h2 class="text-lg font-bold uppercase tracking-wider text-base-content/60 mb-4">Education</h2>
+              <h2 class="resume-section-heading mb-4">Education</h2>
               <div class="space-y-4">
                 {education.map((e) => (
                   <div>
@@ -129,7 +129,7 @@ const resumeDescription = `Dan Maas — ${profileTagline}. Resume and profession
             </section>
 
             <section class="bg-base-100 rounded-box p-6 shadow-sm">
-              <h2 class="text-lg font-bold uppercase tracking-wider text-base-content/60 mb-4">Certifications</h2>
+              <h2 class="resume-section-heading mb-4">Certifications</h2>
               <ul class="space-y-2">
                 {certifications.map((c) => (
                   <li class="font-semibold">{c}</li>
@@ -138,7 +138,7 @@ const resumeDescription = `Dan Maas — ${profileTagline}. Resume and profession
             </section>
 
             <section class="bg-base-100 rounded-box p-6 shadow-sm">
-              <h2 class="text-lg font-bold uppercase tracking-wider text-base-content/60 mb-4">Publications</h2>
+              <h2 class="resume-section-heading mb-4">Publications</h2>
               <ul class="list-disc pl-5 space-y-1.5 text-base-content/80">
                 {publications.map((p) => (
                   <li>{p}</li>
@@ -147,7 +147,7 @@ const resumeDescription = `Dan Maas — ${profileTagline}. Resume and profession
             </section>
 
             <section class="bg-base-100 rounded-box p-6 shadow-sm">
-              <h2 class="text-lg font-bold uppercase tracking-wider text-base-content/60 mb-4">Languages</h2>
+              <h2 class="resume-section-heading mb-4">Languages</h2>
               <div class="flex flex-wrap gap-2">
                 {languages.map((l) => (
                   <span class="resume-pill inline-flex items-center px-3 py-1 text-sm font-medium text-base-content rounded-full border-[1.5px] border-base-content/40">{l.level ? `${l.name} · ${l.level}` : l.name}</span>
@@ -160,7 +160,7 @@ const resumeDescription = `Dan Maas — ${profileTagline}. Resume and profession
         <!-- Right column: Work History -->
         <div class="flex-1 min-w-0">
           <section class="bg-base-100 rounded-box p-6 shadow-sm">
-            <h2 class="text-lg font-bold uppercase tracking-wider text-base-content/60 mb-6">Experience</h2>
+            <h2 class="resume-section-heading mb-6">Experience</h2>
 
             <div class="space-y-8">
               {experience.map((job) => (
@@ -204,7 +204,7 @@ const resumeDescription = `Dan Maas — ${profileTagline}. Resume and profession
           </section>
 
           <section class="bg-base-100 rounded-box p-6 shadow-sm mt-6">
-            <h2 class="text-lg font-bold uppercase tracking-wider text-base-content/60 mb-4">Miscellaneous</h2>
+            <h2 class="resume-section-heading mb-4">Miscellaneous</h2>
             <p class="font-semibold mb-2">Hobbies</p>
             <p class="text-base-content/80">{hobbies}</p>
           </section>

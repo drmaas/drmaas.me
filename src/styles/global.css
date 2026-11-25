@@ -23,6 +23,14 @@ html:not([data-theme="night"])
   .link-focus {
     @apply no-underline text-cyan-600 hover:text-black dark:hover:text-white;
   }
+
+  .resume-section-heading {
+    @apply text-lg font-bold uppercase tracking-wider text-base-content/75;
+  }
+
+  .resume-contact-label {
+    @apply text-xs uppercase tracking-widest text-base-content/75 font-semibold shrink-0 md:w-24 md:text-right;
+  }
 }
 
 /*
